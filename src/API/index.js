@@ -42,7 +42,7 @@ class Helper {
   }
 }
 
-export default class SquareAPI {
+export default class FoursquareAPI {
   static search(urlParams) {
     return Helper.simpleFetch('/venues/search', 'GET', urlParams);
   }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import NavBar from './components/NavBar';
-import SideBar from './components/SideBar';
+// import SideBar from './components/SideBar';
 import Map from './components/Map';
-import SquareAPI from './API/';
+import FoursquareAPI from './API/';
 import './App.css';
 
 class App extends Component {
@@ -11,7 +11,9 @@ class App extends Component {
     this.state = {
       queryValue: '',
       venues: [],
-      markers: []
+      markers: [],
+      center: [],
+      zoom: 12
     };
 
     this.initMap = this.initMap.bind(this);
@@ -19,12 +21,25 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.getVenues();
-    SquareAPI.search({
+    FoursquareAPI.search({
       near: 'Chicago, IL',
       query: 'tacos',
       limit: 10
-    }).then((results) => console.log(results));
+    }).then((results) => {
+      const { venues } = results.response;
+      const { center } = results.response.geocode.feature.geometry;
+      const markers = venues.map((venue) => {
+        return {
+          lat: venue.location.lat,
+          lng: venue.location.lng,
+          name: venue.name,
+          isOpen: false,
+          isVisible: true
+        };
+      });
+      // Update state with Foursquare data and pass renderMap as callback
+      this.setState({ venues, center, markers }, this.renderMap());
+    });
   }
 
   renderMap() {
@@ -32,6 +47,7 @@ class App extends Component {
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyCHE01dQ6hdkOBP0qxkzYdTCJdhYesX8gY&callback=initMap'
     );
     window.initMap = this.initMap;
+    console.log('map script tag loaded');
   }
 
   getVenues() {
@@ -76,24 +92,24 @@ class App extends Component {
     const markerArray = [];
 
     // Generate content for infoWindow
-    this.state.venues.map((place) => {
+    this.state.venues.map((venue) => {
       // const contentString = `${place.venue.name}`;
       const contentString =
         '<div class="venue-info">' +
         '<h4>Venue Name</h4>' +
         '<p>' +
-        place.venue.name +
+        venue.name +
         '</p>' +
         '</div>';
 
       // Create A Marker
       const marker = new window.google.maps.Marker({
         position: {
-          lat: place.venue.location.lat,
-          lng: place.venue.location.lng
+          lat: venue.location.lat,
+          lng: venue.location.lng
         },
         map: map,
-        title: place.venue.name,
+        title: venue.name,
         animation: window.google.maps.Animation.DROP
       });
 
@@ -108,6 +124,7 @@ class App extends Component {
       markerArray.push(marker);
     });
     this.setState({ markers: markerArray });
+    console.log('markers added');
   }
 
   // Filter map markers
@@ -126,12 +143,12 @@ class App extends Component {
     return (
       <div id="app-container">
         <NavBar />
-        <SideBar
+        {/* <SideBar
           venues={this.state.venues}
           queryValue={this.state.queryValue}
           filterMarkers={this.filterMarkers}
-        />
-        <Map />
+        /> */}
+        <Map {...this.state} />
       </div>
     );
   }
