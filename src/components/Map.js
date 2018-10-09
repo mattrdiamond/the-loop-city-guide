@@ -5,6 +5,10 @@ class Map extends Component {
   //   this.renderMap();
   // }
 
+  propsTest() {
+    console.log('props called');
+  }
+
   renderMap() {
     loadMapScript(
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyCHE01dQ6hdkOBP0qxkzYdTCJdhYesX8gY&callback=initMap'
@@ -13,10 +17,11 @@ class Map extends Component {
   }
 
   initMap() {
+    console.log(this.props.venues);
     // Create A Map
     const map = new window.google.maps.Map(document.getElementById('map'), {
-      center: this.props.center,
-      zoom: this.props.zoom
+      center: { lat: 41.9, lng: -87.629 },
+      zoom: 12
     });
 
     // Create single InfoWindow
@@ -26,24 +31,24 @@ class Map extends Component {
     const markerArray = [];
 
     // Generate content for infoWindow
-    this.state.venues.map((place) => {
+    this.props.venues.map((venue) => {
       // const contentString = `${place.venue.name}`;
       const contentString =
         '<div class="venue-info">' +
         '<h4>Venue Name</h4>' +
         '<p>' +
-        place.venue.name +
+        venue.name +
         '</p>' +
         '</div>';
 
       // Create A Marker
       const marker = new window.google.maps.Marker({
         position: {
-          lat: place.venue.location.lat,
-          lng: place.venue.location.lng
+          lat: venue.location.lat,
+          lng: venue.location.lng
         },
         map: map,
-        title: place.venue.name,
+        title: venue.name,
         animation: window.google.maps.Animation.DROP
       });
 
@@ -58,12 +63,13 @@ class Map extends Component {
       markerArray.push(marker);
     });
     this.setState({ markers: markerArray });
+    console.log('markers added');
   }
 
   render() {
     return (
       <main>
-        <div role="application" aria-hidden="true" id="map" />
+        <div role="application" aria-hidden="true" id="map" {...this.props} />
       </main>
     );
   }

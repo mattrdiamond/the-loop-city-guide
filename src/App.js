@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      queryValue: '',
+      queryvalue: '',
       venues: [],
       markers: [],
       center: [],
@@ -21,9 +21,12 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // test to access child method
+    this.accessChild();
+
     FoursquareAPI.search({
       near: 'Chicago, IL',
-      query: 'tacos',
+      query: 'records',
       limit: 10
     }).then((results) => {
       const { venues } = results.response;
@@ -34,13 +37,20 @@ class App extends Component {
           lng: venue.location.lng,
           name: venue.name,
           isOpen: false,
-          isVisible: true
+          isVisible: true,
+          id: venue.id
         };
       });
       // Update state with Foursquare data and pass renderMap as callback
       this.setState({ venues, center, markers }, this.renderMap());
+      // this.setState({ venues, center, markers }, this.accessMapComponent());
     });
   }
+
+  // test to access child method
+  accessChild = () => {
+    this.refs.child.propsTest();
+  };
 
   renderMap() {
     loadMapScript(
@@ -50,39 +60,106 @@ class App extends Component {
     console.log('map script tag loaded');
   }
 
-  getVenues() {
-    // include "?" at end of url to append query string
-    const endPoint = 'https://api.foursquare.com/v2/venues/explore?';
-    const parameters = {
-      client_id: 'HJNNIPI2LLUFNMLQNWRVAJOELZVHCP02VCSIEKK4XNIIS1CB',
-      client_secret: 'YTE4A4QEZH0FMUFOWYRLVVPIJX3L0XW3D2K1GJ0GRMWAT2PV',
-      query: 'record store',
-      near: 'Chicago',
-      v: '20180929'
-    };
+  // getVenues() {
+  //   // include "?" at end of url to append query string
+  //   const endPoint = 'https://api.foursquare.com/v2/venues/explore?';
+  //   const parameters = {
+  //     client_id: 'HJNNIPI2LLUFNMLQNWRVAJOELZVHCP02VCSIEKK4XNIIS1CB',
+  //     client_secret: 'YTE4A4QEZH0FMUFOWYRLVVPIJX3L0XW3D2K1GJ0GRMWAT2PV',
+  //     query: 'record store',
+  //     near: 'Chicago',
+  //     v: '20180929'
+  //   };
 
-    // URLSearchParams will add parameters to url using query strings
-    fetch(endPoint + new URLSearchParams(parameters))
-      .then((response) => response.json())
-      .then((data) => {
-        // Pass renderMap as callback after loading dynamic Foursquare data into state
-        this.setState(
-          {
-            venues: data.response.groups[0].items
-          },
-          this.renderMap()
-        );
-      })
-      .catch((error) => {
-        console.log('Error: ' + error);
-      });
-  }
+  //   // URLSearchParams will add parameters to url using query strings
+  //   fetch(endPoint + new URLSearchParams(parameters))
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // Pass renderMap as callback after loading dynamic Foursquare data into state
+  //       this.setState(
+  //         {
+  //           venues: data.response.groups[0].items
+  //         },
+  //         this.renderMap()
+  //       );
+  //     })
+  //     .catch((error) => {
+  //       console.log('Error: ' + error);
+  //     });
+  // }
 
+  // initMap() {
+  //   // Create A Map
+  //   const map = new window.google.maps.Map(document.getElementById('map'), {
+  //     // center: { lat: 41.9, lng: -87.629 },
+  //     center: this.state.center,
+  //     zoom: this.state.zoom
+  //   });
+
+  //   // Create single InfoWindow
+  //   const infowindow = new window.google.maps.InfoWindow();
+
+  //   // Array to hold markers
+  //   const markerArray = [];
+
+  //   // Generate content for infoWindow
+  //   this.state.venues.map((venue) => {
+
+  //     // Create A Marker
+  //     const marker = new window.google.maps.Marker({
+  //       position: {
+  //         lat: venue.location.lat,
+  //         lng: venue.location.lng
+  //       },
+  //       map: map,
+  //       title: venue.name,
+  //       animation: window.google.maps.Animation.DROP
+  //     });
+
+  //     // Add listener to marker
+  //     marker.addListener('click', () => {
+  //       console.log(marker);
+  //       // find venue that matches clicked marker
+  //       const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);
+  //       // data from venue (state)
+  //       console.log('clicked venue before');
+  //       console.log(clickedVenue);
+
+  //       FoursquareAPI.getVenueDetails(venue.id).then((res) => {
+  //         //get venue details from foursquare and copy them to clickedVenue
+  //         const venueDetails = Object.assign(clickedVenue, res.response.venue);
+  //         // copy venueDetails object and append to state.venues
+  //         this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
+
+  //         // check if venue contains a photo
+  //         const venuePhoto = venue.bestPhoto
+  //           ? `<img src="${venue.bestPhoto.prefix}100x100${
+  //               venue.bestPhoto.suffix
+  //             }" alt="An image of ${venue.name}" />`
+  //           : '';
+
+  //         const contentString = `<div class="venue-info">
+  //         <p>${venue.name}</p>
+  //         ${venuePhoto}
+  //         </div>`;
+
+  //         infowindow.setContent(contentString);
+  //         // Open An InfoWindow
+  //         infowindow.open(map, marker);
+  //       });
+
+  //     });
+
+  //     markerArray.push(marker);
+  //   });
+  //   this.setState({ markers: markerArray });
+  //   console.log('markers added');
+  // }
   initMap() {
     // Create A Map
     const map = new window.google.maps.Map(document.getElementById('map'), {
-      center: { lat: 41.9, lng: -87.629 },
-      zoom: 12
+      center: this.state.center,
+      zoom: this.state.zoom
     });
 
     // Create single InfoWindow
@@ -93,15 +170,6 @@ class App extends Component {
 
     // Generate content for infoWindow
     this.state.venues.map((venue) => {
-      // const contentString = `${place.venue.name}`;
-      const contentString =
-        '<div class="venue-info">' +
-        '<h4>Venue Name</h4>' +
-        '<p>' +
-        venue.name +
-        '</p>' +
-        '</div>';
-
       // Create A Marker
       const marker = new window.google.maps.Marker({
         position: {
@@ -115,17 +183,54 @@ class App extends Component {
 
       // Add listener to marker
       marker.addListener('click', () => {
-        // Update the content for clicked marker
-        infowindow.setContent(contentString);
-        // Open An InfoWindow
-        infowindow.open(map, marker);
+        // find venue that matches clicked marker
+        const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);
+
+        // this.getFoursquareDetails(clickedVenue)
+        FoursquareAPI.getVenueDetails(venue.id)
+          .then((res) => {
+            //get venue details from foursquare and copy them to clickedVenue
+            const venueDetails = Object.assign(clickedVenue, res.response.venue);
+            // copy venueDetails object and append to state.venues
+            this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
+            return venueDetails;
+          })
+          .then(() => {
+            // check if venue contains a photo
+            const venuePhoto = venue.bestPhoto
+              ? '<img src="' +
+                venue.bestPhoto.prefix +
+                '100x100' +
+                venue.bestPhoto.suffix +
+                '" alt="An image of ${venue.name}" />'
+              : '';
+
+            const contentString = `<div class="venue-info">
+            <p>${venue.name}</p>
+            ${venuePhoto}
+            </div>`;
+
+            infowindow.setContent(contentString);
+            // Open An InfoWindow
+            infowindow.open(map, marker);
+          });
       });
 
       markerArray.push(marker);
     });
     this.setState({ markers: markerArray });
-    console.log('markers added');
   }
+
+  // ****************************
+  // getFoursquareDetails(venue) {
+  //   FoursquareAPI.getVenueDetails(venue.id);
+  //   //get venue details from foursquare and copy them to clickedVenue
+  //   const venueDetails = Object.assign(clickedVenue, res.response.venue);
+  //   // copy venueDetails object and append to state.venues
+  //   this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
+  //   return venueDetails;
+  // }
+  // ****************************
 
   // Filter map markers
   filterMarkers(query) {
@@ -139,6 +244,10 @@ class App extends Component {
     });
   }
 
+  accessMapComponent() {
+    this.refs.child.renderMap();
+  }
+
   render() {
     return (
       <div id="app-container">
@@ -148,7 +257,7 @@ class App extends Component {
           queryValue={this.state.queryValue}
           filterMarkers={this.filterMarkers}
         /> */}
-        <Map {...this.state} />
+        <Map venues={this.state.venues} ref="child" />
       </div>
     );
   }
