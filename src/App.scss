@@ -1,3 +1,7 @@
+@import './scss/variables';
+@import './scss/NavBar';
+@import './scss/SideBar';
+
 #root,
 #app-container,
 main {
@@ -20,18 +24,4 @@ body {
 
 #map {
   height: 100%;
-}
-
-#navbar {
-  grid-column-start: 1;
-  grid-column-end: 3;
-  background: #333;
-  color: white;
-}
-
-#sidebar {
-  width: 300px;
-  height: 100%;
-  background: #999;
-  z-index: 4;
 }

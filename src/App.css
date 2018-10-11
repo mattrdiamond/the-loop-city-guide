@@ -1,3 +1,30 @@
+#navbar {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  background: #6200ee;
+  color: white; }
+
+.sidebar {
+  width: 300px;
+  height: 100%;
+  background: #fff;
+  z-index: 4;
+  font-size: 1rem;
+  padding: 1rem;
+  box-sizing: border-box; }
+  .sidebar #searchInput {
+    padding: 0.5rem;
+    height: 2.5rem;
+    width: 100%;
+    font-size: 1rem;
+    box-sizing: border-box; }
+  .sidebar .venueList {
+    list-style: none; }
+    .sidebar .venueList .listItem {
+      padding: 0.5rem;
+      margin-top: 1rem;
+      cursor: pointer; }
+
 #root,
 #app-container,
 main {
@@ -17,15 +44,3 @@ body {
 
 #map {
   height: 100%; }
-
-#navbar {
-  grid-column-start: 1;
-  grid-column-end: 3;
-  background: #333;
-  color: white; }
-
-#sidebar {
-  width: 300px;
-  height: 100%;
-  background: #999;
-  z-index: 4; }

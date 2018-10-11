@@ -1,0 +1,26 @@
+.sidebar {
+  width: 300px;
+  height: 100%;
+  background: $white;
+  z-index: 4;
+  font-size: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  // height: 100vh;
+  // overflow-y: auto;
+  #searchInput {
+    padding: 0.5rem;
+    height: 2.5rem;
+    width: 100%;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  .venueList {
+    list-style: none;
+    .listItem {
+      padding: 0.5rem;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+  }
+}

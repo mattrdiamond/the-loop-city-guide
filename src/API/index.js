@@ -27,6 +27,12 @@ class Helper {
       Accept: 'application/json'
     };
   }
+  static handleErrors(response) {
+    if (!response.ok) {
+      console.log(response.statusText);
+    }
+    return response;
+  }
   // endpoint: inserted after baseURL
   // method: request method
   // urlParams: Foursquare API parameters
@@ -38,7 +44,9 @@ class Helper {
     return fetch(
       `${Helper.baseURL()}${endPoint}?${Helper.auth()}&${Helper.urlBuilder(urlParams)}`,
       requestData
-    ).then((response) => response.json());
+    )
+      .then(Helper.handleErrors)
+      .then((response) => response.json());
   }
 }
 

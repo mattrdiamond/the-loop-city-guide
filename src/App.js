@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './components/NavBar';
-// import SideBar from './components/SideBar';
+import SideBar from './components/SideBar';
 import Map from './components/Map';
 import FoursquareAPI from './API/';
 import './App.css';
@@ -27,7 +27,7 @@ class App extends Component {
     FoursquareAPI.search({
       near: 'Chicago, IL',
       query: 'records',
-      limit: 10
+      limit: 15
     }).then((results) => {
       const { venues } = results.response;
       const { center } = results.response.geocode.feature.geometry;
@@ -36,12 +36,11 @@ class App extends Component {
           lat: venue.location.lat,
           lng: venue.location.lng,
           name: venue.name,
-          isOpen: false, //remove
-          isVisible: true, // remove
+          // isOpen: false,
+          // isVisible: true,
           id: venue.id
         };
       });
-      console.log(markers);
       // Update state with Foursquare data and pass renderMap as callback
       this.setState({ venues, center, markers }, this.renderMap());
     });
@@ -69,7 +68,7 @@ class App extends Component {
     // Create single InfoWindow
     const infowindow = new window.google.maps.InfoWindow();
 
-    this.state.venues.map((venue) => {
+    this.state.venues.forEach((venue) => {
       const marker = new window.google.maps.Marker({
         position: {
           lat: venue.location.lat,
@@ -93,22 +92,24 @@ class App extends Component {
             const venueDetails = Object.assign(clickedVenue, res.response.venue);
             // copy venueDetails object and append to state.venues
             this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
-            return venueDetails;
+            // return venueDetails;
           })
           .then(() => {
-            // Generate content for infoWindow
             const venuePhoto = venue.bestPhoto
               ? '<img src="' +
                 venue.bestPhoto.prefix +
                 '100x100' +
                 venue.bestPhoto.suffix +
-                '" alt="An image of ${venue.name}" />'
+                '" alt="An image of ' +
+                venue.name +
+                '" />'
               : '';
 
-            const contentString = `<div class="venue-info">
+            // Generate content for infoWindow
+            const contentString = `<React.Fragment>
             <p>${venue.name}</p>
             ${venuePhoto}
-            </div>`;
+            </React.Fragment>`;
 
             infowindow.setContent(contentString);
             infowindow.open(map, marker);
@@ -148,12 +149,8 @@ class App extends Component {
     return (
       <div id="app-container">
         <NavBar />
-        {/* <SideBar
-          venues={this.state.venues}
-          queryValue={this.state.queryValue}
-          filterMarkers={this.filterMarkers}
-        /> */}
-        <Map venues={this.state.venues} ref="child" />
+        <SideBar {...this.state} />
+        <Map ref="child" />
       </div>
     );
   }
