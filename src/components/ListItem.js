@@ -6,7 +6,6 @@ export default class ListItem extends Component {
       <li
         className="listItem"
         onClick={() => {
-          console.log('clicked venue', this.props.venue);
           this.props.handleListItemClick(this.props.venue);
         }}
       >

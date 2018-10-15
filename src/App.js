@@ -23,21 +23,13 @@ class App extends Component {
     // fetch restaurant data from Foursquare
     FoursquareAPI.search({
       near: 'Chicago, IL',
-      query: 'pizza',
-      limit: 5
+      query: 'coffee',
+      limit: 10
     }).then((results) => {
       const { venues } = results.response;
       const { center } = results.response.geocode.feature.geometry;
-      const markers = venues.map((venue) => {
-        return {
-          lat: venue.location.lat,
-          lng: venue.location.lng,
-          name: venue.name,
-          id: venue.id
-        };
-      });
-      // Update state with Foursquare data and pass renderMap as callback
-      this.setState({ venues, center, markers }, this.renderMap());
+      this.setState({ venues, center });
+      this.renderMap();
     });
   }
 
@@ -58,19 +50,20 @@ class App extends Component {
     // Create single InfoWindow
     const infowindow = new window.google.maps.InfoWindow();
 
-    // add markers
     this.state.venues.map((venue) => {
       const marker = new window.google.maps.Marker({
         position: {
           lat: venue.location.lat,
           lng: venue.location.lng
         },
+        id: venue.id,
         map: map,
         title: venue.name,
         animation: window.google.maps.Animation.DROP
       });
 
-      // Add listener to marker
+      this.state.markers.push(marker);
+
       marker.addListener('click', () => {
         // animate marker
         this.toggleBounce(marker);
@@ -114,7 +107,6 @@ class App extends Component {
 
   handleListItemClick(venue) {
     const clickedMarker = this.state.markers.find((marker) => marker.id === venue.id);
-    console.log('marker matching li:', clickedMarker);
     window.google.maps.event.trigger(clickedMarker, 'click');
   }
 
