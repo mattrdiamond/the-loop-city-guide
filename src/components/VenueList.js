@@ -6,7 +6,13 @@ export default class venueList extends Component {
     return (
       <ul className="venueList">
         {this.props.venues &&
-          this.props.venues.map((venue, index) => <ListItem key={index} {...venue} />)}
+          this.props.venues.map((venue, index) => (
+            <ListItem
+              key={index}
+              venue={venue}
+              handleListItemClick={this.props.handleListItemClick}
+            />
+          ))}
       </ul>
     );
   }

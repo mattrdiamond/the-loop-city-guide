@@ -1,8 +1,11 @@
 #navbar {
   grid-column-start: 1;
   grid-column-end: 3;
-  background: #6200ee;
-  color: white; }
+  background: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 1rem; }
 
 .sidebar {
   width: 300px;

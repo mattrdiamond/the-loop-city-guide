@@ -15,19 +15,16 @@ class App extends Component {
       center: [],
       zoom: 12
     };
-
     this.initMap = this.initMap.bind(this);
-    this.filterMarkers = this.filterMarkers.bind(this);
+    this.handleListItemClick = this.handleListItemClick.bind(this);
   }
 
   componentDidMount() {
-    // test to access child method
-    this.accessChild();
-
+    // fetch restaurant data from Foursquare
     FoursquareAPI.search({
       near: 'Chicago, IL',
-      query: 'records',
-      limit: 15
+      query: 'pizza',
+      limit: 5
     }).then((results) => {
       const { venues } = results.response;
       const { center } = results.response.geocode.feature.geometry;
@@ -36,8 +33,6 @@ class App extends Component {
           lat: venue.location.lat,
           lng: venue.location.lng,
           name: venue.name,
-          // isOpen: false,
-          // isVisible: true,
           id: venue.id
         };
       });
@@ -46,20 +41,15 @@ class App extends Component {
     });
   }
 
-  // test to access child method
-  accessChild = () => {
-    this.refs.child.propsTest();
-  };
-
   renderMap() {
     loadMapScript(
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyCHE01dQ6hdkOBP0qxkzYdTCJdhYesX8gY&callback=initMap'
     );
     window.initMap = this.initMap;
-    console.log('map script tag loaded');
   }
 
   initMap() {
+    // load map
     const map = new window.google.maps.Map(document.getElementById('map'), {
       center: this.state.center,
       zoom: this.state.zoom
@@ -68,7 +58,8 @@ class App extends Component {
     // Create single InfoWindow
     const infowindow = new window.google.maps.InfoWindow();
 
-    this.state.venues.forEach((venue) => {
+    // add markers
+    this.state.venues.map((venue) => {
       const marker = new window.google.maps.Marker({
         position: {
           lat: venue.location.lat,
@@ -81,6 +72,7 @@ class App extends Component {
 
       // Add listener to marker
       marker.addListener('click', () => {
+        // animate marker
         this.toggleBounce(marker);
 
         // find venue that matches clicked marker
@@ -92,9 +84,9 @@ class App extends Component {
             const venueDetails = Object.assign(clickedVenue, res.response.venue);
             // copy venueDetails object and append to state.venues
             this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
-            // return venueDetails;
           })
           .then(() => {
+            // use photo if available. otherwise set as empty string
             const venuePhoto = venue.bestPhoto
               ? '<img src="' +
                 venue.bestPhoto.prefix +
@@ -107,15 +99,23 @@ class App extends Component {
 
             // Generate content for infoWindow
             const contentString = `<React.Fragment>
-            <p>${venue.name}</p>
-            ${venuePhoto}
-            </React.Fragment>`;
+              <p>${venue.name}</p>
+              ${venuePhoto}
+              </React.Fragment>`;
 
             infowindow.setContent(contentString);
+
+            // open infowindow
             infowindow.open(map, marker);
           });
       });
     });
+  }
+
+  handleListItemClick(venue) {
+    const clickedMarker = this.state.markers.find((marker) => marker.id === venue.id);
+    console.log('marker matching li:', clickedMarker);
+    window.google.maps.event.trigger(clickedMarker, 'click');
   }
 
   toggleBounce(marker) {
@@ -129,28 +129,15 @@ class App extends Component {
     }, 1000);
   }
 
-  // Filter map markers
-  filterMarkers(query) {
-    this.state.markers.forEach((marker) => {
-      marker.title.toLowerCase().includes(query.trim())
-        ? marker.setVisible(true)
-        : marker.setVisible(false);
-    });
-    this.setState({
-      queryValue: query.trim()
-    });
-  }
-
-  accessMapComponent() {
-    this.refs.child.renderMap();
-  }
-
   render() {
     return (
       <div id="app-container">
         <NavBar />
-        <SideBar {...this.state} />
-        <Map ref="child" />
+        <SideBar
+          handleListItemClick={this.handleListItemClick}
+          venues={this.state.venues}
+        />
+        <Map />
       </div>
     );
   }
