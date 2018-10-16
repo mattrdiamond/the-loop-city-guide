@@ -8,6 +8,7 @@ export default class ListItem extends Component {
         onClick={() => {
           this.props.handleListItemClick(this.props.venue);
         }}
+        // <img src={() => this.props.venues.categories}
       >
         {this.props.venue.name}
       </li>

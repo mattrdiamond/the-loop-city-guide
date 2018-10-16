@@ -19,18 +19,45 @@ class App extends Component {
     this.handleListItemClick = this.handleListItemClick.bind(this);
   }
 
+  // componentDidMount() {
+  //   // fetch restaurant data from Foursquare
+  //   FoursquareAPI.search({
+  //     near: 'Chicago, IL',
+  //     query: 'coffee',
+  //     limit: 10
+  //   }).then((results) => {
+  //     const { venues } = results.response;
+  //     const { center } = results.response.geocode.feature.geometry;
+  //     this.setState({ venues, center });
+  //     this.renderMap();
+  //   });
+  // }
   componentDidMount() {
     // fetch restaurant data from Foursquare
     FoursquareAPI.search({
       near: 'Chicago, IL',
       query: 'coffee',
       limit: 10
-    }).then((results) => {
-      const { venues } = results.response;
-      const { center } = results.response.geocode.feature.geometry;
-      this.setState({ venues, center });
-      this.renderMap();
-    });
+    })
+      .then((results) => {
+        const { venues } = results.response;
+        const { center } = results.response.geocode.feature.geometry;
+        this.setState({ venues, center });
+        this.renderMap();
+        return venues;
+      })
+      .then((venues) => {
+        const venueDetails = [];
+        venues.forEach((venue) => {
+          FoursquareAPI.getVenueDetails(venue.id).then((results) => {
+            // const venueDetails = [results.response.venue];
+            venueDetails.push(results.response.venue);
+            // copy and merge venue details with state value
+            this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
+            console.log(venueDetails);
+          });
+        });
+      });
   }
 
   renderMap() {
@@ -38,6 +65,7 @@ class App extends Component {
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyCHE01dQ6hdkOBP0qxkzYdTCJdhYesX8gY&callback=initMap'
     );
     window.initMap = this.initMap;
+    console.log('loaded map script');
   }
 
   initMap() {
@@ -103,6 +131,7 @@ class App extends Component {
           });
       });
     });
+    console.log('inititialized map and markers');
   }
 
   handleListItemClick(venue) {
