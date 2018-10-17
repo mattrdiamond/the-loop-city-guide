@@ -9,16 +9,27 @@ export default class SideBar extends Component {
     };
   }
 
+  handleFilterVenues() {
+    if (this.state.query.trim() !== '') {
+      const matchingVenues = this.props.venues.filter((venue) =>
+        venue.name.toLowerCase().includes(this.state.query.toLowerCase().trim())
+      );
+      return matchingVenues;
+    } else {
+      return this.props.venues;
+    }
+  }
+
   handleChange = (e) => {
-    console.log(e);
     this.setState({ query: e.target.value });
     const markers = this.props.venues.map((venue) => {
-      const queryMatch = venue.name.toLowerCase().includes(e.target.value.toLowerCase());
+      const queryMatch = venue.name
+        .toLowerCase()
+        .includes(e.target.value.toLowerCase().trim());
       const marker = this.props.markers.find((marker) => marker.id === venue.id);
       queryMatch ? marker.setVisible(true) : marker.setVisible(false);
       return marker;
     });
-    console.log(markers);
     this.props.updateSuperState({ markers: markers });
   };
 
@@ -33,7 +44,7 @@ export default class SideBar extends Component {
         />
         <VenueList
           handleListItemClick={this.props.handleListItemClick}
-          venues={this.props.venues}
+          venues={this.handleFilterVenues()}
         />
       </div>
     );

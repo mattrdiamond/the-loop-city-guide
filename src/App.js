@@ -69,7 +69,6 @@ class App extends Component {
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyCHE01dQ6hdkOBP0qxkzYdTCJdhYesX8gY&callback=initMap'
     );
     window.initMap = this.initMap;
-    console.log('loaded map script');
   }
 
   initMap() {
@@ -135,7 +134,6 @@ class App extends Component {
           });
       });
     });
-    console.log('inititialized map and markers');
   }
 
   handleListItemClick(venue) {
