@@ -13,10 +13,27 @@ class App extends Component {
       venues: [],
       markers: [],
       center: [],
-      zoom: 12
+      zoom: 12,
+      updateSuperState: (obj) => {
+        this.setState(obj);
+      }
     };
     this.initMap = this.initMap.bind(this);
     this.handleListItemClick = this.handleListItemClick.bind(this);
+  }
+
+  componentDidMount() {
+    // fetch restaurant data from Foursquare
+    FoursquareAPI.search({
+      near: 'Chicago, IL',
+      query: 'coffee',
+      limit: 10
+    }).then((results) => {
+      const { venues } = results.response;
+      const { center } = results.response.geocode.feature.geometry;
+      this.setState({ venues, center });
+      this.renderMap();
+    });
   }
 
   // componentDidMount() {
@@ -25,40 +42,27 @@ class App extends Component {
   //     near: 'Chicago, IL',
   //     query: 'coffee',
   //     limit: 10
-  //   }).then((results) => {
-  //     const { venues } = results.response;
-  //     const { center } = results.response.geocode.feature.geometry;
-  //     this.setState({ venues, center });
-  //     this.renderMap();
-  //   });
+  //   })
+  //     .then((results) => {
+  //       const { venues } = results.response;
+  //       const { center } = results.response.geocode.feature.geometry;
+  //       this.setState({ venues, center });
+  //       this.renderMap();
+  //       return venues;
+  //     })
+  //     .then((venues) => {
+  //       const venueDetails = [];
+  //       venues.forEach((venue) => {
+  //         FoursquareAPI.getVenueDetails(venue.id).then((results) => {
+  //           // const venueDetails = [results.response.venue];
+  //           venueDetails.push(results.response.venue);
+  //           // copy and merge venue details with state value
+  //           this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
+  //           console.log(venueDetails);
+  //         });
+  //       });
+  //     });
   // }
-  componentDidMount() {
-    // fetch restaurant data from Foursquare
-    FoursquareAPI.search({
-      near: 'Chicago, IL',
-      query: 'coffee',
-      limit: 10
-    })
-      .then((results) => {
-        const { venues } = results.response;
-        const { center } = results.response.geocode.feature.geometry;
-        this.setState({ venues, center });
-        this.renderMap();
-        return venues;
-      })
-      .then((venues) => {
-        const venueDetails = [];
-        venues.forEach((venue) => {
-          FoursquareAPI.getVenueDetails(venue.id).then((results) => {
-            // const venueDetails = [results.response.venue];
-            venueDetails.push(results.response.venue);
-            // copy and merge venue details with state value
-            this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
-            console.log(venueDetails);
-          });
-        });
-      });
-  }
 
   renderMap() {
     loadMapScript(
@@ -157,6 +161,8 @@ class App extends Component {
         <SideBar
           handleListItemClick={this.handleListItemClick}
           venues={this.state.venues}
+          markers={this.state.markers}
+          updateSuperState={this.state.updateSuperState}
         />
         <Map />
       </div>
