@@ -14,6 +14,7 @@ export default class SideBar extends Component {
       const matchingVenues = this.props.venues.filter((venue) =>
         venue.name.toLowerCase().includes(this.state.query.toLowerCase().trim())
       );
+      this.animateMarkers(matchingVenues);
       return matchingVenues;
     } else {
       return this.props.venues;
@@ -21,6 +22,7 @@ export default class SideBar extends Component {
   }
 
   handleChange = (e) => {
+    this.props.infoWindow.close();
     this.setState({ query: e.target.value });
     const markers = this.props.venues.map((venue) => {
       const queryMatch = venue.name
@@ -32,6 +34,19 @@ export default class SideBar extends Component {
     });
     this.props.updateSuperState({ markers: markers });
   };
+
+  animateMarkers(matchingVenues) {
+    if (matchingVenues.length === 1) {
+      const marker = this.props.markers.find(
+        (marker) => marker.id === matchingVenues[0].id
+      );
+      marker.setAnimation(window.google.maps.Animation.BOUNCE);
+    } else {
+      this.props.markers.forEach((marker) =>
+        marker.setAnimation(window.google.maps.Animation.DROP)
+      );
+    }
+  }
 
   render() {
     return (

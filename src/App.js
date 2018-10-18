@@ -14,6 +14,7 @@ class App extends Component {
       markers: [],
       center: [],
       zoom: 12,
+      infoWindow: '',
       updateSuperState: (obj) => {
         this.setState(obj);
       }
@@ -80,6 +81,8 @@ class App extends Component {
 
     // Create single InfoWindow
     const infowindow = new window.google.maps.InfoWindow();
+
+    this.setState({ infoWindow: infowindow });
 
     this.state.venues.map((venue) => {
       const marker = new window.google.maps.Marker({
@@ -161,6 +164,8 @@ class App extends Component {
           venues={this.state.venues}
           markers={this.state.markers}
           updateSuperState={this.state.updateSuperState}
+          handleListItemClick={this.handleListItemClick}
+          infoWindow={this.state.infoWindow}
         />
         <Map />
       </div>
