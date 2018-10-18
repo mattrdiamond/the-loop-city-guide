@@ -133,6 +133,9 @@ class App extends Component {
 
             // open infowindow
             infowindow.open(map, marker);
+          })
+          .catch((error) => {
+            alert('Error: Failed to fetch Foursquare Data');
           });
       });
     });
