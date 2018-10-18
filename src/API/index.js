@@ -29,8 +29,10 @@ class Helper {
   }
   static handleErrors(response) {
     if (!response.ok) {
-      console.log(response.statusText);
+      throw Error(response.statusText);
     }
+    console.log('response', response);
+
     return response;
   }
   // endpoint: inserted after baseURL
@@ -46,6 +48,7 @@ class Helper {
       requestData
     )
       .then(Helper.handleErrors)
+
       .then((response) => response.json());
   }
 }

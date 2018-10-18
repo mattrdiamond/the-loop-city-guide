@@ -81,7 +81,6 @@ class App extends Component {
 
     // Create single InfoWindow
     const infowindow = new window.google.maps.InfoWindow();
-
     this.setState({ infoWindow: infowindow });
 
     this.state.venues.map((venue) => {
@@ -181,6 +180,7 @@ const loadMapScript = (url) => {
   script.src = url;
   script.async = true;
   script.defer = true;
+  script.onerror = () => alert('Unable to load Google Maps');
   index.parentNode.insertBefore(script, index);
 };
 

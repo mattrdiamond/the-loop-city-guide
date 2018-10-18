@@ -17,6 +17,7 @@ export default class ListItem extends Component {
           }
           alt={this.props.venue.categories[0].name}
         />
+
         {this.props.venue.name}
       </li>
     );
