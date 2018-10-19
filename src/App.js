@@ -29,12 +29,16 @@ class App extends Component {
       near: 'Chicago, IL',
       query: 'coffee',
       limit: 10
-    }).then((results) => {
-      const { venues } = results.response;
-      const { center } = results.response.geocode.feature.geometry;
-      this.setState({ venues, center });
-      this.renderMap();
-    });
+    })
+      .then((results) => {
+        const { venues } = results.response;
+        const { center } = results.response.geocode.feature.geometry;
+        this.setState({ venues, center });
+        this.renderMap();
+      })
+      .catch((error) => {
+        alert('Error: Failed to fetch Foursquare Data');
+      });
   }
 
   // componentDidMount() {
@@ -62,6 +66,9 @@ class App extends Component {
   //           console.log(venueDetails);
   //         });
   //       });
+  //     })
+  //     .catch((error) => {
+  //       alert('Error: Failed to fetch Foursquare Data');
   //     });
   // }
 
@@ -108,10 +115,10 @@ class App extends Component {
           .then((res) => {
             //get venue details from foursquare and copy them to clickedVenue
             const venueDetails = Object.assign(clickedVenue, res.response.venue);
+
             // copy venueDetails object and append to state.venues
             this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
-          })
-          .then(() => {
+
             // use photo if available. otherwise set as empty string
             const venuePhoto = venue.bestPhoto
               ? '<img src="' +
@@ -129,9 +136,8 @@ class App extends Component {
               ${venuePhoto}
               </React.Fragment>`;
 
+            // Set infowindow content and open
             infowindow.setContent(contentString);
-
-            // open infowindow
             infowindow.open(map, marker);
           })
           .catch((error) => {
