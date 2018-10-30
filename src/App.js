@@ -9,18 +9,21 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      queryvalue: '',
+      // queryvalue: '',
       venues: [],
       markers: [],
       center: [],
       zoom: 12,
       infoWindow: '',
+      sidebarOpen: false,
       updateSuperState: (obj) => {
         this.setState(obj);
       }
     };
     this.initMap = this.initMap.bind(this);
     this.handleListItemClick = this.handleListItemClick.bind(this);
+    this.toggleSidebar = this.toggleSidebar.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +44,7 @@ class App extends Component {
       });
   }
 
+  // fetch restaurant details from Foursquare
   // componentDidMount() {
   //   // fetch restaurant data from Foursquare
   //   FoursquareAPI.search({
@@ -163,10 +167,22 @@ class App extends Component {
     }, 1000);
   }
 
+  handleMouseDown(e) {
+    this.toggleSidebar();
+    console.log('clicked');
+  }
+
+  toggleSidebar() {
+    this.setState({ sidebarOpen: !this.state.sidebarOpen });
+  }
+
   render() {
     return (
       <div id="app-container">
-        <NavBar />
+        <NavBar
+          handleMouseDown={this.handleMouseDown}
+          sidebarOpen={this.state.sidebarOpen}
+        />
         <SideBar
           handleListItemClick={this.handleListItemClick}
           venues={this.state.venues}
@@ -174,6 +190,8 @@ class App extends Component {
           updateSuperState={this.state.updateSuperState}
           handleListItemClick={this.handleListItemClick}
           infoWindow={this.state.infoWindow}
+          sidebarOpen={this.state.sidebarOpen}
+          handleMouseDown={this.handleMouseDown}
         />
         <Map />
       </div>

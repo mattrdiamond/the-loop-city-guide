@@ -1,9 +1,13 @@
 #navbar {
   grid-column-start: 1;
   grid-column-end: 3;
-  background: $primary-color;
+  background: $ui-primary;
   color: white;
   display: flex;
   align-items: center;
   padding: 1rem;
 }
+
+// button {
+//   border: 2px solid red;
+// }

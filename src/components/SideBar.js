@@ -49,8 +49,14 @@ export default class SideBar extends Component {
   }
 
   render() {
+    let sidebarVisibility = 'hidden';
+
+    if (this.props.sidebarOpen) {
+      sidebarVisibility = 'visible';
+    }
+
     return (
-      <div className="sidebar">
+      <div id="sidebar" className={sidebarVisibility}>
         <input
           id="searchInput"
           type="text"
