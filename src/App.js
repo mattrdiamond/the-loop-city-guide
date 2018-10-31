@@ -23,7 +23,7 @@ class App extends Component {
     this.initMap = this.initMap.bind(this);
     this.handleListItemClick = this.handleListItemClick.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
-    this.handleMouseDown = this.handleMouseDown.bind(this);
+    this.navKeyPress = this.navKeyPress.bind(this);
   }
 
   componentDidMount() {
@@ -154,6 +154,10 @@ class App extends Component {
   handleListItemClick(venue) {
     const clickedMarker = this.state.markers.find((marker) => marker.id === venue.id);
     window.google.maps.event.trigger(clickedMarker, 'click');
+
+    if (window.innerWidth < 600) {
+      this.toggleSidebar();
+    }
   }
 
   toggleBounce(marker) {
@@ -167,9 +171,11 @@ class App extends Component {
     }, 1000);
   }
 
-  handleMouseDown(e) {
-    this.toggleSidebar();
-    console.log('clicked');
+  navKeyPress(e) {
+    var code = e.keyCode || e.which;
+    if (code === 13) {
+      this.toggleSidebar();
+    }
   }
 
   toggleSidebar() {
@@ -180,8 +186,9 @@ class App extends Component {
     return (
       <div id="app-container">
         <NavBar
-          handleMouseDown={this.handleMouseDown}
+          toggleSidebar={this.toggleSidebar}
           sidebarOpen={this.state.sidebarOpen}
+          navKeyPress={this.navKeyPress}
         />
         <SideBar
           handleListItemClick={this.handleListItemClick}
@@ -191,7 +198,6 @@ class App extends Component {
           handleListItemClick={this.handleListItemClick}
           infoWindow={this.state.infoWindow}
           sidebarOpen={this.state.sidebarOpen}
-          handleMouseDown={this.handleMouseDown}
         />
         <Map />
       </div>

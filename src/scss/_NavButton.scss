@@ -16,14 +16,14 @@
   .hamburger-box {
     position: relative;
     display: inline-block;
-    width: 35px;
+    width: 30px;
     height: 24px;
 
     .hamburger-inner,
     .hamburger-inner:after,
     .hamburger-inner:before {
       position: absolute;
-      width: 35px;
+      width: 30px;
       height: 3px;
       transition-timing-function: ease;
       transition-duration: 0.15s;

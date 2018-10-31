@@ -7,7 +7,7 @@
   align-items: center;
   padding: 1rem; }
 
-#sidebar {
+#venue-sidebar {
   width: 300px;
   height: 100%;
   background: #ecf0f1;
@@ -19,19 +19,13 @@
   position: absolute;
   overflow: scroll;
   transition: all 0.5s ease; }
-  #sidebar #searchInput {
+  #venue-sidebar #search-input {
     padding: 0.5rem;
     height: 2.5rem;
     width: 100%;
     font-size: 1rem;
     box-sizing: border-box; }
-  #sidebar .venueList {
-    list-style: none; }
-    #sidebar .venueList .listItem {
-      padding: 0.5rem;
-      margin-top: 1rem;
-      cursor: pointer; }
-  #sidebar.visible {
+  #venue-sidebar.visible {
     left: 0; }
 
 .hamburger--vortex {
@@ -47,13 +41,13 @@
   .hamburger--vortex .hamburger-box {
     position: relative;
     display: inline-block;
-    width: 35px;
+    width: 30px;
     height: 24px; }
     .hamburger--vortex .hamburger-box .hamburger-inner,
     .hamburger--vortex .hamburger-box .hamburger-inner:after,
     .hamburger--vortex .hamburger-box .hamburger-inner:before {
       position: absolute;
-      width: 35px;
+      width: 30px;
       height: 3px;
       transition-timing-function: ease;
       transition-duration: 0.15s;
@@ -90,6 +84,16 @@
     .hamburger--vortex.open .hamburger-inner::after {
       bottom: 0;
       transform: rotate(90deg); }
+
+.venue-list {
+  list-style: none; }
+
+.list-item {
+  padding: 0.5rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center; }
 
 #root,
 #app-container,

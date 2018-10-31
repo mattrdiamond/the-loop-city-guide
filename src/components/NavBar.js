@@ -6,8 +6,9 @@ class NavBar extends Component {
     return (
       <nav id="navbar">
         <NavButton
-          handleMouseDown={this.props.handleMouseDown}
+          toggleSidebar={this.props.toggleSidebar}
           sidebarOpen={this.props.sidebarOpen}
+          navKeyPress={this.props.navKeyPress}
         />
         <h1 className="site-title">Neighborhood Map</h1>
       </nav>

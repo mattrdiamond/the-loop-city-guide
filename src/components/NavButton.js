@@ -3,10 +3,8 @@ import React, { Component } from 'react';
 class NavButton extends Component {
   render() {
     let buttonState = 'closed';
-    console.log('sidebar', this.props.sidebarOpen);
 
     if (this.props.sidebarOpen) {
-      console.log('sidebar', this.props.sidebarOpen);
       buttonState = 'open';
     }
 
@@ -14,10 +12,12 @@ class NavButton extends Component {
       <button
         id="nav-button"
         className={'hamburger--vortex ' + buttonState}
-        onMouseDown={this.props.handleMouseDown}
+        onMouseDown={this.props.toggleSidebar}
+        onKeyPress={this.props.navKeyPress}
         type="button"
-        aria-label="Menu"
-        aria-controls="navigation"
+        aria-label="Venues"
+        aria-controls="venue-sidebar"
+        aria-haspopup="true"
       >
         <span className="hamburger-box">
           <span className="hamburger-inner" />

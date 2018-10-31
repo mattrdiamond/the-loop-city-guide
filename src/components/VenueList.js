@@ -4,7 +4,7 @@ import ListItem from './ListItem';
 export default class venueList extends Component {
   render() {
     return (
-      <ul className="venueList">
+      <ul className="venue-list">
         {this.props.venues &&
           this.props.venues.map((venue, index) => (
             <ListItem

@@ -56,9 +56,9 @@ export default class SideBar extends Component {
     }
 
     return (
-      <div id="sidebar" className={sidebarVisibility}>
+      <div id="venue-sidebar" className={sidebarVisibility}>
         <input
-          id="searchInput"
+          id="search-input"
           type="text"
           placeholder="Search"
           onChange={this.handleChange}

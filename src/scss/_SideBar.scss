@@ -1,4 +1,4 @@
-#sidebar {
+#venue-sidebar {
   width: 300px;
   height: 100%;
   background: $white;
@@ -12,20 +12,12 @@
   position: absolute;
   overflow: scroll;
   transition: all 0.5s ease;
-  #searchInput {
+  #search-input {
     padding: 0.5rem;
     height: 2.5rem;
     width: 100%;
     font-size: 1rem;
     box-sizing: border-box;
-  }
-  .venueList {
-    list-style: none;
-    .listItem {
-      padding: 0.5rem;
-      margin-top: 1rem;
-      cursor: pointer;
-    }
   }
   &.visible {
     left: 0;
