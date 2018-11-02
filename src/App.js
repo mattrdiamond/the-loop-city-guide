@@ -9,7 +9,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // queryvalue: '',
       venues: [],
       markers: [],
       center: [],
@@ -85,7 +84,7 @@ class App extends Component {
 
   initMap() {
     // load map
-    const map = new window.google.maps.Map(document.getElementById('map'), {
+    this.map = new window.google.maps.Map(document.getElementById('map'), {
       center: this.state.center,
       zoom: this.state.zoom
     });
@@ -101,7 +100,7 @@ class App extends Component {
           lng: venue.location.lng
         },
         id: venue.id,
-        map: map,
+        map: this.map,
         title: venue.name,
         animation: window.google.maps.Animation.DROP
       });
@@ -142,7 +141,7 @@ class App extends Component {
 
             // Set infowindow content and open
             infowindow.setContent(contentString);
-            infowindow.open(map, marker);
+            infowindow.open(this.map, marker);
           })
           .catch((error) => {
             alert('Error: Failed to fetch Foursquare Data');
@@ -155,8 +154,20 @@ class App extends Component {
     const clickedMarker = this.state.markers.find((marker) => marker.id === venue.id);
     window.google.maps.event.trigger(clickedMarker, 'click');
 
+    this.setState({ zoom: 13 });
+    this.map.setCenter(clickedMarker.position);
+    this.map.panBy(-75, 0);
+
     if (window.innerWidth < 600) {
       this.toggleSidebar();
+    }
+  }
+
+  // update version of componentDidMount
+  // update state if the data has changed
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.zoom !== this.state.zoom) {
+      this.map.setZoom(this.state.zoom);
     }
   }
 
@@ -173,6 +184,7 @@ class App extends Component {
 
   navKeyPress(e) {
     var code = e.keyCode || e.which;
+
     if (code === 13) {
       this.toggleSidebar();
     }
@@ -195,7 +207,6 @@ class App extends Component {
           venues={this.state.venues}
           markers={this.state.markers}
           updateSuperState={this.state.updateSuperState}
-          handleListItemClick={this.handleListItemClick}
           infoWindow={this.state.infoWindow}
           sidebarOpen={this.state.sidebarOpen}
         />
