@@ -195,7 +195,7 @@ class App extends Component {
     this.setState({ sidebarOpen: !this.state.sidebarOpen });
   }
 
-  // test
+  // test - update map bounds to focus on showing markers
   // todo: set bounds inititially, then fit bounds when filtering. might not need to manually set zoom?
   centerMap(bounds) {
     console.log('this.map', this.map);
