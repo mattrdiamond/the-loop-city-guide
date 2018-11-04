@@ -23,6 +23,7 @@ class App extends Component {
     this.handleListItemClick = this.handleListItemClick.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
     this.navKeyPress = this.navKeyPress.bind(this);
+    this.centerMap = this.centerMap.bind(this);
   }
 
   componentDidMount() {
@@ -194,6 +195,14 @@ class App extends Component {
     this.setState({ sidebarOpen: !this.state.sidebarOpen });
   }
 
+  // test
+  // todo: set bounds inititially, then fit bounds when filtering. might not need to manually set zoom?
+  centerMap(bounds) {
+    console.log('this.map', this.map);
+    this.map.fitBounds(bounds);
+    // this.map.setZoom(this.map.getZoom() - 2);
+  }
+
   render() {
     return (
       <div id="app-container">
@@ -209,6 +218,7 @@ class App extends Component {
           updateSuperState={this.state.updateSuperState}
           infoWindow={this.state.infoWindow}
           sidebarOpen={this.state.sidebarOpen}
+          centerMap={this.centerMap}
         />
         <Map />
       </div>

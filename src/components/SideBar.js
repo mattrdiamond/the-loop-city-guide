@@ -15,20 +15,39 @@ export default class SideBar extends Component {
         venue.name.toLowerCase().includes(this.state.query.toLowerCase().trim())
       );
       this.animateMarkers(matchingVenues);
+      // test
+      this.centerMap(matchingVenues);
       return matchingVenues;
     } else {
       return this.props.venues;
     }
   }
 
+  // test
+  centerMap(matchingVenues) {
+    // should this be set in initmap instead?
+    let bounds = new window.google.maps.LatLngBounds();
+    const matchingMarkers = this.props.markers.filter((marker) => marker.visible);
+    console.log('matchingMarkers', matchingMarkers);
+    console.log('all markers', this.props.markers);
+    console.log('matching venues', matchingVenues);
+    matchingMarkers.forEach((marker) => bounds.extend(marker.position));
+    console.log('newBounds', bounds);
+    this.props.centerMap(bounds);
+  }
+
+  // find markers that match query value and hide others
   handleChange = (e) => {
     this.props.infoWindow.close();
     this.setState({ query: e.target.value });
+    // check each venue to see if it includes query value
     const markers = this.props.venues.map((venue) => {
       const queryMatch = venue.name
         .toLowerCase()
         .includes(e.target.value.toLowerCase().trim());
+      // find corresponding marker
       const marker = this.props.markers.find((marker) => marker.id === venue.id);
+      // set visible if marker matches query value
       queryMatch ? marker.setVisible(true) : marker.setVisible(false);
       return marker;
     });
