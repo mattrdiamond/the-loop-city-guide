@@ -15,25 +15,10 @@ export default class SideBar extends Component {
         venue.name.toLowerCase().includes(this.state.query.toLowerCase().trim())
       );
       this.animateMarkers(matchingVenues);
-      // test
-      this.centerMap(matchingVenues);
       return matchingVenues;
     } else {
       return this.props.venues;
     }
-  }
-
-  // test
-  centerMap(matchingVenues) {
-    // should this be set in initmap instead?
-    let bounds = new window.google.maps.LatLngBounds();
-    const matchingMarkers = this.props.markers.filter((marker) => marker.visible);
-    console.log('matchingMarkers', matchingMarkers);
-    console.log('all markers', this.props.markers);
-    console.log('matching venues', matchingVenues);
-    matchingMarkers.forEach((marker) => bounds.extend(marker.position));
-    console.log('newBounds', bounds);
-    this.props.centerMap(bounds);
   }
 
   // find markers that match query value and hide others
@@ -52,6 +37,7 @@ export default class SideBar extends Component {
       return marker;
     });
     this.props.updateSuperState({ markers: markers });
+    this.props.centerMap();
   };
 
   animateMarkers(matchingVenues) {

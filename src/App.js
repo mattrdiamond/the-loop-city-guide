@@ -84,6 +84,9 @@ class App extends Component {
   }
 
   initMap() {
+    // create empty LatLngBounds object
+    this.bounds = new window.google.maps.LatLngBounds();
+
     // load map
     this.map = new window.google.maps.Map(document.getElementById('map'), {
       center: this.state.center,
@@ -107,6 +110,9 @@ class App extends Component {
       });
 
       this.state.markers.push(marker);
+
+      //extend the bounds to include each marker's position
+      this.bounds.extend(marker.position);
 
       marker.addListener('click', () => {
         // animate marker
@@ -149,6 +155,9 @@ class App extends Component {
           });
       });
     });
+    // fit the map to the newly inclusive bounds
+    this.map.fitBounds(this.bounds);
+    console.log('zoom', this.map.getZoom());
   }
 
   handleListItemClick(venue) {
@@ -197,10 +206,13 @@ class App extends Component {
 
   // test - update map bounds to focus on showing markers
   // todo: set bounds inititially, then fit bounds when filtering. might not need to manually set zoom?
-  centerMap(bounds) {
-    console.log('this.map', this.map);
-    this.map.fitBounds(bounds);
+  centerMap() {
+    let newBounds = new window.google.maps.LatLngBounds();
+    const matchingMarkers = this.state.markers.filter((marker) => marker.visible);
+    matchingMarkers.forEach((marker) => newBounds.extend(marker.position));
+    this.map.fitBounds(newBounds);
     // this.map.setZoom(this.map.getZoom() - 2);
+    console.log('zoom', this.map.getZoom());
   }
 
   render() {
