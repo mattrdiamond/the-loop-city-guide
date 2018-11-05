@@ -5,7 +5,9 @@ export default class SideBar extends Component {
   constructor() {
     super();
     this.state = {
-      query: ''
+      query: '',
+      previousMarkers: [],
+      currentMarkers: []
     };
   }
 
@@ -23,7 +25,6 @@ export default class SideBar extends Component {
 
   // find markers that match query value and hide others
   handleChange = (e) => {
-    this.props.infoWindow.close();
     this.setState({ query: e.target.value });
     // check each venue to see if it includes query value
     const markers = this.props.venues.map((venue) => {
@@ -37,8 +38,58 @@ export default class SideBar extends Component {
       return marker;
     });
     this.props.updateSuperState({ markers: markers });
-    this.props.centerMap();
+    // update map bounds to focus on filtered markers
+    const visibleMarkers = this.props.markers.filter((marker) => marker.visible);
+    if (visibleMarkers.length > 1) {
+      this.props.infoWindow.close();
+    }
+    this.didMarkersChange(visibleMarkers);
+
+    // if (this.didMarkersChange()) {
+    // this.props.updateMap();
+    // }
   };
+
+  didMarkersChange(visibleMarkers) {
+    // const visibleMarkers = this.props.markers.filter((marker) => marker.visible);
+    if (visibleMarkers.length !== this.state.previousMarkers.length) {
+      this.setState({ previousMarkers: visibleMarkers });
+      // return true;
+      // this.animateMarkers();
+
+      // console.log('value change');
+      this.props.updateMap();
+    }
+    this.setState({ currentMarkers: visibleMarkers });
+    // return false;
+  }
+
+  // didMarkersChange() {
+  //   const showingMarkers = this.props.markers.filter((marker) => marker.visible);
+  //   if (showingMarkers.length !== this.state.previousMarkers.length) {
+  //     this.setState({ previousMarkers: showingMarkers });
+
+  //     console.log('value change');
+  //     this.props.updateMap();
+  //   }
+  //   this.setState({ currentMarkers: showingMarkers });
+
+  // }
+
+  // componentDidMount() {
+  //   const showingMarkers = this.props.markers.filter((marker) => marker.visible);
+  //   this.setState({ currentMarkers: showingMarkers });
+  //   console.log('mounted', showingMarkers);
+  // }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (this.state.currentMarkers !== nextState.currentMarkers) {
+  //     console.log('marker change');
+  //     return true;
+  //   }
+  //   console.log('no marker change');
+  //   return false;
+  // }
 
   animateMarkers(matchingVenues) {
     if (matchingVenues.length === 1) {

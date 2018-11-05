@@ -23,7 +23,7 @@ class App extends Component {
     this.handleListItemClick = this.handleListItemClick.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
     this.navKeyPress = this.navKeyPress.bind(this);
-    this.centerMap = this.centerMap.bind(this);
+    this.updateMap = this.updateMap.bind(this);
   }
 
   componentDidMount() {
@@ -160,20 +160,21 @@ class App extends Component {
     console.log('zoom', this.map.getZoom());
   }
 
+  // should this go in sidebar?
   handleListItemClick(venue) {
     const clickedMarker = this.state.markers.find((marker) => marker.id === venue.id);
     window.google.maps.event.trigger(clickedMarker, 'click');
 
-    this.setState({ zoom: 13 });
-    this.map.setCenter(clickedMarker.position);
-    this.map.panBy(-75, 0);
+    // this.setState({ zoom: 13 });
+    // this.map.setCenter(clickedMarker.position);
+    // this.map.panBy(-75, 0);
 
     if (window.innerWidth < 600) {
       this.toggleSidebar();
     }
   }
 
-  // update version of componentDidMount
+  // componentDidUpdate - update version of componentDidMount
   // update state if the data has changed
   componentDidUpdate(prevProps, prevState) {
     if (prevState.zoom !== this.state.zoom) {
@@ -204,13 +205,62 @@ class App extends Component {
     this.setState({ sidebarOpen: !this.state.sidebarOpen });
   }
 
-  // test - update map bounds to focus on showing markers
-  // todo: set bounds inititially, then fit bounds when filtering. might not need to manually set zoom?
-  centerMap() {
+  // update map bounds to focus on visible markers
+  updateMap() {
+    // create new bounds object
     let newBounds = new window.google.maps.LatLngBounds();
-    const matchingMarkers = this.state.markers.filter((marker) => marker.visible);
-    matchingMarkers.forEach((marker) => newBounds.extend(marker.position));
+    // filter visible markers
+    const visibleMarkers = this.state.markers.filter((marker) => marker.visible);
+    // extend the bounds to include each marker's position
+    visibleMarkers.forEach((marker) => newBounds.extend(marker.position));
     this.map.fitBounds(newBounds);
+
+    // do we need above code if we go with max zoom level?
+
+    // test1
+    // *********if 1 marker, set zoom level to 15 and center map manually. else this.map.fitbounds
+    // if (visibleMarkers.length === 1) {
+    //   window.google.maps.event.trigger(visibleMarkers[0], 'click');
+    //   this.setState({ zoom: 13 });
+    //   this.map.setCenter(visibleMarkers[0].position);
+    //   this.map.panBy(-75, 0);
+    //   console.log('cingle marker');
+    // } else {
+    //   this.map.fitBounds(newBounds);
+    // }
+
+    // this works
+    // set maximum zoom level
+    // let maxZoom;
+    // if (this.map.getZoom() > 15) {
+    //   maxZoom = 15;
+    //   console.log('max zoom');
+    //   // this.setState({ zoom: 15 });
+    // }
+    // // this.setState({ zoom: maxZoom });
+    // let zoom = this.map.getZoom();
+    // this.setState({ zoom: zoom });
+    // console.log('current zoom', zoom);
+
+    let zoomLevel = this.map.getZoom();
+    if (zoomLevel > 15) {
+      zoomLevel = 15;
+      if (visibleMarkers.length === 1) {
+        window.google.maps.event.trigger(visibleMarkers[0], 'click');
+      }
+    }
+
+    this.setState({ zoom: zoomLevel });
+    this.map.panBy(-75, 0);
+    // this.map.setCenter(visibleMarkers[0].position);
+
+    console.log('current zoom', this.map.getZoom());
+
+    // this.map.addListener('zoom_changed', function() {
+    //   this.setState({ zoom: this.map.getZoom() });
+    //   console.log('zoom changed');
+    // });
+    // this.setState({ zoom: zoomLevel });
     // this.map.setZoom(this.map.getZoom() - 2);
     console.log('zoom', this.map.getZoom());
   }
@@ -230,7 +280,7 @@ class App extends Component {
           updateSuperState={this.state.updateSuperState}
           infoWindow={this.state.infoWindow}
           sidebarOpen={this.state.sidebarOpen}
-          centerMap={this.centerMap}
+          updateMap={this.updateMap}
         />
         <Map />
       </div>
