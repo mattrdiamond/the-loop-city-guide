@@ -16,3 +16,9 @@ $ui-06: lighten($ui-primary, 60%);
 $ui-07: lighten($ui-primary, 70%);
 $ui-08: lighten($ui-primary, 80%);
 $ui-09: lighten($ui-primary, 90%);
+
+//--------------------------------------------------------------------
+// Units
+//--------------------------------------------------------------------
+
+$height-minus-navbar: calc(100% - 50px);

@@ -6,4 +6,9 @@
   display: flex;
   align-items: center;
   padding: 1rem;
+  box-sizing: border-box;
+  height: 50px;
+  h1 {
+    margin-left: 0.5rem;
+  }
 }

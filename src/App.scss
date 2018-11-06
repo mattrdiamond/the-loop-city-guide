@@ -5,16 +5,29 @@
 @import './scss/VenueList';
 @import './scss/ListItem';
 
+html {
+  height: 100%;
+}
+
 #root,
 #app-container,
 main {
   width: 100%;
+}
+
+main {
+  height: $height-minus-navbar;
+}
+
+body,
+#root,
+#app-container {
+  // min-height: 100%;
   height: 100%;
 }
 
 html,
 body {
-  height: 100%;
   margin: 0;
   padding: 0;
 }

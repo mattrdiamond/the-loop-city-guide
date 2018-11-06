@@ -117,6 +117,7 @@ class App extends Component {
       marker.addListener('click', () => {
         // animate marker
         this.toggleBounce(marker);
+        console.log('marker clicked');
 
         // find venue that matches clicked marker
         const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);
@@ -206,41 +207,16 @@ class App extends Component {
   }
 
   // update map bounds to focus on visible markers
-  updateMap() {
+  updateMap(visibleMarkers) {
     // create new bounds object
     let newBounds = new window.google.maps.LatLngBounds();
     // filter visible markers
-    const visibleMarkers = this.state.markers.filter((marker) => marker.visible);
+    // const visibleMarkers = this.state.markers.filter((marker) => marker.visible);
     // extend the bounds to include each marker's position
     visibleMarkers.forEach((marker) => newBounds.extend(marker.position));
     this.map.fitBounds(newBounds);
 
     // do we need above code if we go with max zoom level?
-
-    // test1
-    // *********if 1 marker, set zoom level to 15 and center map manually. else this.map.fitbounds
-    // if (visibleMarkers.length === 1) {
-    //   window.google.maps.event.trigger(visibleMarkers[0], 'click');
-    //   this.setState({ zoom: 13 });
-    //   this.map.setCenter(visibleMarkers[0].position);
-    //   this.map.panBy(-75, 0);
-    //   console.log('cingle marker');
-    // } else {
-    //   this.map.fitBounds(newBounds);
-    // }
-
-    // this works
-    // set maximum zoom level
-    // let maxZoom;
-    // if (this.map.getZoom() > 15) {
-    //   maxZoom = 15;
-    //   console.log('max zoom');
-    //   // this.setState({ zoom: 15 });
-    // }
-    // // this.setState({ zoom: maxZoom });
-    // let zoom = this.map.getZoom();
-    // this.setState({ zoom: zoom });
-    // console.log('current zoom', zoom);
 
     let zoomLevel = this.map.getZoom();
     if (zoomLevel > 15) {
@@ -253,16 +229,6 @@ class App extends Component {
     this.setState({ zoom: zoomLevel });
     this.map.panBy(-75, 0);
     // this.map.setCenter(visibleMarkers[0].position);
-
-    console.log('current zoom', this.map.getZoom());
-
-    // this.map.addListener('zoom_changed', function() {
-    //   this.setState({ zoom: this.map.getZoom() });
-    //   console.log('zoom changed');
-    // });
-    // this.setState({ zoom: zoomLevel });
-    // this.map.setZoom(this.map.getZoom() - 2);
-    console.log('zoom', this.map.getZoom());
   }
 
   render() {
