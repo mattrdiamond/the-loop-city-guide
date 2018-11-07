@@ -4,4 +4,10 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  img {
+    background: $primary;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    width: 30px;
+  }
 }
