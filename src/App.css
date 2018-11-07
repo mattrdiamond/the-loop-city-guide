@@ -41,7 +41,8 @@
   transition-property: opacity, filter;
   text-transform: none;
   border: 0;
-  background-color: transparent; }
+  background-color: transparent;
+  padding: 0; }
   .hamburger--vortex .hamburger-box {
     position: relative;
     display: inline-block;

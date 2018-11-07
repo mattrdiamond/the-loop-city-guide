@@ -23,7 +23,7 @@ class App extends Component {
     this.handleListItemClick = this.handleListItemClick.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
     this.navKeyPress = this.navKeyPress.bind(this);
-    this.updateMap = this.updateMap.bind(this);
+    this.updateMapBounds = this.updateMapBounds.bind(this);
   }
 
   componentDidMount() {
@@ -207,7 +207,7 @@ class App extends Component {
   }
 
   // update map bounds to focus on visible markers
-  updateMap(visibleMarkers) {
+  updateMapBounds(visibleMarkers) {
     // create new bounds object
     let newBounds = new window.google.maps.LatLngBounds();
     // filter visible markers
@@ -246,7 +246,7 @@ class App extends Component {
           updateSuperState={this.state.updateSuperState}
           infoWindow={this.state.infoWindow}
           sidebarOpen={this.state.sidebarOpen}
-          updateMap={this.updateMap}
+          updateMapBounds={this.updateMapBounds}
         />
         <Map />
       </div>
