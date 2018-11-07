@@ -25,6 +25,7 @@ class App extends Component {
     this.navKeyPress = this.navKeyPress.bind(this);
     this.updateMapBounds = this.updateMapBounds.bind(this);
     this.closeSidebar = this.closeSidebar.bind(this);
+    this.listItemKeyPress = this.listItemKeyPress.bind(this);
   }
 
   componentDidMount() {
@@ -162,14 +163,22 @@ class App extends Component {
     this.map.fitBounds(this.bounds);
   }
 
-  // handleListItemClick(venue) {
-  //   const clickedMarker = this.state.markers.find((marker) => marker.id === venue.id);
-  //   window.google.maps.event.trigger(clickedMarker, 'click');
+  handleListItemClick(venue) {
+    const clickedMarker = this.state.markers.find((marker) => marker.id === venue.id);
+    window.google.maps.event.trigger(clickedMarker, 'click');
 
-  //   if (window.innerWidth < 600) {
-  //     this.toggleSidebar();
-  //   }
-  // }
+    if (window.innerWidth < 600) {
+      this.toggleSidebar();
+    }
+  }
+
+  listItemKeyPress(e, venue) {
+    let code = e.keyCode || e.which;
+
+    if (code === 13) {
+      this.handleListItemClick(venue);
+    }
+  }
 
   // componentDidUpdate - update version of componentDidMount
   // update map zoom level if the data has changed
@@ -191,7 +200,7 @@ class App extends Component {
   }
 
   navKeyPress(e) {
-    var code = e.keyCode || e.which;
+    let code = e.keyCode || e.which;
 
     if (code === 13) {
       this.toggleSidebar();
@@ -239,7 +248,7 @@ class App extends Component {
           infoWindow={this.state.infoWindow}
           sidebarOpen={this.state.sidebarOpen}
           updateMapBounds={this.updateMapBounds}
-          toggleSidebar={this.toggleSidebar}
+          listItemKeyPress={this.listItemKeyPress}
         />
         <Map closeSidebar={this.closeSidebar} />
       </div>

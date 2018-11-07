@@ -76,9 +76,8 @@ export default class SideBar extends Component {
         />
         <VenueList
           handleListItemClick={this.props.handleListItemClick}
+          listItemKeyPress={this.props.listItemKeyPress}
           venues={this.handleFilterVenues()}
-          markers={this.props.markers}
-          toggleSidebar={this.props.toggleSidebar}
         />
       </div>
     );

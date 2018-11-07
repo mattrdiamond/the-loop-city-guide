@@ -11,8 +11,7 @@ export default class venueList extends Component {
               key={index}
               venue={venue}
               handleListItemClick={this.props.handleListItemClick}
-              markers={this.props.markers}
-              toggleSidebar={this.props.toggleSidebar}
+              listItemKeyPress={this.props.listItemKeyPress}
             />
           ))}
       </ul>
