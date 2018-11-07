@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // fetch restaurant data from Foursquare
+    // Fetch restaurant data from Foursquare
     FoursquareAPI.search({
       near: 'Chicago, IL',
       query: 'coffee',
@@ -78,17 +78,18 @@ class App extends Component {
   // }
 
   renderMap() {
+    const API_KEY = 'AIzaSyCHE01dQ6hdkOBP0qxkzYdTCJdhYesX8gY';
     loadMapScript(
-      'https://maps.googleapis.com/maps/api/js?key=AIzaSyCHE01dQ6hdkOBP0qxkzYdTCJdhYesX8gY&callback=initMap'
+      `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`
     );
     window.initMap = this.initMap;
   }
 
   initMap() {
-    // create empty LatLngBounds object
+    // Create empty LatLngBounds object
     this.bounds = new window.google.maps.LatLngBounds();
 
-    // load map
+    // Load map
     this.map = new window.google.maps.Map(document.getElementById('map'), {
       center: this.state.center,
       zoom: this.state.zoom
@@ -98,6 +99,7 @@ class App extends Component {
     const infowindow = new window.google.maps.InfoWindow();
     this.setState({ infoWindow: infowindow });
 
+    // Create marker for each venue
     this.state.venues.map((venue) => {
       const marker = new window.google.maps.Marker({
         position: {
@@ -112,26 +114,25 @@ class App extends Component {
 
       this.state.markers.push(marker);
 
-      //extend the bounds to include each marker's position
+      // Extend the bounds to include each marker's position
       this.bounds.extend(marker.position);
 
       marker.addListener('click', () => {
-        // animate marker
+        // Animate marker
         this.toggleBounce(marker);
-        console.log('marker clicked');
 
-        // find venue that matches clicked marker
+        // Find venue that matches clicked marker
         const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);
 
         FoursquareAPI.getVenueDetails(venue.id)
           .then((res) => {
-            //get venue details from foursquare and copy them to clickedVenue
+            //Get venue details from foursquare and copy them to clickedVenue
             const venueDetails = Object.assign(clickedVenue, res.response.venue);
 
-            // copy venueDetails object and append to state.venues
+            // Copy venueDetails object and append to venues
             this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
 
-            // use photo if available. otherwise set as empty string
+            // Use photo if available. Otherwise set as empty string
             const venuePhoto = venue.bestPhoto
               ? '<img src="' +
                 venue.bestPhoto.prefix +
@@ -161,19 +162,14 @@ class App extends Component {
     this.map.fitBounds(this.bounds);
   }
 
-  // should this go in sidebar?
-  handleListItemClick(venue) {
-    const clickedMarker = this.state.markers.find((marker) => marker.id === venue.id);
-    window.google.maps.event.trigger(clickedMarker, 'click');
+  // handleListItemClick(venue) {
+  //   const clickedMarker = this.state.markers.find((marker) => marker.id === venue.id);
+  //   window.google.maps.event.trigger(clickedMarker, 'click');
 
-    // this.setState({ zoom: 13 });
-    // this.map.setCenter(clickedMarker.position);
-    // this.map.panBy(-75, 0);
-
-    if (window.innerWidth < 600) {
-      this.toggleSidebar();
-    }
-  }
+  //   if (window.innerWidth < 600) {
+  //     this.toggleSidebar();
+  //   }
+  // }
 
   // componentDidUpdate - update version of componentDidMount
   // update map zoom level if the data has changed
@@ -208,11 +204,9 @@ class App extends Component {
 
   closeSidebar() {
     this.setState({ sidebarOpen: false });
-    console.log('close sidebar');
   }
 
   updateMapBounds(visibleMarkers) {
-    console.log('bounds set');
     let newBounds = new window.google.maps.LatLngBounds();
     visibleMarkers.forEach((marker) => newBounds.extend(marker.position));
     this.map.fitBounds(newBounds);
@@ -221,16 +215,12 @@ class App extends Component {
     let zoomLevel = this.map.getZoom();
     if (zoomLevel > 15) {
       zoomLevel = 15;
-
       // open infoWindow if map contains a single marker
       if (visibleMarkers.length === 1) {
         window.google.maps.event.trigger(visibleMarkers[0], 'click');
       }
     }
-    // this.map.panBy(-150, 0);
     this.setState({ zoom: zoomLevel });
-
-    // this.map.setCenter(visibleMarkers[0].position);
   }
 
   render() {
@@ -249,6 +239,7 @@ class App extends Component {
           infoWindow={this.state.infoWindow}
           sidebarOpen={this.state.sidebarOpen}
           updateMapBounds={this.updateMapBounds}
+          toggleSidebar={this.toggleSidebar}
         />
         <Map closeSidebar={this.closeSidebar} />
       </div>

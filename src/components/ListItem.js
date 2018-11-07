@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 
 export default class ListItem extends Component {
+  handleListItemClick(venue) {
+    const clickedMarker = this.props.markers.find((marker) => marker.id === venue.id);
+    window.google.maps.event.trigger(clickedMarker, 'click');
+
+    if (window.innerWidth < 600) {
+      this.props.toggleSidebar();
+    }
+  }
+
   render() {
     return (
       <li
+        tabIndex="0"
         className="list-item"
         onClick={() => {
-          this.props.handleListItemClick(this.props.venue);
+          this.handleListItemClick(this.props.venue);
         }}
       >
         <img

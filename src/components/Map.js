@@ -5,6 +5,7 @@ class Map extends Component {
     super(props);
     this.handleCloseSidebar = this.handleCloseSidebar.bind(this);
   }
+
   handleCloseSidebar() {
     if (window.innerWidth < 600) {
       this.props.closeSidebar();
