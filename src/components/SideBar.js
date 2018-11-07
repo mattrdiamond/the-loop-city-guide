@@ -37,20 +37,22 @@ export default class SideBar extends Component {
       return marker;
     });
     this.props.updateSuperState({ markers: markers });
-
     this.didMarkersChange();
   };
 
+  // check to see if number of markers changed before updating map bounds
   didMarkersChange() {
     const visibleMarkers = this.props.markers.filter((marker) => marker.visible);
+    // close infoWindow unless the map contains a single marker
     if (visibleMarkers.length > 1) {
       this.props.infoWindow.close();
     }
-    // only update map bounds if the number of markers changed and if the map contains markers
+    // only update map bounds if the number of markers changed the map contains markers
     if (
       visibleMarkers.length !== this.state.previousMarkers.length &&
       visibleMarkers.length > 0
     ) {
+      // update map bounds to focus on visible markers
       this.props.updateMapBounds(visibleMarkers);
     }
     // update previousMarkers for next execution

@@ -24,6 +24,7 @@ class App extends Component {
     this.toggleSidebar = this.toggleSidebar.bind(this);
     this.navKeyPress = this.navKeyPress.bind(this);
     this.updateMapBounds = this.updateMapBounds.bind(this);
+    this.closeSidebar = this.closeSidebar.bind(this);
   }
 
   componentDidMount() {
@@ -158,7 +159,6 @@ class App extends Component {
     });
     // fit the map to the newly inclusive bounds
     this.map.fitBounds(this.bounds);
-    console.log('zoom', this.map.getZoom());
   }
 
   // should this go in sidebar?
@@ -176,7 +176,7 @@ class App extends Component {
   }
 
   // componentDidUpdate - update version of componentDidMount
-  // update state if the data has changed
+  // update map zoom level if the data has changed
   componentDidUpdate(prevProps, prevState) {
     if (prevState.zoom !== this.state.zoom) {
       this.map.setZoom(this.state.zoom);
@@ -206,28 +206,30 @@ class App extends Component {
     this.setState({ sidebarOpen: !this.state.sidebarOpen });
   }
 
-  // update map bounds to focus on visible markers
+  closeSidebar() {
+    this.setState({ sidebarOpen: false });
+    console.log('close sidebar');
+  }
+
   updateMapBounds(visibleMarkers) {
-    // create new bounds object
+    console.log('bounds set');
     let newBounds = new window.google.maps.LatLngBounds();
-    // filter visible markers
-    // const visibleMarkers = this.state.markers.filter((marker) => marker.visible);
-    // extend the bounds to include each marker's position
     visibleMarkers.forEach((marker) => newBounds.extend(marker.position));
     this.map.fitBounds(newBounds);
 
-    // do we need above code if we go with max zoom level?
-
+    // set max zoom level
     let zoomLevel = this.map.getZoom();
     if (zoomLevel > 15) {
       zoomLevel = 15;
+
+      // open infoWindow if map contains a single marker
       if (visibleMarkers.length === 1) {
         window.google.maps.event.trigger(visibleMarkers[0], 'click');
       }
     }
-
+    // this.map.panBy(-150, 0);
     this.setState({ zoom: zoomLevel });
-    this.map.panBy(-75, 0);
+
     // this.map.setCenter(visibleMarkers[0].position);
   }
 
@@ -248,7 +250,7 @@ class App extends Component {
           sidebarOpen={this.state.sidebarOpen}
           updateMapBounds={this.updateMapBounds}
         />
-        <Map />
+        <Map closeSidebar={this.closeSidebar} />
       </div>
     );
   }
