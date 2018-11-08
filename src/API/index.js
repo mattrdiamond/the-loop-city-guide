@@ -5,8 +5,8 @@ class Helper {
 
   static auth() {
     const keys = {
-      client_id: 'HJNNIPI2LLUFNMLQNWRVAJOELZVHCP02VCSIEKK4XNIIS1CB',
-      client_secret: 'YTE4A4QEZH0FMUFOWYRLVVPIJX3L0XW3D2K1GJ0GRMWAT2PV',
+      client_id: 'INSERT ID HERE',
+      client_secret: 'INSERT SECRET HERE',
       v: '20181004'
     };
     // turn keys object into string separated by ampersands

@@ -47,7 +47,7 @@ class App extends Component {
   }
 
   renderMap() {
-    const API_KEY = 'AIzaSyCHE01dQ6hdkOBP0qxkzYdTCJdhYesX8gY';
+    const API_KEY = 'INSERT API KEY HERE';
     loadMapScript(
       `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`
     );
