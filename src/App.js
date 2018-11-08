@@ -46,38 +46,6 @@ class App extends Component {
       });
   }
 
-  // fetch restaurant details from Foursquare
-  // componentDidMount() {
-  //   // fetch restaurant data from Foursquare
-  //   FoursquareAPI.search({
-  //     near: 'Chicago, IL',
-  //     query: 'coffee',
-  //     limit: 10
-  //   })
-  //     .then((results) => {
-  //       const { venues } = results.response;
-  //       const { center } = results.response.geocode.feature.geometry;
-  //       this.setState({ venues, center });
-  //       this.renderMap();
-  //       return venues;
-  //     })
-  //     .then((venues) => {
-  //       const venueDetails = [];
-  //       venues.forEach((venue) => {
-  //         FoursquareAPI.getVenueDetails(venue.id).then((results) => {
-  //           // const venueDetails = [results.response.venue];
-  //           venueDetails.push(results.response.venue);
-  //           // copy and merge venue details with state value
-  //           this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
-  //           console.log(venueDetails);
-  //         });
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       alert('Error: Failed to fetch Foursquare Data');
-  //     });
-  // }
-
   renderMap() {
     const API_KEY = 'AIzaSyCHE01dQ6hdkOBP0qxkzYdTCJdhYesX8gY';
     loadMapScript(
@@ -180,7 +148,6 @@ class App extends Component {
     }
   }
 
-  // componentDidUpdate - update version of componentDidMount
   // update map zoom level if the data has changed
   componentDidUpdate(prevProps, prevState) {
     if (prevState.zoom !== this.state.zoom) {
