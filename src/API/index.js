@@ -2,6 +2,7 @@ class Helper {
   static baseURL() {
     return 'https://api.foursquare.com/v2';
   }
+
   static auth() {
     const keys = {
       client_id: 'HJNNIPI2LLUFNMLQNWRVAJOELZVHCP02VCSIEKK4XNIIS1CB',
@@ -13,6 +14,7 @@ class Helper {
       .map((key) => `${key}=${keys[key]}`)
       .join('&');
   }
+
   static urlBuilder(urlParams) {
     // if empty return empty string
     if (!urlParams) {
@@ -22,11 +24,13 @@ class Helper {
       .map((key) => `${key}=${urlParams[key]}`)
       .join('&');
   }
+
   static headers() {
     return {
       Accept: 'application/json'
     };
   }
+
   static handleErrors(response) {
     if (!response.ok) {
       throw Error(response.statusText);
@@ -35,6 +39,7 @@ class Helper {
 
     return response;
   }
+
   // endpoint: inserted after baseURL
   // method: request method
   // urlParams: Foursquare API parameters
@@ -64,3 +69,5 @@ export default class FoursquareAPI {
     return Helper.simpleFetch(`/venues/${VENUE_ID}/photos`, 'GET');
   }
 }
+
+// Credit: Helper class from tutorial by Forrest Walker

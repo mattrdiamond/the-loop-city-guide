@@ -224,6 +224,7 @@ class App extends Component {
     let zoomLevel = this.map.getZoom();
     if (zoomLevel > 15) {
       zoomLevel = 15;
+
       // open infoWindow if map contains a single marker
       if (visibleMarkers.length === 1) {
         window.google.maps.event.trigger(visibleMarkers[0], 'click');

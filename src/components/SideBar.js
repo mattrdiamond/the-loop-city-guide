@@ -25,13 +25,16 @@ export default class SideBar extends Component {
   // show markers that match query value and hide others
   handleFilterMarkers = (e) => {
     this.setState({ query: e.target.value });
+
     // check each venue to see if it includes query value
     const markers = this.props.venues.map((venue) => {
       const queryMatch = venue.name
         .toLowerCase()
         .includes(e.target.value.toLowerCase().trim());
+
       // find corresponding marker
       const marker = this.props.markers.find((marker) => marker.id === venue.id);
+
       // set visible if marker matches query value
       queryMatch ? marker.setVisible(true) : marker.setVisible(false);
       return marker;
@@ -43,10 +46,12 @@ export default class SideBar extends Component {
   // check to see if number of markers changed before updating map bounds
   didMarkersChange() {
     const visibleMarkers = this.props.markers.filter((marker) => marker.visible);
+
     // close infoWindow unless the map contains a single marker
     if (visibleMarkers.length > 1) {
       this.props.infoWindow.close();
     }
+
     // only update map bounds if the number of markers changed the map contains markers
     if (
       visibleMarkers.length !== this.state.previousMarkers.length &&
@@ -68,18 +73,20 @@ export default class SideBar extends Component {
 
     return (
       <div id="venue-sidebar" className={sidebarVisibility}>
-        <input
-          id="search-input"
-          type="text"
-          placeholder="Search"
-          onChange={this.handleFilterMarkers}
-        />
-        <VenueList
-          handleListItemClick={this.props.handleListItemClick}
-          listItemKeyPress={this.props.listItemKeyPress}
-          venues={this.handleFilterVenues()}
-        />
-        <p className="attribution">Powered by FourSquare</p>
+        <div className="sidebar-wrapper">
+          <input
+            id="search-input"
+            type="text"
+            placeholder="Search"
+            onChange={this.handleFilterMarkers}
+          />
+          <VenueList
+            handleListItemClick={this.props.handleListItemClick}
+            listItemKeyPress={this.props.listItemKeyPress}
+            venues={this.handleFilterVenues()}
+          />
+          <p className="attribution">Powered by FourSquare</p>
+        </div>
       </div>
     );
   }

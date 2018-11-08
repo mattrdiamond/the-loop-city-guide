@@ -9,9 +9,7 @@ class Map extends Component {
   handleCloseSidebar() {
     if (window.innerWidth < 600) {
       this.props.closeSidebar();
-      return true;
     }
-    return false;
   }
 
   render() {

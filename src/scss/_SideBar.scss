@@ -8,7 +8,7 @@
   box-sizing: border-box;
   left: -300px;
   position: absolute;
-  overflow: scroll;
+  overflow: auto;
   transition: all 0.5s ease;
   #search-input {
     padding: 0.5rem;
