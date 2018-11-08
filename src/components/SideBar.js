@@ -79,7 +79,7 @@ export default class SideBar extends Component {
           listItemKeyPress={this.props.listItemKeyPress}
           venues={this.handleFilterVenues()}
         />
-        <p />
+        <p className="attribution">Powered by FourSquare</p>
       </div>
     );
   }

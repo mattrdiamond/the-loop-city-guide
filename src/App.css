@@ -14,7 +14,7 @@
 #venue-sidebar {
   width: 300px;
   height: calc(100% - 50px);
-  background: #ecf0f1;
+  background: #f3f3f3;
   z-index: 4;
   font-size: 1rem;
   padding: 1rem;
@@ -31,6 +31,13 @@
     box-sizing: border-box; }
   #venue-sidebar.visible {
     left: 0; }
+  #venue-sidebar .attribution {
+    color: #999999;
+    font-size: 0.6rem;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+    border-top: 1px solid #cccccc; }
 
 .hamburger--vortex {
   display: inline-block;

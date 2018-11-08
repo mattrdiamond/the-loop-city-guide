@@ -20,4 +20,13 @@
   &.visible {
     left: 0;
   }
+  .attribution {
+    color: $ui-04;
+    font-size: 0.6rem;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    // text-transform: uppercase;
+    text-align: center;
+    border-top: 1px solid $ui-06;
+  }
 }
