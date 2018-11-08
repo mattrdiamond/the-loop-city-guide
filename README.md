@@ -18,6 +18,7 @@ This single page application features an interactive map that displays museum lo
 - Install all project dependencies with `npm install`
 - Start the server with `npm start`
 - A new browser window open automatically displaying the app. If it doesn't, navigate to [http://localhost:3000/](http://localhost:3000/) in your browser.
+- Add your own API key for Google Maps and Foursquare
 
 ### Production Mode
 
