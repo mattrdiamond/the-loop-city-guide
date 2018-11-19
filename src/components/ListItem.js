@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 export default class ListItem extends Component {
   render() {
+    const { venue } = this.props;
     return (
       <li
         tabIndex="0"
@@ -13,7 +14,7 @@ export default class ListItem extends Component {
           this.props.listItemKeyPress(e, this.props.venue);
         }}
       >
-        {this.props.venue.categories[0] && this.props.venue.categories[0].icon ? (
+        {this.props.venue.categories[0] && (
           <img
             src={
               this.props.venue.categories[0].icon.prefix +
@@ -22,8 +23,13 @@ export default class ListItem extends Component {
             }
             alt={this.props.venue.categories[0].name}
           />
-        ) : (
-          ''
+        )}
+
+        {this.props.venue.bestPhoto && (
+          <img
+            src={this.props.venue.bestPhoto.prefix + '100x100' + venue.bestPhoto.suffix}
+            alt={'An image of ' + venue.name}
+          />
         )}
 
         {this.props.venue.name}

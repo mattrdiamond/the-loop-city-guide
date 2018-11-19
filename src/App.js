@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './components/NavBar';
 import SideBar from './components/SideBar';
 import Map from './components/Map';
-import FoursquareAPI from './API/';
+import FoursquareAPI from './API/Foursquare';
 import './App.css';
 
 class App extends Component {
@@ -28,30 +28,11 @@ class App extends Component {
     this.listItemKeyPress = this.listItemKeyPress.bind(this);
   }
 
-  componentDidMount() {
-    // Fetch restaurant data from Foursquare
-    FoursquareAPI.search({
-      near: 'Chicago, IL',
-      query: 'museum',
-      limit: 10
-    })
-      .then((results) => {
-        const { venues } = results.response;
-        const { center } = results.response.geocode.feature.geometry;
-        this.setState({ venues, center });
-        this.renderMap();
-      })
-      .catch((error) => {
-        alert('Error: Failed to fetch Foursquare Data');
-      });
-  }
-
-  // fetch restaurant details from Foursquare
   // componentDidMount() {
-  //   // fetch restaurant data from Foursquare
+  //   // Fetch restaurant data from Foursquare
   //   FoursquareAPI.search({
   //     near: 'Chicago, IL',
-  //     query: 'coffee',
+  //     query: 'museum',
   //     limit: 10
   //   })
   //     .then((results) => {
@@ -59,24 +40,43 @@ class App extends Component {
   //       const { center } = results.response.geocode.feature.geometry;
   //       this.setState({ venues, center });
   //       this.renderMap();
-  //       return venues;
-  //     })
-  //     .then((venues) => {
-  //       const venueDetails = [];
-  //       venues.forEach((venue) => {
-  //         FoursquareAPI.getVenueDetails(venue.id).then((results) => {
-  //           // const venueDetails = [results.response.venue];
-  //           venueDetails.push(results.response.venue);
-  //           // copy and merge venue details with state value
-  //           this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
-  //           console.log(venueDetails);
-  //         });
-  //       });
   //     })
   //     .catch((error) => {
   //       alert('Error: Failed to fetch Foursquare Data');
   //     });
   // }
+
+  // fetch restaurant details from Foursquare
+  componentDidMount() {
+    // fetch restaurant data from Foursquare
+    FoursquareAPI.search({
+      near: 'Chicago, IL',
+      query: 'restaurant',
+      limit: 10
+    })
+      .then((results) => {
+        const { venues } = results.response;
+        const { center } = results.response.geocode.feature.geometry;
+        this.setState({ venues, center });
+        this.renderMap();
+        return venues;
+      })
+      .then((venues) => {
+        const venueDetails = [];
+        venues.forEach((venue) => {
+          FoursquareAPI.getVenueDetails(venue.id).then((results) => {
+            // const venueDetails = [results.response.venue];
+            venueDetails.push(results.response.venue);
+            // copy and merge venue details with state value
+            this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
+            console.log(venueDetails);
+          });
+        });
+      })
+      .catch((error) => {
+        alert('Error: Failed to fetch Foursquare Data');
+      });
+  }
 
   renderMap() {
     const API_KEY = 'AIzaSyCHE01dQ6hdkOBP0qxkzYdTCJdhYesX8gY';
@@ -84,6 +84,7 @@ class App extends Component {
       `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`
     );
     window.initMap = this.initMap;
+    console.log('load map script');
   }
 
   initMap() {
@@ -224,16 +225,22 @@ class App extends Component {
     let zoomLevel = this.map.getZoom();
     if (zoomLevel > 15) {
       zoomLevel = 15;
+    }
 
-      // open infoWindow if map contains a single marker
-      if (visibleMarkers.length === 1) {
-        window.google.maps.event.trigger(visibleMarkers[0], 'click');
+    this.map.setZoom(zoomLevel);
+    this.setState({ zoom: zoomLevel });
+
+    if (visibleMarkers.length === 1) {
+      window.google.maps.event.trigger(visibleMarkers[0], 'click');
+
+      if (window.innerWidth > 500) {
+        this.map.panBy(-150, 0);
       }
     }
-    this.setState({ zoom: zoomLevel });
   }
 
   render() {
+    console.log('rendered');
     return (
       <div id="app-container">
         <NavBar
@@ -267,6 +274,7 @@ const loadMapScript = (url) => {
   script.defer = true;
   script.onerror = () => alert('Unable to load Google Maps');
   index.parentNode.insertBefore(script, index);
+  console.log('script tag loaded');
 };
 
 export default App;
