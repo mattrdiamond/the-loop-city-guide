@@ -1,13 +1,38 @@
 .list-item {
-  padding: 0.5rem;
   margin-top: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
-  img {
-    background: $primary;
-    border-radius: 50%;
-    margin-right: 0.5rem;
-    width: 30px;
+  width: 100%;
+  color: $black-03;
+
+  .content-container {
+    display: flex;
+    border: 1px solid red;
+    width: 100%;
+
+    img {
+      background: $primary;
+      margin-right: 1rem;
+    }
+
+    .info-column {
+      width: 215px;
+      border: 1px solid blue;
+    }
+
+    h2 {
+      font-size: 1.23rem;
+      font-family: 'proxima_nova_bold', Helvetica, sans-serif;
+      color: $primary;
+    }
+
+    .price-inactive {
+      color: $black-07;
+    }
+
+    .vert-line {
+      margin: 0 0.5rem;
+    }
   }
 }

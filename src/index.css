@@ -8,9 +8,5 @@ li,
 input {
   margin: 0;
   padding: 0;
-}
-
-body {
-  font-family: sans-serif;
-  font-size: 10px;
+  font-size: 100%;
 }

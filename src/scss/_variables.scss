@@ -2,11 +2,23 @@
 // Colors
 //--------------------------------------------------------------------
 
-$white: #f3f3f3;
-$black: #111;
-$primary: #5e9cea;
+// Primary colors
+$white: #fff;
+$primary: #247f9e;
+$black: #333;
 
-$ui-primary: #333;
+$black-01: lighten($black, 10%);
+$black-02: lighten($black, 20%);
+$black-03: lighten($black, 30%);
+$black-04: lighten($black, 40%);
+$black-05: lighten($black, 50%);
+$black-06: lighten($black, 60%);
+$black-07: lighten($black, 70%);
+$black-08: lighten($black, 80%);
+$black-09: lighten($black, 90%);
+
+// UI colors
+$ui-primary: #32333f;
 
 $ui-01: lighten($ui-primary, 10%);
 $ui-02: lighten($ui-primary, 20%);

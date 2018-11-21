@@ -7,6 +7,10 @@
 
 html {
   height: 100%;
+  font-size: 13px;
+  font-family: 'proxima_nova_regular', Helvetica, sans-serif;
+  letter-spacing: 0.25px;
+  color: $ui-primary;
 }
 
 #root,
@@ -31,12 +35,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
-// #app-container {
-//   display: grid;
-//   grid-template-columns: 300px 1fr;
-//   grid-template-rows: 60px 1fr;
-// }
 
 #map {
   height: 100%;
