@@ -3,6 +3,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: space-around;
   width: 100%;
   color: $black-03;
 
@@ -11,28 +12,51 @@
     border: 1px solid red;
     width: 100%;
 
-    img {
+    .venue-image {
       background: $primary;
       margin-right: 1rem;
     }
 
     .info-column {
-      width: 215px;
+      // width: 215px;
       border: 1px solid blue;
+
+      .price-inactive {
+        color: $black-07;
+      }
+
+      .vert-line {
+        margin: 0 0.5rem;
+      }
     }
 
-    h2 {
-      font-size: 1.23rem;
-      font-family: 'proxima_nova_bold', Helvetica, sans-serif;
-      color: $primary;
-    }
+    .rating-column {
+      text-align: center;
+      width: 40px;
+      height: 45px;
+      box-sizing: content-box;
+      padding-top: 5px;
+      position: relative;
+      background: $secondary;
+      color: white;
+      margin-left: auto;
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-bottom: 7px solid $white;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+      }
 
-    .price-inactive {
-      color: $black-07;
-    }
-
-    .vert-line {
-      margin: 0 0.5rem;
+      img {
+        width: 13px;
+        display: block;
+        margin: 0 auto 2px;
+      }
     }
   }
 }

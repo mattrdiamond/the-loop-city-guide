@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 export default class ListItem extends Component {
   getVenuePrice(price) {
-    // const activePrice = `<span class="price-active">$</span>`;
-    // const inactivePrice = `<span class="price-inactive">$</span>`;
     const activePrice = <span class="price-active">$</span>;
     const inactivePrice = <span class="price-inactive">$</span>;
     let formattedPrice = [];
@@ -11,24 +9,7 @@ export default class ListItem extends Component {
       price > 0 ? formattedPrice.push(activePrice) : formattedPrice.push(inactivePrice);
       price--;
     }
-    console.log('formatted price', formattedPrice);
     return formattedPrice;
-
-    // let formattedPrice;
-    // switch (price) {
-    //   case 1:
-    //     formattedPrice = activePrice + inactivePrice + inactivePrice + inactivePrice;
-    //     break;
-    //   case 2:
-    //     formattedPrice = activePrice + activePrice + inactivePrice + inactivePrice;
-    //     break;
-    //   case 3:
-    //     formattedPrice = activePrice + activePrice + activePrice + inactivePrice;
-    //     break;
-    //   case 4:
-    //     formattedPrice = activePrice + activePrice + activePrice + activePrice;
-    //     break;
-    // }
   }
   // getVenuePhoto(venue) {
   //   let venueImage;
@@ -43,7 +24,6 @@ export default class ListItem extends Component {
   // }
   render() {
     const { venue } = this.props;
-    // *****************remove all of the extra this.props!
 
     let venueImage;
 
@@ -62,10 +42,10 @@ export default class ListItem extends Component {
         tabIndex="0"
         className="list-item"
         onClick={() => {
-          this.props.handleListItemClick(this.props.venue);
+          this.props.handleListItemClick(venue);
         }}
         onKeyPress={(e) => {
-          this.props.listItemKeyPress(e, this.props.venue);
+          this.props.listItemKeyPress(e, venue);
         }}
       >
         <div class="content-container">
@@ -90,7 +70,7 @@ export default class ListItem extends Component {
         )}*/}
 
           {/* -------display image, icon or placeholder-------*/}
-          {<img src={venueImage} alt={'An image of ' + venue.name} />}
+          {<img class="venue-image" src={venueImage} alt={'An image of ' + venue.name} />}
           {/*{<img src={this.getVenuePhoto(venue)} alt={'An image of ' + venue.name} />}*/}
 
           <div class="info-column">
@@ -111,6 +91,15 @@ export default class ListItem extends Component {
               <div class="venue-address">
                 <p>{venue.location.address}</p>
                 <p>{venue.location.city}</p>
+              </div>
+            )}
+          </div>
+
+          <div class="rating-column">
+            {venue.rating && (
+              <div class="rating-container">
+                <img src={require('../images/star.svg')} alt="star" />
+                <span>{venue.rating}</span>
               </div>
             )}
           </div>
