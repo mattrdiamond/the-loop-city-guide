@@ -8,18 +8,25 @@
   color: $black-03;
 
   .content-container {
-    display: flex;
     border: 1px solid red;
     width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+
+    .content-inner-wrapper {
+      display: flex;
+    }
 
     .venue-image {
       background: $primary;
       margin-right: 1rem;
+      border-radius: 2px;
     }
 
     .info-column {
       // width: 215px;
       border: 1px solid blue;
+      padding-right: 5px;
 
       .price-inactive {
         color: $black-07;
@@ -40,6 +47,7 @@
       background: $secondary;
       color: white;
       margin-left: auto;
+      margin-top: -10px;
       &:after {
         content: '';
         position: absolute;
@@ -58,5 +66,12 @@
         margin: 0 auto 2px;
       }
     }
+  }
+
+  .tab-list {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    list-style: none;
   }
 }

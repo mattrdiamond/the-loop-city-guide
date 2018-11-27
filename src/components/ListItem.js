@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Tabs from './Tabs';
 
 export default class ListItem extends Component {
   getVenuePrice(price) {
@@ -49,60 +50,60 @@ export default class ListItem extends Component {
         }}
       >
         <div class="content-container">
-          {/*--------------if icon exists, display icon image--------------*/}
-          {/*{this.props.venue.categories[0] && (
-          <img
-            src={
-              this.props.venue.categories[0].icon.prefix +
-              '32' +
-              this.props.venue.categories[0].icon.suffix
+          <div class="content-inner-wrapper">
+            {/* -------display image, icon or placeholder-------*/}
+            {
+              <img
+                class="venue-image"
+                src={venueImage}
+                alt={'An image of ' + venue.name}
+              />
             }
-            alt={this.props.venue.categories[0].name}
-          />
-          )}*/}
+            {/*{<img src={this.getVenuePhoto(venue)} alt={'An image of ' + venue.name} />}*/}
 
-          {/*--------------if venue photo exists, display venue photo--------------*/}
-          {/*{this.props.venue.bestPhoto && (
-          <img
-            src={this.props.venue.bestPhoto.prefix + '100x100' + venue.bestPhoto.suffix}
-            alt={'An image of ' + venue.name}
-          />
-        )}*/}
+            <div class="info-column">
+              <h2>{venue.name}</h2>
 
-          {/* -------display image, icon or placeholder-------*/}
-          {<img class="venue-image" src={venueImage} alt={'An image of ' + venue.name} />}
-          {/*{<img src={this.getVenuePhoto(venue)} alt={'An image of ' + venue.name} />}*/}
+              {venue.categories[0] && (
+                <span class="venue-info">
+                  <span class="venue-category">{venue.categories[0].name}</span>
+                  <span class="vert-line">|</span>
+                </span>
+              )}
 
-          <div class="info-column">
-            <h2>{venue.name}</h2>
+              {venue.price && (
+                <span class="venue-info">{this.getVenuePrice(venue.price.tier)}</span>
+              )}
 
-            {venue.categories[0] && (
-              <span class="venue-info">
-                <span class="venue-category">{venue.categories[0].name}</span>
-                <span class="vert-line">|</span>
-              </span>
-            )}
+              {venue.location.address && (
+                <div class="venue-address">
+                  <p>{venue.location.address}</p>
+                  <p>{venue.location.city}</p>
+                </div>
+              )}
+            </div>
 
-            {venue.price && (
-              <span class="venue-info">{this.getVenuePrice(venue.price.tier)}</span>
-            )}
-
-            {venue.location.address && (
-              <div class="venue-address">
-                <p>{venue.location.address}</p>
-                <p>{venue.location.city}</p>
-              </div>
-            )}
+            <div class="rating-column">
+              {venue.rating && (
+                <div class="rating-container">
+                  <img src={require('../images/star.svg')} alt="star" />
+                  <span>{venue.rating}</span>
+                </div>
+              )}
+            </div>
           </div>
 
-          <div class="rating-column">
-            {venue.rating && (
-              <div class="rating-container">
-                <img src={require('../images/star.svg')} alt="star" />
-                <span>{venue.rating}</span>
-              </div>
-            )}
-          </div>
+          <Tabs>
+            <div label="Tips">
+              See ya later, <em>Alligator</em>!
+            </div>
+            <div label="Hours">
+              After &apos;while, <em>Crocodile</em>!
+            </div>
+            <div label="Info">
+              Nothing to see here, this tab is <em>extinct</em>!
+            </div>
+          </Tabs>
         </div>
       </li>
     );
