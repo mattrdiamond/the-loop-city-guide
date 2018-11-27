@@ -94,15 +94,9 @@ export default class ListItem extends Component {
           </div>
 
           <Tabs>
-            <div label="Tips">
-              See ya later, <em>Alligator</em>!
-            </div>
-            <div label="Hours">
-              After &apos;while, <em>Crocodile</em>!
-            </div>
-            <div label="Info">
-              Nothing to see here, this tab is <em>extinct</em>!
-            </div>
+            <div label="Tips">Placeholder text tips</div>
+            <div label="Hours">Placeholder text hours</div>
+            <div label="Info">Placeholder text info</div>
           </Tabs>
         </div>
       </li>

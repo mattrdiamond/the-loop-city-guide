@@ -11,7 +11,7 @@ class Tabs extends Component {
   }
 
   onClickTabItem = (tab) => {
-    // close tab when clicking on same tab twice or open tab
+    // close tab if already open else open tab.
     if (tab === this.state.activeTab) {
       this.setState({ activeTab: '' });
     } else {
@@ -26,8 +26,14 @@ class Tabs extends Component {
       state: { activeTab }
     } = this;
 
+    let className = 'tab-content';
+
+    if (activeTab) {
+      className = ' tab-content-active';
+    }
+
     return (
-      <div className="tabs">
+      <div className="venue-tabs">
         <ul className="tab-list">
           {children.map((child) => {
             const { label } = child.props;
@@ -42,7 +48,7 @@ class Tabs extends Component {
             );
           })}
         </ul>
-        <div className="tab-content">
+        <div className={className}>
           {children.map((child) => {
             if (child.props.label !== activeTab) return undefined;
             return child.props.children;

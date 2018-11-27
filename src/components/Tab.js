@@ -6,7 +6,6 @@ class Tab extends Component {
     // if ((this.props.activeTab = tab)) {
     //   console.log('close me');
     // }
-    console.log('this', this.props.activeTab);
     onClickTabItem(label);
   };
 
