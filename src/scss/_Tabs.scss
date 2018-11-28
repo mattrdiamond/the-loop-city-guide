@@ -1,7 +1,6 @@
 .venue-tabs {
   margin-top: 10px;
-  // padding: 10px 10px 0px;
-  border-top: 1px solid $ui-05;
+  // border-top: 1px solid $ui-05;
   margin: 10px -10px 0;
 
   .tab-list {
@@ -15,12 +14,23 @@
     width: 100%;
     text-align: center;
     padding: 10px;
+    border-top: 1px solid $ui-05;
+    &:hover {
+      background: $ui-08;
+    }
     &:first-of-type {
       border-right: 1px solid $ui-05;
+      border-radius: 0 0 0 9px;
     }
     &:last-of-type {
       border-left: 1px solid $ui-05;
+      border-radius: 0 0 9px 0;
     }
+  }
+
+  .tab-list-active {
+    border-top: 3px solid $secondary;
+    padding-top: 8px;
   }
 
   .tab-content {

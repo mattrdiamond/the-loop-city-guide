@@ -24,8 +24,6 @@
     }
 
     .info-column {
-      // width: 215px;
-      border: 1px solid blue;
       padding-right: 5px;
 
       .price-inactive {
@@ -34,6 +32,10 @@
 
       .vert-line {
         margin: 0 0.5rem;
+      }
+
+      .venue-address {
+        margin-top: 0.5rem;
       }
     }
 

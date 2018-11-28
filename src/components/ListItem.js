@@ -94,7 +94,7 @@ export default class ListItem extends Component {
           </div>
 
           <Tabs>
-            <div label="Tips">Placeholder text tips</div>
+            <div label="Tips">Placeholder text tipss</div>
             <div label="Hours">Placeholder text hours</div>
             <div label="Info">Placeholder text info</div>
           </Tabs>
