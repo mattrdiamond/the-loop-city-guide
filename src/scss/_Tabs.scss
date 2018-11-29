@@ -14,16 +14,16 @@
     width: 100%;
     text-align: center;
     padding: 10px;
-    border-top: 1px solid $ui-05;
+    border-top: 1px solid $ui-07;
     &:hover {
       background: $ui-08;
     }
     &:first-of-type {
-      border-right: 1px solid $ui-05;
+      border-right: 1px solid $ui-07;
       border-radius: 0 0 0 9px;
     }
     &:last-of-type {
-      border-left: 1px solid $ui-05;
+      border-left: 1px solid $ui-07;
       border-radius: 0 0 9px 0;
     }
   }
@@ -31,6 +31,12 @@
   .tab-list-active {
     border-top: 3px solid $secondary;
     padding-top: 8px;
+    &:first-of-type {
+      border-radius: 0;
+    }
+    &::last-of-type {
+      border-radius: 0;
+    }
   }
 
   .tab-content {

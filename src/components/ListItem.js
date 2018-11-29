@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Tabs from './Tabs';
+import Tip from './Tip';
 
 export default class ListItem extends Component {
   getVenuePrice(price) {
@@ -23,6 +24,7 @@ export default class ListItem extends Component {
   //     return (venueImage = 'https://via.placeholder.com/50');
   //   }
   // }
+
   render() {
     const { venue } = this.props;
 
@@ -94,7 +96,13 @@ export default class ListItem extends Component {
           </div>
 
           <Tabs>
-            <div label="Tips">Placeholder text tipss</div>
+            <div label="Tips">
+              <div className="tip-container">
+                <Tip venue={venue} />
+                <p>Test2</p>
+                <p>Test3</p>
+              </div>
+            </div>
             <div label="Hours">Placeholder text hours</div>
             <div label="Info">Placeholder text info</div>
           </Tabs>

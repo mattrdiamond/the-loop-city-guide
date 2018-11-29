@@ -22,7 +22,9 @@
   left: -415px;
   position: absolute;
   overflow: auto;
-  transition: all 0.5s ease; }
+  transition: all 0.5s ease;
+  box-shadow: 1px 0px 5px #b3b3b3;
+  background: #e9e9ed; }
   #venue-sidebar #search-input {
     padding: 0.5rem;
     height: 2.5rem;
@@ -107,12 +109,13 @@
   align-items: center;
   justify-content: space-around;
   width: 100%;
-  color: gray; }
+  color: gray;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 3px 3px #cccdd7; }
   .list-item .content-container {
-    border: 1px solid red;
     width: 100%;
-    padding: 10px 10px 0;
-    border-radius: 10px; }
+    padding: 10px 10px 0; }
     .list-item .content-container .content-inner-wrapper {
       display: flex; }
     .list-item .content-container .venue-image {
@@ -165,18 +168,22 @@
     width: 100%;
     text-align: center;
     padding: 10px;
-    border-top: 1px solid #b0b1c0; }
+    border-top: 1px solid #dadbe2; }
     .venue-tabs .tab-list-item:hover {
-      background: #f7f7f9; }
+      background: #e9e9ed; }
     .venue-tabs .tab-list-item:first-of-type {
-      border-right: 1px solid #b0b1c0;
+      border-right: 1px solid #dadbe2;
       border-radius: 0 0 0 9px; }
     .venue-tabs .tab-list-item:last-of-type {
-      border-left: 1px solid #b0b1c0;
+      border-left: 1px solid #dadbe2;
       border-radius: 0 0 9px 0; }
   .venue-tabs .tab-list-active {
     border-top: 3px solid #da3743;
     padding-top: 8px; }
+    .venue-tabs .tab-list-active:first-of-type {
+      border-radius: 0; }
+    .venue-tabs .tab-list-active::last-of-type {
+      border-radius: 0; }
   .venue-tabs .tab-content {
     display: none; }
   .venue-tabs .tab-content-active {

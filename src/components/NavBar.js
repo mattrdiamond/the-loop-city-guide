@@ -25,7 +25,7 @@ const NavBar = ({ toggleSidebar, sidebarOpen, navKeyPress }) => (
       sidebarOpen={sidebarOpen}
       navKeyPress={navKeyPress}
     />
-    <h1 className="site-title">Neighborhood Map</h1>
+    <h1 className="site-title">Placeholder Text</h1>
   </nav>
 );
 
