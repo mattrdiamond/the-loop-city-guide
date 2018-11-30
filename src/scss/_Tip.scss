@@ -1,0 +1,25 @@
+.tip {
+  display: flex;
+  &:first-of-type {
+    margin-bottom: $unit;
+  }
+
+  .tip-photo {
+    border-radius: 50px;
+    margin-right: $unit;
+    margin-top: 10px;
+    height: 50px;
+  }
+
+  .user-name {
+    margin-bottom: $unit;
+    font-size: 10px;
+    color: $black-06;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .tip-quote {
+    margin-top: 5px;
+  }
+}

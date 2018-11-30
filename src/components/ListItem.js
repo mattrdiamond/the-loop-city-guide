@@ -4,11 +4,20 @@ import Tip from './Tip';
 
 export default class ListItem extends Component {
   getVenuePrice(price) {
-    const activePrice = <span class="price-active">$</span>;
-    const inactivePrice = <span class="price-inactive">$</span>;
+    // convert venue price into dollar sign icons
     let formattedPrice = [];
     for (let i = 0; i < 4; i++) {
-      price > 0 ? formattedPrice.push(activePrice) : formattedPrice.push(inactivePrice);
+      price > 0
+        ? formattedPrice.push(
+            <span key={i} className="price-active">
+              $
+            </span>
+          )
+        : formattedPrice.push(
+            <span key={i} className="price-inactive">
+              $
+            </span>
+          );
       price--;
     }
     return formattedPrice;
@@ -51,43 +60,42 @@ export default class ListItem extends Component {
           this.props.listItemKeyPress(e, venue);
         }}
       >
-        <div class="content-container">
-          <div class="content-inner-wrapper">
-            {/* -------display image, icon or placeholder-------*/}
+        <div className="content-container">
+          <div className="content-inner-wrapper">
             {
               <img
-                class="venue-image"
+                className="venue-image"
                 src={venueImage}
                 alt={'An image of ' + venue.name}
               />
             }
             {/*{<img src={this.getVenuePhoto(venue)} alt={'An image of ' + venue.name} />}*/}
 
-            <div class="info-column">
+            <div className="info-column">
               <h2>{venue.name}</h2>
 
               {venue.categories[0] && (
-                <span class="venue-info">
-                  <span class="venue-category">{venue.categories[0].name}</span>
-                  <span class="vert-line">|</span>
+                <span className="venue-info">
+                  <span className="venue-category">{venue.categories[0].name}</span>
+                  <span className="vert-line">|</span>
                 </span>
               )}
 
               {venue.price && (
-                <span class="venue-info">{this.getVenuePrice(venue.price.tier)}</span>
+                <span className="venue-info">{this.getVenuePrice(venue.price.tier)}</span>
               )}
 
               {venue.location.address && (
-                <div class="venue-address">
+                <div className="venue-address">
                   <p>{venue.location.address}</p>
                   <p>{venue.location.city}</p>
                 </div>
               )}
             </div>
 
-            <div class="rating-column">
+            <div className="rating-column">
               {venue.rating && (
-                <div class="rating-container">
+                <div className="rating-container">
                   <img src={require('../images/star.svg')} alt="star" />
                   <span>{venue.rating}</span>
                 </div>
@@ -97,11 +105,9 @@ export default class ListItem extends Component {
 
           <Tabs>
             <div label="Tips">
-              <div className="tip-container">
+              <ul className="tip-list">
                 <Tip venue={venue} />
-                <p>Test2</p>
-                <p>Test3</p>
-              </div>
+              </ul>
             </div>
             <div label="Hours">Placeholder text hours</div>
             <div label="Info">Placeholder text info</div>
