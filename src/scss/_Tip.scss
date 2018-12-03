@@ -2,6 +2,8 @@
   display: flex;
   &:first-of-type {
     margin-bottom: $unit;
+    padding-bottom: $unit;
+    border-bottom: 1px solid $ui-07;
   }
 
   .tip-photo {
@@ -14,12 +16,12 @@
   .user-name {
     margin-bottom: $unit;
     font-size: 10px;
-    color: $black-06;
+    color: $black-05;
     text-transform: uppercase;
     font-weight: bold;
   }
 
   .tip-quote {
-    margin-top: 5px;
+    margin-top: 10px;
   }
 }

@@ -51,7 +51,7 @@ class App extends Component {
     // fetch restaurant data from Foursquare
     FoursquareAPI.search({
       near: 'Chicago, IL',
-      query: 'tacos',
+      query: 'cafe',
       limit: 10
     })
       .then((results) => {

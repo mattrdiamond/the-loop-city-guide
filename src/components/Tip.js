@@ -20,7 +20,7 @@ const Tip = ({ venue, index }) => {
       />
       <div className="tip-text">
         <p className="tip-quote">&ldquo;{user.text}&rdquo;</p>
-        <span className="user-name">—{user.user.firstName}</span>
+        <span className="user-name">{user.user.firstName}</span>
         {user.user.lastName && (
           <span className="user-name">{' ' + user.user.lastName}</span>
         )}

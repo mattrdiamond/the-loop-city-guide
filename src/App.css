@@ -123,7 +123,8 @@
       margin-right: 1rem;
       border-radius: 2px; }
     .list-item .content-container .info-column {
-      padding-right: 5px; }
+      padding-right: 5px;
+      max-width: 211px; }
       .list-item .content-container .info-column .price-inactive {
         color: #e6e6e6; }
       .list-item .content-container .info-column .vert-line {
@@ -179,7 +180,8 @@
       border-radius: 0 0 9px 0; }
   .venue-tabs .tab-list-active {
     border-top: 3px solid #da3743;
-    padding-top: 8px; }
+    padding-top: 8px;
+    background: #f7f7f9; }
     .venue-tabs .tab-list-active:first-of-type {
       border-radius: 0; }
     .venue-tabs .tab-list-active::last-of-type {
@@ -188,12 +190,16 @@
     display: none; }
   .venue-tabs .tab-content-active {
     display: block;
-    padding: 10px; }
+    padding: 10px;
+    background: #f7f7f9;
+    border-radius: 0 0 10px 10px; }
 
 .tip {
   display: flex; }
   .tip:first-of-type {
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dadbe2; }
   .tip .tip-photo {
     border-radius: 50px;
     margin-right: 10px;
@@ -202,11 +208,11 @@
   .tip .user-name {
     margin-bottom: 10px;
     font-size: 10px;
-    color: #cccccc;
+    color: #b3b3b3;
     text-transform: uppercase;
     font-weight: bold; }
   .tip .tip-quote {
-    margin-top: 5px; }
+    margin-top: 10px; }
 
 html {
   height: 100%;
