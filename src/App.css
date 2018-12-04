@@ -169,15 +169,34 @@
     width: 100%;
     text-align: center;
     padding: 10px;
-    border-top: 1px solid #dadbe2; }
+    border-top: 1px solid #dadbe2;
+    color: #247f9e;
+    font-family: "proxima_nova_bold", Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
     .venue-tabs .tab-list-item:hover {
       background: #e9e9ed; }
+    .venue-tabs .tab-list-item:before {
+      content: '';
+      display: block;
+      width: 15px;
+      height: 15px;
+      margin-right: 5px; }
     .venue-tabs .tab-list-item:first-of-type {
       border-right: 1px solid #dadbe2;
       border-radius: 0 0 0 9px; }
+      .venue-tabs .tab-list-item:first-of-type:before {
+        background: url("./images/tips.svg") no-repeat; }
+    .venue-tabs .tab-list-item:nth-of-type(2):before {
+      background: url("./images/clock.svg") no-repeat; }
     .venue-tabs .tab-list-item:last-of-type {
       border-left: 1px solid #dadbe2;
       border-radius: 0 0 9px 0; }
+      .venue-tabs .tab-list-item:last-of-type:before {
+        background: url("./images/info.svg") no-repeat; }
   .venue-tabs .tab-list-active {
     border-top: 3px solid #da3743;
     padding-top: 8px;
@@ -214,11 +233,14 @@
   .tip .tip-quote {
     margin-top: 10px; }
 
+.hours-unavailable .unavailable-message {
+  margin-bottom: 0.5rem; }
+
 html {
   height: 100%;
   font-size: 13px;
   font-family: 'proxima_nova_regular', Helvetica, sans-serif;
-  letter-spacing: 0.25px;
+  letter-spacing: 0.4px;
   color: #32333f; }
 
 #root,
@@ -246,6 +268,9 @@ h2 {
   font-size: 1.23rem;
   font-family: 'proxima_nova_bold', Helvetica, sans-serif;
   color: #247f9e;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.5px;
   line-height: 1.2;
   font-weight: normal; }
+
+.bold {
+  font-family: 'proxima_nova_bold', Helvetica, sans-serif; }

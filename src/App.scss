@@ -6,12 +6,13 @@
 @import './scss/ListItem';
 @import './scss/Tabs';
 @import './scss/Tip';
+@import './scss/Hours';
 
 html {
   height: 100%;
   font-size: 13px;
   font-family: 'proxima_nova_regular', Helvetica, sans-serif;
-  letter-spacing: 0.25px;
+  letter-spacing: 0.4px;
   color: $ui-primary;
 }
 
@@ -46,7 +47,11 @@ h2 {
   font-size: 1.23rem;
   font-family: 'proxima_nova_bold', Helvetica, sans-serif;
   color: $primary;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.5px;
   line-height: 1.2;
   font-weight: normal;
+}
+
+.bold {
+  font-family: 'proxima_nova_bold', Helvetica, sans-serif;
 }

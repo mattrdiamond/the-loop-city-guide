@@ -16,7 +16,25 @@ const Hours = ({ venue, index }) => {
       </table>
     );
   } else {
-    return `Please contact ${venue.name} for hours of operation:`;
+    return (
+      <div className="hours-unavailable">
+        <p className="unavailable-message">
+          Please contact {venue.name} for hours of operation.
+        </p>
+        {venue.url && (
+          <React.Fragment>
+            <span class="bold">Website: </span>
+            <a href="{venue.url}">{venue.url}</a>
+          </React.Fragment>
+        )}
+        {venue.contact.formattedPhone && (
+          <React.Fragment>
+            <span className="bold">Phone: </span>
+            <span>{venue.contact.formattedPhone}</span>
+          </React.Fragment>
+        )}
+      </div>
+    );
   }
 };
 
