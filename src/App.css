@@ -230,8 +230,15 @@
     color: #b3b3b3;
     text-transform: uppercase;
     font-weight: bold; }
-  .tip .tip-quote {
-    margin-top: 10px; }
+
+.table-hours th {
+  padding-right: 10px; }
+
+.table-hours .open {
+  color: #247f9e; }
+
+.table-hours .closed {
+  color: #da3743; }
 
 .hours-unavailable .unavailable-message {
   margin-bottom: 0.5rem; }

@@ -1,5 +1,22 @@
+.table-hours {
+
+  th {
+    padding-right: 10px;
+  }
+
+  .open {
+    color: $primary;
+  }
+
+  .closed {
+    color: $secondary;
+  }
+}
+
 .hours-unavailable {
+
   .unavailable-message {
     margin-bottom: 0.5rem;
   }
+
 }

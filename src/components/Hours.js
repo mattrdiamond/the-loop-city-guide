@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 
 const Hours = ({ venue, index }) => {
-  let venueHours = venue.hours;
-  let test = true;
+  const venueHours = venue.hours;
+  const isOpen = venueHours.isOpen;
+  let statusColor = isOpen ? 'open' : 'closed';
+
   if (venueHours) {
     return (
-      <table>
+      <table className="table-hours">
         <tbody>
           {venueHours.timeframes.map((timeframe, index) => (
             <tr key={index}>
               <th scope="row">{timeframe.days}</th>
+              {/*<td>{timeframe.open[0].renderedTime}</td>*/}
+              {timeframe.open.map((timeSegment, index) => (
+                <td key={index}>{timeSegment.renderedTime}</td>
+              ))}
+              {timeframe.includesToday && (
+                <td className={statusColor}>{venueHours.status}</td>
+              )}
             </tr>
           ))}
         </tbody>
