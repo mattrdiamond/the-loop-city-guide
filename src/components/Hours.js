@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 const Hours = ({ venue, index }) => {
   const venueHours = venue.hours;
-  const isOpen = venueHours.isOpen;
-  let statusColor = isOpen ? 'open' : 'closed';
 
   if (venueHours) {
     return (
@@ -14,10 +12,10 @@ const Hours = ({ venue, index }) => {
               <th scope="row">{timeframe.days}</th>
               {/*<td>{timeframe.open[0].renderedTime}</td>*/}
               {timeframe.open.map((timeSegment, index) => (
-                <td key={index}>{timeSegment.renderedTime}</td>
+                <td className="hours" key={index}>{timeSegment.renderedTime}</td>
               ))}
               {timeframe.includesToday && (
-                <td className={statusColor}>{venueHours.status}</td>
+                venueHours.isOpen ? (<td className="open">Open now</td>) : (<td className="closed">Closed now</td>)
               )}
             </tr>
           ))}
