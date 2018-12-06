@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Tabs from './Tabs';
 import Tip from './Tip';
 import Hours from './Hours';
+import Info from './Info';
 
 export default class ListItem extends Component {
   getVenuePrice(price) {
@@ -113,7 +114,9 @@ export default class ListItem extends Component {
             <div label="Hours">
               <Hours venue={venue} />
             </div>
-            <div label="Info">Placeholder text info</div>
+            <div label="Info">
+              <Info venue={venue} />
+            </div>
           </Tabs>
         </div>
       </li>

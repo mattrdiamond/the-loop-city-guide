@@ -26,11 +26,14 @@
   box-shadow: 1px 0px 5px #b3b3b3;
   background: #e9e9ed; }
   #venue-sidebar #search-input {
-    padding: 0.5rem;
-    height: 2.5rem;
+    padding: 10px;
+    height: 3rem;
     width: 100%;
     font-size: 1rem;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    border: none;
+    border-radius: 10px;
+    font-family: "proxima_nova_regular", Helvetica, sans-serif; }
   #venue-sidebar.visible {
     left: 0; }
   #venue-sidebar .attribution {
@@ -247,6 +250,21 @@
 .hours-unavailable .unavailable-message {
   margin-bottom: 0.5rem; }
 
+.info-item {
+  border-bottom: 1px dotted #e6e6e6;
+  padding: 8px;
+  margin: 0; }
+  .info-item:first-of-type {
+    padding-top: 0; }
+  .info-item:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0; }
+  .info-item .attribute-key,
+  .info-item .attribute-value {
+    display: inline; }
+  .info-item .attribute-value {
+    float: right; }
+
 html {
   height: 100%;
   font-size: 13px;
@@ -277,11 +295,11 @@ body {
 
 h2 {
   font-size: 1.23rem;
-  font-family: 'proxima_nova_bold', Helvetica, sans-serif;
+  font-family: "proxima_nova_bold", Helvetica, sans-serif;
   color: #247f9e;
   letter-spacing: 0.5px;
   line-height: 1.2;
   font-weight: normal; }
 
 .bold {
-  font-family: 'proxima_nova_bold', Helvetica, sans-serif; }
+  font-family: "proxima_nova_bold", Helvetica, sans-serif; }

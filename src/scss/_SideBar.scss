@@ -12,16 +12,21 @@
   transition: all 0.5s ease;
   box-shadow: 1px 0px 5px $black-05;
   background: $ui-08;
+
   #search-input {
-    padding: 0.5rem;
-    height: 2.5rem;
+    padding: $unit;
+    height: 3rem;
     width: 100%;
     font-size: 1rem;
     box-sizing: border-box;
+    border: none;
+    border-radius: 10px;
+    font-family: $roman;
   }
   &.visible {
     left: 0;
   }
+
   .attribution {
     color: $ui-04;
     font-size: 0.6rem;
