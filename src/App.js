@@ -51,7 +51,7 @@ class App extends Component {
     // fetch restaurant data from Foursquare
     FoursquareAPI.search({
       near: 'Chicago, IL',
-      query: 'cafe',
+      query: 'restaurant',
       limit: 10
     })
       .then((results) => {
@@ -122,6 +122,7 @@ class App extends Component {
       marker.addListener('click', () => {
         // Animate marker
         this.toggleBounce(marker);
+        console.log('this', marker);
 
         // Find venue that matches clicked marker
         const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);

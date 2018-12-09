@@ -84,7 +84,9 @@ export default class ListItem extends Component {
               )}
 
               {venue.price && (
-                <span className="venue-info">{this.getVenuePrice(venue.price.tier)}</span>
+                <span className="venue-info venue-price">
+                  {this.getVenuePrice(venue.price.tier)}
+                </span>
               )}
 
               {venue.location.address && (
