@@ -99,6 +99,7 @@ class App extends Component {
 
     // Create single InfoWindow
     const infowindow = new window.google.maps.InfoWindow();
+    infowindow.id = '';
     this.setState({ infoWindow: infowindow });
 
     // Create marker for each venue
@@ -122,7 +123,9 @@ class App extends Component {
       marker.addListener('click', () => {
         // Animate marker
         this.toggleBounce(marker);
-        console.log('this', marker);
+
+        // Add current marker id to infowindow
+        infowindow.id = marker.id;
 
         // Find venue that matches clicked marker
         const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);
@@ -133,7 +136,10 @@ class App extends Component {
             const venueDetails = Object.assign(clickedVenue, res.response.venue);
 
             // Copy venueDetails object and append to venues
-            this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
+            this.setState({
+              venues: Object.assign(this.state.venues, venueDetails),
+              infowindow: infowindow
+            });
 
             // Use photo if available. Otherwise set as empty string
             const venuePhoto = venue.bestPhoto
@@ -167,7 +173,11 @@ class App extends Component {
 
   handleListItemClick(venue) {
     const clickedMarker = this.state.markers.find((marker) => marker.id === venue.id);
-    window.google.maps.event.trigger(clickedMarker, 'click');
+
+    // Open infowindow if not already open
+    if (this.state.infoWindow.id !== clickedMarker.id) {
+      window.google.maps.event.trigger(clickedMarker, 'click');
+    }
 
     if (window.innerWidth < 600) {
       this.toggleSidebar();
