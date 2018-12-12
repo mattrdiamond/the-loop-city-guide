@@ -12,11 +12,16 @@ const Hours = ({ venue, index }) => {
               <th scope="row">{timeframe.days}</th>
               {/*<td>{timeframe.open[0].renderedTime}</td>*/}
               {timeframe.open.map((timeSegment, index) => (
-                <td className="hours" key={index}>{timeSegment.renderedTime}</td>
+                <td className="hours" key={index}>
+                  {timeSegment.renderedTime}
+                </td>
               ))}
-              {timeframe.includesToday && (
-                venueHours.isOpen ? (<td className="open">Open now</td>) : (<td className="closed">Closed now</td>)
-              )}
+              {timeframe.includesToday &&
+                (venueHours.isOpen ? (
+                  <td className="open">Open now</td>
+                ) : (
+                  <td className="closed">Closed now</td>
+                ))}
             </tr>
           ))}
         </tbody>
@@ -29,16 +34,16 @@ const Hours = ({ venue, index }) => {
           Please contact {venue.name} for hours of operation.
         </p>
         {venue.url && (
-          <React.Fragment>
+          <div className="hours-website">
             <span class="bold">Website: </span>
             <a href="{venue.url}">{venue.url}</a>
-          </React.Fragment>
+          </div>
         )}
         {venue.contact.formattedPhone && (
-          <React.Fragment>
+          <div className="hours-phone">
             <span className="bold">Phone: </span>
             <span>{venue.contact.formattedPhone}</span>
-          </React.Fragment>
+          </div>
         )}
       </div>
     );
