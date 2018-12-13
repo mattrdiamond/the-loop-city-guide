@@ -243,10 +243,12 @@
     font-weight: bold; }
 
 .table-hours {
-  margin: 0 auto; }
+  width: 100%;
+  border-collapse: collapse; }
   .table-hours th,
   .table-hours .hours {
-    padding-right: 20px; }
+    width: 33.3%;
+    padding-bottom: 8px; }
   .table-hours .open,
   .table-hours .closed {
     font-family: "proxima_nova_bold", Helvetica, sans-serif; }

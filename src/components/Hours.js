@@ -8,9 +8,45 @@ const Hours = ({ venue, index }) => {
       <table className="table-hours">
         <tbody>
           {venueHours.timeframes.map((timeframe, index) => (
+            <React.Fragment>
+              <tr key={index}>
+                <th scope="row">{timeframe.days}</th>
+                <td>{timeframe.open[0].renderedTime}</td>
+                {/*{timeframe.open.map((timeSegment, index) => (
+                <td className="hours" key={index}>
+                  {timeSegment.renderedTime}
+                </td>
+              )
+              )}*/}
+                {timeframe.includesToday &&
+                  (venueHours.isOpen ? (
+                    <td className="open">Open now</td>
+                  ) : (
+                    <td className="closed">Closed now</td>
+                  ))}
+              </tr>
+              {/* if venue hours contains second time segment add new row */}
+              {timeframe.open.length > 1 &&
+                timeframe.open
+                  .filter((index) => index > 0)
+                  .map((time) => (
+                    <tr key={index}>
+                      <td>&nbsp;</td>
+                      <td>{time.renderedTime}</td>
+                    </tr>
+                  ))}
+              {/*{timeframe.open[1] && (
+                <tr key={index}>
+                  <td>&nbsp;</td>
+                  <td>{timeframe.open[1].renderedTime}</td>
+                </tr>
+              )}*/}
+            </React.Fragment>
+          ))}
+          {/*{venueHours.timeframes.map((timeframe, index) => (
             <tr key={index}>
               <th scope="row">{timeframe.days}</th>
-              {/*<td>{timeframe.open[0].renderedTime}</td>*/}
+              {/*<td>{timeframe.open[0].renderedTime}</td>}
               {timeframe.open.map((timeSegment, index) => (
                 <td className="hours" key={index}>
                   {timeSegment.renderedTime}
@@ -23,7 +59,7 @@ const Hours = ({ venue, index }) => {
                   <td className="closed">Closed now</td>
                 ))}
             </tr>
-          ))}
+                ))}*/}
         </tbody>
       </table>
     );
@@ -35,7 +71,7 @@ const Hours = ({ venue, index }) => {
         </p>
         {venue.url && (
           <div className="hours-website">
-            <span class="bold">Website: </span>
+            <span className="bold">Website: </span>
             <a href="{venue.url}">{venue.url}</a>
           </div>
         )}

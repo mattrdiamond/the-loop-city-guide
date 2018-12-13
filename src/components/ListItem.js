@@ -46,7 +46,7 @@ export default class ListItem extends Component {
       venueImage = venue.bestPhoto.prefix + '100x100' + venue.bestPhoto.suffix;
     } else if (venue.categories.length > 0) {
       venueImage =
-        venue.categories[0].icon.prefix + '32' + venue.categories[0].icon.suffix;
+        venue.categories[0].icon.prefix + '100' + venue.categories[0].icon.suffix;
     } else {
       venueImage = 'https://via.placeholder.com/50';
     }
@@ -97,14 +97,14 @@ export default class ListItem extends Component {
               )}
             </div>
 
-            <div className="rating-column">
-              {venue.rating && (
+            {venue.rating && (
+              <div className="rating-column">
                 <div className="rating-container">
                   <img src={require('../images/star.svg')} alt="star" />
                   <span>{venue.rating}</span>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
 
           <Tabs>

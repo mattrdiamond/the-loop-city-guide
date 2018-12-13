@@ -138,7 +138,7 @@ class App extends Component {
             // Copy venueDetails object and append to venues
             this.setState({
               venues: Object.assign(this.state.venues, venueDetails),
-              infowindow: infowindow
+              infoWindow: infowindow
             });
 
             // Use photo if available. Otherwise set as empty string
