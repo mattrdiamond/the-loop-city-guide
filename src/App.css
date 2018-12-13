@@ -9,7 +9,7 @@
   box-sizing: border-box;
   height: 50px; }
   #navbar h1 {
-    margin-left: 0.5rem; }
+    margin: 0 auto; }
 
 #venue-sidebar {
   width: 415px;

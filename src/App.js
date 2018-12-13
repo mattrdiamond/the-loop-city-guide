@@ -150,11 +150,11 @@ class App extends Component {
                 '" alt="An image of ' +
                 venue.name +
                 '" />'
-              : '';
+              : 'test';
 
             // Generate content for infoWindow
             const contentString = `<React.Fragment>
-              <p>${venue.name}</p>
+              <h4>${venue.name}</h4>
               ${venuePhoto}
               </React.Fragment>`;
 
