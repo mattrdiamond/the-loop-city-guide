@@ -6,23 +6,17 @@ const Hours = ({ venue, index }) => {
   if (venueHours) {
     return (
       <table className="table-hours">
-        <tbody>
           {venueHours.timeframes.map((timeframe, index) => (
-            <React.Fragment>
-              <tr key={index}>
-                <th scope="row">{timeframe.days}</th>
-                <td>{timeframe.open[0].renderedTime}</td>
-                {/*{timeframe.open.map((timeSegment, index) => (
-                <td className="hours" key={index}>
-                  {timeSegment.renderedTime}
-                </td>
-              )
-              )}*/}
+            <tbody key={index}>
+              <tr key={`row_${index}`}>
+                <th key={timeframe.days} scope="row">{timeframe.days}</th>
+                <td key={timeframe.open[0].renderedTime}>{timeframe.open[0].renderedTime}</td>
+
                 {timeframe.includesToday &&
                   (venueHours.isOpen ? (
-                    <td className="open">Open now</td>
+                    <td key={`isOpen`} className="open">Open now</td>
                   ) : (
-                    <td className="closed">Closed now</td>
+                    <td key={`isClosed`} className="closed">Closed now</td>
                   ))}
               </tr>
               {/* if venue hours contains second time segment add new row */}
@@ -31,36 +25,12 @@ const Hours = ({ venue, index }) => {
                   .filter((index) => index > 0)
                   .map((time) => (
                     <tr key={index}>
-                      <td>&nbsp;</td>
-                      <td>{time.renderedTime}</td>
+                      <td key={`blank_cell_${index}`}>&nbsp;</td>
+                      <td key={`addnl_hrs_` + time.renderedTime}>{time.renderedTime}</td>
                     </tr>
                   ))}
-              {/*{timeframe.open[1] && (
-                <tr key={index}>
-                  <td>&nbsp;</td>
-                  <td>{timeframe.open[1].renderedTime}</td>
-                </tr>
-              )}*/}
-            </React.Fragment>
+            </tbody>
           ))}
-          {/*{venueHours.timeframes.map((timeframe, index) => (
-            <tr key={index}>
-              <th scope="row">{timeframe.days}</th>
-              {/*<td>{timeframe.open[0].renderedTime}</td>}
-              {timeframe.open.map((timeSegment, index) => (
-                <td className="hours" key={index}>
-                  {timeSegment.renderedTime}
-                </td>
-              ))}
-              {timeframe.includesToday &&
-                (venueHours.isOpen ? (
-                  <td className="open">Open now</td>
-                ) : (
-                  <td className="closed">Closed now</td>
-                ))}
-            </tr>
-                ))}*/}
-        </tbody>
       </table>
     );
   } else {

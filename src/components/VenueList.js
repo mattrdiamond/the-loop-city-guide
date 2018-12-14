@@ -8,7 +8,7 @@ export default class venueList extends Component {
         {this.props.venues &&
           this.props.venues.map((venue, index) => (
             <ListItem
-              key={index}
+              key={venue.location.address + venue.createdAt}
               venue={venue}
               handleListItemClick={this.props.handleListItemClick}
               listItemKeyPress={this.props.listItemKeyPress}

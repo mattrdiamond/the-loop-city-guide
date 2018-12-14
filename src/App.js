@@ -51,7 +51,7 @@ class App extends Component {
     // fetch restaurant data from Foursquare
     FoursquareAPI.search({
       near: 'Chicago, IL',
-      query: 'restaurant',
+      query: 'coffee',
       limit: 10
     })
       .then((results) => {
@@ -69,9 +69,9 @@ class App extends Component {
             venueDetails.push(results.response.venue);
             // copy and merge venue details with state value
             this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
-            console.log(venueDetails);
           });
         });
+        console.log('api details')
       })
       .catch((error) => {
         alert('Error: Failed to fetch Foursquare Data');
@@ -84,10 +84,11 @@ class App extends Component {
       `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`
     );
     window.initMap = this.initMap;
-    console.log('load map script');
   }
 
   initMap() {
+    console.log('initmap run');
+    console.log('venue state at initmap', this.state.venues);
     // Create empty LatLngBounds object
     this.bounds = new window.google.maps.LatLngBounds();
 
@@ -129,42 +130,67 @@ class App extends Component {
 
         // Find venue that matches clicked marker
         const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);
+        console.log('clicked venue', clickedVenue)
 
-        FoursquareAPI.getVenueDetails(venue.id)
-          .then((res) => {
-            //Get venue details from foursquare and copy them to clickedVenue
-            const venueDetails = Object.assign(clickedVenue, res.response.venue);
+        // ********************************************************
+        // Use photo if available. Otherwise set as empty string
+        const venuePhoto = clickedVenue.bestPhoto
+        ? '<img src="' +
+        clickedVenue.bestPhoto.prefix +
+          '100x100' +
+          clickedVenue.bestPhoto.suffix +
+          '" alt="An image of ' +
+          clickedVenue.name +
+          '" />'
+        : '';
 
-            // Copy venueDetails object and append to venues
-            this.setState({
-              venues: Object.assign(this.state.venues, venueDetails),
-              infoWindow: infowindow
-            });
 
-            // Use photo if available. Otherwise set as empty string
-            const venuePhoto = venue.bestPhoto
-              ? '<img src="' +
-                venue.bestPhoto.prefix +
-                '100x100' +
-                venue.bestPhoto.suffix +
-                '" alt="An image of ' +
-                venue.name +
-                '" />'
-              : 'test';
+      // Generate content for infoWindow
+      const contentString = `<React.Fragment>
+        <h4>${venue.name}</h4>
+        ${venuePhoto}
+        </React.Fragment>`;
 
-            // Generate content for infoWindow
-            const contentString = `<React.Fragment>
-              <h4>${venue.name}</h4>
-              ${venuePhoto}
-              </React.Fragment>`;
+      // Set infowindow content and open
+      infowindow.setContent(contentString);
+      infowindow.open(this.map, marker);
+        // ********************************************************
 
-            // Set infowindow content and open
-            infowindow.setContent(contentString);
-            infowindow.open(this.map, marker);
-          })
-          .catch((error) => {
-            alert('Error: Failed to fetch Foursquare Data');
-          });
+        // FoursquareAPI.getVenueDetails(venue.id)
+        //   .then((res) => {
+        //     //Get venue details from foursquare and copy them to clickedVenue
+        //     const venueDetails = Object.assign(clickedVenue, res.response.venue);
+
+        //     // Copy venueDetails object and append to venues
+        //     this.setState({
+        //       venues: Object.assign(this.state.venues, venueDetails),
+        //       infoWindow: infowindow
+        //     });
+
+        //     // Use photo if available. Otherwise set as empty string
+        //     const venuePhoto = venue.bestPhoto
+        //       ? '<img src="' +
+        //         venue.bestPhoto.prefix +
+        //         '100x100' +
+        //         venue.bestPhoto.suffix +
+        //         '" alt="An image of ' +
+        //         venue.name +
+        //         '" />'
+        //       : 'test';
+
+        //     // Generate content for infoWindow
+        //     const contentString = `<React.Fragment>
+        //       <h4>${venue.name}</h4>
+        //       ${venuePhoto}
+        //       </React.Fragment>`;
+
+        //     // Set infowindow content and open
+        //     infowindow.setContent(contentString);
+        //     infowindow.open(this.map, marker);
+        //   })
+        //   .catch((error) => {
+        //     alert('Error: Failed to fetch Foursquare Data');
+        //   });
       });
     });
     // fit the map to the newly inclusive bounds
