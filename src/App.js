@@ -71,7 +71,6 @@ class App extends Component {
             this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
           });
         });
-        console.log('api details')
       })
       .catch((error) => {
         alert('Error: Failed to fetch Foursquare Data');
@@ -132,7 +131,7 @@ class App extends Component {
         const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);
         console.log('clicked venue', clickedVenue)
 
-        // ********************************************************
+        // **********************************************moved out of api call
         // Use photo if available. Otherwise set as empty string
         const venuePhoto = clickedVenue.bestPhoto
         ? '<img src="' +
@@ -146,10 +145,10 @@ class App extends Component {
 
 
       // Generate content for infoWindow
-      const contentString = `<React.Fragment>
-        <h4>${venue.name}</h4>
+      const contentString = `<div id='iw-container'>
+        <h4 class="iw-title">${venue.name}</h4>
         ${venuePhoto}
-        </React.Fragment>`;
+        </div>`;
 
       // Set infowindow content and open
       infowindow.setContent(contentString);
