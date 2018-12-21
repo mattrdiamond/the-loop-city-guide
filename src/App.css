@@ -19,7 +19,6 @@
   font-size: 1rem;
   padding: 1rem;
   box-sizing: border-box;
-  left: -415px;
   position: absolute;
   overflow: auto;
   transition: all 0.5s ease;
@@ -32,7 +31,11 @@
     font-size: 1rem;
     box-sizing: border-box;
     border: none;
+    border-radius: 3rem;
     font-family: "proxima_nova_regular", Helvetica, sans-serif; }
+    #venue-sidebar #search-input:focus {
+      box-shadow: 0 2px 9px 0 rgba(50, 51, 63, 0.28);
+      outline: none; }
   #venue-sidebar.visible {
     left: 0; }
   #venue-sidebar .attribution {
@@ -113,8 +116,11 @@
   width: 100%;
   color: gray;
   border-radius: 10px;
-  background: #fff;
-  box-shadow: 0px 3px 3px #cccdd7; }
+  background: #fff; }
+  .list-item:focus {
+    border: 2px solid #da3743;
+    box-shadow: 0 2px 9px 0 rgba(50, 51, 63, 0.28);
+    outline: none; }
   .list-item .content-container {
     width: 100%;
     padding: 10px 10px 0; }
@@ -275,6 +281,28 @@
   .info-item .attribute-value {
     float: right; }
 
+.load-screen {
+  position: fixed;
+  z-index: 5;
+  background: black;
+  width: 100%;
+  height: 100%;
+  color: white;
+  text-align: center;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .load-screen .loading-image {
+    animation: logo-spin infinite 20s linear;
+    height: 200px; }
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
 html {
   height: 100%;
   font-size: 13px;
@@ -313,3 +341,6 @@ h2 {
 
 .bold {
   font-family: "proxima_nova_bold", Helvetica, sans-serif; }
+
+#iw-container .iw-photo {
+  background: gray; }

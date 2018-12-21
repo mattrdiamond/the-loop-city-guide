@@ -4,6 +4,7 @@ import SideBar from './components/SideBar';
 import Map from './components/Map';
 import FoursquareAPI from './API/Foursquare';
 import './App.css';
+import LoadScreen from './components/LoadScreen';
 
 class App extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class App extends Component {
       zoom: 12,
       infoWindow: '',
       sidebarOpen: false,
+      loading: false,
       updateSuperState: (obj) => {
         this.setState(obj);
       }
@@ -48,10 +50,11 @@ class App extends Component {
 
   // fetch restaurant details from Foursquare
   componentDidMount() {
+    this.setState({ loading: true });
     // fetch restaurant data from Foursquare
     FoursquareAPI.search({
       near: 'Chicago, IL',
-      query: 'coffee',
+      query: 'restaurant',
       limit: 10
     })
       .then((results) => {
@@ -65,7 +68,6 @@ class App extends Component {
         const venueDetails = [];
         venues.forEach((venue) => {
           FoursquareAPI.getVenueDetails(venue.id).then((results) => {
-            // const venueDetails = [results.response.venue];
             venueDetails.push(results.response.venue);
             // copy and merge venue details with state value
             this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
@@ -86,8 +88,6 @@ class App extends Component {
   }
 
   initMap() {
-    console.log('initmap run');
-    console.log('venue state at initmap', this.state.venues);
     // Create empty LatLngBounds object
     this.bounds = new window.google.maps.LatLngBounds();
 
@@ -129,30 +129,45 @@ class App extends Component {
 
         // Find venue that matches clicked marker
         const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);
-        console.log('clicked venue', clickedVenue)
 
         // **********************************************moved out of api call
+
         // Use photo if available. Otherwise set as empty string
-        const venuePhoto = clickedVenue.bestPhoto
-        ? '<img src="' +
-        clickedVenue.bestPhoto.prefix +
-          '100x100' +
-          clickedVenue.bestPhoto.suffix +
-          '" alt="An image of ' +
-          clickedVenue.name +
-          '" />'
-        : '';
+        const venuePhoto = clickedVenue.categories[0]
+          ? '<img class="iw-photo" src="' +
+            clickedVenue.categories[0].icon.prefix +
+            '100' +
+            clickedVenue.categories[0].icon.suffix +
+            '" alt="' +
+            clickedVenue.categories[0].icon.name +
+            ' icon" />'
+          : '';
 
+        const getVenueHours = () => {
+          if (venue.hasOwnProperty('hours')) {
+            console.log('yep');
+            return venue.hours.status;
+          } else {
+            console.log('nope', venue);
+            return '';
+          }
+        };
 
-      // Generate content for infoWindow
-      const contentString = `<div id='iw-container'>
-        <h4 class="iw-title">${venue.name}</h4>
-        ${venuePhoto}
-        </div>`;
+        // Generate content for infoWindow
+        const contentString = `<div id='iw-container'>
+          ${venuePhoto}
+          <div class="iw-content">
+          <h4 class="iw-title">${venue.name}</h4>
+          <ul class="iw-list>
+          <li class="iw-address>${venue.location.address}</li>
+          <li class="iw-hours">${getVenueHours()}</li>
+          </ul>
+          </div>
+          </div>`;
 
-      // Set infowindow content and open
-      infowindow.setContent(contentString);
-      infowindow.open(this.map, marker);
+        // Set infowindow content and open
+        infowindow.setContent(contentString);
+        infowindow.open(this.map, marker);
         // ********************************************************
 
         // FoursquareAPI.getVenueDetails(venue.id)
@@ -194,6 +209,7 @@ class App extends Component {
     });
     // fit the map to the newly inclusive bounds
     this.map.fitBounds(this.bounds);
+    this.setState({ loading: false });
   }
 
   handleListItemClick(venue) {
@@ -276,9 +292,13 @@ class App extends Component {
   }
 
   render() {
-    console.log('rendered');
+    // if (!this.state.venues.length && !this.state.markers.length) {
+    //   return <div>Loading...</div>;
+    // }
+
     return (
       <div id="app-container">
+        {this.state.loading && <LoadScreen />}
         <NavBar
           toggleSidebar={this.toggleSidebar}
           sidebarOpen={this.state.sidebarOpen}
