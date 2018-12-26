@@ -30,24 +30,6 @@ class App extends Component {
     this.listItemKeyPress = this.listItemKeyPress.bind(this);
   }
 
-  // componentDidMount() {
-  //   // Fetch restaurant data from Foursquare
-  //   FoursquareAPI.search({
-  //     near: 'Chicago, IL',
-  //     query: 'museum',
-  //     limit: 10
-  //   })
-  //     .then((results) => {
-  //       const { venues } = results.response;
-  //       const { center } = results.response.geocode.feature.geometry;
-  //       this.setState({ venues, center });
-  //       this.renderMap();
-  //     })
-  //     .catch((error) => {
-  //       alert('Error: Failed to fetch Foursquare Data');
-  //     });
-  // }
-
   // fetch restaurant details from Foursquare
   componentDidMount() {
     this.setState({ loading: true });
@@ -60,26 +42,45 @@ class App extends Component {
       .then((results) => {
         const { venues } = results.response;
         const { center } = results.response.geocode.feature.geometry;
-        this.setState({ venues, center });
-        this.renderMap();
+        this.fetchVenueDetails(venues, center);
         return venues;
       })
-      .then((venues) => {
-        const venueDetails = [];
-        venues.forEach((venue) => {
-          FoursquareAPI.getVenueDetails(venue.id).then((results) => {
-            venueDetails.push(results.response.venue);
-            // copy and merge venue details with state value
-            this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
-          });
-        });
-      })
       .catch((error) => {
-        alert('Error: Failed to fetch Foursquare Data');
+        alert('Error: Failed to fetch Foursquare Venues');
       });
   }
 
+  fetchVenueDetails(venues, center) {
+    // map through each venue and fetch venue details
+    Promise.all(
+      venues.map((venue) => {
+        const venueData = FoursquareAPI.getVenueDetails(venue.id).then(
+          (results) => results.response.venue
+        );
+        return venueData;
+      })
+    )
+      .then((venueData) => {
+        this.setState({ venues: venueData, center: center });
+      })
+      .catch((error) => {
+        alert('Error: Failed to fetch Foursquare Details');
+      });
+  }
+
+  // componentDidUpdate - (update version of componentDidMount)
+  // update map zoom level if the data has changed
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.zoom !== this.state.zoom) {
+      this.map.setZoom(this.state.zoom);
+    }
+    if (prevState.venues !== this.state.venues) {
+      this.renderMap();
+    }
+  }
+
   renderMap() {
+    console.log('2. renderMap called with initMap callback');
     const API_KEY = 'AIzaSyCHE01dQ6hdkOBP0qxkzYdTCJdhYesX8gY';
     loadMapScript(
       `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`
@@ -129,6 +130,7 @@ class App extends Component {
 
         // Find venue that matches clicked marker
         const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);
+        console.log('name', clickedVenue.name);
 
         // **********************************************moved out of api call
 
@@ -168,48 +170,12 @@ class App extends Component {
         // Set infowindow content and open
         infowindow.setContent(contentString);
         infowindow.open(this.map, marker);
-        // ********************************************************
-
-        // FoursquareAPI.getVenueDetails(venue.id)
-        //   .then((res) => {
-        //     //Get venue details from foursquare and copy them to clickedVenue
-        //     const venueDetails = Object.assign(clickedVenue, res.response.venue);
-
-        //     // Copy venueDetails object and append to venues
-        //     this.setState({
-        //       venues: Object.assign(this.state.venues, venueDetails),
-        //       infoWindow: infowindow
-        //     });
-
-        //     // Use photo if available. Otherwise set as empty string
-        //     const venuePhoto = venue.bestPhoto
-        //       ? '<img src="' +
-        //         venue.bestPhoto.prefix +
-        //         '100x100' +
-        //         venue.bestPhoto.suffix +
-        //         '" alt="An image of ' +
-        //         venue.name +
-        //         '" />'
-        //       : 'test';
-
-        //     // Generate content for infoWindow
-        //     const contentString = `<React.Fragment>
-        //       <h4>${venue.name}</h4>
-        //       ${venuePhoto}
-        //       </React.Fragment>`;
-
-        //     // Set infowindow content and open
-        //     infowindow.setContent(contentString);
-        //     infowindow.open(this.map, marker);
-        //   })
-        //   .catch((error) => {
-        //     alert('Error: Failed to fetch Foursquare Data');
-        //   });
       });
     });
     // fit the map to the newly inclusive bounds
     this.map.fitBounds(this.bounds);
     this.setState({ loading: false });
+    console.log('4. initMap called');
   }
 
   handleListItemClick(venue) {
@@ -230,14 +196,6 @@ class App extends Component {
 
     if (code === 13) {
       this.handleListItemClick(venue);
-    }
-  }
-
-  // componentDidUpdate - update version of componentDidMount
-  // update map zoom level if the data has changed
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.zoom !== this.state.zoom) {
-      this.map.setZoom(this.state.zoom);
     }
   }
 
@@ -292,10 +250,6 @@ class App extends Component {
   }
 
   render() {
-    // if (!this.state.venues.length && !this.state.markers.length) {
-    //   return <div>Loading...</div>;
-    // }
-
     return (
       <div id="app-container">
         {this.state.loading && <LoadScreen />}
@@ -330,7 +284,7 @@ const loadMapScript = (url) => {
   script.defer = true;
   script.onerror = () => alert('Unable to load Google Maps');
   index.parentNode.insertBefore(script, index);
-  console.log('script tag loaded');
+  console.log('3. loadMapScript tag loaded');
 };
 
 export default App;
