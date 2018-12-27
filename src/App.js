@@ -130,9 +130,6 @@ class App extends Component {
 
         // Find venue that matches clicked marker
         const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);
-        console.log('name', clickedVenue.name);
-
-        // **********************************************moved out of api call
 
         // Use photo if available. Otherwise set as empty string
         const venuePhoto = clickedVenue.categories[0]
@@ -147,10 +144,10 @@ class App extends Component {
 
         const getVenueHours = () => {
           if (venue.hasOwnProperty('hours')) {
-            console.log('yep');
+            console.log('hours', venue.hours.status);
             return venue.hours.status;
           } else {
-            console.log('nope', venue);
+            console.log('no hours dog');
             return '';
           }
         };
