@@ -39,6 +39,7 @@ export default class SideBar extends Component {
       queryMatch ? marker.setVisible(true) : marker.setVisible(false);
       return marker;
     });
+
     this.props.updateSuperState({ markers: markers });
     this.didMarkersChange();
   };
@@ -46,7 +47,7 @@ export default class SideBar extends Component {
   // check to see if number of markers changed before updating map bounds
   didMarkersChange() {
     const visibleMarkers = this.props.markers.filter((marker) => marker.visible);
-
+    console.log('visibleMarkers', visibleMarkers);
     // close infoWindow unless the map contains a single marker
     if (visibleMarkers.length > 1) {
       this.props.infoWindow.close();

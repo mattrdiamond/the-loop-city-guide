@@ -62,6 +62,7 @@ class App extends Component {
     )
       .then((venueData) => {
         this.setState({ venues: venueData, center: center });
+        console.log('1. fetch venue data');
       })
       .catch((error) => {
         alert('Error: Failed to fetch Foursquare Details');
@@ -75,17 +76,8 @@ class App extends Component {
       this.map.setZoom(this.state.zoom);
     }
     if (prevState.venues !== this.state.venues) {
-      this.renderMap();
+      this.initMap();
     }
-  }
-
-  renderMap() {
-    console.log('2. renderMap called with initMap callback');
-    const API_KEY = 'AIzaSyCHE01dQ6hdkOBP0qxkzYdTCJdhYesX8gY';
-    loadMapScript(
-      `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`
-    );
-    window.initMap = this.initMap;
   }
 
   initMap() {
@@ -101,9 +93,10 @@ class App extends Component {
     // Create single InfoWindow
     const infowindow = new window.google.maps.InfoWindow();
     infowindow.id = '';
-    this.setState({ infoWindow: infowindow });
 
     // Create marker for each venue
+    const markerArray = [];
+
     this.state.venues.map((venue) => {
       const marker = new window.google.maps.Marker({
         position: {
@@ -116,12 +109,13 @@ class App extends Component {
         animation: window.google.maps.Animation.DROP
       });
 
-      this.state.markers.push(marker);
+      markerArray.push(marker);
 
       // Extend the bounds to include each marker's position
       this.bounds.extend(marker.position);
 
       marker.addListener('click', () => {
+        console.log('marker clicked');
         // Animate marker
         this.toggleBounce(marker);
 
@@ -147,7 +141,7 @@ class App extends Component {
             console.log('hours', venue.hours.status);
             return venue.hours.status;
           } else {
-            console.log('no hours dog');
+            console.log('no hours');
             return '';
           }
         };
@@ -171,8 +165,7 @@ class App extends Component {
     });
     // fit the map to the newly inclusive bounds
     this.map.fitBounds(this.bounds);
-    this.setState({ loading: false });
-    console.log('4. initMap called');
+    this.setState({ loading: false, markers: markerArray, infoWindow: infowindow });
   }
 
   handleListItemClick(venue) {
@@ -181,6 +174,7 @@ class App extends Component {
     // Open infowindow if not already open
     if (this.state.infoWindow.id !== clickedMarker.id) {
       window.google.maps.event.trigger(clickedMarker, 'click');
+      console.log('li clicked', clickedMarker);
     }
 
     if (window.innerWidth < 600) {
@@ -265,23 +259,15 @@ class App extends Component {
           updateMapBounds={this.updateMapBounds}
           listItemKeyPress={this.listItemKeyPress}
         />
-        <Map closeSidebar={this.closeSidebar} />
+        <Map
+          {...this.state}
+          id="map"
+          initMap={this.initMap}
+          closeSidebar={this.closeSidebar}
+        />
       </div>
     );
   }
 }
-
-// Load google maps asynchronously
-// Create Google Maps script tag and insert it before all other script tags
-const loadMapScript = (url) => {
-  const index = window.document.getElementsByTagName('script')[0];
-  const script = window.document.createElement('script');
-  script.src = url;
-  script.async = true;
-  script.defer = true;
-  script.onerror = () => alert('Unable to load Google Maps');
-  index.parentNode.insertBefore(script, index);
-  console.log('3. loadMapScript tag loaded');
-};
 
 export default App;
