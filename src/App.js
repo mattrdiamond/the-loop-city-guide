@@ -151,8 +151,11 @@ class App extends Component {
           ${venuePhoto}
           <div class="iw-content">
           <h4 class="iw-title">${venue.name}</h4>
-          <ul class="iw-list>
-          <li class="iw-address>${venue.location.address}</li>
+          <ul class="iw-list">
+          <li class="iw-address">
+          <img class="iw-icon" src="../images/marker.svg" alt="location icon">
+          ${venue.location.address}
+          </li>
           <li class="iw-hours">${getVenueHours()}</li>
           </ul>
           </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Icon from './Icon';
 
 class Tab extends Component {
   handleOnClick = () => {
@@ -23,6 +24,7 @@ class Tab extends Component {
 
     return (
       <li className={className} onClick={handleOnClick}>
+        <Icon icon={label} />
         {label}
       </li>
     );

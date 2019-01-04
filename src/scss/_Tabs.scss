@@ -24,31 +24,31 @@
     &:hover {
       background: $ui-08;
     }
-    &:before {
-      content: '';
-      display: block;
-      width: 15px;
-      height: 15px;
-      margin-right: 5px;
-    }
+    // &:before {
+    //   content: '';
+    //   display: block;
+    //   width: 15px;
+    //   height: 15px;
+    //   margin-right: 5px;
+    // }
     &:first-of-type {
       border-right: 1px solid $ui-07;
       border-radius: 0 0 0 9px;
-      &:before{
-        background: url('./images/tips.svg') no-repeat;
-      }
+      // &:before{
+      //   // background: url('./images/tips.svg') no-repeat;
+      // }
     }
-    &:nth-of-type(2) {
-      &:before {
-        background: url('./images/clock.svg') no-repeat;
-      }
-    }
+    // &:nth-of-type(2) {
+    //   // &:before {
+    //   //   background: url('./images/clock.svg') no-repeat;
+    //   // }
+    // }
     &:last-of-type {
       border-left: 1px solid $ui-07;
       border-radius: 0 0 9px 0;
-      &:before {
-        background: url('./images/info.svg') no-repeat;
-      }
+      // &:before {
+      //   // background: url('./images/info.svg') no-repeat;
+      // }
     }
   }
 

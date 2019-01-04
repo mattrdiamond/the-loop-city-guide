@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const Hours = ({ venue, index }) => {
   const venueHours = venue.hours;
@@ -6,31 +6,39 @@ const Hours = ({ venue, index }) => {
   if (venueHours) {
     return (
       <table className="table-hours">
-          {venueHours.timeframes.map((timeframe, index) => (
-            <tbody key={index}>
-              <tr key={`row_${index}`}>
-                <th key={timeframe.days} scope="row">{timeframe.days}</th>
-                <td key={timeframe.open[0].renderedTime}>{timeframe.open[0].renderedTime}</td>
+        {venueHours.timeframes.map((timeframe, index) => (
+          <tbody key={index}>
+            <tr key={`row_${index}`}>
+              <th key={timeframe.days} scope="row">
+                {timeframe.days}
+              </th>
+              <td key={timeframe.open[0].renderedTime}>
+                {timeframe.open[0].renderedTime}
+              </td>
 
-                {timeframe.includesToday &&
-                  (venueHours.isOpen ? (
-                    <td key={`isOpen`} className="open">Open now</td>
-                  ) : (
-                    <td key={`isClosed`} className="closed">Closed now</td>
-                  ))}
-              </tr>
-              {/* if venue hours contains second time segment add new row */}
-              {timeframe.open.length > 1 &&
-                timeframe.open
-                  .filter((index) => index > 0)
-                  .map((time) => (
-                    <tr key={index}>
-                      <td key={`blank_cell_${index}`}>&nbsp;</td>
-                      <td key={`addnl_hrs_` + time.renderedTime}>{time.renderedTime}</td>
-                    </tr>
-                  ))}
-            </tbody>
-          ))}
+              {timeframe.includesToday &&
+                (venueHours.isOpen ? (
+                  <td key={`isOpen`} className="open">
+                    Open now
+                  </td>
+                ) : (
+                  <td key={`isClosed`} className="closed">
+                    Closed now
+                  </td>
+                ))}
+            </tr>
+            {/* if venue hours contains second time segment add new row */}
+            {timeframe.open.length > 1 &&
+              timeframe.open
+                .filter((index) => index > 0)
+                .map((time) => (
+                  <tr key={index}>
+                    <td key={`blank_cell_${index}`}>&nbsp;</td>
+                    <td key={`addnl_hrs_` + time.renderedTime}>{time.renderedTime}</td>
+                  </tr>
+                ))}
+          </tbody>
+        ))}
       </table>
     );
   } else {

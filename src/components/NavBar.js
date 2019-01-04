@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
+import React from 'react';
 import NavButton from './NavButton';
 
 // class NavBar extends Component {

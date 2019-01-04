@@ -3,6 +3,7 @@ import Tabs from './Tabs';
 import Tip from './Tip';
 import Hours from './Hours';
 import Info from './Info';
+import Icon from './Icon';
 
 export default class ListItem extends Component {
   getVenuePrice(price) {
@@ -100,7 +101,7 @@ export default class ListItem extends Component {
             {venue.rating && (
               <div className="rating-column">
                 <div className="rating-container">
-                  <img src={require('../images/star.svg')} alt="star" />
+                  <Icon icon="star" width="13px" height="13px" />
                   <span>{venue.rating}</span>
                 </div>
               </div>

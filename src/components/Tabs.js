@@ -8,9 +8,18 @@ class Tabs extends Component {
     this.state = {
       activeTab: ''
     };
+    this.onClickTabItem = this.onClickTabItem.bind(this);
   }
 
-  onClickTabItem = (tab) => {
+  // onClickTabItem = (tab) => {
+  //   // close tab if already open else open tab.
+  //   if (tab === this.state.activeTab) {
+  //     this.setState({ activeTab: '' });
+  //   } else {
+  //     this.setState({ activeTab: tab });
+  //   }
+  // };
+  onClickTabItem(tab) {
     // close tab if already open else open tab.
     if (tab === this.state.activeTab) {
       this.setState({ activeTab: '' });
@@ -26,6 +35,9 @@ class Tabs extends Component {
       state: { activeTab }
     } = this;
 
+    console.log('children', children);
+    console.log('child', children[0].props);
+
     let className = 'tab-content';
 
     if (activeTab) {
@@ -34,6 +46,7 @@ class Tabs extends Component {
 
     return (
       <div className="venue-tabs">
+        {/*--- map through list of 3 tabs ---*/}
         <ul className="tab-list">
           {children.map((child) => {
             const { label } = child.props;
@@ -48,6 +61,8 @@ class Tabs extends Component {
             );
           })}
         </ul>
+
+        {/*--- this div fills with active tab content ---*/}
         <div className={className}>
           {children.map((child) => {
             if (child.props.label !== activeTab) return undefined;
