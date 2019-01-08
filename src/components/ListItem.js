@@ -75,7 +75,7 @@ export default class ListItem extends Component {
             {/*{<img src={this.getVenuePhoto(venue)} alt={'An image of ' + venue.name} />}*/}
 
             <div className="info-column">
-              <h2>{venue.name}</h2>
+              <h2 className="venue-name">{venue.name}</h2>
 
               {venue.categories[0] && (
                 <span className="venue-info">
@@ -109,15 +109,15 @@ export default class ListItem extends Component {
           </div>
 
           <Tabs>
-            <div label="Tips">
+            <div label="tips">
               <ul className="tip-list">
                 <Tip venue={venue} />
               </ul>
             </div>
-            <div label="Hours">
+            <div label="hours">
               <Hours venue={venue} />
             </div>
-            <div label="Info">
+            <div label="info">
               <Info venue={venue} />
             </div>
           </Tabs>

@@ -5,6 +5,8 @@ import Map from './components/Map';
 import FoursquareAPI from './API/Foursquare';
 import './App.css';
 import LoadScreen from './components/LoadScreen';
+import InfoWindowContent from './components/InfoWindowContent';
+
 
 class App extends Component {
   constructor(props) {
@@ -62,7 +64,6 @@ class App extends Component {
     )
       .then((venueData) => {
         this.setState({ venues: venueData, center: center });
-        console.log('1. fetch venue data');
       })
       .catch((error) => {
         alert('Error: Failed to fetch Foursquare Details');
@@ -114,8 +115,9 @@ class App extends Component {
       // Extend the bounds to include each marker's position
       this.bounds.extend(marker.position);
 
+      // Add click event to each marker
       marker.addListener('click', () => {
-        console.log('marker clicked');
+
         // Animate marker
         this.toggleBounce(marker);
 
@@ -123,46 +125,10 @@ class App extends Component {
         infowindow.id = marker.id;
 
         // Find venue that matches clicked marker
-        const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);
-
-        // Use photo if available. Otherwise set as empty string
-        const venuePhoto = clickedVenue.categories[0]
-          ? '<img class="iw-photo" src="' +
-            clickedVenue.categories[0].icon.prefix +
-            '100' +
-            clickedVenue.categories[0].icon.suffix +
-            '" alt="' +
-            clickedVenue.categories[0].icon.name +
-            ' icon" />'
-          : '';
-
-        const getVenueHours = () => {
-          if (venue.hasOwnProperty('hours')) {
-            console.log('hours', venue.hours.status);
-            return venue.hours.status;
-          } else {
-            console.log('no hours');
-            return '';
-          }
-        };
-
-        // Generate content for infoWindow
-        const contentString = `<div id='iw-container'>
-          ${venuePhoto}
-          <div class="iw-content">
-          <h4 class="iw-title">${venue.name}</h4>
-          <ul class="iw-list">
-          <li class="iw-address">
-          <img class="iw-icon" src="../images/marker.svg" alt="location icon">
-          ${venue.location.address}
-          </li>
-          <li class="iw-hours">${getVenueHours()}</li>
-          </ul>
-          </div>
-          </div>`;
+        // const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);
 
         // Set infowindow content and open
-        infowindow.setContent(contentString);
+        infowindow.setContent(InfoWindowContent(venue));
         infowindow.open(this.map, marker);
       });
     });
@@ -177,7 +143,6 @@ class App extends Component {
     // Open infowindow if not already open
     if (this.state.infoWindow.id !== clickedMarker.id) {
       window.google.maps.event.trigger(clickedMarker, 'click');
-      console.log('li clicked', clickedMarker);
     }
 
     if (window.innerWidth < 600) {
