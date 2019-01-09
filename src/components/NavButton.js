@@ -15,7 +15,7 @@ class NavButton extends Component {
         onMouseDown={this.props.toggleSidebar}
         onKeyPress={this.props.navKeyPress}
         type="button"
-        aria-label="Venues"
+        aria-label="Show/hide venue sidebar"
         aria-controls="venue-sidebar"
         aria-haspopup="true"
       >

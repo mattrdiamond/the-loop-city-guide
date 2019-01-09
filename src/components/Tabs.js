@@ -26,7 +26,7 @@ class Tabs extends Component {
     } else {
       this.setState({ activeTab: tab });
     }
-  };
+  }
 
   render() {
     const {
@@ -63,7 +63,7 @@ class Tabs extends Component {
         </ul>
 
         {/*--- this div fills with active tab content ---*/}
-        <div className={className}>
+        <div id="tab-content" className={className}>
           {children.map((child) => {
             if (child.props.label !== activeTab) return undefined;
             return child.props.children;

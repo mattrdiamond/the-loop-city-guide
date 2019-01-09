@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import Icon from './Icon';
+import ArrowButton from './ArrowButton';
 
 class Tab extends Component {
   handleOnClick = () => {
     const { label, onClickTabItem } = this.props;
-    // if ((this.props.activeTab = tab)) {
-    //   console.log('close me');
-    // }
     onClickTabItem(label);
   };
 
@@ -16,16 +14,19 @@ class Tab extends Component {
       props: { activeTab, label }
     } = this;
 
-    let className = 'tab-list-item';
+    let tabClass = 'tab-list-item';
+    let arrowClass = 'arrow-button';
 
     if (activeTab === label) {
-      className += ' tab-list-active';
+      tabClass += ' tab-list-active';
+      arrowClass += ' active';
     }
 
     return (
-      <li className={className} onClick={handleOnClick}>
+      <li className={tabClass} onClick={handleOnClick}>
         <Icon icon={label} />
         {label}
+        <ArrowButton arrowClass={arrowClass} />
       </li>
     );
   }
