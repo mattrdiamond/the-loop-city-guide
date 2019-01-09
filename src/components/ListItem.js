@@ -91,11 +91,32 @@ export default class ListItem extends Component {
               )}
 
               {venue.location.address && (
-                <div className="venue-address">
-                  <p>{venue.location.address}</p>
-                  <p>{venue.location.city}</p>
-                </div>
+                <span className="venue-address">
+                  {venue.location.address + ', ' + venue.location.city}
+                </span>
               )}
+
+              <ul className="venue-links">
+                {venue.url && (
+                  <li className="venue-link">
+                    <a href={venue.url}>Website </a>
+                  </li>
+                )}
+                {venue.menu && (
+                  <li className="venue-link">
+                    {venue.url && <span className="venue-bullet"> &#x25CF; </span>}
+                    <a href={venue.menu.url}>Menu</a>
+                  </li>
+                )}
+                {venue.delivery && (
+                  <li className="venue-link">
+                    {(venue.url || venue.menu) && (
+                      <span className="venue-bullet"> &#x25CF; </span>
+                    )}
+                    <a href={venue.delivery.url}>Delivery</a>
+                  </li>
+                )}
+              </ul>
             </div>
 
             {venue.rating && (

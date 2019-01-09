@@ -148,7 +148,18 @@
       .list-item .content-container .info-column .price-inactive {
         color: #e6e6e6; }
       .list-item .content-container .info-column .venue-address {
+        margin-top: 0.5rem;
+        display: block; }
+      .list-item .content-container .info-column .venue-links {
+        list-style-type: none;
         margin-top: 0.5rem; }
+      .list-item .content-container .info-column .venue-link {
+        display: inline; }
+        .list-item .content-container .info-column .venue-link a {
+          text-decoration: none;
+          color: inherit; }
+          .list-item .content-container .info-column .venue-link a:hover {
+            border-bottom: 2px solid #247f9e; }
     .list-item .content-container .rating-column {
       text-align: center;
       width: 40px;
@@ -302,7 +313,7 @@
 .icon-star {
   fill: white;
   display: block;
-  margin: 0 auto; }
+  margin: 0 auto 1px; }
 
 #iw-container {
   display: flex;

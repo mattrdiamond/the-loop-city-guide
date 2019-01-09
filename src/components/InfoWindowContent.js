@@ -1,7 +1,7 @@
 import React from 'react';
 import Icons from '../images/icons.svg';
 
-const InfoWindowContent = ( venue ) => {
+const InfoWindowContent = (venue) => {
   // Include venue icon if available. Otherwise set as empty string
   const venuePhoto = venue.categories[0]
     ? '<img class="iw-photo" src="' +
@@ -42,6 +42,5 @@ const InfoWindowContent = ( venue ) => {
 
   return contentString;
 };
-
 
 export default InfoWindowContent;

@@ -59,6 +59,24 @@
 
       .venue-address {
         margin-top: 0.5rem;
+        display: block;
+      }
+
+      .venue-links {
+        list-style-type: none;
+        margin-top: 0.5rem;
+      }
+
+      .venue-link {
+        display: inline;
+
+        a {
+          text-decoration: none;
+          color: inherit;
+          &:hover {
+            border-bottom: 2px solid $primary;
+          }
+        }
       }
     }
 
