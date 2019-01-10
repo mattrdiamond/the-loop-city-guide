@@ -78,7 +78,7 @@ export default class SideBar extends Component {
           <input
             id="search-input"
             type="text"
-            placeholder="Search"
+            placeholder="Filter"
             onChange={this.handleFilterMarkers}
           />
           <VenueList

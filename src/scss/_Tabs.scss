@@ -16,8 +16,8 @@
     border-top: 1px solid $ui-07;
     // color: $primary;
     cursor: pointer;
-    font-family: $bold;
-    text-transform: uppercase;
+    // font-family: $bold;
+    text-transform: capitalize;
     font-size: 13px;
     display: flex;
     justify-content: center;
@@ -30,29 +30,18 @@
     // }
     &:first-of-type {
       border-right: 1px solid $ui-07;
-      border-radius: 0 0 0 9px;
-      // &:before{
-      //   // background: url('./images/tips.svg') no-repeat;
-      // }
+      // border-radius: 0 0 0 9px;
     }
-    // &:nth-of-type(2) {
-    //   // &:before {
-    //   //   background: url('./images/clock.svg') no-repeat;
-    //   // }
-    // }
     &:last-of-type {
       border-left: 1px solid $ui-07;
-      border-radius: 0 0 9px 0;
-      // &:before {
-      //   // background: url('./images/info.svg') no-repeat;
-      // }
+      // border-radius: 0 0 9px 0;
     }
   }
 
   .tab-list-active {
     border-top: 3px solid $secondary;
     padding-top: 8px;
-    background: $ui-09;
+    // background: $ui-09;
 
     &:first-of-type {
       border-radius: 0;
@@ -62,6 +51,10 @@
     }
   }
 
+  .tab-list-inactive {
+    border-bottom: 1px solid $ui-07;
+  }
+
   .tab-content {
     display: none;
   }
@@ -69,7 +62,7 @@
   .tab-content-active {
     display: block;
     padding: 10px;
-    background: $ui-09;
+    // background: $ui-09;
     border-radius: 0 0 10px 10px;
   }
 }

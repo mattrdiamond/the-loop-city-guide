@@ -17,9 +17,13 @@ class Tab extends Component {
     let tabClass = 'tab-list-item';
     let arrowClass = 'arrow-button';
 
-    if (activeTab === label) {
-      tabClass += ' tab-list-active';
-      arrowClass += ' active';
+    if (activeTab) {
+      if (activeTab === label) {
+        tabClass += ' tab-list-active';
+        arrowClass += ' active';
+      } else {
+        tabClass += ' tab-list-inactive';
+      }
     }
 
     return (

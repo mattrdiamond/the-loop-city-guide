@@ -113,7 +113,7 @@
   align-items: center;
   justify-content: space-around;
   width: 100%;
-  color: gray;
+  color: #4d4d4d;
   border-radius: 10px;
   background: #fff; }
   .list-item:focus {
@@ -137,14 +137,14 @@
         margin-bottom: 3px;
         cursor: pointer; }
       .list-item .content-container .info-column .venue-category {
-        background: #fcf1ee;
-        padding: 2px 8px;
         border-radius: 20px;
+        color: #da3743;
         text-transform: uppercase;
         font-size: 0.8rem;
         margin-top: 14px; }
       .list-item .content-container .info-column .vert-line {
-        margin: 0 0.5rem; }
+        margin: 0 0.5rem;
+        color: #cccccc; }
       .list-item .content-container .info-column .price-inactive {
         color: #e6e6e6; }
       .list-item .content-container .info-column .venue-address {
@@ -159,7 +159,11 @@
           text-decoration: none;
           color: inherit; }
           .list-item .content-container .info-column .venue-link a:hover {
-            border-bottom: 2px solid #247f9e; }
+            text-decoration: underline;
+            color: #247f9e; }
+      .list-item .content-container .info-column .venue-bullet {
+        color: #cccccc;
+        font-size: 0.8rem; }
     .list-item .content-container .rating-column {
       text-align: center;
       width: 40px;
@@ -202,8 +206,7 @@
     padding: 10px;
     border-top: 1px solid #dadbe2;
     cursor: pointer;
-    font-family: "proxima_nova_bold", Helvetica, sans-serif;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-size: 13px;
     display: flex;
     justify-content: center;
@@ -211,25 +214,23 @@
     .venue-tabs .tab-list-item:hover {
       color: #247f9e; }
     .venue-tabs .tab-list-item:first-of-type {
-      border-right: 1px solid #dadbe2;
-      border-radius: 0 0 0 9px; }
+      border-right: 1px solid #dadbe2; }
     .venue-tabs .tab-list-item:last-of-type {
-      border-left: 1px solid #dadbe2;
-      border-radius: 0 0 9px 0; }
+      border-left: 1px solid #dadbe2; }
   .venue-tabs .tab-list-active {
     border-top: 3px solid #da3743;
-    padding-top: 8px;
-    background: #f7f7f9; }
+    padding-top: 8px; }
     .venue-tabs .tab-list-active:first-of-type {
       border-radius: 0; }
     .venue-tabs .tab-list-active::last-of-type {
       border-radius: 0; }
+  .venue-tabs .tab-list-inactive {
+    border-bottom: 1px solid #dadbe2; }
   .venue-tabs .tab-content {
     display: none; }
   .venue-tabs .tab-content-active {
     display: block;
     padding: 10px;
-    background: #f7f7f9;
     border-radius: 0 0 10px 10px; }
 
 .tip {
@@ -281,7 +282,8 @@
   .info-item .attribute-value {
     display: inline; }
   .info-item .attribute-value {
-    float: right; }
+    float: right;
+    margin-left: 10px; }
 
 .load-screen {
   position: fixed;
@@ -308,7 +310,8 @@
 .icon-tips,
 .icon-hours,
 .icon-info {
-  padding-right: 5px; }
+  padding-right: 5px;
+  fill: #b3b3b3; }
 
 .icon-star {
   fill: white;
@@ -343,7 +346,7 @@
   height: 1.25rem;
   display: inline-block;
   position: relative;
-  margin-left: 5px; }
+  margin-left: 10px; }
   .arrow-button span {
     top: 0.5rem;
     position: absolute;

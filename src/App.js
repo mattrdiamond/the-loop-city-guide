@@ -7,7 +7,6 @@ import './App.css';
 import LoadScreen from './components/LoadScreen';
 import InfoWindowContent from './components/InfoWindowContent';
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -44,12 +43,31 @@ class App extends Component {
       .then((results) => {
         const { venues } = results.response;
         const { center } = results.response.geocode.feature.geometry;
+        console.log('results', venues);
+        console.log('center', center);
         this.fetchVenueDetails(venues, center);
         return venues;
       })
       .catch((error) => {
         alert('Error: Failed to fetch Foursquare Venues');
       });
+
+    // FoursquareAPI.getVenueRecommendations({
+    //   near: 'Chicago, IL',
+    //   section: 'food',
+    //   limit: 10
+    // })
+    //   .then((results) => {
+    //     const { items } = results.response.groups[0];
+    //     const { center } = results.response.geocode;
+    //     const venues = items.map((item) => item.venue);
+    //     console.log('venues', venues);
+    //     this.fetchVenueDetails(venues, center);
+    //     return venues;
+    //   })
+    //   .catch((error) => {
+    //     alert('Error: Failed to fetch Foursquare Venues');
+    //   });
   }
 
   fetchVenueDetails(venues, center) {
@@ -117,7 +135,6 @@ class App extends Component {
 
       // Add click event to each marker
       marker.addListener('click', () => {
-
         // Animate marker
         this.toggleBounce(marker);
 
