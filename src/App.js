@@ -35,39 +35,39 @@ class App extends Component {
   componentDidMount() {
     this.setState({ loading: true });
     // fetch restaurant data from Foursquare
-    FoursquareAPI.search({
-      near: 'Chicago, IL',
-      query: 'restaurant',
-      limit: 10
-    })
-      .then((results) => {
-        const { venues } = results.response;
-        const { center } = results.response.geocode.feature.geometry;
-        console.log('results', venues);
-        console.log('center', center);
-        this.fetchVenueDetails(venues, center);
-        return venues;
-      })
-      .catch((error) => {
-        alert('Error: Failed to fetch Foursquare Venues');
-      });
-
-    // FoursquareAPI.getVenueRecommendations({
+    // FoursquareAPI.search({
     //   near: 'Chicago, IL',
-    //   section: 'food',
+    //   query: 'restaurant',
     //   limit: 10
     // })
     //   .then((results) => {
-    //     const { items } = results.response.groups[0];
-    //     const { center } = results.response.geocode;
-    //     const venues = items.map((item) => item.venue);
-    //     console.log('venues', venues);
+    //     const { venues } = results.response;
+    //     const { center } = results.response.geocode.feature.geometry;
+    //     console.log('results', venues);
+    //     console.log('center', center);
     //     this.fetchVenueDetails(venues, center);
     //     return venues;
     //   })
     //   .catch((error) => {
     //     alert('Error: Failed to fetch Foursquare Venues');
     //   });
+
+    FoursquareAPI.getVenueRecommendations({
+      near: 'Chicago, IL',
+      section: 'food',
+      limit: 10
+    })
+      .then((results) => {
+        const { items } = results.response.groups[0];
+        const { center } = results.response.geocode;
+        const venues = items.map((item) => item.venue);
+        console.log('venues', venues);
+        this.fetchVenueDetails(venues, center);
+        return venues;
+      })
+      .catch((error) => {
+        alert('Error: Failed to fetch Foursquare Venues');
+      });
   }
 
   fetchVenueDetails(venues, center) {

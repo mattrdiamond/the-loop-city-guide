@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from './Icon';
 
 const Hours = ({ venue, index }) => {
   const venueHours = venue.hours;
@@ -44,18 +45,19 @@ const Hours = ({ venue, index }) => {
   } else {
     return (
       <div className="hours-unavailable">
-        <p className="unavailable-message">
-          Please contact {venue.name} for hours of operation.
-        </p>
+        <p className="unavailable-message">Please contact {venue.name} for hours.</p>
+
         {venue.url && (
-          <div className="hours-website">
-            <span className="bold">Website: </span>
+          <div className="hours-web">
+            {/*<span className="bold">Website: </span>*/}
+            <Icon icon="globe" />
             <a href="{venue.url}">{venue.url}</a>
           </div>
         )}
         {venue.contact.formattedPhone && (
           <div className="hours-phone">
-            <span className="bold">Phone: </span>
+            <Icon icon="phone" />
+            {/*<span className="bold">Phone number: </span>*/}
             <span>{venue.contact.formattedPhone}</span>
           </div>
         )}

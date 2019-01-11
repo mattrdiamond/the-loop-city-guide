@@ -91,27 +91,43 @@ export default class ListItem extends Component {
               )}
 
               {venue.location.address && (
-                <span className="venue-address">
-                  {venue.location.address + ', ' + venue.location.city}
-                </span>
+                <div className="address-container">
+                  {/*<div className="address-icon">
+                    <Icon icon="marker" />
+                  </div>
+                  <div className="address-location">
+                    <span className="venue-address">{venue.location.address}</span>
+                    <span className="venue-address">
+                      {venue.location.formattedAddress[1]}
+                    </span>
+              </div>*/}
+
+                  <Icon icon="marker" />
+                  <span className="venue-address">
+                    {venue.location.address + ', ' + venue.location.city}
+                  </span>
+
+                  {/*<span className="venue-address">{venue.location.crossStreet}</span>*/}
+                </div>
               )}
 
               <ul className="venue-links">
+                {(venue.url || venue.menu || venue.delivery) && <Icon icon="clock" />}
                 {venue.url && (
                   <li className="venue-link">
-                    <a href={venue.url}>Website </a>
+                    <a href={venue.url}>Website</a>
                   </li>
                 )}
                 {venue.menu && (
                   <li className="venue-link">
-                    {venue.url && <span className="venue-bullet"> &#x25CF; </span>}
+                    {venue.url && <span className="venue-bullet">&#x25CF;</span>}
                     <a href={venue.menu.url}>Menu</a>
                   </li>
                 )}
                 {venue.delivery && (
                   <li className="venue-link">
                     {(venue.url || venue.menu) && (
-                      <span className="venue-bullet"> &#x25CF; </span>
+                      <span className="venue-bullet">&#x25CF;</span>
                     )}
                     <a href={venue.delivery.url}>Delivery</a>
                   </li>

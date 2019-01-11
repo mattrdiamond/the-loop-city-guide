@@ -2,11 +2,18 @@
 .icon-hours,
 .icon-info {
   padding-right: 5px;
-  fill: $black-05;
+  fill: $ui-05;
 }
 
 .icon-star {
   fill: white;
   display: block;
   margin: 0 auto 1px;
+}
+
+.icon-globe,
+.icon-phone {
+  vertical-align: middle;
+  margin-right: 5px;
+  fill: $black-04;
 }

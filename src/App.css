@@ -147,23 +147,26 @@
         color: #cccccc; }
       .list-item .content-container .info-column .price-inactive {
         color: #e6e6e6; }
-      .list-item .content-container .info-column .venue-address {
+      .list-item .content-container .info-column .address-container {
         margin-top: 0.5rem;
-        display: block; }
+        display: flex; }
+        .list-item .content-container .info-column .address-container .icon-marker {
+          position: relative;
+          top: 2px;
+          margin-right: 3px;
+          fill: #9395aa; }
+        .list-item .content-container .info-column .address-container .venue-address {
+          display: block; }
       .list-item .content-container .info-column .venue-links {
         list-style-type: none;
         margin-top: 0.5rem; }
       .list-item .content-container .info-column .venue-link {
         display: inline; }
-        .list-item .content-container .info-column .venue-link a {
-          text-decoration: none;
-          color: inherit; }
-          .list-item .content-container .info-column .venue-link a:hover {
-            text-decoration: underline;
-            color: #247f9e; }
       .list-item .content-container .info-column .venue-bullet {
         color: #cccccc;
-        font-size: 0.8rem; }
+        font-size: 0.8rem;
+        display: inline-block;
+        margin: 0 5px; }
     .list-item .content-container .rating-column {
       text-align: center;
       width: 40px;
@@ -206,26 +209,29 @@
     padding: 10px;
     border-top: 1px solid #dadbe2;
     cursor: pointer;
+    font-weight: bold;
+    color: #247f9e;
     text-transform: capitalize;
     font-size: 13px;
     display: flex;
     justify-content: center;
     align-items: center; }
     .venue-tabs .tab-list-item:hover {
-      color: #247f9e; }
+      color: #247f9e;
+      background: #f7f7f9; }
     .venue-tabs .tab-list-item:first-of-type {
-      border-right: 1px solid #dadbe2; }
+      border-right: 1px solid #dadbe2;
+      border-radius: 0 0 0 9px; }
     .venue-tabs .tab-list-item:last-of-type {
-      border-left: 1px solid #dadbe2; }
-  .venue-tabs .tab-list-active {
-    border-top: 3px solid #da3743;
-    padding-top: 8px; }
-    .venue-tabs .tab-list-active:first-of-type {
+      border-left: 1px solid #dadbe2;
+      border-radius: 0 0 9px 0; }
+    .venue-tabs .tab-list-item.tab-list-active {
+      border-top: 3px solid #da3743;
+      padding-top: 8px;
       border-radius: 0; }
-    .venue-tabs .tab-list-active::last-of-type {
+    .venue-tabs .tab-list-item.tab-list-inactive {
+      border-bottom: 1px solid #dadbe2;
       border-radius: 0; }
-  .venue-tabs .tab-list-inactive {
-    border-bottom: 1px solid #dadbe2; }
   .venue-tabs .tab-content {
     display: none; }
   .venue-tabs .tab-content-active {
@@ -266,8 +272,14 @@
   .table-hours .closed {
     color: #da3743; }
 
-.hours-unavailable .unavailable-message {
-  margin-bottom: 0.5rem; }
+.hours-unavailable {
+  text-align: center; }
+  .hours-unavailable a {
+    color: #247f9e; }
+  .hours-unavailable .unavailable-message {
+    margin-bottom: 0.5rem; }
+  .hours-unavailable .hours-phone {
+    margin-top: 5px; }
 
 .info-item {
   border-bottom: 1px dotted #e6e6e6;
@@ -311,12 +323,18 @@
 .icon-hours,
 .icon-info {
   padding-right: 5px;
-  fill: #b3b3b3; }
+  fill: #b0b1c0; }
 
 .icon-star {
   fill: white;
   display: block;
   margin: 0 auto 1px; }
+
+.icon-globe,
+.icon-phone {
+  vertical-align: middle;
+  margin-right: 5px;
+  fill: #999999; }
 
 #iw-container {
   display: flex;
@@ -346,7 +364,8 @@
   height: 1.25rem;
   display: inline-block;
   position: relative;
-  margin-left: 10px; }
+  margin-left: 10px;
+  top: 2px; }
   .arrow-button span {
     top: 0.5rem;
     position: absolute;
@@ -393,6 +412,13 @@ body {
 
 #map {
   height: 100%; }
+
+a {
+  text-decoration: none;
+  color: inherit; }
+  a:hover {
+    text-decoration: underline;
+    color: #247f9e; }
 
 h2 {
   font-size: 1.23rem;

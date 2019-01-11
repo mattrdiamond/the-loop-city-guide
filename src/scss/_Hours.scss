@@ -23,7 +23,17 @@
 }
 
 .hours-unavailable {
+  text-align: center;
+
+  a {
+    color: $primary;
+  }
+
   .unavailable-message {
     margin-bottom: 0.5rem;
+  }
+
+  .hours-phone {
+    margin-top: 5px;
   }
 }

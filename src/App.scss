@@ -47,6 +47,15 @@ body {
   height: 100%;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    text-decoration: underline;
+    color: $primary;
+  }
+}
+
 h2 {
   font-size: 1.23rem;
   font-family: $bold;

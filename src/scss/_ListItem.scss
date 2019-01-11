@@ -57,9 +57,20 @@
         color: $black-07;
       }
 
-      .venue-address {
+      .address-container {
         margin-top: 0.5rem;
-        display: block;
+        display: flex;
+
+        .icon-marker {
+          position: relative;
+          top: 2px;
+          margin-right: 3px;
+          fill: $ui-04;
+        }
+
+        .venue-address {
+          display: block;
+        }
       }
 
       .venue-links {
@@ -69,21 +80,13 @@
 
       .venue-link {
         display: inline;
-
-        a {
-          text-decoration: none;
-          color: inherit;
-          &:hover {
-            // border-bottom: 2px solid $primary;
-            text-decoration: underline;
-            color: $primary;
-          }
-        }
       }
 
       .venue-bullet {
         color: $black-06;
         font-size: 0.8rem;
+        display: inline-block;
+        margin: 0 5px;
       }
     }
 
