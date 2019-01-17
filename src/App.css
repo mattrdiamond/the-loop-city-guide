@@ -140,7 +140,7 @@
         border-radius: 20px;
         color: #da3743;
         text-transform: uppercase;
-        font-size: 0.9rem;
+        font-size: 0.92rem;
         margin-top: 14px;
         letter-spacing: 0.7px; }
       .list-item .content-container .info-column .vert-line {
@@ -200,7 +200,9 @@
     font-size: 13px;
     display: flex;
     justify-content: center;
-    align-items: center; }
+    align-items: center;
+    font-family: "proxima_nova_semibold", Helvetica, sans-serif;
+    color: #666666; }
     .venue-tabs .tab-list-item:hover {
       background: #f7f7f9; }
     .venue-tabs .tab-list-item:first-of-type {
@@ -244,19 +246,32 @@
   .tip .tip-quote {
     margin-bottom: 0.25rem; }
   .tip .user-name {
-    font-size: 0.8rem;
-    color: #b3b3b3;
-    text-transform: uppercase; }
+    font-size: 0.9rem;
+    color: #999999;
+    text-transform: uppercase;
+    font-family: "proxima_nova_semibold", Helvetica, sans-serif; }
   .tip .user-date {
-    float: right; }
+    float: right;
+    color: #cccccc;
+    font-family: "proxima_nova_regular", Helvetica, sans-serif; }
 
 .table-hours {
   width: 100%;
-  border-collapse: collapse; }
+  border-collapse: collapse;
+  margin-bottom: -0.4rem; }
+  .table-hours tr {
+    height: 2.5rem; }
+  .table-hours tbody {
+    border-bottom: 1px dotted #dadbe2; }
+    .table-hours tbody:last-of-type {
+      border-bottom: none; }
+      .table-hours tbody:last-of-type tr {
+        margin-bottom: -1rem; }
+  .table-hours th {
+    padding-left: 8px; }
   .table-hours th,
   .table-hours .hours {
-    width: 33.3%;
-    padding-bottom: 8px; }
+    width: 33.3%; }
   .table-hours .open,
   .table-hours .closed {
     font-family: "proxima_nova_bold", Helvetica, sans-serif; }
@@ -364,7 +379,7 @@
   display: inline-block;
   position: relative;
   margin-left: 9px;
-  top: 0.2rem; }
+  top: 0.16rem; }
   .arrow-button span {
     top: 0.5rem;
     position: absolute;
@@ -426,6 +441,9 @@ h2 {
   color: #247f9e;
   letter-spacing: 0.4px;
   line-height: 1.2;
+  font-weight: normal; }
+
+th {
   font-weight: normal; }
 
 .bold {

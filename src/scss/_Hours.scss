@@ -1,11 +1,32 @@
 .table-hours {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: -0.4rem;
+
+  tr {
+    height: 2.5rem;
+  }
+
+  tbody {
+    border-bottom: 1px dotted $ui-07;
+    &:last-of-type {
+      // border-bottom: 1px solid transparent;
+      border-bottom: none;
+
+      tr {
+        margin-bottom: -1rem;
+      }
+    }
+  }
+
+  th {
+    padding-left: 8px;
+  }
 
   th,
   .hours {
     width: 33.3%;
-    padding-bottom: 8px;
+    // padding-bottom: 8px;
   }
 
   .open,

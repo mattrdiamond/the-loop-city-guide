@@ -18,7 +18,21 @@ const Hours = ({ venue, index }) => {
                 {timeframe.open[0].renderedTime}
               </td>
 
-              {timeframe.includesToday &&
+              {/* if timeframe includes today, display open status, otherwise add empty cell so border-bottom is visible*/}
+              {timeframe.includesToday ? (
+                venueHours.isOpen ? (
+                  <td key={`isOpen`} className="open">
+                    Open now
+                  </td>
+                ) : (
+                  <td key={`isClosed`} className="closed">
+                    Closed now
+                  </td>
+                )
+              ) : (
+                <td>&nbsp;</td>
+              )}
+              {/*{timeframe.includesToday &&
                 (venueHours.isOpen ? (
                   <td key={`isOpen`} className="open">
                     Open now
@@ -27,8 +41,9 @@ const Hours = ({ venue, index }) => {
                   <td key={`isClosed`} className="closed">
                     Closed now
                   </td>
-                ))}
+                ))}*/}
             </tr>
+
             {/* if venue hours contains second time segment add new row */}
             {timeframe.open.length > 1 &&
               timeframe.open

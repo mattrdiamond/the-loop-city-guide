@@ -22,12 +22,15 @@
 
   .user-name {
     // margin-bottom: $unit;
-    font-size: 0.8rem;
-    color: $black-05;
+    font-size: 0.9rem;
+    color: $black-04;
     text-transform: uppercase;
+    font-family: $semibold;
   }
 
   .user-date {
     float: right;
+    color: $black-06;
+    font-family: $roman;
   }
 }

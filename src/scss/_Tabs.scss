@@ -24,6 +24,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: $semibold;
+    color: $black-02;
     &:hover {
       background: $ui-09;
       // background: red;
