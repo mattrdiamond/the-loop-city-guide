@@ -1,6 +1,6 @@
 .venue-tabs {
   margin-top: 10px;
-  margin: 10px -10px 0;
+  margin: 13px -13px 0;
 
   .tab-list {
     display: flex;
@@ -12,21 +12,21 @@
   .tab-list-item {
     width: 100%;
     text-align: center;
-    padding: 10px;
+    // padding: 10px;
+    padding: 0.85rem 0 0.95rem;
     border-top: 1px solid $ui-07;
     // color: $primary;
     cursor: pointer;
     // font-family: $bold;
-    font-weight: bold;
-    color: $primary;
+    // color: $primary;
     text-transform: capitalize;
     font-size: 13px;
     display: flex;
     justify-content: center;
     align-items: center;
     &:hover {
-      color: $primary;
       background: $ui-09;
+      // background: red;
     }
     // &:hover .icon-tips {
     //   fill: $primary
@@ -41,9 +41,13 @@
     }
 
     &.tab-list-active {
-      border-top: 3px solid $secondary;
+      border-top: 3px solid $primary;
       padding-top: 8px;
       border-radius: 0;
+      color: $primary;
+      &:hover {
+        background: inherit;
+      }
       // background: $ui-09;
 
       // &:first-of-type {
@@ -52,12 +56,28 @@
       // &:last-of-type {
       //   border-radius: 0;
       // }
+      .icon {
+        fill: $primary;
+      }
     }
 
     &.tab-list-inactive {
       border-bottom: 1px solid $ui-07;
       border-radius: 0;
     }
+
+    // .icon-tips {
+    //   top: 1px;
+    //   position: relative;
+    // }
+
+    // .icon-hours {
+    //   top: 2px;
+    // }
+
+    // .icon-info {
+    //   top: 3px;
+    // }
   }
 
   .tab-content {
@@ -66,7 +86,7 @@
 
   .tab-content-active {
     display: block;
-    padding: 10px;
+    padding: 1rem;
     // background: $ui-09;
     border-radius: 0 0 10px 10px;
   }

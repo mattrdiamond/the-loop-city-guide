@@ -3,6 +3,7 @@ import Icon from './Icon';
 
 const Hours = ({ venue, index }) => {
   const venueHours = venue.hours;
+  const formatUrl = (url) => url.replace('http://', '');
 
   if (venueHours) {
     return (
@@ -45,20 +46,25 @@ const Hours = ({ venue, index }) => {
   } else {
     return (
       <div className="hours-unavailable">
-        <p className="unavailable-message">Please contact {venue.name} for hours.</p>
-
+        <p className="unavailable-message">
+          {`We're sorry, no hours have been reported for this venue. Please contact ${
+            venue.name
+          } for hours.`}
+        </p>
         {venue.url && (
-          <div className="hours-web">
-            {/*<span className="bold">Website: </span>*/}
+          <div className="hours-web info-item">
             <Icon icon="globe" />
-            <a href="{venue.url}">{venue.url}</a>
+            <span className="attribute-key">Website</span>
+            <a className="attribute-value" href={venue.url}>
+              {formatUrl(venue.url)}
+            </a>
           </div>
         )}
         {venue.contact.formattedPhone && (
-          <div className="hours-phone">
+          <div className="hours-phone info-item">
             <Icon icon="phone" />
-            {/*<span className="bold">Phone number: </span>*/}
-            <span>{venue.contact.formattedPhone}</span>
+            <span className="attribute-key">Phone</span>
+            <span className="attribute-value">{venue.contact.formattedPhone}</span>
           </div>
         )}
       </div>

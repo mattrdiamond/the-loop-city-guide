@@ -1,6 +1,10 @@
 .icon-tips,
 .icon-hours,
-.icon-info {
+.icon-info,
+.icon-globe,
+.icon-phone,
+.icon-link,
+.icon-marker {
   padding-right: 5px;
   fill: $ui-05;
 }
@@ -14,6 +18,4 @@
 .icon-globe,
 .icon-phone {
   vertical-align: middle;
-  margin-right: 5px;
-  fill: $black-04;
 }

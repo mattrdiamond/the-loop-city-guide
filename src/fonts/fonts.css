@@ -15,3 +15,11 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'proxima_nova_semibold';
+  src: url('proximanova-semibold-webfont.woff2') format('woff2'),
+    url('proximanova-semibold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

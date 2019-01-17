@@ -34,7 +34,7 @@
     border-radius: 3rem;
     font-family: "proxima_nova_regular", Helvetica, sans-serif; }
     #venue-sidebar #search-input:focus {
-      box-shadow: 0 2px 9px 0 rgba(50, 51, 63, 0.28);
+      box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.25);
       outline: none; }
   #venue-sidebar.visible {
     left: 0; }
@@ -117,11 +117,11 @@
   border-radius: 10px;
   background: #fff; }
   .list-item:focus {
-    box-shadow: 0 0 0 1px #da3743;
+    box-shadow: 0 2px 11px 0 rgba(0, 0, 0, 0.3);
     outline: none; }
   .list-item .content-container {
     width: 100%;
-    padding: 10px 10px 0; }
+    padding: 1rem 1rem 0; }
     .list-item .content-container .content-inner-wrapper {
       display: flex; }
     .list-item .content-container .venue-image {
@@ -131,7 +131,7 @@
       width: 100px;
       cursor: pointer; }
     .list-item .content-container .info-column {
-      padding-right: 5px;
+      padding-right: 10px;
       max-width: 211px; }
       .list-item .content-container .info-column .venue-name {
         margin-bottom: 3px;
@@ -140,33 +140,20 @@
         border-radius: 20px;
         color: #da3743;
         text-transform: uppercase;
-        font-size: 0.8rem;
-        margin-top: 14px; }
+        font-size: 0.9rem;
+        margin-top: 14px;
+        letter-spacing: 0.7px; }
       .list-item .content-container .info-column .vert-line {
         margin: 0 0.5rem;
         color: #cccccc; }
+      .list-item .content-container .info-column .venue-price {
+        font-size: 0.95rem; }
       .list-item .content-container .info-column .price-inactive {
         color: #e6e6e6; }
       .list-item .content-container .info-column .address-container {
-        margin-top: 0.5rem;
-        display: flex; }
-        .list-item .content-container .info-column .address-container .icon-marker {
-          position: relative;
-          top: 2px;
-          margin-right: 3px;
-          fill: #9395aa; }
+        margin-top: 0.5rem; }
         .list-item .content-container .info-column .address-container .venue-address {
           display: block; }
-      .list-item .content-container .info-column .venue-links {
-        list-style-type: none;
-        margin-top: 0.5rem; }
-      .list-item .content-container .info-column .venue-link {
-        display: inline; }
-      .list-item .content-container .info-column .venue-bullet {
-        color: #cccccc;
-        font-size: 0.8rem;
-        display: inline-block;
-        margin: 0 5px; }
     .list-item .content-container .rating-column {
       text-align: center;
       width: 40px;
@@ -177,7 +164,7 @@
       background: #da3743;
       color: white;
       margin-left: auto;
-      margin-top: -10px;
+      margin-top: -13px;
       display: flex;
       justify-content: center; }
       .list-item .content-container .rating-column:after {
@@ -197,7 +184,7 @@
 
 .venue-tabs {
   margin-top: 10px;
-  margin: 10px -10px 0; }
+  margin: 13px -13px 0; }
   .venue-tabs .tab-list {
     display: flex;
     width: 100%;
@@ -206,18 +193,15 @@
   .venue-tabs .tab-list-item {
     width: 100%;
     text-align: center;
-    padding: 10px;
+    padding: 0.85rem 0 0.95rem;
     border-top: 1px solid #dadbe2;
     cursor: pointer;
-    font-weight: bold;
-    color: #247f9e;
     text-transform: capitalize;
     font-size: 13px;
     display: flex;
     justify-content: center;
     align-items: center; }
     .venue-tabs .tab-list-item:hover {
-      color: #247f9e;
       background: #f7f7f9; }
     .venue-tabs .tab-list-item:first-of-type {
       border-right: 1px solid #dadbe2;
@@ -226,9 +210,14 @@
       border-left: 1px solid #dadbe2;
       border-radius: 0 0 9px 0; }
     .venue-tabs .tab-list-item.tab-list-active {
-      border-top: 3px solid #da3743;
+      border-top: 3px solid #247f9e;
       padding-top: 8px;
-      border-radius: 0; }
+      border-radius: 0;
+      color: #247f9e; }
+      .venue-tabs .tab-list-item.tab-list-active:hover {
+        background: inherit; }
+      .venue-tabs .tab-list-item.tab-list-active .icon {
+        fill: #247f9e; }
     .venue-tabs .tab-list-item.tab-list-inactive {
       border-bottom: 1px solid #dadbe2;
       border-radius: 0; }
@@ -236,26 +225,30 @@
     display: none; }
   .venue-tabs .tab-content-active {
     display: block;
-    padding: 10px;
+    padding: 1rem;
     border-radius: 0 0 10px 10px; }
 
 .tip {
   display: flex; }
   .tip:first-of-type {
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #dadbe2; }
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dotted #dadbe2; }
   .tip .tip-photo {
     border-radius: 50px;
-    margin-right: 10px;
-    margin-top: 10px;
+    margin-right: 1rem;
+    margin-top: 5px;
     height: 50px; }
+  .tip .tip-text {
+    width: 100%; }
+  .tip .tip-quote {
+    margin-bottom: 0.25rem; }
   .tip .user-name {
-    margin-bottom: 10px;
-    font-size: 10px;
+    font-size: 0.8rem;
     color: #b3b3b3;
-    text-transform: uppercase;
-    font-weight: bold; }
+    text-transform: uppercase; }
+  .tip .user-date {
+    float: right; }
 
 .table-hours {
   width: 100%;
@@ -272,17 +265,21 @@
   .table-hours .closed {
     color: #da3743; }
 
-.hours-unavailable {
-  text-align: center; }
-  .hours-unavailable a {
-    color: #247f9e; }
-  .hours-unavailable .unavailable-message {
-    margin-bottom: 0.5rem; }
-  .hours-unavailable .hours-phone {
-    margin-top: 5px; }
+.hours-unavailable a {
+  color: #247f9e;
+  float: right; }
+
+.hours-unavailable .unavailable-message {
+  margin-bottom: 1rem; }
+
+.hours-unavailable .icon-phone,
+.hours-unavailable .icon-globe {
+  position: relative;
+  top: -1px;
+  width: 14px; }
 
 .info-item {
-  border-bottom: 1px dotted #e6e6e6;
+  border-bottom: 1px dotted #dadbe2;
   padding: 8px;
   margin: 0; }
   .info-item:first-of-type {
@@ -321,7 +318,11 @@
 
 .icon-tips,
 .icon-hours,
-.icon-info {
+.icon-info,
+.icon-globe,
+.icon-phone,
+.icon-link,
+.icon-marker {
   padding-right: 5px;
   fill: #b0b1c0; }
 
@@ -332,9 +333,7 @@
 
 .icon-globe,
 .icon-phone {
-  vertical-align: middle;
-  margin-right: 5px;
-  fill: #999999; }
+  vertical-align: middle; }
 
 #iw-container {
   display: flex;
@@ -360,30 +359,31 @@
     fill: #9395aa; }
 
 .arrow-button {
-  width: 1.25rem;
+  width: 1.05rem;
   height: 1.25rem;
   display: inline-block;
   position: relative;
-  margin-left: 10px;
-  top: 2px; }
+  margin-left: 9px;
+  top: 0.2rem; }
   .arrow-button span {
     top: 0.5rem;
     position: absolute;
-    width: 0.75rem;
-    height: 0.1rem;
-    background-color: #b0b1c0;
+    width: 0.65rem;
+    height: 0.12rem;
+    background-color: #cccdd7;
     display: inline-block;
-    transition: all 0.2s ease; }
+    transition: all 0.2s ease;
+    border-radius: 5px; }
     .arrow-button span:first-of-type {
       left: 0;
-      transform: rotate(45deg); }
+      transform: rotate(40deg); }
     .arrow-button span:last-of-type {
       right: 0;
-      transform: rotate(-45deg); }
+      transform: rotate(-40deg); }
   .arrow-button.active span:first-of-type {
-    transform: rotate(-45deg); }
+    transform: rotate(-40deg); }
   .arrow-button.active span:last-of-type {
-    transform: rotate(45deg); }
+    transform: rotate(40deg); }
 
 html {
   height: 100%;
@@ -421,10 +421,10 @@ a {
     color: #247f9e; }
 
 h2 {
-  font-size: 1.23rem;
+  font-size: 1.25rem;
   font-family: "proxima_nova_bold", Helvetica, sans-serif;
   color: #247f9e;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   line-height: 1.2;
   font-weight: normal; }
 

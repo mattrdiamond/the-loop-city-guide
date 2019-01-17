@@ -25,6 +25,14 @@ export default class ListItem extends Component {
     }
     return formattedPrice;
   }
+
+  formatCategory(category) {
+    // if (category.includes("restaurant") )
+    const removeRestaurant = category.toLowerCase().replace('restaurant', '');
+    console.log('category', category);
+    console.log('removed', removeRestaurant)
+    return removeRestaurant;
+  }
   // getVenuePhoto(venue) {
   //   let venueImage;
   //   if (venue.bestPhoto) {
@@ -79,7 +87,8 @@ export default class ListItem extends Component {
 
               {venue.categories[0] && (
                 <span className="venue-info">
-                  <span className="venue-category">{venue.categories[0].name}</span>
+                  {/*<span className="venue-category">{venue.categories[0].name}</span>*/}
+                  <span className="venue-category">{this.formatCategory(venue.categories[0].name)}</span>
                   <span className="vert-line">|</span>
                 </span>
               )}
@@ -92,6 +101,8 @@ export default class ListItem extends Component {
 
               {venue.location.address && (
                 <div className="address-container">
+                  <span className="venue-address">{venue.location.address}</span>
+                  <span className="venue-address">{venue.location.formattedAddress[1]}</span>
                   {/*<div className="address-icon">
                     <Icon icon="marker" />
                   </div>
@@ -102,17 +113,17 @@ export default class ListItem extends Component {
                     </span>
               </div>*/}
 
-                  <Icon icon="marker" />
+                  {/*<Icon icon="marker" />
                   <span className="venue-address">
                     {venue.location.address + ', ' + venue.location.city}
-                  </span>
+            </span>*/}
 
                   {/*<span className="venue-address">{venue.location.crossStreet}</span>*/}
                 </div>
               )}
 
-              <ul className="venue-links">
-                {(venue.url || venue.menu || venue.delivery) && <Icon icon="clock" />}
+              {/*<ul className="venue-links">
+                {(venue.url || venue.menu || venue.delivery) && <Icon icon="link" />}
                 {venue.url && (
                   <li className="venue-link">
                     <a href={venue.url}>Website</a>
@@ -132,7 +143,7 @@ export default class ListItem extends Component {
                     <a href={venue.delivery.url}>Delivery</a>
                   </li>
                 )}
-              </ul>
+                    </ul>*/}
             </div>
 
             {venue.rating && (

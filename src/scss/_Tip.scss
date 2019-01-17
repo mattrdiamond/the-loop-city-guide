@@ -1,27 +1,33 @@
 .tip {
   display: flex;
   &:first-of-type {
-    margin-bottom: $unit;
-    padding-bottom: $unit;
-    border-bottom: 1px solid $ui-07;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dotted $ui-07;
   }
 
   .tip-photo {
     border-radius: 50px;
-    margin-right: $unit;
-    margin-top: 10px;
+    margin-right: 1rem;
+    margin-top: 5px;
     height: 50px;
   }
 
-  .user-name {
-    margin-bottom: $unit;
-    font-size: 10px;
-    color: $black-05;
-    text-transform: uppercase;
-    font-weight: bold;
+  .tip-text {
+    width: 100%;
+  }
+  .tip-quote {
+    margin-bottom: 0.25rem;
   }
 
-  .tip-quote {
-    // margin-top: 10px;
+  .user-name {
+    // margin-bottom: $unit;
+    font-size: 0.8rem;
+    color: $black-05;
+    text-transform: uppercase;
+  }
+
+  .user-date {
+    float: right;
   }
 }

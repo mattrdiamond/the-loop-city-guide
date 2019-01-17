@@ -1,7 +1,6 @@
 import React from 'react';
 import Icons from '../images/icons.svg';
 
-
 // const Icon = (props) => (
 //   <svg
 //     className={`icon icon-${props.icon}`}

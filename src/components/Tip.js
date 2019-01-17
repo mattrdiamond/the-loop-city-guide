@@ -2,13 +2,13 @@
 import React from 'react';
 
 const Tip = ({ venue, index }) => {
-  // const formatDate = (secs) => {
-  //   let date = new Date(null);
-  //   date.setTime(secs * 1000);
-  //   const dateString = date.toLocaleString();
-  //   date = dateString.substr(0, dateString.lastIndexOf(','));
-  //   return date;
-  // };
+  const formatDate = (secs) => {
+    let date = new Date(null);
+    date.setTime(secs * 1000);
+    const dateString = date.toLocaleString();
+    date = dateString.substr(0, dateString.lastIndexOf(','));
+    return date;
+  };
 
   let users = venue.tips.groups[0].items;
 
@@ -25,7 +25,7 @@ const Tip = ({ venue, index }) => {
         {user.user.lastName && (
           <span className="user-name">{' ' + user.user.lastName}</span>
         )}
-        {/*<span>{formatDate(user.createdAt)}</span>*/}
+        <span className="user-name user-date">{formatDate(user.createdAt)}</span>
       </div>
     </li>
   ));
