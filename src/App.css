@@ -22,8 +22,7 @@
   position: absolute;
   overflow: auto;
   transition: all 0.5s ease;
-  box-shadow: 1px 0px 5px #b3b3b3;
-  background: #e9e9ed; }
+  background: #e3e3e9; }
   #venue-sidebar #search-input {
     padding: 10px;
     height: 3rem;
@@ -201,8 +200,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "proxima_nova_semibold", Helvetica, sans-serif;
-    color: #666666; }
+    font-family: "proxima_nova_semibold", Helvetica, sans-serif; }
     .venue-tabs .tab-list-item:hover {
       background: #f7f7f9; }
     .venue-tabs .tab-list-item:first-of-type {
@@ -246,14 +244,12 @@
   .tip .tip-quote {
     margin-bottom: 0.25rem; }
   .tip .user-name {
-    font-size: 0.9rem;
-    color: #999999;
-    text-transform: uppercase;
     font-family: "proxima_nova_semibold", Helvetica, sans-serif; }
   .tip .user-date {
     float: right;
-    color: #cccccc;
-    font-family: "proxima_nova_regular", Helvetica, sans-serif; }
+    color: #b3b3b3;
+    font-family: "proxima_nova_regular", Helvetica, sans-serif;
+    font-size: 0.9rem; }
 
 .table-hours {
   width: 100%;

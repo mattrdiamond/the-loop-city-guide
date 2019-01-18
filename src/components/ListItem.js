@@ -28,7 +28,7 @@ export default class ListItem extends Component {
 
   formatCategory(category) {
     // if (category.includes("restaurant") )
-    const removeRestaurant = category.toLowerCase().replace('restaurant', '');
+    const removeRestaurant = category.toLowerCase().replace(' restaurant', '');
     console.log('category', category);
     console.log('removed', removeRestaurant)
     return removeRestaurant;
