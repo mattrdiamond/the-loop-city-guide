@@ -1,17 +1,24 @@
 #venue-sidebar {
   width: 415px;
-  height: $height-minus-navbar;
+  // height: $height-minus-navbar;
+  height: 100%;
   background: $white;
   z-index: 4;
   font-size: 1rem;
-  padding: 1rem;
+  // padding: 1rem;
   box-sizing: border-box;
   // left: -415px;
   position: absolute;
-  overflow: auto;
+
   transition: all 0.5s ease;
   // box-shadow: 1px 0px 5px $black-05;
   background: $ui-08;
+
+  .sidebar-wrapper {
+    padding: 1rem;
+    overflow: auto;
+    height: $height-minus-navbar;
+  }
 
   #search-input {
     padding: $unit;

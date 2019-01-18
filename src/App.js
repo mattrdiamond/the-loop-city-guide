@@ -229,11 +229,11 @@ class App extends Component {
     return (
       <div id="app-container">
         {this.state.loading && <LoadScreen />}
-        <NavBar
+        {/*<NavBar
           toggleSidebar={this.toggleSidebar}
           sidebarOpen={this.state.sidebarOpen}
           navKeyPress={this.navKeyPress}
-        />
+        />*/}
         <SideBar
           handleListItemClick={this.handleListItemClick}
           venues={this.state.venues}
@@ -243,6 +243,9 @@ class App extends Component {
           sidebarOpen={this.state.sidebarOpen}
           updateMapBounds={this.updateMapBounds}
           listItemKeyPress={this.listItemKeyPress}
+          toggleSidebar={this.toggleSidebar}
+          sidebarOpen={this.state.sidebarOpen}
+          navKeyPress={this.navKeyPress}
         />
         <Map
           {...this.state}

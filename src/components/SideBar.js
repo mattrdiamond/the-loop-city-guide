@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import VenueList from './VenueList';
+import NavBar from './NavBar';
 
 export default class SideBar extends Component {
   constructor() {
     super();
     this.state = {
       query: '',
-      previousMarkers: []
+      previousMarkers: [],
     };
   }
 
@@ -64,6 +65,7 @@ export default class SideBar extends Component {
     this.setState({ previousMarkers: visibleMarkers });
   }
 
+
   render() {
     let sidebarVisibility = 'hidden';
 
@@ -73,13 +75,19 @@ export default class SideBar extends Component {
 
     return (
       <div id="venue-sidebar" className={sidebarVisibility}>
+        <NavBar
+          toggleSidebar={this.props.toggleSidebar}
+          sidebarOpen={this.props.sidebarOpen}
+          navKeyPress={this.props.navKeyPress}
+          handleFilterMarkers={this.handleFilterMarkers}
+        />
         <div className="sidebar-wrapper">
-          <input
+          {/*<input
             id="search-input"
             type="text"
             placeholder="Filter"
             onChange={this.handleFilterMarkers}
-          />
+          />*/}
           <VenueList
             handleListItemClick={this.props.handleListItemClick}
             listItemKeyPress={this.props.listItemKeyPress}
