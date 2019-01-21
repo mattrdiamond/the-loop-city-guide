@@ -50,10 +50,11 @@
   background: #fff;
   z-index: 4;
   font-size: 1rem;
-  box-sizing: border-box;
-  position: absolute;
   display: flex;
   flex-direction: column;
+  position: absolute;
+  position: fixed;
+  overflow: auto;
   transition: all 0.5s ease;
   background: #e3e3e9; }
   #venue-sidebar .sidebar-wrapper {
@@ -464,7 +465,8 @@ main {
   width: 100%; }
 
 main {
-  height: 100%; }
+  height: 100%;
+  padding-left: 415px; }
 
 body,
 #root,

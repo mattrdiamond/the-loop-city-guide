@@ -35,7 +35,7 @@ class NavBar extends Component {
             <input
               id="search-input"
               type="text"
-              placeholder="Filter"
+              placeholder="Search"
               onChange={this.props.handleFilterMarkers}
             />
             <span className="input-caption">Type to filter venues</span>
