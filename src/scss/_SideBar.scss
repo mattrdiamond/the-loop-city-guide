@@ -9,6 +9,8 @@
   box-sizing: border-box;
   // left: -415px;
   position: absolute;
+  display: flex;
+  flex-direction: column;
 
   transition: all 0.5s ease;
   // box-shadow: 1px 0px 5px $black-05;
@@ -17,26 +19,27 @@
   .sidebar-wrapper {
     padding: 1rem;
     overflow: auto;
-    height: $height-minus-navbar;
+    // height: $height-minus-navbar;
+    flex-grow: 1;
   }
 
-  #search-input {
-    padding: $unit;
-    height: 3rem;
-    width: 100%;
-    font-size: 1rem;
-    box-sizing: border-box;
-    border: none;
-    border-radius: 3rem;
-    font-family: $roman;
-    &:focus {
-      box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.25);
-      outline: none;
-    }
-  }
-  &.visible {
-    left: 0;
-  }
+  // #search-input {
+  //   padding: $unit;
+  //   height: 3rem;
+  //   width: 100%;
+  //   font-size: 1rem;
+  //   box-sizing: border-box;
+  //   border: none;
+  //   border-radius: 3rem;
+  //   font-family: $roman;
+  //   &:focus {
+  //     box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.25);
+  //     outline: none;
+  //   }
+  // }
+  // &.visible {
+  //   left: 0;
+  // }
 
   .attribution {
     color: $ui-04;

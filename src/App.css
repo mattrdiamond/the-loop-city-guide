@@ -1,13 +1,46 @@
 #navbar {
-  grid-column-start: 1;
-  grid-column-end: 3;
-  background: #32333f;
+  background: #247f9e;
   color: white;
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  box-sizing: border-box;
-  height: 50px; }
+  padding: 1rem; }
+  #navbar .nav-top {
+    display: flex;
+    justify-content: space-between; }
+  #navbar .input-container {
+    height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out; }
+    #navbar .input-container.visible {
+      height: 80px; }
+  #navbar #search-input {
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 1rem;
+    height: 3rem;
+    width: 100%;
+    border: none;
+    background: none;
+    color: white;
+    border-bottom: 1px solid white;
+    font-size: 1.4rem;
+    font-family: "proxima_nova_bold", Helvetica, sans-serif; }
+    #navbar #search-input:focus {
+      outline: none; }
+  #navbar ::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    opacity: 1;
+    /* Firefox */ }
+  #navbar :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgba(255, 255, 255, 0.4); }
+  #navbar ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: rgba(255, 255, 255, 0.4); }
+  #navbar .input-caption {
+    color: rgba(255, 255, 255, 0.4);
+    padding-top: 0.5rem;
+    font-size: 0.9rem;
+    display: block;
+    letter-spacing: 0.4px; }
   #navbar h1 {
     margin: 0 auto; }
 
@@ -19,26 +52,14 @@
   font-size: 1rem;
   box-sizing: border-box;
   position: absolute;
+  display: flex;
+  flex-direction: column;
   transition: all 0.5s ease;
   background: #e3e3e9; }
   #venue-sidebar .sidebar-wrapper {
     padding: 1rem;
     overflow: auto;
-    height: calc(100% - 76px); }
-  #venue-sidebar #search-input {
-    padding: 10px;
-    height: 3rem;
-    width: 100%;
-    font-size: 1rem;
-    box-sizing: border-box;
-    border: none;
-    border-radius: 3rem;
-    font-family: "proxima_nova_regular", Helvetica, sans-serif; }
-    #venue-sidebar #search-input:focus {
-      box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.25);
-      outline: none; }
-  #venue-sidebar.visible {
-    left: 0; }
+    flex-grow: 1; }
   #venue-sidebar .attribution {
     color: #9395aa;
     font-size: 0.6rem;
@@ -57,7 +78,13 @@
   text-transform: none;
   border: 0;
   background-color: transparent;
-  padding: 0; }
+  padding: 0;
+  opacity: 0.6; }
+  .hamburger--vortex:focus {
+    outline: none;
+    opacity: 1; }
+  .hamburger--vortex:hover {
+    opacity: 1; }
   .hamburger--vortex .hamburger-box {
     position: relative;
     display: inline-block;
@@ -68,14 +95,14 @@
     .hamburger--vortex .hamburger-box .hamburger-inner:before {
       position: absolute;
       width: 30px;
-      height: 3px;
+      height: 2px;
       transition-timing-function: ease;
       transition-duration: 0.15s;
       transition-property: transform;
       border-radius: 4px;
-      background-color: #777993; }
+      background-color: white; }
     .hamburger--vortex .hamburger-box:hover {
-      opacity: 0.7; }
+      opacity: 1; }
     .hamburger--vortex .hamburger-box .hamburger-inner {
       transition-duration: 0.2s;
       transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
@@ -118,8 +145,10 @@
   border-radius: 10px;
   background: #fff; }
   .list-item:focus {
-    box-shadow: 0 2px 11px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.2);
     outline: none; }
+  .list-item:first-of-type {
+    margin-top: 0; }
   .list-item .content-container {
     width: 100%;
     padding: 1rem 1rem 0; }
@@ -398,12 +427,36 @@
   .arrow-button.active span:last-of-type {
     transform: rotate(40deg); }
 
+#search-button {
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-family: "proxima_nova_regular", Helvetica, sans-serif;
+  cursor: pointer;
+  padding: 0 1rem;
+  border-radius: 20px;
+  transition: background 0.5s ease; }
+  #search-button:hover {
+    background: rgba(0, 0, 0, 0.1); }
+  #search-button:focus {
+    background: rgba(0, 0, 0, 0.1);
+    outline: none; }
+  #search-button .icon-search {
+    margin-left: 5px;
+    fill: rgba(255, 255, 255, 0.6); }
+
 html {
   height: 100%;
   font-size: 13px;
   font-family: 'proxima_nova_regular', Helvetica, sans-serif;
   letter-spacing: 0.4px;
   color: #32333f; }
+
+button,
+input {
+  letter-spacing: 0.4px; }
 
 #root,
 #app-container,

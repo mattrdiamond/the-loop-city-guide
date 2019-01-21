@@ -1,0 +1,25 @@
+#search-button {
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-family: $roman;
+  cursor: pointer;
+  // padding-left: 20px;
+  padding: 0 1rem;
+  border-radius: 20px;
+  transition: background 0.5s ease;
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  &:focus {
+    background: rgba(0, 0, 0, 0.1);
+    outline: none;
+  }
+
+  .icon-search {
+    margin-left: 5px;
+    fill: rgba(255, 255, 255, 0.6);
+  }
+}
