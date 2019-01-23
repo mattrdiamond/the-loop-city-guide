@@ -31,7 +31,7 @@ class Map extends Component {
 
   render() {
     return (
-      <main>
+      <main className={this.props.sidebarOpen ? 'pad-left' : ''}>
         <div
           role="application"
           aria-hidden="true"

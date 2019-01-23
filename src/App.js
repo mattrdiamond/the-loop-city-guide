@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './components/NavBar';
+import NavButton from './components/NavButton';
 import SideBar from './components/SideBar';
 import Map from './components/Map';
 import FoursquareAPI from './API/Foursquare';
@@ -234,6 +235,11 @@ class App extends Component {
           sidebarOpen={this.state.sidebarOpen}
           navKeyPress={this.navKeyPress}
         />*/}
+        <NavButton
+          toggleSidebar={this.toggleSidebar}
+          sidebarOpen={this.state.sidebarOpen}
+          navKeyPress={this.navKeyPress}
+        />
         <SideBar
           handleListItemClick={this.handleListItemClick}
           venues={this.state.venues}
@@ -243,9 +249,6 @@ class App extends Component {
           sidebarOpen={this.state.sidebarOpen}
           updateMapBounds={this.updateMapBounds}
           listItemKeyPress={this.listItemKeyPress}
-          toggleSidebar={this.toggleSidebar}
-          sidebarOpen={this.state.sidebarOpen}
-          navKeyPress={this.navKeyPress}
         />
         <Map
           {...this.state}

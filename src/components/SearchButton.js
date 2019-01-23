@@ -10,12 +10,12 @@ const SearchButton = ({ toggleInput, showInput }) => {
         id="search-button"
         className="search-button"
         onClick={toggleInput}
-        aria-label="Show/hide search input field"
+        aria-label={(showInput ? 'Hide' : 'Show') + ' search input'}
         aria-expanded={showInput}
         type="button"
       >
-        {buttonText}
         <Icon icon="search" />
+        {buttonText}
       </button>
     </React.Fragment>
   );

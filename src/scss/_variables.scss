@@ -48,3 +48,9 @@ $semibold: 'proxima_nova_semibold', Helvetica, sans-serif;
 
 $height-minus-navbar: calc(100% - 76px);
 $unit: 10px;
+
+//--------------------------------------------------------------------
+// Animations
+//--------------------------------------------------------------------
+
+$easing: cubic-bezier(0.6, 0.05, 0.28, 0.91);

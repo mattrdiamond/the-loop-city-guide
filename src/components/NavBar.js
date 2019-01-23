@@ -18,30 +18,20 @@ class NavBar extends Component {
     const inputStatus = this.state.showInput ? 'visible' : 'hidden';
 
     return (
-      <React.Fragment>
-        <nav id="navbar">
-          <div className="nav-top">
-            <NavButton
-              toggleSidebar={this.props.toggleSidebar}
-              sidebarOpen={this.props.sidebarOpen}
-              navKeyPress={this.props.navKeyPress}
-            />
-            <SearchButton
-              showInput={this.state.showInput}
-              toggleInput={this.toggleInput}
-            />
-          </div>
-          <div className={'input-container ' + inputStatus}>
-            <input
-              id="search-input"
-              type="text"
-              placeholder="Search"
-              onChange={this.props.handleFilterMarkers}
-            />
-            <span className="input-caption">Type to filter venues</span>
-          </div>
-        </nav>
-      </React.Fragment>
+      <nav id="navbar">
+        <div className="nav-top">
+          <SearchButton showInput={this.state.showInput} toggleInput={this.toggleInput} />
+        </div>
+        <div className={'input-container ' + inputStatus}>
+          <input
+            id="search-input"
+            type="text"
+            placeholder="Search..."
+            onChange={this.props.handleFilterMarkers}
+          />
+          <span className="input-caption">Type to filter venues</span>
+        </div>
+      </nav>
     );
   }
 }

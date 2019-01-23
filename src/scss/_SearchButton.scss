@@ -5,9 +5,10 @@
   align-items: center;
   color: white;
   font-family: $roman;
+  font-size: 1rem;
   cursor: pointer;
   // padding-left: 20px;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 20px;
   transition: background 0.5s ease;
   &:hover {
@@ -19,7 +20,7 @@
   }
 
   .icon-search {
-    margin-left: 5px;
+    margin-right: 8px;
     fill: rgba(255, 255, 255, 0.6);
   }
 }

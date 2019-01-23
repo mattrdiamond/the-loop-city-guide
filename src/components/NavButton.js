@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 
 class NavButton extends Component {
   render() {
-    let buttonState = 'closed';
-
-    if (this.props.sidebarOpen) {
-      buttonState = 'open';
-    }
+    const { sidebarOpen } = this.props;
+    const buttonState = sidebarOpen ? 'open' : 'closed';
 
     return (
       <button
@@ -15,12 +12,15 @@ class NavButton extends Component {
         onMouseDown={this.props.toggleSidebar}
         onKeyPress={this.props.navKeyPress}
         type="button"
-        aria-label="Show/hide venue sidebar"
+        aria-label={(sidebarOpen ? 'Hide' : 'Show') + ' venue sidebar'}
         aria-controls="venue-sidebar"
         aria-haspopup="true"
       >
-        <span className="hamburger-box">
-          <span className="hamburger-inner" />
+        <span className={'hamburger-box ' + buttonState}>
+          {/*<span className="hamburger-inner" />*/}
+          <span className="hamburger-top" />
+          <span className="hamburger-middle" />
+          <span className="hamburger-bottom" />
         </span>
       </button>
     );

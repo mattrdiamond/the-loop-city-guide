@@ -10,18 +10,18 @@
     overflow: hidden;
     transition: all 0.5s ease-in-out; }
     #navbar .input-container.visible {
-      height: 80px; }
+      height: 70px; }
   #navbar #search-input {
     padding-left: 0;
     padding-right: 0;
     margin-top: 1rem;
-    height: 3rem;
+    height: 2.5rem;
     width: 100%;
     border: none;
     background: none;
     color: white;
     border-bottom: 1px solid white;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-family: "proxima_nova_bold", Helvetica, sans-serif; }
     #navbar #search-input:focus {
       outline: none; }
@@ -55,12 +55,16 @@
   position: absolute;
   position: fixed;
   overflow: auto;
-  transition: all 0.5s ease;
+  transition: all 350ms cubic-bezier(0.6, 0.05, 0.28, 0.91);
   background: #e3e3e9; }
+  #venue-sidebar.hidden {
+    margin-left: -415px; }
   #venue-sidebar .sidebar-wrapper {
     padding: 1rem;
     overflow: auto;
     flex-grow: 1; }
+  #venue-sidebar.visible {
+    left: 0; }
   #venue-sidebar .attribution {
     color: #9395aa;
     font-size: 0.6rem;
@@ -70,68 +74,48 @@
     border-top: 1px solid #cccdd7; }
 
 .hamburger--vortex {
-  display: inline-block;
-  overflow: visible;
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
   cursor: pointer;
-  transition-timing-function: linear;
-  transition-duration: 0.15s;
-  transition-property: opacity, filter;
-  text-transform: none;
-  border: 0;
-  background-color: transparent;
+  transition: left 500ms cubic-bezier(0.6, 0.05, 0.28, 0.91);
+  border: none;
   padding: 0;
-  opacity: 0.6; }
+  background: #247f9e; }
   .hamburger--vortex:focus {
-    outline: none;
-    opacity: 1; }
-  .hamburger--vortex:hover {
-    opacity: 1; }
+    outline: none; }
+    .hamburger--vortex:focus .hamburger-box {
+      opacity: 1; }
   .hamburger--vortex .hamburger-box {
-    position: relative;
-    display: inline-block;
-    width: 30px;
-    height: 24px; }
-    .hamburger--vortex .hamburger-box .hamburger-inner,
-    .hamburger--vortex .hamburger-box .hamburger-inner:after,
-    .hamburger--vortex .hamburger-box .hamburger-inner:before {
-      position: absolute;
-      width: 30px;
-      height: 2px;
-      transition-timing-function: ease;
-      transition-duration: 0.15s;
-      transition-property: transform;
-      border-radius: 4px;
-      background-color: white; }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16.8px;
+    transition: opacity 0.5s ease;
+    opacity: 0.6; }
     .hamburger--vortex .hamburger-box:hover {
       opacity: 1; }
-    .hamburger--vortex .hamburger-box .hamburger-inner {
-      transition-duration: 0.2s;
-      transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
-      top: 50%;
-      display: block; }
-      .hamburger--vortex .hamburger-box .hamburger-inner::before, .hamburger--vortex .hamburger-box .hamburger-inner::after {
-        transition-duration: 0s;
-        transition-delay: 0.1s;
-        transition-timing-function: linear;
-        display: block;
-        content: ''; }
-      .hamburger--vortex .hamburger-box .hamburger-inner::before {
-        top: -10px;
-        transition-property: top, opacity; }
-      .hamburger--vortex .hamburger-box .hamburger-inner::after {
-        bottom: -10px;
-        transition-property: bottom, transform; }
-  .hamburger--vortex.open .hamburger-inner {
-    transform: rotate(765deg);
-    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1); }
-    .hamburger--vortex.open .hamburger-inner::before, .hamburger--vortex.open .hamburger-inner::after {
-      transition-delay: 0s; }
-    .hamburger--vortex.open .hamburger-inner::before {
-      top: 0;
-      opacity: 0; }
-    .hamburger--vortex.open .hamburger-inner::after {
-      bottom: 0;
-      transform: rotate(90deg); }
+    .hamburger--vortex .hamburger-box .hamburger-top,
+    .hamburger--vortex .hamburger-box .hamburger-middle,
+    .hamburger--vortex .hamburger-box .hamburger-bottom {
+      width: 30px;
+      height: 2px;
+      transition: transform 0.5s cubic-bezier(0.6, 0.05, 0.28, 0.91), opacity 0.5s, background-color 2.25s;
+      background: white; }
+    .hamburger--vortex .hamburger-box .hamburger-top,
+    .hamburger--vortex .hamburger-box .hamburger-middle {
+      margin-bottom: 8px; }
+
+.hamburger--vortex.open {
+  left: 346px; }
+  .hamburger--vortex.open .hamburger-top {
+    transform: translateY(10px) rotate(-135deg); }
+  .hamburger--vortex.open .hamburger-middle {
+    opacity: 0;
+    transform: rotate(135deg); }
+  .hamburger--vortex.open .hamburger-bottom {
+    transform: translateY(-10px) rotate(-45deg); }
 
 .venue-list {
   list-style: none; }
@@ -435,8 +419,9 @@
   align-items: center;
   color: white;
   font-family: "proxima_nova_regular", Helvetica, sans-serif;
+  font-size: 1rem;
   cursor: pointer;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 20px;
   transition: background 0.5s ease; }
   #search-button:hover {
@@ -445,7 +430,7 @@
     background: rgba(0, 0, 0, 0.1);
     outline: none; }
   #search-button .icon-search {
-    margin-left: 5px;
+    margin-right: 8px;
     fill: rgba(255, 255, 255, 0.6); }
 
 html {
@@ -466,7 +451,10 @@ main {
 
 main {
   height: 100%;
-  padding-left: 415px; }
+  padding-left: 0px;
+  transition: all 0.35s cubic-bezier(0.6, 0.05, 0.28, 0.91); }
+  main.pad-left {
+    padding-left: 415px; }
 
 body,
 #root,
