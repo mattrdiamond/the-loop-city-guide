@@ -13,6 +13,7 @@
 @import './scss/InfoWindow';
 @import './scss/ArrowButton';
 @import './scss/SearchButton';
+@import './scss/Map';
 
 html {
   height: 100%;
@@ -28,19 +29,8 @@ input {
 }
 
 #root,
-#app-container,
-main {
+#app-container {
   width: 100%;
-}
-
-main {
-  // height: $height-minus-navbar;
-  height: 100%;
-  padding-left: 0px;
-  transition: all 0.35s $easing;
-  &.pad-left {
-    padding-left: 415px;
-  }
 }
 
 body,
@@ -53,10 +43,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-}
-
-#map {
-  height: 100%;
 }
 
 a {

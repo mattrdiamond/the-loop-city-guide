@@ -220,9 +220,10 @@ class App extends Component {
     if (visibleMarkers.length === 1) {
       window.google.maps.event.trigger(visibleMarkers[0], 'click');
 
-      if (window.innerWidth > 500) {
-        this.map.panBy(-150, 0);
-      }
+      // move map to right to account for sidebar
+      // if (window.innerWidth > 500) {
+      //   this.map.panBy(-150, 0);
+      // }
     }
   }
 

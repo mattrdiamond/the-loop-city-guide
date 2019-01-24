@@ -1,0 +1,12 @@
+main {
+  height: 100%;
+  padding-left: 0px;
+  transition: all 0.35s $easing;
+  &.pad-left {
+    padding-left: 415px;
+  }
+}
+
+#map {
+  height: 100%;
+}

@@ -8,7 +8,8 @@
   #navbar .input-container {
     height: 0;
     overflow: hidden;
-    transition: all 0.5s ease-in-out; }
+    transition: all 0.5s ease-in-out;
+    padding: 0 1rem; }
     #navbar .input-container.visible {
       height: 70px; }
   #navbar #search-input {
@@ -424,7 +425,7 @@
   padding: 0.5rem 1rem;
   border-radius: 20px;
   transition: background 0.5s ease; }
-  #search-button:hover {
+  #search-button:hover, #search-button.expanded {
     background: rgba(0, 0, 0, 0.1); }
   #search-button:focus {
     background: rgba(0, 0, 0, 0.1);
@@ -432,6 +433,16 @@
   #search-button .icon-search {
     margin-right: 8px;
     fill: rgba(255, 255, 255, 0.6); }
+
+main {
+  height: 100%;
+  padding-left: 0px;
+  transition: all 0.35s cubic-bezier(0.6, 0.05, 0.28, 0.91); }
+  main.pad-left {
+    padding-left: 415px; }
+
+#map {
+  height: 100%; }
 
 html {
   height: 100%;
@@ -445,16 +456,8 @@ input {
   letter-spacing: 0.4px; }
 
 #root,
-#app-container,
-main {
+#app-container {
   width: 100%; }
-
-main {
-  height: 100%;
-  padding-left: 0px;
-  transition: all 0.35s cubic-bezier(0.6, 0.05, 0.28, 0.91); }
-  main.pad-left {
-    padding-left: 415px; }
 
 body,
 #root,
@@ -465,9 +468,6 @@ html,
 body {
   margin: 0;
   padding: 0; }
-
-#map {
-  height: 100%; }
 
 a {
   text-decoration: none;
