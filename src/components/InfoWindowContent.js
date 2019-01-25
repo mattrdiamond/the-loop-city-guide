@@ -13,11 +13,13 @@ const InfoWindowContent = (venue) => {
       ' icon" />'
     : '';
 
-  const hoursIcon = `<svg class="iw-icon"
-    role="img" height="13px" width="13px" aria-label="clock icon" >
-    <title>location icon</title>
-    <use href="${Icons}#clock"/>
-    </svg>`;
+  const hoursIcon = `<div class="icon-container clock">
+      <svg class="iw-icon"
+      role="img" height="14px" width="14px" aria-label="clock icon" >
+      <title>location icon</title>
+      <use href="${Icons}#clock"/>
+      </svg>
+    </div>`;
 
   // open status with icon or empty string
   const venueHours = venue.hasOwnProperty('hours') ? hoursIcon + venue.hours.status : '';
@@ -29,10 +31,12 @@ const InfoWindowContent = (venue) => {
     <h4 class="iw-title">${venue.name}</h4>
     <ul class="iw-list">
     <li class="iw-address">
-    <svg class="iw-icon" role="img" height="17px" width="15px" aria-label="location icon" >
+    <div class="icon-container marker">
+    <svg class="iw-icon" role="img" height="18px" width="14px" aria-label="location icon" >
     <title>location icon</title>
     <use href="${Icons}#marker"/>
     </svg>
+    </div>
     ${venue.location.address}
     </li>
     <li class="iw-hours">${venueHours}</li>

@@ -17,7 +17,7 @@ class App extends Component {
       center: [],
       zoom: 12,
       infoWindow: '',
-      sidebarOpen: false,
+      sidebarOpen: true,
       loading: false,
       updateSuperState: (obj) => {
         this.setState(obj);
@@ -53,6 +53,7 @@ class App extends Component {
     //     alert('Error: Failed to fetch Foursquare Venues');
     //   });
 
+    // fetch recommended venues and then get details
     FoursquareAPI.getVenueRecommendations({
       near: 'Chicago, IL',
       section: 'food',
@@ -62,7 +63,6 @@ class App extends Component {
         const { items } = results.response.groups[0];
         const { center } = results.response.geocode;
         const venues = items.map((item) => item.venue);
-        console.log('venues', venues);
         this.fetchVenueDetails(venues, center);
         return venues;
       })
@@ -148,6 +148,7 @@ class App extends Component {
         // Set infowindow content and open
         infowindow.setContent(InfoWindowContent(venue));
         infowindow.open(this.map, marker);
+        this.handleListItemClick(marker);
       });
     });
     // fit the map to the newly inclusive bounds
@@ -156,6 +157,7 @@ class App extends Component {
   }
 
   handleListItemClick(venue) {
+    console.log('yo clicked');
     const clickedMarker = this.state.markers.find((marker) => marker.id === venue.id);
 
     // Open infowindow if not already open

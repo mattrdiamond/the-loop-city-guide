@@ -5,7 +5,8 @@ export default class LoadScreen extends Component {
   render() {
     return (
       <div className="load-screen">
-        <img className="loading-image" src={Loading} />
+        {/*<img className="loading-image" src={Loading} />*/}
+        <p>Loading...</p>
       </div>
     );
   }
