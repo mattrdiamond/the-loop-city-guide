@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import Tabs from './Tabs';
 import Tip from './Tip';
 import Hours from './Hours';
@@ -6,6 +7,19 @@ import Info from './Info';
 import Icon from './Icon';
 
 export default class ListItem extends Component {
+  shouldComponentUpdate(nextProps) {
+    // Performance: only update active venue and previously active venue
+    // (to toggle 'active' class on and off)
+    if (
+      nextProps.activeMarker !== this.props.activeMarker &&
+      (nextProps.activeMarker.prevMarker === this.props.venue.name ||
+        nextProps.activeMarker.nextMarker === this.props.venue.name)
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   getVenuePrice(price) {
     // convert venue price into dollar sign icons
     let formattedPrice = [];
@@ -27,10 +41,8 @@ export default class ListItem extends Component {
   }
 
   formatCategory(category) {
-    // if (category.includes("restaurant") )
+    // remove word "restaurant" from category name
     const removeRestaurant = category.toLowerCase().replace(' restaurant', '');
-    console.log('category', category);
-    console.log('removed', removeRestaurant)
     return removeRestaurant;
   }
   // getVenuePhoto(venue) {
@@ -45,12 +57,9 @@ export default class ListItem extends Component {
   //   }
   // }
 
-  render() {
-    const { venue } = this.props;
-
+  // set venue image as image, icon, or placeholder based on data recieved
+  getVenueImage(venue) {
     let venueImage;
-
-    // set venue image as image, icon, or placeholder based on data recieved
     if (venue.bestPhoto) {
       venueImage = venue.bestPhoto.prefix + '100x100' + venue.bestPhoto.suffix;
     } else if (venue.categories.length > 0) {
@@ -59,11 +68,17 @@ export default class ListItem extends Component {
     } else {
       venueImage = 'https://via.placeholder.com/50';
     }
+    return venueImage;
+  }
+
+  render() {
+    const { venue, infoWindow } = this.props;
+    console.log('ListItem: rendered ' + venue.name);
 
     return (
       <li
         tabIndex="0"
-        className="list-item"
+        className={'list-item' + (infoWindow.id === venue.id ? ' active' : '')}
         onClick={() => {
           this.props.handleListItemClick(venue);
         }}
@@ -76,7 +91,7 @@ export default class ListItem extends Component {
             {
               <img
                 className="venue-image"
-                src={venueImage}
+                src={this.getVenueImage(venue)}
                 alt={'An image of ' + venue.name}
               />
             }
@@ -88,7 +103,9 @@ export default class ListItem extends Component {
               {venue.categories[0] && (
                 <span className="venue-info">
                   {/*<span className="venue-category">{venue.categories[0].name}</span>*/}
-                  <span className="venue-category">{this.formatCategory(venue.categories[0].name)}</span>
+                  <span className="venue-category">
+                    {this.formatCategory(venue.categories[0].name)}
+                  </span>
                   <span className="vert-line">|</span>
                 </span>
               )}
@@ -102,48 +119,11 @@ export default class ListItem extends Component {
               {venue.location.address && (
                 <div className="address-container">
                   <span className="venue-address">{venue.location.address}</span>
-                  <span className="venue-address">{venue.location.formattedAddress[1]}</span>
-                  {/*<div className="address-icon">
-                    <Icon icon="marker" />
-                  </div>
-                  <div className="address-location">
-                    <span className="venue-address">{venue.location.address}</span>
-                    <span className="venue-address">
-                      {venue.location.formattedAddress[1]}
-                    </span>
-              </div>*/}
-
-                  {/*<Icon icon="marker" />
                   <span className="venue-address">
-                    {venue.location.address + ', ' + venue.location.city}
-            </span>*/}
-
-                  {/*<span className="venue-address">{venue.location.crossStreet}</span>*/}
+                    {venue.location.formattedAddress[1]}
+                  </span>
                 </div>
               )}
-
-              {/*<ul className="venue-links">
-                {(venue.url || venue.menu || venue.delivery) && <Icon icon="link" />}
-                {venue.url && (
-                  <li className="venue-link">
-                    <a href={venue.url}>Website</a>
-                  </li>
-                )}
-                {venue.menu && (
-                  <li className="venue-link">
-                    {venue.url && <span className="venue-bullet">&#x25CF;</span>}
-                    <a href={venue.menu.url}>Menu</a>
-                  </li>
-                )}
-                {venue.delivery && (
-                  <li className="venue-link">
-                    {(venue.url || venue.menu) && (
-                      <span className="venue-bullet">&#x25CF;</span>
-                    )}
-                    <a href={venue.delivery.url}>Delivery</a>
-                  </li>
-                )}
-                    </ul>*/}
             </div>
 
             {venue.rating && (

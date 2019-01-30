@@ -14,6 +14,7 @@ class App extends Component {
     this.state = {
       venues: [],
       markers: [],
+      activeMarker: { prevMarker: null, nextMarker: null },
       center: [],
       zoom: 12,
       infoWindow: '',
@@ -32,7 +33,6 @@ class App extends Component {
     this.listItemKeyPress = this.listItemKeyPress.bind(this);
   }
 
-  // fetch restaurant details from Foursquare
   componentDidMount() {
     this.setState({ loading: true });
     // fetch restaurant data from Foursquare
@@ -107,7 +107,8 @@ class App extends Component {
     // Load map
     this.map = new window.google.maps.Map(document.getElementById('map'), {
       center: this.state.center,
-      zoom: this.state.zoom
+      zoom: this.state.zoom,
+      mapTypeControl: false
     });
 
     // Create single InfoWindow
@@ -148,7 +149,16 @@ class App extends Component {
         // Set infowindow content and open
         infowindow.setContent(InfoWindowContent(venue));
         infowindow.open(this.map, marker);
-        this.handleListItemClick(marker);
+
+        // ****************************************************start
+        console.log('marker title', marker.title);
+        console.log('prev marker', this.state.activeMarker.nextMarker);
+        if (marker.title !== this.state.activeMarker.nextMarker) {
+          console.log('no duplicate');
+          const newActiveMarker = this.updateActiveMarker(marker);
+          this.setState({ infoWindow: infowindow, activeMarker: newActiveMarker });
+        }
+        // ****************************************************end
       });
     });
     // fit the map to the newly inclusive bounds
@@ -156,8 +166,14 @@ class App extends Component {
     this.setState({ loading: false, markers: markerArray, infoWindow: infowindow });
   }
 
+  updateActiveMarker(marker) {
+    let copy = { ...this.state.activeMarker };
+    copy.prevMarker = copy.nextMarker;
+    copy.nextMarker = marker.title;
+    return copy;
+  }
+
   handleListItemClick(venue) {
-    console.log('yo clicked');
     const clickedMarker = this.state.markers.find((marker) => marker.id === venue.id);
 
     // Open infowindow if not already open
@@ -165,9 +181,9 @@ class App extends Component {
       window.google.maps.event.trigger(clickedMarker, 'click');
     }
 
-    if (window.innerWidth < 600) {
-      this.toggleSidebar();
-    }
+    // if (window.innerWidth < 600) {
+    //   this.toggleSidebar();
+    // }
   }
 
   listItemKeyPress(e, venue) {
@@ -230,6 +246,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('render app');
     return (
       <div id="app-container">
         {this.state.loading && <LoadScreen />}
@@ -252,6 +269,7 @@ class App extends Component {
           sidebarOpen={this.state.sidebarOpen}
           updateMapBounds={this.updateMapBounds}
           listItemKeyPress={this.listItemKeyPress}
+          activeMarker={this.state.activeMarker}
         />
         <Map
           {...this.state}

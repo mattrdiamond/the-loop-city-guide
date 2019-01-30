@@ -7,10 +7,8 @@ export default class venueList extends Component {
     let venueCopy = [...this.props.venues];
 
     function compare(a, b) {
-      if (a.name < b.name)
-        return -1;
-      if (a.name > b.name)
-        return 1;
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
       return 0;
     }
     venueCopy.sort(compare);
@@ -24,11 +22,14 @@ export default class venueList extends Component {
               venue={venue}
               handleListItemClick={this.props.handleListItemClick}
               listItemKeyPress={this.props.listItemKeyPress}
+              infoWindow={this.props.infoWindow}
+              activeMarker={this.props.activeMarker}
             />
           ))}
       </ul>
     );
-    {/*return (
+    {
+      /*return (
       <ul className="venue-list">
         {this.props.venues &&
           this.props.venues.map((venue, index) => (
@@ -40,6 +41,7 @@ export default class venueList extends Component {
             />
           ))}
       </ul>
-          );*/}
+          );*/
+    }
   }
 }

@@ -7,7 +7,7 @@ export default class SideBar extends Component {
     super();
     this.state = {
       query: '',
-      previousMarkers: [],
+      previousMarkers: []
     };
   }
 
@@ -49,6 +49,7 @@ export default class SideBar extends Component {
   didMarkersChange() {
     const visibleMarkers = this.props.markers.filter((marker) => marker.visible);
     // close infoWindow unless the map contains a single marker
+    console.log('test', this.props.infoWindow);
     if (visibleMarkers.length > 1) {
       this.props.infoWindow.close();
     }
@@ -64,7 +65,6 @@ export default class SideBar extends Component {
     // update previousMarkers for next execution
     this.setState({ previousMarkers: visibleMarkers });
   }
-
 
   render() {
     let sidebarVisibility = 'hidden';
@@ -91,7 +91,9 @@ export default class SideBar extends Component {
           <VenueList
             handleListItemClick={this.props.handleListItemClick}
             listItemKeyPress={this.props.listItemKeyPress}
+            infoWindow={this.props.infoWindow}
             venues={this.handleFilterVenues()}
+            activeMarker={this.props.activeMarker}
           />
           <p className="attribution">Powered by FourSquare</p>
         </div>

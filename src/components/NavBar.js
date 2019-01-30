@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 // import React from 'react';
 import NavButton from './NavButton';
 import SearchButton from './SearchButton';
 
-class NavBar extends Component {
+// PureComponent handles shouldComponentUpdate for you
+class NavBar extends PureComponent {
   constructor() {
     super();
     this.state = { showInput: false };
@@ -16,7 +17,7 @@ class NavBar extends Component {
 
   render() {
     const inputStatus = this.state.showInput ? 'visible' : 'hidden';
-
+    console.log('render navBar');
     return (
       <nav id="navbar">
         <div className="nav-top">
