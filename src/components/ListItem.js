@@ -1,5 +1,4 @@
-// import React, { Component } from 'react';
-import React, { Component, PureComponent } from 'react';
+import React, { Component } from 'react';
 import Tabs from './Tabs';
 import Tip from './Tip';
 import Hours from './Hours';
@@ -7,22 +6,22 @@ import Info from './Info';
 import Icon from './Icon';
 
 export default class ListItem extends Component {
+  // Only update active venue and previous venue (to toggle 'active' class on and off)
   shouldComponentUpdate(nextProps) {
-    // Performance: only update active venue and previously active venue
-    // (to toggle 'active' class on and off)
+    const { activeMarker, venue } = this.props;
     if (
-      nextProps.activeMarker !== this.props.activeMarker &&
-      (nextProps.activeMarker.prevMarker === this.props.venue.name ||
-        nextProps.activeMarker.nextMarker === this.props.venue.name)
+      nextProps.activeMarker !== activeMarker &&
+      (nextProps.activeMarker.prevMarker === venue.id ||
+        nextProps.activeMarker.nextMarker === venue.id)
     ) {
       return true;
     }
     return false;
   }
 
+  // Convert venue price into dollar signs
   getVenuePrice(price) {
-    // convert venue price into dollar sign icons
-    let formattedPrice = [];
+    const formattedPrice = [];
     for (let i = 0; i < 4; i++) {
       price > 0
         ? formattedPrice.push(
@@ -40,24 +39,13 @@ export default class ListItem extends Component {
     return formattedPrice;
   }
 
+  // remove word "restaurant" from category name
   formatCategory(category) {
-    // remove word "restaurant" from category name
     const removeRestaurant = category.toLowerCase().replace(' restaurant', '');
     return removeRestaurant;
   }
-  // getVenuePhoto(venue) {
-  //   let venueImage;
-  //   if (venue.bestPhoto) {
-  //     return (venueImage = venue.bestPhoto.prefix + '100x100' + venue.bestPhoto.suffix);
-  //   } else if (venue.categories.length > 0) {
-  //     return (venueImage =
-  //       venue.categories[0].icon.prefix + '32' + venue.categories[0].icon.suffix);
-  //   } else {
-  //     return (venueImage = 'https://via.placeholder.com/50');
-  //   }
-  // }
 
-  // set venue image as image, icon, or placeholder based on data recieved
+  // Set venue image as image, icon, or placeholder based on api data
   getVenueImage(venue) {
     let venueImage;
     if (venue.bestPhoto) {
@@ -66,7 +54,7 @@ export default class ListItem extends Component {
       venueImage =
         venue.categories[0].icon.prefix + '100' + venue.categories[0].icon.suffix;
     } else {
-      venueImage = 'https://via.placeholder.com/50';
+      venueImage = 'https://via.placeholder.com/100';
     }
     return venueImage;
   }
@@ -95,8 +83,6 @@ export default class ListItem extends Component {
                 alt={'An image of ' + venue.name}
               />
             }
-            {/*{<img src={this.getVenuePhoto(venue)} alt={'An image of ' + venue.name} />}*/}
-
             <div className="info-column">
               <h2 className="venue-name">{venue.name}</h2>
 

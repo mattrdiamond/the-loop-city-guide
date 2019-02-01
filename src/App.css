@@ -92,7 +92,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 16.8px;
+    padding: 18.7px;
     transition: opacity 0.5s ease;
     opacity: 0.6; }
     .hamburger--vortex .hamburger-box:hover {
@@ -102,21 +102,22 @@
     .hamburger--vortex .hamburger-box .hamburger-bottom {
       width: 30px;
       height: 2px;
+      border-radius: 2px;
       transition: transform 0.5s cubic-bezier(0.6, 0.05, 0.28, 0.91), opacity 0.5s, background-color 2.25s;
       background: white; }
     .hamburger--vortex .hamburger-box .hamburger-top,
     .hamburger--vortex .hamburger-box .hamburger-middle {
-      margin-bottom: 8px; }
+      margin-bottom: 7px; }
 
 .hamburger--vortex.open {
   left: 346px; }
   .hamburger--vortex.open .hamburger-top {
-    transform: translateY(10px) rotate(-135deg); }
+    transform: translateY(9px) rotate(-135deg); }
   .hamburger--vortex.open .hamburger-middle {
     opacity: 0;
     transform: rotate(135deg); }
   .hamburger--vortex.open .hamburger-bottom {
-    transform: translateY(-10px) rotate(-45deg); }
+    transform: translateY(-9px) rotate(-45deg); }
 
 .venue-list {
   list-style: none; }
@@ -135,6 +136,8 @@
     outline: none; }
   .list-item:first-of-type {
     margin-top: 0; }
+  .list-item.active {
+    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.2); }
   .list-item .content-container {
     width: 100%;
     padding: 1rem 1rem 0; }

@@ -150,15 +150,11 @@ class App extends Component {
         infowindow.setContent(InfoWindowContent(venue));
         infowindow.open(this.map, marker);
 
-        // ****************************************************start
-        console.log('marker title', marker.title);
-        console.log('prev marker', this.state.activeMarker.nextMarker);
-        if (marker.title !== this.state.activeMarker.nextMarker) {
-          console.log('no duplicate');
+        // add clicked marker id to activeMarker
+        if (marker.id !== this.state.activeMarker.nextMarker) {
           const newActiveMarker = this.updateActiveMarker(marker);
           this.setState({ infoWindow: infowindow, activeMarker: newActiveMarker });
         }
-        // ****************************************************end
       });
     });
     // fit the map to the newly inclusive bounds
@@ -169,7 +165,7 @@ class App extends Component {
   updateActiveMarker(marker) {
     let copy = { ...this.state.activeMarker };
     copy.prevMarker = copy.nextMarker;
-    copy.nextMarker = marker.title;
+    copy.nextMarker = marker.id;
     return copy;
   }
 

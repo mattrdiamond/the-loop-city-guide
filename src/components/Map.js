@@ -30,6 +30,7 @@ class Map extends Component {
   }
 
   render() {
+    console.log('rendered map');
     return (
       <main className={this.props.sidebarOpen ? 'pad-left' : ''}>
         <div

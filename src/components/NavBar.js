@@ -1,6 +1,4 @@
 import React, { Component, PureComponent } from 'react';
-// import React from 'react';
-import NavButton from './NavButton';
 import SearchButton from './SearchButton';
 
 // PureComponent handles shouldComponentUpdate for you
@@ -16,14 +14,15 @@ class NavBar extends PureComponent {
   }
 
   render() {
-    const inputStatus = this.state.showInput ? 'visible' : 'hidden';
+    const { showInput } = this.state;
     console.log('render navBar');
+
     return (
       <nav id="navbar">
         <div className="nav-top">
-          <SearchButton showInput={this.state.showInput} toggleInput={this.toggleInput} />
+          <SearchButton showInput={showInput} toggleInput={this.toggleInput} />
         </div>
-        <div className={'input-container ' + inputStatus}>
+        <div className={'input-container' + (showInput ? ' visible' : ' hidden')}>
           <input
             id="search-input"
             type="text"
@@ -38,22 +37,3 @@ class NavBar extends PureComponent {
 }
 
 export default NavBar;
-
-// const NavBar = ({ toggleSidebar, sidebarOpen, navKeyPress }) => (
-//   <nav id="navbar">
-//     <input
-//       id="search-input"
-//       type="text"
-//       placeholder="Filter"
-//       onChange={this.props.handleFilterMarkers()}
-//     />
-//     <NavButton
-//       toggleSidebar={toggleSidebar}
-//       sidebarOpen={sidebarOpen}
-//       navKeyPress={navKeyPress}
-//     />
-//     <h1 className="site-title">Placeholder Text</h1>
-//   </nav>
-// );
-
-// export default NavBar;

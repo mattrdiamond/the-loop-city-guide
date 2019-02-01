@@ -35,9 +35,6 @@ class Tabs extends Component {
       state: { activeTab }
     } = this;
 
-    console.log('children', children);
-    console.log('child', children[0].props);
-
     let className = 'tab-content';
 
     if (activeTab) {

@@ -67,14 +67,10 @@ export default class SideBar extends Component {
   }
 
   render() {
-    let sidebarVisibility = 'hidden';
-
-    if (this.props.sidebarOpen) {
-      sidebarVisibility = 'visible';
-    }
+    const { sidebarOpen } = this.props;
 
     return (
-      <div id="venue-sidebar" className={sidebarVisibility}>
+      <div id="venue-sidebar" className={sidebarOpen ? 'visible' : 'hidden'}>
         <NavBar
           toggleSidebar={this.props.toggleSidebar}
           sidebarOpen={this.props.sidebarOpen}
