@@ -32,14 +32,14 @@ class Map extends Component {
   render() {
     console.log('rendered map');
     return (
-      <main className={this.props.sidebarOpen ? 'pad-left' : ''}>
+      <section id="map" className={this.props.sidebarOpen ? 'pad-left' : ''}>
         <div
           role="application"
           aria-hidden="true"
           id={this.props.id}
           onClick={this.handleCloseSidebar}
         />
-      </main>
+      </section>
     );
   }
 }

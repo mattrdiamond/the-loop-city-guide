@@ -2,7 +2,7 @@ import React, { Component, PureComponent } from 'react';
 import SearchButton from './SearchButton';
 
 // PureComponent handles shouldComponentUpdate for you
-class NavBar extends PureComponent {
+class SearchBar extends PureComponent {
   constructor() {
     super();
     this.state = { showInput: false };
@@ -15,10 +15,10 @@ class NavBar extends PureComponent {
 
   render() {
     const { showInput } = this.state;
-    console.log('render navBar');
+    console.log('render searchBar');
 
     return (
-      <nav id="navbar">
+      <div className="search-bar">
         <div className="nav-top">
           <SearchButton showInput={showInput} toggleInput={this.toggleInput} />
         </div>
@@ -31,9 +31,9 @@ class NavBar extends PureComponent {
           />
           <span className="input-caption">Type to filter venues</span>
         </div>
-      </nav>
+      </div>
     );
   }
 }
 
-export default NavBar;
+export default SearchBar;

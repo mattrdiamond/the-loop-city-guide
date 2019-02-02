@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import VenueList from './VenueList';
-import NavBar from './NavBar';
+import SearchBar from './SearchBar';
 
 export default class SideBar extends Component {
   constructor() {
@@ -70,8 +70,8 @@ export default class SideBar extends Component {
     const { sidebarOpen } = this.props;
 
     return (
-      <div id="venue-sidebar" className={sidebarOpen ? 'visible' : 'hidden'}>
-        <NavBar
+      <section id="venue-sidebar" className={sidebarOpen ? 'visible' : 'hidden'}>
+        <SearchBar
           toggleSidebar={this.props.toggleSidebar}
           sidebarOpen={this.props.sidebarOpen}
           navKeyPress={this.props.navKeyPress}
@@ -93,7 +93,7 @@ export default class SideBar extends Component {
           />
           <p className="attribution">Powered by FourSquare</p>
         </div>
-      </div>
+      </section>
     );
   }
 }

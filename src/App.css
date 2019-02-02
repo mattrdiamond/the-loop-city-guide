@@ -1,18 +1,18 @@
-#navbar {
+.search-bar {
   background: #247f9e;
   color: white;
   padding: 1rem; }
-  #navbar .nav-top {
+  .search-bar .nav-top {
     display: flex;
     justify-content: space-between; }
-  #navbar .input-container {
+  .search-bar .input-container {
     height: 0;
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
     padding: 0 1rem; }
-    #navbar .input-container.visible {
+    .search-bar .input-container.visible {
       height: 70px; }
-  #navbar #search-input {
+  .search-bar #search-input {
     padding-left: 0;
     padding-right: 0;
     margin-top: 1rem;
@@ -24,25 +24,25 @@
     border-bottom: 1px solid white;
     font-size: 1.3rem;
     font-family: "proxima_nova_bold", Helvetica, sans-serif; }
-    #navbar #search-input:focus {
+    .search-bar #search-input:focus {
       outline: none; }
-  #navbar ::placeholder {
+  .search-bar ::placeholder {
     color: rgba(255, 255, 255, 0.4);
     opacity: 1;
     /* Firefox */ }
-  #navbar :-ms-input-placeholder {
+  .search-bar :-ms-input-placeholder {
     /* Internet Explorer 10-11 */
     color: rgba(255, 255, 255, 0.4); }
-  #navbar ::-ms-input-placeholder {
+  .search-bar ::-ms-input-placeholder {
     /* Microsoft Edge */
     color: rgba(255, 255, 255, 0.4); }
-  #navbar .input-caption {
+  .search-bar .input-caption {
     color: rgba(255, 255, 255, 0.4);
     padding-top: 0.5rem;
     font-size: 0.9rem;
     display: block;
     letter-spacing: 0.4px; }
-  #navbar h1 {
+  .search-bar h1 {
     margin: 0 auto; }
 
 #venue-sidebar {

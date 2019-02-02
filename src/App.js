@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavBar from './components/NavBar';
+import NavBar from './components/SearchBar';
 import NavButton from './components/NavButton';
 import SideBar from './components/SideBar';
 import Map from './components/Map';
@@ -244,7 +244,7 @@ class App extends Component {
   render() {
     console.log('render app');
     return (
-      <div id="app-container">
+      <main id="app-container">
         {this.state.loading && <LoadScreen />}
         {/*<NavBar
           toggleSidebar={this.toggleSidebar}
@@ -273,7 +273,7 @@ class App extends Component {
           initMap={this.initMap}
           closeSidebar={this.closeSidebar}
         />
-      </div>
+      </main>
     );
   }
 }
