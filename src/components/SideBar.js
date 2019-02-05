@@ -29,6 +29,8 @@ export default class SideBar extends Component {
     // const { venues, markers } = this.props;
     this.setState({ query: e.target.value });
 
+    // const markersCopy = {...this.state.markers};
+
     // check each venue to see if it includes query value
     const markers = this.props.venues.map((venue) => {
       const queryMatch = venue.name

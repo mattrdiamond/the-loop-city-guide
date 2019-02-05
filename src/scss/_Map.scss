@@ -1,12 +1,22 @@
-main {
+// main {
+//   height: 100%;
+//   padding-left: 0px;
+//   transition: all 0.35s $easing;
+//   &.pad-left {
+//     padding-left: 415px;
+//   }
+// }
+#map {
   height: 100%;
-  padding-left: 0px;
+  // padding-left: 0px;
+  margin-left: 0px;
   transition: all 0.35s $easing;
   &.pad-left {
-    padding-left: 415px;
+    // padding-left: 415px;
+    margin-left: 415px;
   }
 }
 
-#map {
-  height: 100%;
-}
+// #map {
+//   height: 100%;
+// }
