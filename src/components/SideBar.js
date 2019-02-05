@@ -9,22 +9,24 @@ export default class SideBar extends Component {
       query: '',
       previousMarkers: []
     };
+    this.handleFilterVenues = this.handleFilterVenues.bind(this);
   }
 
   // filter venues to match query value
-  handleFilterVenues() {
-    if (this.state.query.trim() !== '') {
-      const matchingVenues = this.props.venues.filter((venue) =>
-        venue.name.toLowerCase().includes(this.state.query.toLowerCase().trim())
+  handleFilterVenues(venues, query) {
+    if (query.trim() !== '') {
+      const matchingVenues = venues.filter((venue) =>
+        venue.name.toLowerCase().includes(query.toLowerCase().trim())
       );
       return matchingVenues;
     } else {
-      return this.props.venues;
+      return venues;
     }
   }
 
   // show markers that match query value and hide others
   handleFilterMarkers = (e) => {
+    // const { venues, markers } = this.props;
     this.setState({ query: e.target.value });
 
     // check each venue to see if it includes query value
@@ -32,6 +34,7 @@ export default class SideBar extends Component {
       const queryMatch = venue.name
         .toLowerCase()
         .includes(e.target.value.toLowerCase().trim());
+      // .includes(this.state.query.toLowerCase().trim());
 
       // find corresponding marker
       const marker = this.props.markers.find((marker) => marker.id === venue.id);
@@ -41,7 +44,7 @@ export default class SideBar extends Component {
       return marker;
     });
 
-    this.props.updateSuperState({ markers: markers });
+    // this.props.updateSuperState({ markers: markers });
     this.didMarkersChange();
   };
 
@@ -49,7 +52,6 @@ export default class SideBar extends Component {
   didMarkersChange() {
     const visibleMarkers = this.props.markers.filter((marker) => marker.visible);
     // close infoWindow unless the map contains a single marker
-    console.log('test', this.props.infoWindow);
     if (visibleMarkers.length > 1) {
       this.props.infoWindow.close();
     }
@@ -67,23 +69,39 @@ export default class SideBar extends Component {
   }
 
   render() {
-    const { sidebarOpen } = this.props;
+    const {
+      handleFilterVenues,
+      handleFilterMarkers,
+      props: {
+        toggleSidebar,
+        sidebarOpen,
+        navKeyPress,
+        handleListItemClick,
+        listItemKeyPress,
+        infoWindow,
+        activeMarker,
+        venues
+      },
+      state: { query }
+    } = this;
+
+    console.log('rendered sidebar');
 
     return (
       <section id="venue-sidebar" className={sidebarOpen ? 'visible' : 'hidden'}>
         <SearchBar
-          toggleSidebar={this.props.toggleSidebar}
-          sidebarOpen={this.props.sidebarOpen}
-          navKeyPress={this.props.navKeyPress}
-          handleFilterMarkers={this.handleFilterMarkers}
+          toggleSidebar={toggleSidebar}
+          sidebarOpen={sidebarOpen}
+          navKeyPress={navKeyPress}
+          handleFilterMarkers={handleFilterMarkers}
         />
         <div className="sidebar-wrapper">
           <VenueList
-            handleListItemClick={this.props.handleListItemClick}
-            listItemKeyPress={this.props.listItemKeyPress}
-            infoWindow={this.props.infoWindow}
-            venues={this.handleFilterVenues()}
-            activeMarker={this.props.activeMarker}
+            handleListItemClick={handleListItemClick}
+            listItemKeyPress={listItemKeyPress}
+            infoWindow={infoWindow}
+            venues={handleFilterVenues(venues, query)}
+            activeMarker={activeMarker}
           />
           <p className="attribution">Powered by FourSquare</p>
         </div>

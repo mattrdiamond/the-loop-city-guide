@@ -19,10 +19,10 @@ class App extends Component {
       zoom: 12,
       infoWindow: '',
       sidebarOpen: true,
-      loading: false,
-      updateSuperState: (obj) => {
-        this.setState(obj);
-      }
+      loading: false
+      // updateSuperState: (obj) => {
+      //   this.setState(obj);
+      // }
     };
     this.initMap = this.initMap.bind(this);
     this.handleListItemClick = this.handleListItemClick.bind(this);
@@ -268,7 +268,7 @@ class App extends Component {
           handleListItemClick={this.handleListItemClick}
           venues={this.state.venues}
           markers={this.state.markers}
-          updateSuperState={this.state.updateSuperState}
+          // updateSuperState={this.state.updateSuperState}
           infoWindow={this.state.infoWindow}
           sidebarOpen={this.state.sidebarOpen}
           updateMapBounds={this.updateMapBounds}
