@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
 import Tab from './Tab';
 
-class Tabs extends Component {
+export default class Tabs extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       activeTab: ''
     };
     this.onClickTabItem = this.onClickTabItem.bind(this);
   }
 
-  // onClickTabItem = (tab) => {
-  //   // close tab if already open else open tab.
-  //   if (tab === this.state.activeTab) {
-  //     this.setState({ activeTab: '' });
-  //   } else {
-  //     this.setState({ activeTab: tab });
-  //   }
-  // };
+  shouldComponentUpdate(nextState, nextProps) {
+    const { activeTab } = this.state;
+    // console.log('TABS: nextprops activetab', nextProps.activeTab);
+    // console.log('TABS: prevprops activetab', activeTab);
+    // if nextProps is different from active tab,
+    // render when activating (nextProps) or deactivating (activeTab) tabs (nextProps will be false when deactivating and activeTab (previously active tab) will be true)
+    if (nextProps.activeTab !== activeTab && (nextProps.activeTab || activeTab)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Close tab if already open or open tab
   onClickTabItem(tab) {
-    // close tab if already open else open tab.
     if (tab === this.state.activeTab) {
       this.setState({ activeTab: '' });
     } else {
@@ -31,36 +35,32 @@ class Tabs extends Component {
   render() {
     const {
       onClickTabItem,
-      props: { children },
+      props: { children, venue },
       state: { activeTab }
     } = this;
-
-    let className = 'tab-content';
-
-    if (activeTab) {
-      className = ' tab-content-active';
-    }
+    console.log('rendered tabs_' + this.props.venue.name);
 
     return (
       <div className="venue-tabs">
-        {/*--- map through list of 3 tabs ---*/}
+        {/*--- Map through list of 3 tabs ---*/}
         <ul className="tab-list">
           {children.map((child) => {
             const { label } = child.props;
-
             return (
               <Tab
                 activeTab={activeTab}
-                key={label}
+                key={`${venue.id}_${label}`}
                 label={label}
                 onClickTabItem={onClickTabItem}
               />
             );
           })}
         </ul>
-
-        {/*--- this div fills with active tab content ---*/}
-        <div id="tab-content" className={className}>
+        {/*--- Fill div with active tab content ---*/}
+        <div
+          id="tab-content"
+          className={activeTab ? 'tab-content-active' : 'tab-content'}
+        >
           {children.map((child) => {
             if (child.props.label !== activeTab) return undefined;
             return child.props.children;
@@ -70,5 +70,3 @@ class Tabs extends Component {
     );
   }
 }
-
-export default Tabs;

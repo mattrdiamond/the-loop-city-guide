@@ -78,12 +78,6 @@ export default class SideBar extends Component {
           handleFilterMarkers={this.handleFilterMarkers}
         />
         <div className="sidebar-wrapper">
-          {/*<input
-            id="search-input"
-            type="text"
-            placeholder="Filter"
-            onChange={this.handleFilterMarkers}
-          />*/}
           <VenueList
             handleListItemClick={this.props.handleListItemClick}
             listItemKeyPress={this.props.listItemKeyPress}

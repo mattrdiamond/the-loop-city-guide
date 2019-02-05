@@ -39,6 +39,15 @@ export default class ListItem extends Component {
     return formattedPrice;
   }
 
+  // Convert seconds into formatted date
+  formatDate(secs) {
+    let date = new Date(null);
+    date.setTime(secs * 1000);
+    const dateString = date.toLocaleString();
+    date = dateString.substr(0, dateString.lastIndexOf(','));
+    return date;
+  }
+
   // remove word "restaurant" from category name
   formatCategory(category) {
     const removeRestaurant = category.toLowerCase().replace(' restaurant', '');
@@ -122,10 +131,10 @@ export default class ListItem extends Component {
             )}
           </div>
 
-          <Tabs>
+          <Tabs venue={venue}>
             <div label="tips">
               <ul className="tip-list">
-                <Tip venue={venue} />
+                <Tip venue={venue} formatDate={this.formatDate} />
               </ul>
             </div>
             <div label="hours">

@@ -82,6 +82,7 @@ class App extends Component {
       })
     )
       .then((venueData) => {
+        venueData.sort(this.compareVenues);
         this.setState({ venues: venueData, center: center });
       })
       .catch((error) => {
@@ -98,6 +99,13 @@ class App extends Component {
     if (prevState.venues !== this.state.venues) {
       this.initMap();
     }
+  }
+
+  // Sort venues alphabetically by venue name
+  compareVenues(a, b) {
+    if (a.name < b.name) return -1;
+    if (a.name > b.name) return 1;
+    return 0;
   }
 
   initMap() {
