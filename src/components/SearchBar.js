@@ -2,7 +2,7 @@ import React, { Component, PureComponent } from 'react';
 import SearchButton from './SearchButton';
 
 // PureComponent handles shouldComponentUpdate for you
-class SearchBar extends PureComponent {
+export default class SearchBar extends PureComponent {
   constructor() {
     super();
     this.state = { showInput: false };
@@ -14,7 +14,11 @@ class SearchBar extends PureComponent {
   }
 
   render() {
-    const { showInput } = this.state;
+    const {
+      props: { handleFilterMarkers },
+      state: { showInput }
+    } = this;
+
     console.log('render searchBar');
 
     return (
@@ -27,7 +31,7 @@ class SearchBar extends PureComponent {
             id="search-input"
             type="text"
             placeholder="Search..."
-            onChange={this.props.handleFilterMarkers}
+            onChange={handleFilterMarkers}
           />
           <span className="input-caption">Type to filter venues</span>
         </div>
@@ -35,5 +39,3 @@ class SearchBar extends PureComponent {
     );
   }
 }
-
-export default SearchBar;

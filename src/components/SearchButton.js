@@ -1,4 +1,3 @@
-// import React, { Component } from 'react';
 import React from 'react';
 import Icon from './Icon';
 
@@ -20,25 +19,3 @@ const SearchButton = ({ toggleInput, showInput }) => {
 };
 
 export default SearchButton;
-
-// class SearchButton extends Component {
-//   constructor() {
-//     super();
-//     this.state = { showInput: false };
-//   }
-//   render() {
-//     return (
-//       <React.Fragment>
-//         <button
-//           id="search-button"
-//           className="test"
-//           onMouseDown={this.props.toggleInput}
-//           Filter
-//         />
-//         <Icon icon="search" />
-//       </React.Fragment>
-//     )
-//   }
-// }
-
-// export default SearchButton;
