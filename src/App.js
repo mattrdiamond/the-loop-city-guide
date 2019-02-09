@@ -19,10 +19,10 @@ class App extends Component {
       zoom: 12,
       infoWindow: '',
       sidebarOpen: true,
-      loading: false
-      // updateSuperState: (obj) => {
-      //   this.setState(obj);
-      // }
+      loading: false,
+      updateSuperState: (obj) => {
+        this.setState(obj);
+      }
     };
     this.initMap = this.initMap.bind(this);
     this.handleListItemClick = this.handleListItemClick.bind(this);
@@ -57,7 +57,7 @@ class App extends Component {
     FoursquareAPI.getVenueRecommendations({
       near: 'Chicago, IL',
       section: 'food',
-      limit: 10
+      limit: 2
     })
       .then((results) => {
         const { items } = results.response.groups[0];
@@ -124,9 +124,7 @@ class App extends Component {
     infowindow.id = '';
 
     // Create marker for each venue
-    const markerArray = [];
-
-    this.state.venues.map((venue) => {
+    const markerArray = this.state.venues.map((venue) => {
       const marker = new window.google.maps.Marker({
         position: {
           lat: venue.location.lat,
@@ -137,8 +135,6 @@ class App extends Component {
         title: venue.name,
         animation: window.google.maps.Animation.DROP
       });
-
-      markerArray.push(marker);
 
       // Extend the bounds to include each marker's position
       this.bounds.extend(marker.position);
@@ -164,6 +160,7 @@ class App extends Component {
           this.setState({ infoWindow: infowindow, activeMarker: newActiveMarker });
         }
       });
+      return marker;
     });
     // fit the map to the newly inclusive bounds
     this.map.fitBounds(this.bounds);
@@ -268,7 +265,7 @@ class App extends Component {
           handleListItemClick={this.handleListItemClick}
           venues={this.state.venues}
           markers={this.state.markers}
-          // updateSuperState={this.state.updateSuperState}
+          updateSuperState={this.state.updateSuperState}
           infoWindow={this.state.infoWindow}
           sidebarOpen={this.state.sidebarOpen}
           updateMapBounds={this.updateMapBounds}

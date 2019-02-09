@@ -7,13 +7,29 @@ export default class SideBar extends Component {
     super();
     this.state = {
       query: '',
-      previousMarkers: []
+      visibleMarkers: []
     };
     this.handleFilterVenues = this.handleFilterVenues.bind(this);
   }
 
+  // Only update if number of markers/venues changes
+  shouldComponentUpdate(nextState, nextProps) {
+    if (
+      (nextProps.query || this.state.query) &&
+      nextProps.visibleMarkers.length === this.state.visibleMarkers.length
+    ) {
+      return false;
+    }
+    return true;
+  }
+
   // filter venues to match query value
-  handleFilterVenues(venues, query) {
+  handleFilterVenues() {
+    const {
+      props: { venues },
+      state: { query }
+    } = this;
+
     if (query.trim() !== '') {
       const matchingVenues = venues.filter((venue) =>
         venue.name.toLowerCase().includes(query.toLowerCase().trim())
@@ -24,50 +40,49 @@ export default class SideBar extends Component {
     }
   }
 
-  // show markers that match query value and hide others
+  // filter markers that match query value
   handleFilterMarkers = (e) => {
-    // const { venues, markers } = this.props;
+    const { venues, markers, updateSuperState } = this.props;
     this.setState({ query: e.target.value });
 
-    // const markersCopy = {...this.state.markers};
-
     // check each venue to see if it includes query value
-    const markers = this.props.venues.map((venue) => {
+    const showMarkers = venues.map((venue) => {
       const queryMatch = venue.name
         .toLowerCase()
         .includes(e.target.value.toLowerCase().trim());
-      // .includes(this.state.query.toLowerCase().trim());
 
       // find corresponding marker
-      const marker = this.props.markers.find((marker) => marker.id === venue.id);
+      const marker = markers.find((marker) => marker.id === venue.id);
 
       // set visible if marker matches query value
       queryMatch ? marker.setVisible(true) : marker.setVisible(false);
       return marker;
     });
 
-    // this.props.updateSuperState({ markers: markers });
+    updateSuperState({ markers: showMarkers });
     this.didMarkersChange();
   };
 
   // check to see if number of markers changed before updating map bounds
   didMarkersChange() {
-    const visibleMarkers = this.props.markers.filter((marker) => marker.visible);
+    const { markers, infoWindow } = this.props;
+    const showingMarkers = markers.filter((marker) => marker.visible);
+
     // close infoWindow unless the map contains a single marker
-    if (visibleMarkers.length > 1) {
-      this.props.infoWindow.close();
+    if (showingMarkers.length > 1) {
+      infoWindow.close();
     }
 
-    // only update map bounds if the number of markers changed the map contains markers
+    // only update map bounds if the number of markers changed and the map contains markers
     if (
-      visibleMarkers.length !== this.state.previousMarkers.length &&
-      visibleMarkers.length > 0
+      showingMarkers.length !== this.state.visibleMarkers.length &&
+      showingMarkers.length > 0
     ) {
-      // update map bounds to focus on visible markers
-      this.props.updateMapBounds(visibleMarkers);
+      // update map bounds to fit visible markers
+      this.props.updateMapBounds(showingMarkers);
     }
-    // update previousMarkers for next execution
-    this.setState({ previousMarkers: visibleMarkers });
+    // update visibleMarkers for next execution
+    this.setState({ visibleMarkers: showingMarkers });
   }
 
   render() {
@@ -81,10 +96,8 @@ export default class SideBar extends Component {
         handleListItemClick,
         listItemKeyPress,
         infoWindow,
-        activeMarker,
-        venues
-      },
-      state: { query }
+        activeMarker
+      }
     } = this;
 
     console.log('rendered sidebar');
@@ -102,7 +115,7 @@ export default class SideBar extends Component {
             handleListItemClick={handleListItemClick}
             listItemKeyPress={listItemKeyPress}
             infoWindow={infoWindow}
-            venues={handleFilterVenues(venues, query)}
+            venues={handleFilterVenues()}
             activeMarker={activeMarker}
           />
           <p className="attribution">Powered by FourSquare</p>
