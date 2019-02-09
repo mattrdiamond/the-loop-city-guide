@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Map extends Component {
+export default class Map extends Component {
   constructor(props) {
     super(props);
     this.handleCloseSidebar = this.handleCloseSidebar.bind(this);
@@ -30,18 +30,19 @@ class Map extends Component {
   }
 
   render() {
+    const {
+      handleCloseSidebar,
+      props: { id, sidebarOpen }
+    } = this;
     console.log('rendered map');
     return (
-      <section id="map" className={this.props.sidebarOpen ? 'pad-left' : ''}>
-        <div
-          role="application"
-          aria-hidden="true"
-          id={this.props.id}
-          onClick={this.handleCloseSidebar}
-        />
+      <section
+        id="map"
+        className={sidebarOpen ? 'pad-left' : ''}
+        onClick={handleCloseSidebar}
+      >
+        <div role="application" aria-hidden="true" id={id} />
       </section>
     );
   }
 }
-
-export default Map;

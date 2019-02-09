@@ -272,12 +272,7 @@ class App extends Component {
           listItemKeyPress={this.listItemKeyPress}
           activeMarker={this.state.activeMarker}
         />
-        <Map
-          {...this.state}
-          id="map"
-          initMap={this.initMap}
-          closeSidebar={this.closeSidebar}
-        />
+        <Map {...this.state} id="map" closeSidebar={this.closeSidebar} />
       </main>
     );
   }
