@@ -35,7 +35,7 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({ loading: true });
-    // fetch restaurant data from Foursquare
+    // fetch restaurant data based on keyword from Foursquare
     // FoursquareAPI.search({
     //   near: 'Chicago, IL',
     //   query: 'restaurant',
@@ -147,9 +147,6 @@ class App extends Component {
         // Add current marker id to infowindow
         infowindow.id = marker.id;
 
-        // Find venue that matches clicked marker
-        // const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);
-
         // Set infowindow content and open
         infowindow.setContent(InfoWindowContent(venue));
         infowindow.open(this.map, marker);
@@ -175,16 +172,13 @@ class App extends Component {
   }
 
   handleListItemClick(venue) {
-    const clickedMarker = this.state.markers.find((marker) => marker.id === venue.id);
+    const { markers, infoWindow } = this.state;
+    const clickedMarker = markers.find((marker) => marker.id === venue.id);
 
     // Open infowindow if not already open
-    if (this.state.infoWindow.id !== clickedMarker.id) {
+    if (infoWindow.id !== clickedMarker.id) {
       window.google.maps.event.trigger(clickedMarker, 'click');
     }
-
-    // if (window.innerWidth < 600) {
-    //   this.toggleSidebar();
-    // }
   }
 
   listItemKeyPress(e, venue) {
@@ -232,17 +226,11 @@ class App extends Component {
     if (zoomLevel > 15) {
       zoomLevel = 15;
     }
-
     this.map.setZoom(zoomLevel);
     this.setState({ zoom: zoomLevel });
 
     if (visibleMarkers.length === 1) {
       window.google.maps.event.trigger(visibleMarkers[0], 'click');
-
-      // move map to right to account for sidebar
-      // if (window.innerWidth > 500) {
-      //   this.map.panBy(-150, 0);
-      // }
     }
   }
 
@@ -252,11 +240,6 @@ class App extends Component {
     return (
       <main id="app-container">
         {this.state.loading && <LoadScreen />}
-        {/*<NavBar
-          toggleSidebar={this.toggleSidebar}
-          sidebarOpen={this.state.sidebarOpen}
-          navKeyPress={this.navKeyPress}
-        />*/}
         <NavButton
           toggleSidebar={this.toggleSidebar}
           sidebarOpen={this.state.sidebarOpen}
