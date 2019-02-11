@@ -9,7 +9,7 @@
     height: 0;
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
-    padding: 0 1rem; }
+    padding: 0 0.9rem; }
     .search-bar .input-container.visible {
       height: 70px; }
   .search-bar #search-input {
@@ -110,7 +110,7 @@
       margin-bottom: 7px; }
 
 .hamburger--vortex.open {
-  left: 346px; }
+  left: 345px; }
   .hamburger--vortex.open .hamburger-top {
     transform: translateY(9px) rotate(-135deg); }
   .hamburger--vortex.open .hamburger-middle {

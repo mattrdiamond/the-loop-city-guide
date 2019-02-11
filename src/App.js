@@ -248,6 +248,7 @@ class App extends Component {
 
   render() {
     console.log('render app');
+    console.log('app.js: loading:', this.state.loading);
     return (
       <main id="app-container">
         {this.state.loading && <LoadScreen />}
@@ -262,6 +263,7 @@ class App extends Component {
           navKeyPress={this.navKeyPress}
         />
         <SideBar
+          {...this.state}
           handleListItemClick={this.handleListItemClick}
           venues={this.state.venues}
           markers={this.state.markers}

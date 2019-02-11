@@ -8,11 +8,10 @@ import Icon from './Icon';
 export default class ListItem extends Component {
   // Only update active venue and previous venue (to toggle 'active' class on and off)
   shouldComponentUpdate(nextProps) {
-    const { activeMarker, venue } = this.props;
     if (
-      nextProps.activeMarker !== activeMarker &&
-      (nextProps.activeMarker.prevMarker === venue.id ||
-        nextProps.activeMarker.nextMarker === venue.id)
+      nextProps.activeMarker !== this.props.activeMarker &&
+      (nextProps.activeMarker.prevMarker === this.props.venue.id ||
+        nextProps.activeMarker.nextMarker === this.props.venue.id)
     ) {
       return true;
     }
@@ -21,16 +20,17 @@ export default class ListItem extends Component {
 
   // Convert venue price into dollar signs
   getVenuePrice(price) {
+    const { venue } = this.props;
     const formattedPrice = [];
     for (let i = 0; i < 4; i++) {
       price > 0
         ? formattedPrice.push(
-            <span key={i} className="price-active">
+            <span key={venue.id + '_' + i} className="price-active">
               $
             </span>
           )
         : formattedPrice.push(
-            <span key={i} className="price-inactive">
+            <span key={venue.id + '_' + i} className="price-inactive">
               $
             </span>
           );

@@ -12,16 +12,33 @@ export default class SideBar extends Component {
     this.handleFilterVenues = this.handleFilterVenues.bind(this);
   }
 
+  // componentDidMount() {
+  //   console.log('should sidebar mount', this.props.loading);
+  //   this.props.loading ? false : true;
+  // }
+
   // Only update if number of markers/venues changes
   shouldComponentUpdate(nextState, nextProps) {
+    console.log('Sidebar: nextProps visible markers', nextProps.visibleMarkers.length);
+    console.log('Sidebar: props visible markers', this.state.visibleMarkers.length);
+    console.log('Sidebar: next query', nextProps.query);
+    console.log('Sidebar: query', this.state.query);
     if (
-      (nextProps.query || this.state.query) &&
+      !this.props.loading &&
       nextProps.visibleMarkers.length === this.state.visibleMarkers.length
     ) {
       return false;
     }
     return true;
   }
+  //   if (
+  //     (nextProps.query || this.state.query) &&
+  //     nextProps.visibleMarkers.length === this.state.visibleMarkers.length
+  //   ) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
   // filter venues to match query value
   handleFilterVenues() {

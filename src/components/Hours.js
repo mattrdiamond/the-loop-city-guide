@@ -1,14 +1,14 @@
 import React from 'react';
 import Icon from './Icon';
 
-const Hours = ({ venue, index }) => {
+const Hours = ({ venue }) => {
   const venueHours = venue.hours;
   if (venueHours) {
     return (
       <table className="table-hours">
         {venueHours.timeframes.map((timeframe, index) => (
-          <tbody key={`tbody_${index}`}>
-            <tr key={`row_${index}`}>
+          <tbody key={`${venue.id}_tbody_${index}`}>
+            <tr key={`${venue.id}_row_${index}`}>
               <th key={timeframe.days} scope="row">
                 {timeframe.days}
               </th>
@@ -18,11 +18,11 @@ const Hours = ({ venue, index }) => {
               {/* If timeframe includes today, display open status or empty cell */}
               {timeframe.includesToday ? (
                 venueHours.isOpen ? (
-                  <td key={`isOpen`} className="open">
+                  <td key={`${venue.id}_isOpen`} className="open">
                     Open now
                   </td>
                 ) : (
-                  <td key={`isClosed`} className="closed">
+                  <td key={`${venue.id}_isClosed`} className="closed">
                     Closed now
                   </td>
                 )
