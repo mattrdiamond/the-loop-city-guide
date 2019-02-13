@@ -13,20 +13,15 @@ export default class SideBar extends Component {
   }
 
   // Only update if number of markers/venues changes
-  shouldComponentUpdate(nextState, nextProps) {
-    console.log('Sidebar: nextProps visible markers', nextProps.visibleMarkers.length);
-    console.log('Sidebar: props visible markers', this.state.visibleMarkers.length);
-    console.log('Sidebar: next query', nextProps.query);
-    console.log('Sidebar: query', this.state.query);
-    console.log('SidebarOpen: prev', this.props.sidebarOpen);
-    if (
-      !this.props.loading &&
-      nextProps.visibleMarkers.length === this.state.visibleMarkers.length
-    ) {
-      return false;
-    }
-    return true;
-  }
+  // shouldComponentUpdate(nextState, nextProps) {
+  //   if (
+  //     !this.props.loading &&
+  //     nextProps.visibleMarkers.length === this.state.visibleMarkers.length
+  //   ) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
   // filter venues to match query value
   handleFilterVenues() {

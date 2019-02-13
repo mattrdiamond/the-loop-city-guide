@@ -9,12 +9,10 @@ const Hours = ({ venue }) => {
         {venueHours.timeframes.map((timeframe, index) => (
           <tbody key={`${venue.id}_tbody_${index}`}>
             <tr key={`${venue.id}_row_${index}`}>
-              <th key={timeframe.days} scope="row">
+              <th key={`${venue.id}_${timeframe.days}`} scope="row">
                 {timeframe.days}
               </th>
-              <td key={timeframe.open[0].renderedTime}>
-                {timeframe.open[0].renderedTime}
-              </td>
+              <td key={venue.id + '_hours_' + index}>{timeframe.open[0].renderedTime}</td>
               {/* If timeframe includes today, display open status or empty cell */}
               {timeframe.includesToday ? (
                 venueHours.isOpen ? (

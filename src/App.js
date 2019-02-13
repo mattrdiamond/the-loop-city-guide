@@ -35,7 +35,7 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({ loading: true });
-    // fetch restaurant data based on keyword from Foursquare
+    // Option 1: fetch venues based on keyword from Foursquare
     // FoursquareAPI.search({
     //   near: 'Chicago, IL',
     //   query: 'restaurant',
@@ -53,7 +53,7 @@ class App extends Component {
     //     alert('Error: Failed to fetch Foursquare Venues');
     //   });
 
-    // fetch recommended venues and then get details
+    // Option 2: fetch recommended venues from Foursquare
     FoursquareAPI.getVenueRecommendations({
       near: 'Chicago, IL',
       section: 'food',
@@ -90,12 +90,12 @@ class App extends Component {
       });
   }
 
-  // componentDidUpdate - (update version of componentDidMount)
-  // update map zoom level if the data has changed
   componentDidUpdate(prevProps, prevState) {
+    // update map zoom level if the data has changed
     if (prevState.zoom !== this.state.zoom) {
       this.map.setZoom(this.state.zoom);
     }
+    // run initMap once venues have been fetched
     if (prevState.venues !== this.state.venues) {
       this.initMap();
     }
@@ -237,27 +237,32 @@ class App extends Component {
   render() {
     console.log('render app');
     console.log('app.js: loading:', this.state.loading);
+
+    const {
+      toggleSidebar,
+      navKeyPress,
+      handleListItemClick,
+      updateMapBounds,
+      listItemKeyPress,
+      closeSidebar,
+      state: { sidebarOpen }
+    } = this;
+
     return (
       <main id="app-container">
         {this.state.loading && <LoadScreen />}
         <NavButton
-          toggleSidebar={this.toggleSidebar}
-          sidebarOpen={this.state.sidebarOpen}
-          navKeyPress={this.navKeyPress}
+          toggleSidebar={toggleSidebar}
+          sidebarOpen={sidebarOpen}
+          navKeyPress={navKeyPress}
         />
         <SideBar
           {...this.state}
-          handleListItemClick={this.handleListItemClick}
-          venues={this.state.venues}
-          markers={this.state.markers}
-          updateSuperState={this.state.updateSuperState}
-          infoWindow={this.state.infoWindow}
-          sidebarOpen={this.state.sidebarOpen}
-          updateMapBounds={this.updateMapBounds}
-          listItemKeyPress={this.listItemKeyPress}
-          activeMarker={this.state.activeMarker}
+          handleListItemClick={handleListItemClick}
+          updateMapBounds={updateMapBounds}
+          listItemKeyPress={listItemKeyPress}
         />
-        <Map {...this.state} id="map" closeSidebar={this.closeSidebar} />
+        <Map sidebarOpen={sidebarOpen} id="map" closeSidebar={closeSidebar} />
       </main>
     );
   }
