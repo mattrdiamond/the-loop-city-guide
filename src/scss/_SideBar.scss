@@ -2,7 +2,7 @@
   width: 415px;
   // height: $height-minus-navbar;
   height: 100%;
-  background: $white;
+  // background: $white;
   z-index: 4;
   font-size: 1rem;
   // padding: 1rem;
@@ -23,7 +23,7 @@
   background: $ui-08;
 
   .sidebar-wrapper {
-    padding: 1rem;
+    padding: 72px 1rem 1rem;
     overflow: auto;
     // height: $height-minus-navbar;
     flex-grow: 1;

@@ -1,7 +1,11 @@
 .search-bar {
   background: #247f9e;
   color: white;
-  padding: 1rem; }
+  padding: 1rem;
+  position: fixed;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 415px; }
   .search-bar .nav-top {
     display: flex;
     justify-content: space-between; }
@@ -48,7 +52,6 @@
 #venue-sidebar {
   width: 415px;
   height: 100%;
-  background: #fff;
   z-index: 4;
   font-size: 1rem;
   display: flex;
@@ -60,7 +63,7 @@
   #venue-sidebar.hidden {
     margin-left: -415px; }
   #venue-sidebar .sidebar-wrapper {
-    padding: 1rem;
+    padding: 72px 1rem 1rem;
     overflow: auto;
     flex-grow: 1; }
   #venue-sidebar.visible {
@@ -136,7 +139,7 @@
   .list-item:first-of-type {
     margin-top: 0; }
   .list-item.active {
-    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.2); }
+    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.3); }
   .list-item .content-container {
     width: 100%;
     padding: 1rem 1rem 0; }
@@ -524,7 +527,8 @@ th {
     #venue-sidebar.hidden {
       margin-left: 0; }
     #venue-sidebar .sidebar-wrapper {
-      overflow: visible; }
+      overflow: visible;
+      padding: 1rem; }
   .search-bar {
     position: fixed;
     width: 100%;

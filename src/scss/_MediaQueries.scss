@@ -11,12 +11,14 @@
     top: 57px;
     // overflow: change from fixed to visible to make map and venues scroll together???
     overflow: visible;
+    // transition: none;
     &.hidden {
       margin-left: 0;
     }
 
     .sidebar-wrapper {
       overflow: visible;
+      padding: 1rem;
     }
   }
 
