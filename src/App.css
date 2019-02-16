@@ -53,7 +53,6 @@
   font-size: 1rem;
   display: flex;
   flex-direction: column;
-  position: absolute;
   position: fixed;
   overflow: auto;
   transition: all 0.35s cubic-bezier(0.6, 0.05, 0.28, 0.91);
@@ -483,7 +482,8 @@ input {
 body,
 #root,
 #app-container {
-  height: 100%; }
+  height: 100%;
+  background: #e3e3e9; }
 
 html,
 body {
@@ -510,3 +510,38 @@ th {
 
 .bold {
   font-family: "proxima_nova_bold", Helvetica, sans-serif; }
+
+@media only screen and (max-width: 500px) {
+  #app-container {
+    display: flex;
+    flex-direction: column; }
+  #venue-sidebar {
+    width: 100%;
+    position: static;
+    order: 2;
+    top: 57px;
+    overflow: visible; }
+    #venue-sidebar.hidden {
+      margin-left: 0; }
+    #venue-sidebar .sidebar-wrapper {
+      overflow: visible; }
+  .search-bar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1; }
+  #map {
+    width: 100%;
+    order: 1;
+    height: 250px;
+    position: fixed;
+    margin-top: 57px; }
+    #map.pad-left {
+      margin-left: 0; }
+  .hamburger--vortex .hamburger-box {
+    display: none; }
+  body,
+  #root,
+  #app-container {
+    min-height: 100%;
+    height: auto; } }
