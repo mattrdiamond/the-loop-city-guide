@@ -2,7 +2,6 @@
   background: #247f9e;
   color: white;
   padding: 1rem;
-  position: fixed;
   z-index: 1;
   box-sizing: border-box;
   width: 415px; }
@@ -63,18 +62,22 @@
   #venue-sidebar.hidden {
     margin-left: -415px; }
   #venue-sidebar .sidebar-wrapper {
-    padding: 72px 1rem 1rem;
+    padding: 1rem;
     overflow: auto;
     flex-grow: 1; }
   #venue-sidebar.visible {
     left: 0; }
+  #venue-sidebar footer {
+    text-align: center;
+    margin: 2rem 0 1rem; }
+    #venue-sidebar footer .icon-foursquare {
+      fill: #9395aa; }
   #venue-sidebar .attribution {
     color: #9395aa;
-    font-size: 0.6rem;
-    padding-top: 1rem;
-    margin-top: 1rem;
-    text-align: center;
-    border-top: 1px solid #cccdd7; }
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 0.25rem; }
 
 .hamburger--vortex {
   position: fixed;
@@ -527,8 +530,7 @@ th {
     #venue-sidebar.hidden {
       margin-left: 0; }
     #venue-sidebar .sidebar-wrapper {
-      overflow: visible;
-      padding: 1rem; }
+      overflow: visible; }
   .search-bar {
     position: fixed;
     width: 100%;

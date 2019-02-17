@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import VenueList from './VenueList';
 import SearchBar from './SearchBar';
+import Icon from './Icon';
 
 export default class SideBar extends Component {
   constructor() {
@@ -117,7 +118,10 @@ export default class SideBar extends Component {
             venues={handleFilterVenues()}
             activeMarker={activeMarker}
           />
-          <p className="attribution">Powered by FourSquare</p>
+          <footer>
+            <Icon icon="foursquare" height="15px" />
+            <p className="attribution">Location data powered by FourSquare</p>
+          </footer>
         </div>
       </section>
     );

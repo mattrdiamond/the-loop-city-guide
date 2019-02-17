@@ -23,7 +23,7 @@
   background: $ui-08;
 
   .sidebar-wrapper {
-    padding: 72px 1rem 1rem;
+    padding: 1rem;
     overflow: auto;
     // height: $height-minus-navbar;
     flex-grow: 1;
@@ -47,13 +47,20 @@
     left: 0;
   }
 
+  footer {
+    text-align: center;
+    margin: 2rem 0 1rem;
+
+    .icon-foursquare {
+      fill: $ui-04;
+    }
+  }
+
   .attribution {
     color: $ui-04;
-    font-size: 0.6rem;
-    padding-top: 1rem;
-    margin-top: 1rem;
-    // text-transform: uppercase;
-    text-align: center;
-    border-top: 1px solid $ui-06;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 0.25rem;
   }
 }
