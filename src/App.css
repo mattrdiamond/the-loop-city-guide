@@ -89,10 +89,8 @@
   border: none;
   padding: 0;
   background: #247f9e; }
-  .hamburger--vortex:focus {
-    outline: none; }
-    .hamburger--vortex:focus .hamburger-box {
-      opacity: 1; }
+  .hamburger--vortex:focus .hamburger-box {
+    opacity: 1; }
   .hamburger--vortex .hamburger-box {
     display: flex;
     flex-direction: column;
@@ -453,12 +451,9 @@
   cursor: pointer;
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  transition: background 0.5s ease; }
-  #search-button:hover, #search-button.expanded {
+  transition: all 0.5s ease; }
+  #search-button.expanded {
     background: rgba(0, 0, 0, 0.1); }
-  #search-button:focus {
-    background: rgba(0, 0, 0, 0.1);
-    outline: none; }
   #search-button .icon-search {
     margin-right: 8px;
     fill: rgba(255, 255, 255, 0.6); }

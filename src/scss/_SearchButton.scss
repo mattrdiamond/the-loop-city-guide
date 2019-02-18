@@ -10,15 +10,15 @@
   // padding-left: 20px;
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  transition: background 0.5s ease;
-  &:hover,
+  transition: all 0.5s ease;
+  // border: 1px solid transparent;
   &.expanded {
     background: rgba(0, 0, 0, 0.1);
   }
-  &:focus {
-    background: rgba(0, 0, 0, 0.1);
-    outline: none;
+  &:focus,
+  &:hover {
     // border: 1px solid rgba(255, 255, 255, 0.6);
+    // outline: none;
   }
 
   .icon-search {

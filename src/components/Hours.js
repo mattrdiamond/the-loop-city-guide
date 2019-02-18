@@ -44,7 +44,7 @@ const Hours = ({ venue }) => {
           <div className="hours-web info-item">
             <Icon icon="globe" />
             <span className="attribute-key">Website</span>
-            <a className="attribute-value" href={venue.url}>
+            <a className="attribute-value" href={venue.url} target="_blank">
               {venue.url.replace('http://', '')}
             </a>
           </div>

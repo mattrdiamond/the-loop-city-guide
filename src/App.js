@@ -56,8 +56,8 @@ class App extends Component {
     // Option 2: fetch recommended venues from Foursquare
     FoursquareAPI.getVenueRecommendations({
       near: 'Chicago, IL',
-      section: 'food',
-      limit: 2
+      section: 'sights',
+      limit: 5
     })
       .then((results) => {
         const { items } = results.response.groups[0];

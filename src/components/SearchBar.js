@@ -32,6 +32,7 @@ export default class SearchBar extends PureComponent {
             type="text"
             placeholder="Search..."
             onChange={handleFilterMarkers}
+            tabIndex={showInput ? 0 : -1}
           />
           <span className="input-caption">Type to filter venues</span>
         </div>
