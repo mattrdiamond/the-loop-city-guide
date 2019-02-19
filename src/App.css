@@ -1,3 +1,50 @@
+html {
+  height: 100%;
+  font-size: 13px;
+  font-family: 'proxima_nova_regular', Helvetica, sans-serif;
+  letter-spacing: 0.4px;
+  color: #32333f; }
+
+button,
+input {
+  letter-spacing: 0.4px; }
+
+#root,
+#app-container {
+  width: 100%; }
+
+body,
+#root,
+#app-container {
+  height: 100%;
+  background: #e3e3e9; }
+
+html,
+body {
+  margin: 0;
+  padding: 0; }
+
+a {
+  text-decoration: none;
+  color: inherit; }
+  a:hover {
+    text-decoration: underline;
+    color: #247f9e; }
+
+h2 {
+  font-size: 1.25rem;
+  font-family: "proxima_nova_bold", Helvetica, sans-serif;
+  color: #247f9e;
+  letter-spacing: 0.4px;
+  line-height: 1.2;
+  font-weight: normal; }
+
+th {
+  font-weight: normal; }
+
+.bold {
+  font-family: "proxima_nova_bold", Helvetica, sans-serif; }
+
 .search-bar {
   background: #247f9e;
   color: white;
@@ -465,52 +512,30 @@
   #map.pad-left {
     margin-left: 415px; }
 
-html {
-  height: 100%;
-  font-size: 13px;
-  font-family: 'proxima_nova_regular', Helvetica, sans-serif;
-  letter-spacing: 0.4px;
-  color: #32333f; }
+.category-list {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  background: white;
+  padding: 1rem 2rem;
+  border-top: 1px solid #dadbe2;
+  color: #cccdd7; }
 
-button,
-input {
-  letter-spacing: 0.4px; }
-
-#root,
-#app-container {
-  width: 100%; }
-
-body,
-#root,
-#app-container {
-  height: 100%;
-  background: #e3e3e9; }
-
-html,
-body {
-  margin: 0;
-  padding: 0; }
-
-a {
-  text-decoration: none;
-  color: inherit; }
-  a:hover {
-    text-decoration: underline;
-    color: #247f9e; }
-
-h2 {
-  font-size: 1.25rem;
-  font-family: "proxima_nova_bold", Helvetica, sans-serif;
-  color: #247f9e;
-  letter-spacing: 0.4px;
-  line-height: 1.2;
-  font-weight: normal; }
-
-th {
-  font-weight: normal; }
-
-.bold {
-  font-family: "proxima_nova_bold", Helvetica, sans-serif; }
+.category {
+  cursor: pointer;
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.9rem; }
+  .category .icon {
+    width: 25px;
+    height: 25px;
+    fill: #cccdd7; }
+  .category.active {
+    color: #da3743; }
+    .category.active .icon {
+      fill: #da3743; }
 
 @media only screen and (max-width: 500px) {
   #app-container {

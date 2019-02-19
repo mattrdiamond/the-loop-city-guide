@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import VenueList from './VenueList';
 import SearchBar from './SearchBar';
 import Icon from './Icon';
+import CategoryBar from './CategoryBar';
 
 export default class SideBar extends Component {
   constructor() {
@@ -123,6 +124,12 @@ export default class SideBar extends Component {
             <p className="attribution">Location data powered by FourSquare</p>
           </footer>
         </div>
+        <CategoryBar>
+          <div label="food" />
+          <div label="drinks" />
+          <div label="coffee" />
+          <div label="sights" />
+        </CategoryBar>
       </section>
     );
   }
