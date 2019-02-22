@@ -98,7 +98,9 @@ export default class SideBar extends Component {
         handleListItemClick,
         listItemKeyPress,
         infoWindow,
-        activeMarker
+        activeMarker,
+        updateSuperState,
+        category
       }
     } = this;
     console.log('rendered sidebar');
@@ -124,7 +126,7 @@ export default class SideBar extends Component {
             <p className="attribution">Location data powered by FourSquare</p>
           </footer>
         </div>
-        <CategoryBar>
+        <CategoryBar updateSuperState={updateSuperState} category={category}>
           <div label="food" />
           <div label="drinks" />
           <div label="coffee" />

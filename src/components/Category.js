@@ -15,12 +15,12 @@ export default class Category extends Component {
   render() {
     const {
       handleOnClick,
-      props: { activeCategory, label }
+      props: { category, label }
     } = this;
 
     return (
       <li
-        className={'category' + (label === activeCategory ? ' active' : ' inactive')}
+        className={'category' + (label === category ? ' active' : ' inactive')}
         onClick={handleOnClick}
       >
         <Icon icon={label} />

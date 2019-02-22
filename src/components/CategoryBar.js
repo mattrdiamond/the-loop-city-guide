@@ -4,21 +4,21 @@ import Category from './Category';
 export default class CategoryBar extends Component {
   constructor() {
     super();
-    this.state = { activeCategory: 'food' };
+    // this.state = { activeCategory: 'food' };
     this.onClickCategory = this.onClickCategory.bind(this);
   }
 
-  onClickCategory(category) {
-    if (this.state.activeCategory !== category) {
-      this.setState({ activeCategory: category });
+  onClickCategory(clickedCategory) {
+    if (this.props.category !== clickedCategory) {
+      // this.setState({ activeCategory: category });
+      this.props.updateSuperState({ category: clickedCategory });
     }
   }
 
   render() {
     const {
       onClickCategory,
-      props: { children },
-      state: { activeCategory }
+      props: { children, category }
     } = this;
 
     console.log('render category bar');
@@ -31,7 +31,7 @@ export default class CategoryBar extends Component {
             const { label } = child.props;
             return (
               <Category
-                activeCategory={activeCategory}
+                category={category}
                 key={label}
                 label={label}
                 onClickCategory={onClickCategory}
