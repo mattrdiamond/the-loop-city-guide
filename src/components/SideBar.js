@@ -120,6 +120,7 @@ export default class SideBar extends Component {
             infoWindow={infoWindow}
             venues={handleFilterVenues()}
             activeMarker={activeMarker}
+            loading={this.props.loading}
           />
           <footer>
             <Icon icon="foursquare" height="15px" />

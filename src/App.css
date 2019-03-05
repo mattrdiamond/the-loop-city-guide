@@ -194,10 +194,11 @@ th {
     .list-item .content-container .content-inner-wrapper {
       display: flex; }
     .list-item .content-container .venue-image {
-      background: #247f9e;
+      background: #cccdd7;
       margin-right: 1rem;
       border-radius: 2px;
       width: 100px;
+      height: 100px;
       cursor: pointer; }
     .list-item .content-container .info-column {
       padding-right: 10px;
@@ -272,7 +273,7 @@ th {
     align-items: center;
     font-family: "proxima_nova_semibold", Helvetica, sans-serif; }
     .venue-tabs .tab-list-item:hover {
-      background: #f7f7f9; }
+      background: #ececf0; }
     .venue-tabs .tab-list-item:first-of-type {
       border-right: 1px solid #dadbe2;
       border-radius: 0 0 0 9px; }
@@ -536,6 +537,109 @@ th {
     color: #da3743; }
     .category.active .icon {
       fill: #da3743; }
+
+.animated-background {
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 169px;
+  position: relative;
+  margin-top: 1rem;
+  border-radius: 10px;
+  display: flex; }
+
+.mask {
+  background: white;
+  position: absolute; }
+
+.pic-col,
+.txt-col,
+.rating-col {
+  height: 100%;
+  position: relative; }
+
+.pic-col {
+  width: 126px; }
+  .pic-col .pic-border {
+    border: 1rem solid white;
+    width: 100%;
+    height: 126px;
+    box-sizing: border-box;
+    border-radius: 10px 0 0; }
+  .pic-col .pic-bottom {
+    top: 126px;
+    width: 100%;
+    height: 43px;
+    border-radius: 0 0 0 10px; }
+
+.txt-col {
+  flex-grow: 1; }
+  .txt-col .txt-1 {
+    width: 100%;
+    height: 18px; }
+  .txt-col .txt-2,
+  .txt-col .txt-3,
+  .txt-col .txt-4,
+  .txt-col .txt-5,
+  .txt-col .txt-6 {
+    height: 1rem; }
+  .txt-col .txt-3,
+  .txt-col .txt-5,
+  .txt-col .txt-7 {
+    width: 100%; }
+  .txt-col .txt-2,
+  .txt-col .txt-4,
+  .txt-col .txt-6 {
+    right: 0; }
+  .txt-col .txt-2 {
+    width: 15%;
+    top: 18px; }
+  .txt-col .txt-3 {
+    top: 31px; }
+  .txt-col .txt-4 {
+    width: 40%;
+    top: 44px; }
+  .txt-col .txt-5 {
+    top: 57px; }
+  .txt-col .txt-6 {
+    width: 60%;
+    top: 70px; }
+  .txt-col .txt-7 {
+    top: 83px;
+    height: 86px; }
+
+.rating-col {
+  width: 53px; }
+  .rating-col .rating-1 {
+    height: 119px;
+    bottom: 0;
+    width: 40px; }
+    .rating-col .rating-1:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: -7px;
+      width: 0;
+      height: 0;
+      border-bottom: 7px solid white;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent; }
+  .rating-col .rating-2 {
+    width: 1rem;
+    right: 0;
+    height: 100%;
+    border-radius: 0 10px 10px 0; }
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0; }
+  100% {
+    background-position: 468px 0; } }
 
 @media only screen and (max-width: 500px) {
   #app-container {

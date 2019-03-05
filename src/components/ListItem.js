@@ -4,19 +4,21 @@ import Tip from './Tip';
 import Hours from './Hours';
 import Info from './Info';
 import Icon from './Icon';
+import ListItemLoader from './ListItemLoader';
 
 export default class ListItem extends Component {
   // Only update active venue and previous venue (to toggle 'active' class on and off)
-  shouldComponentUpdate(nextProps) {
-    if (
-      nextProps.activeMarker !== this.props.activeMarker &&
-      (nextProps.activeMarker.prevMarker === this.props.venue.id ||
-        nextProps.activeMarker.nextMarker === this.props.venue.id)
-    ) {
-      return true;
-    }
-    return false;
-  }
+  // adjust to include change in loading
+  // shouldComponentUpdate(nextProps) {
+  //   if (
+  //     nextProps.activeMarker !== this.props.activeMarker &&
+  //     (nextProps.activeMarker.prevMarker === this.props.venue.id ||
+  //       nextProps.activeMarker.nextMarker === this.props.venue.id)
+  //   ) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   // Convert venue price into dollar signs
   getVenuePrice(price) {
@@ -73,79 +75,90 @@ export default class ListItem extends Component {
     console.log('ListItem: rendered ' + venue.name);
 
     return (
-      <li
-        tabIndex="0"
-        className={'list-item' + (infoWindow.id === venue.id ? ' active' : '')}
-        onClick={() => {
-          this.props.handleListItemClick(venue);
-        }}
-        onKeyPress={(e) => {
-          this.props.listItemKeyPress(e, venue);
-        }}
-      >
-        <div className="content-container">
-          <div className="content-inner-wrapper">
-            {
-              <img
-                className="venue-image"
-                src={this.getVenueImage(venue)}
-                alt={'An image of ' + venue.name}
-              />
-            }
-            <div className="info-column">
-              <h2 className="venue-name">{venue.name}</h2>
+      <React.Fragment>
+        {this.props.loading ? (
+          <ListItemLoader />
+        ) : (
+          <li
+            tabIndex="0"
+            className={'list-item' + (infoWindow.id === venue.id ? ' active' : '')}
+            onClick={() => {
+              this.props.handleListItemClick(venue);
+            }}
+            onKeyPress={(e) => {
+              this.props.listItemKeyPress(e, venue);
+            }}
+          >
+            <div className="content-container">
+              <div className="content-inner-wrapper">
+                {
+                  <img
+                    className="venue-image"
+                    src={this.getVenueImage(venue)}
+                    alt={'An image of ' + venue.name}
+                  />
+                }
+                <div className="info-column">
+                  <h2 className="venue-name">{venue.name}</h2>
 
-              {venue.categories[0] && (
-                <span className="venue-info">
-                  {/*<span className="venue-category">{venue.categories[0].name}</span>*/}
-                  <span className="venue-category">
-                    {this.formatCategory(venue.categories[0].name)}
-                  </span>
-                  <span className="vert-line">|</span>
-                </span>
-              )}
+                  {venue.categories[0] && (
+                    <span className="venue-info">
+                      {/*<span className="venue-category">{venue.categories[0].name}</span>*/}
+                      <span className="venue-category">
+                        {this.formatCategory(venue.categories[0].name)}
+                      </span>
+                      <span className="vert-line">|</span>
+                    </span>
+                  )}
 
-              {venue.price && (
-                <span className="venue-info venue-price">
-                  {this.getVenuePrice(venue.price.tier)}
-                </span>
-              )}
+                  {venue.price && (
+                    <span className="venue-info venue-price">
+                      {this.getVenuePrice(venue.price.tier)}
+                    </span>
+                  )}
 
-              {venue.location.address && (
-                <div className="address-container">
-                  <span className="venue-address">{venue.location.address}</span>
-                  <span className="venue-address">
-                    {venue.location.formattedAddress[1]}
-                  </span>
+                  {venue.location.address && (
+                    <div className="address-container">
+                      <span className="venue-address">{venue.location.address}</span>
+                      <span className="venue-address">
+                        {venue.location.formattedAddress[1]}
+                      </span>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
 
-            {venue.rating && (
-              <div className="rating-column">
-                <div className="rating-container">
-                  <Icon icon="star" width="13px" height="13px" />
-                  <span>{venue.rating}</span>
-                </div>
+                {venue.rating && (
+                  <div className="rating-column">
+                    <div className="rating-container">
+                      <Icon icon="star" width="13px" height="13px" />
+                      <span>{venue.rating}</span>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
 
-          <Tabs venue={venue}>
-            <div label="tips">
-              <ul className="tip-list">
-                <Tip venue={venue} formatDate={this.formatDate} />
-              </ul>
+              <Tabs venue={venue}>
+                <div label="tips">
+                  <ul className="tip-list">
+                    <Tip venue={venue} formatDate={this.formatDate} />
+                  </ul>
+                </div>
+                <div label="hours">
+                  <Hours venue={venue} />
+                </div>
+                <div label="info">
+                  <Info venue={venue} />
+                </div>
+              </Tabs>
             </div>
-            <div label="hours">
-              <Hours venue={venue} />
-            </div>
-            <div label="info">
-              <Info venue={venue} />
-            </div>
-          </Tabs>
-        </div>
-      </li>
+          </li>
+        )}
+        <ListItemLoader />
+        <ListItemLoader />
+        <ListItemLoader />
+        <ListItemLoader />
+        <ListItemLoader />
+      </React.Fragment>
     );
   }
 }

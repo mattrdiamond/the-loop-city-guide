@@ -61,7 +61,7 @@ class App extends Component {
     FoursquareAPI.getVenueRecommendations({
       near: 'Chicago, IL',
       section: this.state.category,
-      limit: 2
+      limit: 1
     })
       .then((results) => {
         console.log('fetching venue details');
@@ -157,6 +157,7 @@ class App extends Component {
   }
 
   clearMarkers() {
+    this.setState({ loading: true });
     for (var i = 0; i < this.state.markers.length; i++) {
       this.state.markers[i].setMap(null);
     }
@@ -249,7 +250,7 @@ class App extends Component {
 
     return (
       <main id="app-container">
-        {this.state.loading && <LoadScreen />}
+        {/*{this.state.loading && <LoadScreen />}*/}
         <NavButton
           toggleSidebar={toggleSidebar}
           sidebarOpen={sidebarOpen}

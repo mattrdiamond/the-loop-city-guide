@@ -6,7 +6,8 @@ const venueList = ({
   handleListItemClick,
   listItemKeyPress,
   infoWindow,
-  activeMarker
+  activeMarker,
+  loading
 }) => (
   <ul className="venue-list">
     {venues &&
@@ -18,6 +19,7 @@ const venueList = ({
           listItemKeyPress={listItemKeyPress}
           infoWindow={infoWindow}
           activeMarker={activeMarker}
+          loading={loading}
         />
       ))}
   </ul>
