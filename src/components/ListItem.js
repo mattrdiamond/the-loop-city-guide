@@ -153,11 +153,6 @@ export default class ListItem extends Component {
             </div>
           </li>
         )}
-        <ListItemLoader />
-        <ListItemLoader />
-        <ListItemLoader />
-        <ListItemLoader />
-        <ListItemLoader />
       </React.Fragment>
     );
   }

@@ -116,15 +116,16 @@ th {
     left: 0; }
   #venue-sidebar footer {
     text-align: center;
-    margin: 2rem 0 1rem; }
+    margin: 2rem 0 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
     #venue-sidebar footer .icon-foursquare {
-      fill: #9395aa; }
+      fill: #da3743;
+      margin: 0 2px; }
   #venue-sidebar .attribution {
-    color: #9395aa;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-top: 0.25rem; }
+    color: #777993;
+    font-size: 0.8rem; }
 
 .hamburger--vortex {
   position: fixed;
@@ -552,6 +553,8 @@ th {
   margin-top: 1rem;
   border-radius: 10px;
   display: flex; }
+  .animated-background:first-of-type {
+    margin-top: 0; }
 
 .mask {
   background: white;

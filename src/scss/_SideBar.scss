@@ -50,17 +50,18 @@
   footer {
     text-align: center;
     margin: 2rem 0 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .icon-foursquare {
-      fill: $ui-04;
+      fill: $secondary;
+      margin: 0 2px;
     }
   }
 
   .attribution {
-    color: $ui-04;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-top: 0.25rem;
+    color: $ui-03;
+    font-size: 0.8rem;
   }
 }

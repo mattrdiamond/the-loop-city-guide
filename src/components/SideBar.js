@@ -123,8 +123,9 @@ export default class SideBar extends Component {
             loading={this.props.loading}
           />
           <footer>
-            <Icon icon="foursquare" height="15px" />
-            <p className="attribution">Location data powered by FourSquare</p>
+            <span className="attribution">Powered by</span>
+            <Icon icon="foursquare" height="14px" />
+            <span className="attribution">Foursquare</span>
           </footer>
         </div>
         <CategoryBar updateSuperState={updateSuperState} category={category}>
