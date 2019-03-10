@@ -2,12 +2,15 @@
 // Colors
 //--------------------------------------------------------------------
 
-// Primary colors
+//---- Primary colors
 $white: #fff;
 $white-opaque: rgba(255, 255, 255, 0.4);
 $primary: #247f9e;
 $secondary: #da3743;
 $black: #333;
+
+//---- Variants
+// $primary-01: darken($primary, 30%);
 
 $black-01: lighten($black, 10%);
 $black-02: lighten($black, 20%);
@@ -19,9 +22,7 @@ $black-07: lighten($black, 70%);
 $black-08: lighten($black, 77%);
 $black-09: lighten($black, 90%);
 
-$primary-03: lighten($primary, 30%);
-
-// UI colors
+//---- UI colors
 $ui-primary: #32333f;
 
 $ui-01: lighten($ui-primary, 10%);

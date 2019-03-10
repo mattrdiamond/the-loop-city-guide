@@ -49,19 +49,21 @@
 
   footer {
     text-align: center;
-    margin: 2rem 0 1rem;
+    margin: 1.5rem 0 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
 
     .icon-foursquare {
-      fill: $secondary;
-      margin: 0 2px;
+      fill: $primary;
+      margin: 0 4px;
+      position: relative;
+      top: 1px;
     }
   }
 
   .attribution {
-    color: $ui-03;
+    color: $ui-04;
     font-size: 0.8rem;
   }
 }

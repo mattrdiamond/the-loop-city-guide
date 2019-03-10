@@ -110,11 +110,59 @@
   padding: 0;
   background: $primary;
   &:focus {
-    // outline: none;
+    outline: none;
 
     .hamburger-box {
       opacity: 1;
+      // background: rgba(0, 0, 0, 0.1);
     }
+  }
+
+  &.open {
+    // background: orange;
+    &:after {
+      content: '';
+      width: 36px;
+      height: 36px;
+      right: calc(50% - 20px);
+      top: calc(50% - 20px);
+      border-radius: 50%;
+      // background: rgba(0, 0, 0, 0.1);
+      border: 2px solid transparent;
+      position: absolute;
+      transition: all 0.5s ease;
+    }
+    &:focus:after,
+    &:hover:after {
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+    &:hover {
+      .hamburger-box {
+        opacity: 1;
+      }
+    }
+    // }
+    //   &.open:focus:after {
+    //     border: 2px solid rgba(255, 255, 255, 0.4);
+    //   }
+
+    // &:focus {
+    //   // content: '';
+    //   // width: 36px;
+    //   // height: 36px;
+    //   // right: calc(50% - 20px);
+    //   // top: calc(50% - 20px);
+    //   // border-radius: 50%;
+    //   // // background: rgba(0, 0, 0, 0.1);
+    //   border: 2px solid rgba(255, 255, 255, 0.4);
+    //   // position: absolute;
+    //   // transition: all 2.5s ease;
+    // }
+
+    // .hamburger-box {
+    //   background: none;
+    //   // opacity: 0.6;
+    // }
   }
 
   .hamburger-box {
@@ -129,21 +177,50 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 18.7px;
+    padding: 19.5px;
     transition: opacity 0.5s ease;
-
     opacity: 0.6;
     &:hover {
       opacity: 1;
     }
+
+    // &.open:after {
+    //   content: '';
+    //   width: 36px;
+    //   height: 36px;
+    //   right: 11px;
+    //   border-radius: 50%;
+    //   border: 2px solid transparent;
+    //   position: absolute;
+    //   transition: all 0.5s ease;
+    // }
+
+    // &.open:hover:after {
+    //   background: rgba(0, 0, 0, 0.1);
+    // }
+
     // &:focus {
     //   opacity: 1;
+    // }
+
+    // &.open:after {
+    //   content: '';
+    //   width: 36px;
+    //   height: 36px;
+    //   right: 11px;
+    //   border-radius: 50%;
+    //   border: 2px solid #a8ccd9;
+    //   position: absolute;
+    //   opacity: 50%;
+    //   &:hover {
+    //     border: 2px solid red;
+    //   }
     // }
 
     .hamburger-top,
     .hamburger-middle,
     .hamburger-bottom {
-      width: 30px;
+      width: 25px;
       height: 2px;
       border-radius: 2px;
       // margin-bottom: 8px;
@@ -166,7 +243,7 @@
 
 .hamburger--vortex.open {
   // .hamburger-box.open {
-  left: 345px;
+  left: 348px;
 
   .hamburger-top {
     transform: translateY(9px) rotate(-135deg);
