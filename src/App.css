@@ -155,7 +155,7 @@ th {
     position: absolute;
     transition: all 0.5s ease; }
   .hamburger--vortex.open:focus:after, .hamburger--vortex.open:hover:after {
-    border: 2px solid rgba(255, 255, 255, 0.4); }
+    border: 2px solid #6aa6ba; }
   .hamburger--vortex.open:hover .hamburger-box {
     opacity: 1; }
   .hamburger--vortex .hamburger-box {
@@ -509,7 +509,6 @@ th {
     transform: rotate(40deg); }
 
 #search-button {
-  border: none;
   background: none;
   display: flex;
   align-items: center;
@@ -525,8 +524,7 @@ th {
     background: rgba(0, 0, 0, 0.1); }
   #search-button:focus, #search-button:hover {
     outline: none;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    background: none; }
+    border: 2px solid #6aa6ba; }
   #search-button .icon-search {
     margin-right: 8px;
     fill: rgba(255, 255, 255, 0.6); }

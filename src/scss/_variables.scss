@@ -8,10 +8,9 @@ $white-opaque: rgba(255, 255, 255, 0.4);
 $primary: #247f9e;
 $secondary: #da3743;
 $black: #333;
+$focus: #6aa6ba;
 
 //---- Variants
-// $primary-01: darken($primary, 30%);
-
 $black-01: lighten($black, 10%);
 $black-02: lighten($black, 20%);
 $black-03: lighten($black, 30%);
