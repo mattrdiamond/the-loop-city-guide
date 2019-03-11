@@ -60,7 +60,7 @@ th {
     height: 0;
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
-    padding: 0 0.5rem; }
+    padding: 0 1rem; }
     .search-bar .input-container.visible {
       height: 70px; }
   .search-bar #search-input {
@@ -122,7 +122,7 @@ th {
     justify-content: center;
     align-items: center; }
     #venue-sidebar footer .icon-foursquare {
-      fill: #247f9e;
+      fill: #da3743;
       margin: 0 4px;
       position: relative;
       top: 1px; }
@@ -154,8 +154,6 @@ th {
     border: 2px solid transparent;
     position: absolute;
     transition: all 0.5s ease; }
-  .hamburger--vortex.open:focus:after, .hamburger--vortex.open:hover:after {
-    border: 2px solid #6aa6ba; }
   .hamburger--vortex.open:hover .hamburger-box {
     opacity: 1; }
   .hamburger--vortex .hamburger-box {
@@ -516,15 +514,15 @@ th {
   font-family: "proxima_nova_regular", Helvetica, sans-serif;
   font-size: 1rem;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
   border-radius: 20px;
   transition: all 0.5s ease;
   border: 2px solid transparent; }
   #search-button.expanded {
     background: rgba(0, 0, 0, 0.1); }
-  #search-button:focus, #search-button:hover {
-    outline: none;
-    border: 2px solid #6aa6ba; }
+  #search-button:focus {
+    background: rgba(0, 0, 0, 0.2);
+    outline: none; }
   #search-button .icon-search {
     margin-right: 8px;
     fill: rgba(255, 255, 255, 0.6); }

@@ -9,7 +9,7 @@
   font-size: 1rem;
   cursor: pointer;
   // padding-left: 20px;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
   border-radius: 20px;
   transition: all 0.5s ease;
   border: 2px solid transparent;
@@ -18,14 +18,13 @@
     // border: 2px solid rgba(255, 255, 255, 0.4);
     // border: 2px solid rgba(0, 0, 0, 0.1);
   }
-  &:focus,
-  &:hover {
+  &:focus {
     // border: 1px solid rgba(255, 255, 255, 0.6);
-    // background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.2);
     outline: none;
-    // border: 2px solid rgba(0, 0, 0, 0.2);
+    // border: 2px solid rgba(0, 0, 0, 0.15);
     // border: 2px solid rgba(255, 255, 255, 0.3);
-    border: 2px solid $focus;
+    // border: 2px solid $focus;
     // background: none;
   }
 

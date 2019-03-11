@@ -132,10 +132,9 @@
       position: absolute;
       transition: all 0.5s ease;
     }
-    &:focus:after,
-    &:hover:after {
+    &:focus:after {
       // border: 2px solid rgba(255, 255, 255, 0.3);
-      border: 2px solid $focus;
+      // border: 2px solid $focus;
       // border: 2px solid rgba(0, 0, 0, 0.2);
       // background: rgba(0, 0, 0, 0.1);
     }
