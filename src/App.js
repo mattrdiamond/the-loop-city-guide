@@ -7,6 +7,7 @@ import FoursquareAPI from './API/Foursquare';
 import './App.css';
 import LoadScreen from './components/LoadScreen';
 import InfoWindowContent from './components/InfoWindowContent';
+import MapStyles from './MapStyles.json';
 
 class App extends Component {
   constructor(props) {
@@ -100,6 +101,7 @@ class App extends Component {
     this.map = new window.google.maps.Map(document.getElementById('map'), {
       center: this.state.center,
       zoom: this.state.zoom,
+      styles: MapStyles,
       mapTypeControl: false
     });
 

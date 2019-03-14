@@ -11,6 +11,8 @@
     top: 57px;
     // overflow: change from fixed to visible to make map and venues scroll together???
     overflow: visible;
+    height: auto;
+    flex: 1;
     // transition: none;
     &.hidden {
       margin-left: 0;
@@ -33,7 +35,7 @@
     order: 1;
     height: 250px;
     position: fixed;
-    margin-top: 57px;
+    margin-top: 59px;
     &.pad-left {
       margin-left: 0;
     }
@@ -48,6 +50,6 @@
   #root,
   #app-container {
     min-height: 100%;
-    height: auto;
+    // height: auto;
   }
 }

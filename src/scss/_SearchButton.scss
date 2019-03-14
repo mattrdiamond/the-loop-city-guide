@@ -9,23 +9,16 @@
   font-size: 1rem;
   cursor: pointer;
   // padding-left: 20px;
-  padding: 0 1rem;
+  padding: 0 0.85rem;
   border-radius: 20px;
   transition: all 0.5s ease;
   border: 2px solid transparent;
   &.expanded {
     background: rgba(0, 0, 0, 0.1);
-    // border: 2px solid rgba(255, 255, 255, 0.4);
-    // border: 2px solid rgba(0, 0, 0, 0.1);
   }
   &:focus {
-    // border: 1px solid rgba(255, 255, 255, 0.6);
     background: rgba(0, 0, 0, 0.2);
     outline: none;
-    // border: 2px solid rgba(0, 0, 0, 0.15);
-    // border: 2px solid rgba(255, 255, 255, 0.3);
-    // border: 2px solid $focus;
-    // background: none;
   }
 
   .icon-search {

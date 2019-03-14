@@ -101,6 +101,7 @@ th {
   height: 100%;
   z-index: 4;
   font-size: 1rem;
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -291,7 +292,7 @@ th {
     align-items: center;
     font-family: "proxima_nova_semibold", Helvetica, sans-serif; }
     .venue-tabs .tab-list-item:hover {
-      background: #ececf0; }
+      background: #f4f4f6; }
     .venue-tabs .tab-list-item:first-of-type {
       border-right: 1px solid #dadbe2;
       border-radius: 0 0 0 9px; }
@@ -514,7 +515,7 @@ th {
   font-family: "proxima_nova_regular", Helvetica, sans-serif;
   font-size: 1rem;
   cursor: pointer;
-  padding: 0 1rem;
+  padding: 0 0.85rem;
   border-radius: 20px;
   transition: all 0.5s ease;
   border: 2px solid transparent; }
@@ -673,7 +674,9 @@ th {
     position: static;
     order: 2;
     top: 57px;
-    overflow: visible; }
+    overflow: visible;
+    height: auto;
+    flex: 1; }
     #venue-sidebar.hidden {
       margin-left: 0; }
     #venue-sidebar .sidebar-wrapper {
@@ -688,7 +691,7 @@ th {
     order: 1;
     height: 250px;
     position: fixed;
-    margin-top: 57px; }
+    margin-top: 59px; }
     #map.pad-left {
       margin-left: 0; }
   .hamburger--vortex .hamburger-box {
@@ -696,5 +699,4 @@ th {
   body,
   #root,
   #app-container {
-    min-height: 100%;
-    height: auto; } }
+    min-height: 100%; } }
