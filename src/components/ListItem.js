@@ -76,6 +76,7 @@ export default class ListItem extends Component {
 
     return (
       <React.Fragment>
+        {/*--- Display loading component for each venue until fetch complete ---*/}
         {this.props.loading ? (
           <ListItemLoader />
         ) : (
