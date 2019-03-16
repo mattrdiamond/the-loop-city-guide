@@ -3,6 +3,8 @@ import VenueList from './VenueList';
 import SearchBar from './SearchBar';
 import Icon from './Icon';
 import CategoryBar from './CategoryBar';
+import ListItem from './ListItem';
+import ListItemLoader from './ListItemLoader';
 
 export default class SideBar extends Component {
   constructor() {
@@ -114,14 +116,23 @@ export default class SideBar extends Component {
           handleFilterMarkers={handleFilterMarkers}
         />
         <div className="sidebar-wrapper">
-          <VenueList
-            handleListItemClick={handleListItemClick}
-            listItemKeyPress={listItemKeyPress}
-            infoWindow={infoWindow}
-            venues={handleFilterVenues()}
-            activeMarker={activeMarker}
-            loading={this.props.loading}
-          />
+          {/*--- Initial load: display loading component until fetch complete ---*/}
+          {this.props.loading && this.props.venues.length === 0 ? (
+            <div className="loader-container">
+              <ListItemLoader />
+              <ListItemLoader />
+              <ListItemLoader />
+            </div>
+          ) : (
+            <VenueList
+              handleListItemClick={handleListItemClick}
+              listItemKeyPress={listItemKeyPress}
+              infoWindow={infoWindow}
+              venues={handleFilterVenues()}
+              activeMarker={activeMarker}
+              loading={this.props.loading}
+            />
+          )}
           <footer>
             <span className="attribution">Powered by</span>
             <Icon icon="foursquare" height="14px" />

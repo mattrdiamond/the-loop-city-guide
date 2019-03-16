@@ -123,7 +123,7 @@ th {
     justify-content: center;
     align-items: center; }
     #venue-sidebar footer .icon-foursquare {
-      fill: #da3743;
+      fill: #9395aa;
       margin: 0 4px;
       position: relative;
       top: 1px; }
@@ -213,7 +213,7 @@ th {
     .list-item .content-container .content-inner-wrapper {
       display: flex; }
     .list-item .content-container .venue-image {
-      background: #cccdd7;
+      background: #eeeeee;
       margin-right: 1rem;
       border-radius: 2px;
       width: 100px;
@@ -442,7 +442,7 @@ th {
   font-family: "proxima_nova_regular", Helvetica, sans-serif; }
 
 .iw-photo {
-  background: #da3743;
+  background: #fdaf08;
   max-height: 60px;
   border-radius: 40px; }
 

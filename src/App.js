@@ -239,6 +239,7 @@ class App extends Component {
   render() {
     console.log('render app');
     console.log('app.js: loading:', this.state.loading);
+    console.log('app.js: venues length', this.state.venues.length);
 
     const {
       toggleSidebar,
@@ -252,7 +253,11 @@ class App extends Component {
 
     return (
       <main id="app-container">
-        {/*{this.state.loading && <LoadScreen />}*/}
+        {/*{this.state.loading && this.state.venues.length <= 0 ? (
+          <LoadScreen />
+        ) : (
+          <h1>hiiiiiiiiiiiiiiiiii</h1>
+        )}*/}
         <NavButton
           toggleSidebar={toggleSidebar}
           sidebarOpen={sidebarOpen}
