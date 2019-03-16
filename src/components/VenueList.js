@@ -6,7 +6,6 @@ const venueList = ({
   handleListItemClick,
   listItemKeyPress,
   infoWindow,
-  activeMarker,
   loading
 }) => (
   <ul className="venue-list">
@@ -18,7 +17,6 @@ const venueList = ({
           handleListItemClick={handleListItemClick}
           listItemKeyPress={listItemKeyPress}
           infoWindow={infoWindow}
-          activeMarker={activeMarker}
           loading={loading}
         />
       ))}

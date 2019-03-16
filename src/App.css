@@ -395,28 +395,6 @@ th {
     float: right;
     margin-left: 10px; }
 
-.load-screen {
-  position: fixed;
-  z-index: 6;
-  background: black;
-  width: 100%;
-  height: 100%;
-  color: white;
-  text-align: center;
-  opacity: 0.8;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-  .load-screen .loading-image {
-    animation: logo-spin infinite 20s linear;
-    height: 200px; }
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg); }
-  to {
-    transform: rotate(360deg); } }
-
 .icon-tips,
 .icon-hours,
 .icon-info,

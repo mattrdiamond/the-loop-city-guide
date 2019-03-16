@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import NavBar from './components/SearchBar';
 import NavButton from './components/NavButton';
 import SideBar from './components/SideBar';
 import Map from './components/Map';
 import FoursquareAPI from './API/Foursquare';
 import './App.css';
-import LoadScreen from './components/LoadScreen';
 import InfoWindowContent from './components/InfoWindowContent';
 import MapStyles from './MapStyles.json';
 
@@ -15,7 +13,6 @@ class App extends Component {
     this.state = {
       venues: [],
       markers: [],
-      activeMarker: { prevMarker: null, nextMarker: null },
       center: [],
       zoom: 12,
       infoWindow: '',
@@ -41,18 +38,12 @@ class App extends Component {
     this.setState({ loading: true });
 
     // Fetch venues and then initialize map
-    console.log('app mounted');
     this.fetchVenues(this.initMap);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // update map zoom level if the data has changed
-    if (prevState.zoom !== this.state.zoom) {
-      this.map.setZoom(this.state.zoom);
-    }
-
+    // If category changed, clear markers, fetch data and create new markers
     if (prevState.category !== this.state.category) {
-      console.log('category changed');
       this.clearMarkers();
       this.fetchVenues(this.createMarkers);
     }
@@ -62,10 +53,9 @@ class App extends Component {
     FoursquareAPI.getVenueRecommendations({
       near: 'Chicago, IL',
       section: this.state.category,
-      limit: 1
+      limit: 2
     })
       .then((results) => {
-        console.log('fetching venue details');
         const { items } = results.response.groups[0];
         const { center } = results.response.geocode;
         const venues = items.map((item) => item.venue);
@@ -79,7 +69,6 @@ class App extends Component {
       })
       .then((venueDetails, center) => {
         venueDetails.sort(this.alphabetizeVenues);
-        console.log('set state with venue details');
         this.setState({ venues: venueDetails, center: center });
         callback();
       })
@@ -114,12 +103,13 @@ class App extends Component {
   }
 
   createMarkers() {
-    this.bounds = new window.google.maps.LatLngBounds();
-
-    const { infowindow, bounds } = this;
+    const {
+      infowindow,
+      state: { venues }
+    } = this;
 
     // Create marker for each venue
-    const markerArray = this.state.venues.map((venue) => {
+    const markerArray = venues.map((venue) => {
       const marker = new window.google.maps.Marker({
         position: {
           lat: venue.location.lat,
@@ -131,9 +121,6 @@ class App extends Component {
         animation: window.google.maps.Animation.DROP
       });
 
-      // Extend the bounds to include each marker's position
-      bounds.extend(marker.position);
-
       // Add click event to each marker
       marker.addListener('click', () => {
         // Animate marker
@@ -144,32 +131,39 @@ class App extends Component {
 
         // Set infowindow content and open
         infowindow.setContent(InfoWindowContent(venue));
+        this.setState({ infoWindow: infowindow });
         infowindow.open(this.map, marker);
-
-        // add clicked marker id to activeMarker
-        if (marker.id !== this.state.activeMarker.nextMarker) {
-          const newActiveMarker = this.updateActiveMarker(marker);
-          this.setState({ infoWindow: infowindow, activeMarker: newActiveMarker });
-        }
       });
       return marker;
     });
-    this.map.fitBounds(this.bounds);
+    this.updateMapBounds(markerArray);
     this.setState({ loading: false, markers: markerArray, infoWindow: infowindow });
+  }
+
+  updateMapBounds(visibleMarkers) {
+    // Extend the map bounds to include each marker's position
+    let newBounds = new window.google.maps.LatLngBounds();
+    visibleMarkers.forEach((marker) => newBounds.extend(marker.position));
+    this.map.fitBounds(newBounds);
+
+    // set max zoom level
+    window.google.maps.event.addListenerOnce(this.map, 'idle', () => {
+      let zoomLevel = this.map.getZoom();
+      if (zoomLevel > 15) {
+        zoomLevel = 15;
+        this.map.setZoom(zoomLevel);
+      }
+      this.setState({ zoom: zoomLevel });
+    });
+
+    if (visibleMarkers.length === 1) {
+      window.google.maps.event.trigger(visibleMarkers[0], 'click');
+    }
   }
 
   clearMarkers() {
     this.setState({ loading: true });
-    for (var i = 0; i < this.state.markers.length; i++) {
-      this.state.markers[i].setMap(null);
-    }
-  }
-
-  updateActiveMarker(marker) {
-    let copy = { ...this.state.activeMarker };
-    copy.prevMarker = copy.nextMarker;
-    copy.nextMarker = marker.id;
-    return copy;
+    this.state.markers.forEach((marker) => marker.setMap(null));
   }
 
   handleListItemClick(venue) {
@@ -190,17 +184,6 @@ class App extends Component {
     }
   }
 
-  toggleBounce(marker) {
-    if (marker.getAnimation() !== null) {
-      marker.setAnimation(null);
-    } else {
-      marker.setAnimation(window.google.maps.Animation.BOUNCE);
-    }
-    setTimeout(() => {
-      marker.setAnimation(null);
-    }, 1000);
-  }
-
   navKeyPress(e) {
     let code = e.keyCode || e.which;
 
@@ -217,30 +200,18 @@ class App extends Component {
     this.setState({ sidebarOpen: false });
   }
 
-  updateMapBounds(visibleMarkers) {
-    console.log('update map bounds');
-    let newBounds = new window.google.maps.LatLngBounds();
-    visibleMarkers.forEach((marker) => newBounds.extend(marker.position));
-    this.map.fitBounds(newBounds);
-
-    // set max zoom level
-    let zoomLevel = this.map.getZoom();
-    if (zoomLevel > 15) {
-      zoomLevel = 15;
+  toggleBounce(marker) {
+    if (marker.getAnimation() !== null) {
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(window.google.maps.Animation.BOUNCE);
     }
-    this.map.setZoom(zoomLevel);
-    this.setState({ zoom: zoomLevel });
-
-    if (visibleMarkers.length === 1) {
-      window.google.maps.event.trigger(visibleMarkers[0], 'click');
-    }
+    setTimeout(() => {
+      marker.setAnimation(null);
+    }, 1000);
   }
 
   render() {
-    console.log('render app');
-    console.log('app.js: loading:', this.state.loading);
-    console.log('app.js: venues length', this.state.venues.length);
-
     const {
       toggleSidebar,
       navKeyPress,
@@ -253,11 +224,6 @@ class App extends Component {
 
     return (
       <main id="app-container">
-        {/*{this.state.loading && this.state.venues.length <= 0 ? (
-          <LoadScreen />
-        ) : (
-          <h1>hiiiiiiiiiiiiiiiiii</h1>
-        )}*/}
         <NavButton
           toggleSidebar={toggleSidebar}
           sidebarOpen={sidebarOpen}

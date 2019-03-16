@@ -100,7 +100,6 @@ export default class SideBar extends Component {
         handleListItemClick,
         listItemKeyPress,
         infoWindow,
-        activeMarker,
         updateSuperState,
         category
       }
@@ -129,7 +128,6 @@ export default class SideBar extends Component {
               listItemKeyPress={listItemKeyPress}
               infoWindow={infoWindow}
               venues={handleFilterVenues()}
-              activeMarker={activeMarker}
               loading={this.props.loading}
             />
           )}

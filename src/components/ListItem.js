@@ -7,19 +7,6 @@ import Icon from './Icon';
 import ListItemLoader from './ListItemLoader';
 
 export default class ListItem extends Component {
-  // Only update active venue and previous venue (to toggle 'active' class on and off)
-  // adjust to include change in loading
-  // shouldComponentUpdate(nextProps) {
-  //   if (
-  //     nextProps.activeMarker !== this.props.activeMarker &&
-  //     (nextProps.activeMarker.prevMarker === this.props.venue.id ||
-  //       nextProps.activeMarker.nextMarker === this.props.venue.id)
-  //   ) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
   // Convert venue price into dollar signs
   getVenuePrice(price) {
     const { venue } = this.props;
