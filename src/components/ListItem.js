@@ -4,6 +4,7 @@ import Tip from './Tip';
 import Hours from './Hours';
 import Info from './Info';
 import Icon from './Icon';
+import Placeholder from '../images/placeholder.svg';
 import ListItemLoader from './ListItemLoader';
 
 export default class ListItem extends Component {
@@ -43,20 +44,6 @@ export default class ListItem extends Component {
     return removeRestaurant;
   }
 
-  // Set venue image as image, icon, or placeholder based on api data
-  getVenueImage(venue) {
-    let venueImage;
-    if (venue.bestPhoto) {
-      venueImage = venue.bestPhoto.prefix + '100x100' + venue.bestPhoto.suffix;
-    } else if (venue.categories.length > 0) {
-      venueImage =
-        venue.categories[0].icon.prefix + '100' + venue.categories[0].icon.suffix;
-    } else {
-      venueImage = 'https://via.placeholder.com/100';
-    }
-    return venueImage;
-  }
-
   render() {
     const { venue, infoWindow } = this.props;
     console.log('ListItem: rendered ' + venue.name);
@@ -82,7 +69,11 @@ export default class ListItem extends Component {
                 {
                   <img
                     className="venue-image"
-                    src={this.getVenueImage(venue)}
+                    src={
+                      venue.bestPhoto
+                        ? venue.bestPhoto.prefix + '100x100' + venue.bestPhoto.suffix
+                        : `${Placeholder}`
+                    }
                     alt={'An image of ' + venue.name}
                   />
                 }
@@ -90,19 +81,18 @@ export default class ListItem extends Component {
                   <h2 className="venue-name">{venue.name}</h2>
 
                   {venue.categories[0] && (
-                    <span className="venue-info">
-                      {/*<span className="venue-category">{venue.categories[0].name}</span>*/}
-                      <span className="venue-category">
-                        {this.formatCategory(venue.categories[0].name)}
-                      </span>
-                      <span className="vert-line">|</span>
+                    <span className="venue-category">
+                      {this.formatCategory(venue.categories[0].name)}
                     </span>
                   )}
 
                   {venue.price && (
-                    <span className="venue-info venue-price">
-                      {this.getVenuePrice(venue.price.tier)}
-                    </span>
+                    <React.Fragment>
+                      <span className="vert-line">|</span>
+                      <span className="venue-price">
+                        {this.getVenuePrice(venue.price.tier)}
+                      </span>
+                    </React.Fragment>
                   )}
 
                   {venue.location.address && (

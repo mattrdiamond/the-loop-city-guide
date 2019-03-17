@@ -53,7 +53,7 @@ class App extends Component {
     FoursquareAPI.getVenueRecommendations({
       near: 'Chicago, IL',
       section: this.state.category,
-      limit: 5
+      limit: 2
     })
       .then((results) => {
         const { items } = results.response.groups[0];
