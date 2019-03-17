@@ -53,7 +53,7 @@ class App extends Component {
     FoursquareAPI.getVenueRecommendations({
       near: 'Chicago, IL',
       section: this.state.category,
-      limit: 2
+      limit: 5
     })
       .then((results) => {
         const { items } = results.response.groups[0];
@@ -146,13 +146,13 @@ class App extends Component {
     visibleMarkers.forEach((marker) => newBounds.extend(marker.position));
     this.map.fitBounds(newBounds);
 
-    // set max zoom level
-    window.google.maps.event.addListenerOnce(this.map, 'idle', () => {
+    // set max zoom level when bounds change
+    window.google.maps.event.addListenerOnce(this.map, 'bounds_changed', () => {
       let zoomLevel = this.map.getZoom();
       if (zoomLevel > 15) {
         zoomLevel = 15;
-        this.map.setZoom(zoomLevel);
       }
+      this.map.setZoom(zoomLevel);
       this.setState({ zoom: zoomLevel });
     });
 
