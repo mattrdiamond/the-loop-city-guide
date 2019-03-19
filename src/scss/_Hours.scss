@@ -4,24 +4,40 @@
   margin-bottom: -0.4rem;
 
   tr {
-    height: 2.5rem;
+    // height: 2.5rem;
+    // padding: 10px 0 10px 8px;
   }
 
   tbody {
     border-bottom: 1px dotted $ui-07;
+    &:first-of-type {
+      th,
+      td {
+        padding: 0 0 10px 8px;
+      }
+    }
     &:last-of-type {
+      th,
+      td {
+        padding-bottom: 5px;
+      }
       // border-bottom: 1px solid transparent;
       border-bottom: none;
 
-      tr {
-        margin-bottom: -1rem;
-      }
+      // tr {
+      //   margin-bottom: -1rem;
+      // }
+    }
+
+    th,
+    td {
+      padding: 10px 0 10px 8px;
     }
   }
 
-  th {
-    padding-left: 8px;
-  }
+  // th {
+  //   padding: 10px 0 10px 8px;
+  // }
 
   th,
   .hours {
@@ -43,7 +59,7 @@
   }
 }
 
-.hours-unavailable {
+.data-unavailable {
   // text-align: center;
 
   a {
@@ -51,9 +67,9 @@
     float: right;
   }
 
-  .unavailable-message {
-    margin-bottom: 1rem;
-  }
+  // .unavailable-message {
+  //   margin-bottom: 1rem;
+  // }
 
   .icon-phone,
   .icon-globe {

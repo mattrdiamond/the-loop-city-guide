@@ -13,7 +13,7 @@ const Hours = ({ venue }) => {
                 {timeframe.days}
               </th>
               <td key={venue.id + '_hours_' + index}>{timeframe.open[0].renderedTime}</td>
-              {/* If timeframe includes today, display open status or empty cell */}
+              {/*--- If timeframe includes today, display open status or empty cell ---*/}
               {timeframe.includesToday ? (
                 venueHours.isOpen ? (
                   <td key={`${venue.id}_isOpen`} className="open">

@@ -4,13 +4,11 @@ import Category from './Category';
 export default class CategoryBar extends Component {
   constructor() {
     super();
-    // this.state = { activeCategory: 'food' };
     this.onClickCategory = this.onClickCategory.bind(this);
   }
 
   onClickCategory(clickedCategory) {
     if (this.props.category !== clickedCategory) {
-      // this.setState({ activeCategory: category });
       this.props.updateSuperState({ category: clickedCategory });
     }
   }

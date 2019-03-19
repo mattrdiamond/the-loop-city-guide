@@ -345,16 +345,19 @@ th {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: -0.4rem; }
-  .table-hours tr {
-    height: 2.5rem; }
   .table-hours tbody {
     border-bottom: 1px dotted #dadbe2; }
+    .table-hours tbody:first-of-type th,
+    .table-hours tbody:first-of-type td {
+      padding: 0 0 10px 8px; }
     .table-hours tbody:last-of-type {
       border-bottom: none; }
-      .table-hours tbody:last-of-type tr {
-        margin-bottom: -1rem; }
-  .table-hours th {
-    padding-left: 8px; }
+      .table-hours tbody:last-of-type th,
+      .table-hours tbody:last-of-type td {
+        padding-bottom: 5px; }
+    .table-hours tbody th,
+    .table-hours tbody td {
+      padding: 10px 0 10px 8px; }
   .table-hours th,
   .table-hours .hours {
     width: 33.3%; }
@@ -366,15 +369,12 @@ th {
   .table-hours .closed {
     color: #da3743; }
 
-.hours-unavailable a {
+.data-unavailable a {
   color: #247f9e;
   float: right; }
 
-.hours-unavailable .unavailable-message {
-  margin-bottom: 1rem; }
-
-.hours-unavailable .icon-phone,
-.hours-unavailable .icon-globe {
+.data-unavailable .icon-phone,
+.data-unavailable .icon-globe {
   position: relative;
   top: -1px;
   width: 14px; }
@@ -394,6 +394,9 @@ th {
   .info-item .attribute-value {
     float: right;
     margin-left: 10px; }
+
+.unavailable-message + .info-item {
+  padding-top: 1rem; }
 
 .icon-tips,
 .icon-hours,
