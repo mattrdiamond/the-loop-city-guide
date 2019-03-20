@@ -347,20 +347,29 @@ th {
   margin-bottom: -0.4rem; }
   .table-hours tbody {
     border-bottom: 1px dotted #dadbe2; }
-    .table-hours tbody:first-of-type th,
+    .table-hours tbody td {
+      padding: 10px 0 10px 0px;
+      text-align: center; }
+      .table-hours tbody td:first-of-type {
+        padding: 10px 0 10px 0rem;
+        width: 38%; }
+      .table-hours tbody td:last-of-type {
+        padding: 10px 2% 10px 1rem; }
+    .table-hours tbody th {
+      width: 31%;
+      box-sizing: border-box;
+      padding: 10px 4px 10px 4px; }
+    .table-hours tbody:first-of-type th {
+      padding: 0 4px 10px 4px; }
     .table-hours tbody:first-of-type td {
-      padding: 0 0 10px 8px; }
+      padding: 0 0 10px 0px; }
+      .table-hours tbody:first-of-type td:last-of-type {
+        padding: 0 2% 10px 1rem; }
     .table-hours tbody:last-of-type {
       border-bottom: none; }
       .table-hours tbody:last-of-type th,
       .table-hours tbody:last-of-type td {
         padding-bottom: 5px; }
-    .table-hours tbody th,
-    .table-hours tbody td {
-      padding: 10px 0 10px 8px; }
-  .table-hours th,
-  .table-hours .hours {
-    width: 33.3%; }
   .table-hours .open,
   .table-hours .closed {
     font-family: "proxima_nova_bold", Helvetica, sans-serif; }

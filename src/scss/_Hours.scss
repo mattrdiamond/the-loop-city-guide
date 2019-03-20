@@ -3,17 +3,48 @@
   border-collapse: collapse;
   margin-bottom: -0.4rem;
 
-  tr {
-    // height: 2.5rem;
-    // padding: 10px 0 10px 8px;
-  }
-
   tbody {
     border-bottom: 1px dotted $ui-07;
+
+    td {
+      padding: 10px 0 10px 0px;
+      // width: 33.3%;
+      text-align: center;
+      &:first-of-type {
+        padding: 10px 0 10px 0rem;
+        width: 38%;
+        // width: 42%;
+      }
+      &:last-of-type {
+        // padding: 10px 0 10px 1rem;
+
+        // text-align: center;
+        // padding-left: 1rem;
+        // padding-right: 3%;
+        padding: 10px 2% 10px 1rem;
+      }
+    }
+
+    th {
+      width: 31%;
+      box-sizing: border-box;
+      padding: 10px 4px 10px 4px;
+    }
+
     &:first-of-type {
-      th,
+      th {
+        padding: 0 4px 10px 4px;
+      }
       td {
-        padding: 0 0 10px 8px;
+        padding: 0 0 10px 0px;
+        // &:last-of-type {
+        //   // padding-left: 1rem;
+        //   // padding-right: 3%;
+        //   // padding: 0 4% 10px 1rem; 68.5 -> 31.5
+        // }
+        &:last-of-type {
+          padding: 0 2% 10px 1rem;
+        }
       }
     }
     &:last-of-type {
@@ -24,14 +55,10 @@
       // border-bottom: 1px solid transparent;
       border-bottom: none;
 
-      // tr {
-      //   margin-bottom: -1rem;
+      // td:last-of-type {
+      //   padding: 10px 4% 5px 1rem;
+      //   background: red;
       // }
-    }
-
-    th,
-    td {
-      padding: 10px 0 10px 8px;
     }
   }
 
@@ -39,11 +66,11 @@
   //   padding: 10px 0 10px 8px;
   // }
 
-  th,
-  .hours {
-    width: 33.3%;
-    // padding-bottom: 8px;
-  }
+  // th,
+  // .hours {
+  //   width: 33.3%;
+  //   // padding-bottom: 8px;
+  // }
 
   .open,
   .closed {
