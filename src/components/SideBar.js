@@ -73,7 +73,7 @@ export default class SideBar extends Component {
     const showingMarkers = markers.filter((marker) => marker.visible);
 
     // close infoWindow unless the map contains a single marker
-    if (showingMarkers.length > 1) {
+    if (showingMarkers.length > 1 || showingMarkers.length === 0) {
       infoWindow.close();
     }
 
