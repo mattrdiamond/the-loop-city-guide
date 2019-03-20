@@ -1,43 +1,19 @@
 @import './scss/variables';
-@import './scss/NavBar';
+@import './scss/Base';
+@import './scss/SearchBar';
 @import './scss/SideBar';
 @import './scss/NavButton';
 @import './scss/VenueList';
 @import './scss/ListItem';
-
-html {
-  height: 100%;
-}
-
-#root,
-#app-container,
-main {
-  width: 100%;
-}
-
-main {
-  height: $height-minus-navbar;
-}
-
-body,
-#root,
-#app-container {
-  // min-height: 100%;
-  height: 100%;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-// #app-container {
-//   display: grid;
-//   grid-template-columns: 300px 1fr;
-//   grid-template-rows: 60px 1fr;
-// }
-
-#map {
-  height: 100%;
-}
+@import './scss/Tabs';
+@import './scss/Tip';
+@import './scss/Hours';
+@import './scss/Info';
+@import './scss/Icon';
+@import './scss/InfoWindow';
+@import './scss/ArrowButton';
+@import './scss/SearchButton';
+@import './scss/Map';
+@import './scss/CategoryBar';
+@import './scss/ListItemLoader';
+@import './scss/MediaQueries';

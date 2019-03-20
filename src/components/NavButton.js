@@ -1,30 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class NavButton extends Component {
-  render() {
-    let buttonState = 'closed';
-
-    if (this.props.sidebarOpen) {
-      buttonState = 'open';
-    }
-
-    return (
-      <button
-        id="nav-button"
-        className={'hamburger--vortex ' + buttonState}
-        onMouseDown={this.props.toggleSidebar}
-        onKeyPress={this.props.navKeyPress}
-        type="button"
-        aria-label="Venues"
-        aria-controls="venue-sidebar"
-        aria-haspopup="true"
-      >
-        <span className="hamburger-box">
-          <span className="hamburger-inner" />
-        </span>
-      </button>
-    );
-  }
-}
+const NavButton = ({ sidebarOpen, toggleSidebar, navKeyPress }) => {
+  const isOpen = sidebarOpen ? ' open' : ' closed';
+  return (
+    <button
+      id="nav-button"
+      className={'hamburger--vortex' + isOpen}
+      onMouseDown={toggleSidebar}
+      onKeyPress={navKeyPress}
+      type="button"
+      aria-label={(sidebarOpen ? 'Hide' : 'Show') + ' venue sidebar'}
+      aria-controls="venue-sidebar"
+      aria-haspopup="true"
+    >
+      <span className={'hamburger-box' + isOpen}>
+        <span className="hamburger-top" />
+        <span className="hamburger-middle" />
+        <span className="hamburger-bottom" />
+      </span>
+    </button>
+  );
+};
 
 export default NavButton;

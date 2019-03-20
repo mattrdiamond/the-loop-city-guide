@@ -1,0 +1,26 @@
+.info-item {
+  border-bottom: 1px dotted $ui-07;
+  padding: 8px;
+  margin: 0;
+  &:first-of-type {
+    padding-top: 0;
+  }
+  &:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .attribute-key,
+  .attribute-value {
+    display: inline;
+  }
+
+  .attribute-value {
+    float: right;
+    margin-left: 10px;
+  }
+}
+
+.unavailable-message + .info-item {
+  padding-top: 1rem;
+}

@@ -1,13 +1,141 @@
 .list-item {
-  padding: 0.5rem;
   margin-top: 1rem;
-  cursor: pointer;
   display: flex;
   align-items: center;
-  img {
-    background: $primary;
-    border-radius: 50%;
-    margin-right: 0.5rem;
-    width: 30px;
+  justify-content: space-around;
+  width: 100%;
+  color: $black-01;
+  border-radius: 10px;
+  background: $white;
+  // box-shadow: 0px 3px 3px $ui-06;
+  &:focus {
+    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.2);
+    outline: none;
+  }
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &.active {
+    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .content-container {
+    width: 100%;
+    padding: 1rem 1rem 0;
+
+    .content-inner-wrapper {
+      display: flex;
+    }
+
+    .venue-image {
+      background: #eeeeee;
+      margin-right: 1rem;
+      border-radius: 2px;
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+    }
+
+    .info-column {
+      padding-right: 10px;
+      max-width: 211px;
+
+      .venue-name {
+        margin-bottom: 3px;
+        cursor: pointer;
+      }
+
+      .venue-category {
+        border-radius: 20px;
+        color: $secondary;
+        text-transform: uppercase;
+        font-size: 0.92rem;
+        margin-top: 14px;
+        letter-spacing: 0.7px;
+      }
+
+      .vert-line {
+        margin: 0 0.5rem;
+        color: $black-06;
+      }
+
+      .venue-price {
+        font-size: 0.95rem;
+      }
+
+      .price-inactive {
+        color: $black-07;
+      }
+
+      .address-container {
+        margin-top: 0.5rem;
+
+        // .icon-marker {
+        //   position: relative;
+        //   top: 2px;
+        //   width: 11px;
+        //   margin-right: 1px;
+        // }
+
+        .venue-address {
+          display: block;
+        }
+      }
+
+      // .icon-link {
+      //   width: 12px;
+      //   position: relative;
+      //   top: 2px;
+      // }
+
+      // .venue-links {
+      //   list-style-type: none;
+      //   margin-top: 0.25rem;
+      // }
+
+      // .venue-link {
+      //   display: inline;
+      // }
+
+      // .venue-bullet {
+      //   color: $black-06;
+      //   font-size: 0.8rem;
+      //   display: inline-block;
+      //   margin: 0 5px;
+      // }
+    }
+
+    .rating-column {
+      text-align: center;
+      width: 40px;
+      height: 45px;
+      box-sizing: content-box;
+      padding-top: 5px;
+      position: relative;
+      background: $secondary;
+      color: white;
+      margin-left: auto;
+      margin-top: -13px;
+      display: flex;
+      justify-content: center;
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-bottom: 7px solid $white;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+      }
+
+      img {
+        width: 13px;
+        display: block;
+        margin: 0 auto 2px;
+      }
+    }
   }
 }

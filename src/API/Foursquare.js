@@ -68,6 +68,7 @@ export default class FoursquareAPI {
   static getVenuePhotos(VENUE_ID) {
     return Helper.simpleFetch(`/venues/${VENUE_ID}/photos`, 'GET');
   }
+  static getVenueRecommendations(urlParams) {
+    return Helper.simpleFetch(`/venues/explore`, 'GET', urlParams);
+  }
 }
-
-// Credit: Helper class from tutorial by Forrest Walker

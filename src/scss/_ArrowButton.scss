@@ -1,0 +1,38 @@
+.arrow-button {
+  width: 1.05rem;
+  height: 1.25rem;
+  display: inline-block;
+  position: relative;
+  margin-left: 9px;
+  top: 0.16rem;
+
+  span {
+    top: 0.5rem;
+    position: absolute;
+    width: 0.65rem;
+    height: 0.12rem;
+    background-color: $ui-06;
+    display: inline-block;
+    transition: all 0.2s ease;
+    border-radius: 5px;
+    &:first-of-type {
+      left: 0;
+      transform: rotate(40deg);
+    }
+    &:last-of-type {
+      right: 0;
+      transform: rotate(-40deg);
+    }
+  }
+
+  &.active {
+    span {
+      &:first-of-type {
+        transform: rotate(-40deg);
+      }
+      &:last-of-type {
+        transform: rotate(40deg);
+      }
+    }
+  }
+}

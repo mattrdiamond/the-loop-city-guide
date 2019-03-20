@@ -1,0 +1,21 @@
+.icon-tips,
+.icon-hours,
+.icon-info,
+.icon-globe,
+.icon-phone,
+.icon-link,
+.icon-marker {
+  padding-right: 5px;
+  fill: $ui-05;
+}
+
+.icon-star {
+  fill: white;
+  display: block;
+  margin: 0 auto 1px;
+}
+
+.icon-globe,
+.icon-phone {
+  vertical-align: middle;
+}

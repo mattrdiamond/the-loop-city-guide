@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import NavBar from './components/NavBar';
+import NavButton from './components/NavButton';
 import SideBar from './components/SideBar';
 import Map from './components/Map';
-import FoursquareAPI from './API/';
+import FoursquareAPI from './API/Foursquare';
 import './App.css';
+import InfoWindowContent from './components/InfoWindowContent';
+import MapStyles from './MapStyles.json';
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +16,9 @@ class App extends Component {
       center: [],
       zoom: 12,
       infoWindow: '',
-      sidebarOpen: false,
+      sidebarOpen: true,
+      loading: false,
+      category: 'food',
       updateSuperState: (obj) => {
         this.setState(obj);
       }
@@ -26,50 +30,86 @@ class App extends Component {
     this.updateMapBounds = this.updateMapBounds.bind(this);
     this.closeSidebar = this.closeSidebar.bind(this);
     this.listItemKeyPress = this.listItemKeyPress.bind(this);
+    this.fetchVenues = this.fetchVenues.bind(this);
+    this.createMarkers = this.createMarkers.bind(this);
   }
 
   componentDidMount() {
-    // Fetch restaurant data from Foursquare
-    FoursquareAPI.search({
+    this.setState({ loading: true });
+
+    // Fetch venues and then initialize map
+    this.fetchVenues(this.initMap);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // If category changed, clear markers, fetch data and create new markers
+    if (prevState.category !== this.state.category) {
+      this.clearMarkers();
+      this.fetchVenues(this.createMarkers);
+    }
+  }
+
+  fetchVenues(callback) {
+    FoursquareAPI.getVenueRecommendations({
       near: 'Chicago, IL',
-      query: 'museum',
-      limit: 10
+      section: this.state.category,
+      limit: 5
     })
       .then((results) => {
-        const { venues } = results.response;
-        const { center } = results.response.geocode.feature.geometry;
-        this.setState({ venues, center });
-        this.renderMap();
+        const { items } = results.response.groups[0];
+        const { center } = results.response.geocode;
+        const venues = items.map((item) => item.venue);
+        const venuePromises = venues.map((venue) => {
+          return FoursquareAPI.getVenueDetails(venue.id).then(
+            (results) => results.response.venue
+          );
+        });
+        const venueDetails = Promise.all(venuePromises);
+        return venueDetails;
+      })
+      .then((venueDetails, center) => {
+        venueDetails.sort(this.alphabetizeVenues);
+        this.setState({ venues: venueDetails, center: center });
+        callback();
       })
       .catch((error) => {
-        alert('Error: Failed to fetch Foursquare Data');
+        console.log(error);
+        alert('Error: Failed to fetch Foursquare Venues');
       });
   }
 
-  renderMap() {
-    const API_KEY = 'INSERT API KEY HERE';
-    loadMapScript(
-      `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`
-    );
-    window.initMap = this.initMap;
+  // Sort venues alphabetically by venue name
+  alphabetizeVenues(a, b) {
+    if (a.name < b.name) return -1;
+    if (a.name > b.name) return 1;
+    return 0;
   }
 
   initMap() {
-    // Create empty LatLngBounds object
-    this.bounds = new window.google.maps.LatLngBounds();
-
     // Load map
     this.map = new window.google.maps.Map(document.getElementById('map'), {
       center: this.state.center,
-      zoom: this.state.zoom
+      zoom: this.state.zoom,
+      styles: MapStyles,
+      mapTypeControl: false
     });
 
     // Create single InfoWindow
-    const infowindow = new window.google.maps.InfoWindow();
-    this.setState({ infoWindow: infowindow });
+    this.infowindow = new window.google.maps.InfoWindow();
+    this.infowindow.id = '';
+
+    // Add markers
+    this.createMarkers();
+  }
+
+  createMarkers() {
+    const {
+      infowindow,
+      state: { venues }
+    } = this;
 
     // Create marker for each venue
-    this.state.venues.map((venue) => {
+    const markerArray = venues.map((venue) => {
       const marker = new window.google.maps.Marker({
         position: {
           lat: venue.location.lat,
@@ -81,62 +121,58 @@ class App extends Component {
         animation: window.google.maps.Animation.DROP
       });
 
-      this.state.markers.push(marker);
-
-      // Extend the bounds to include each marker's position
-      this.bounds.extend(marker.position);
-
+      // Add click event to each marker
       marker.addListener('click', () => {
         // Animate marker
         this.toggleBounce(marker);
 
-        // Find venue that matches clicked marker
-        const clickedVenue = this.state.venues.find((marker) => marker.id === venue.id);
+        // Add current marker id to infowindow
+        infowindow.id = marker.id;
 
-        FoursquareAPI.getVenueDetails(venue.id)
-          .then((res) => {
-            //Get venue details from foursquare and copy them to clickedVenue
-            const venueDetails = Object.assign(clickedVenue, res.response.venue);
-
-            // Copy venueDetails object and append to venues
-            this.setState({ venues: Object.assign(this.state.venues, venueDetails) });
-
-            // Use photo if available. Otherwise set as empty string
-            const venuePhoto = venue.bestPhoto
-              ? '<img src="' +
-                venue.bestPhoto.prefix +
-                '100x100' +
-                venue.bestPhoto.suffix +
-                '" alt="An image of ' +
-                venue.name +
-                '" />'
-              : '';
-
-            // Generate content for infoWindow
-            const contentString = `<React.Fragment>
-              <p>${venue.name}</p>
-              ${venuePhoto}
-              </React.Fragment>`;
-
-            // Set infowindow content and open
-            infowindow.setContent(contentString);
-            infowindow.open(this.map, marker);
-          })
-          .catch((error) => {
-            alert('Error: Failed to fetch Foursquare Data');
-          });
+        // Set infowindow content and open
+        infowindow.setContent(InfoWindowContent(venue));
+        this.setState({ infoWindow: infowindow });
+        infowindow.open(this.map, marker);
       });
+      return marker;
     });
-    // fit the map to the newly inclusive bounds
-    this.map.fitBounds(this.bounds);
+    this.updateMapBounds(markerArray);
+    this.setState({ loading: false, markers: markerArray, infoWindow: infowindow });
+  }
+
+  updateMapBounds(visibleMarkers) {
+    // Extend the map bounds to include each marker's position
+    let newBounds = new window.google.maps.LatLngBounds();
+    visibleMarkers.forEach((marker) => newBounds.extend(marker.position));
+    this.map.fitBounds(newBounds);
+
+    // set max zoom level when bounds change
+    window.google.maps.event.addListenerOnce(this.map, 'bounds_changed', () => {
+      let zoomLevel = this.map.getZoom();
+      if (zoomLevel > 15) {
+        zoomLevel = 15;
+      }
+      this.map.setZoom(zoomLevel);
+      this.setState({ zoom: zoomLevel });
+    });
+
+    if (visibleMarkers.length === 1) {
+      window.google.maps.event.trigger(visibleMarkers[0], 'click');
+    }
+  }
+
+  clearMarkers() {
+    this.setState({ loading: true });
+    this.state.markers.forEach((marker) => marker.setMap(null));
   }
 
   handleListItemClick(venue) {
-    const clickedMarker = this.state.markers.find((marker) => marker.id === venue.id);
-    window.google.maps.event.trigger(clickedMarker, 'click');
+    const { markers, infoWindow } = this.state;
+    const clickedMarker = markers.find((marker) => marker.id === venue.id);
 
-    if (window.innerWidth < 600) {
-      this.toggleSidebar();
+    // Open infowindow if not already open
+    if (infoWindow.id !== clickedMarker.id) {
+      window.google.maps.event.trigger(clickedMarker, 'click');
     }
   }
 
@@ -146,24 +182,6 @@ class App extends Component {
     if (code === 13) {
       this.handleListItemClick(venue);
     }
-  }
-
-  // update map zoom level if the data has changed
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.zoom !== this.state.zoom) {
-      this.map.setZoom(this.state.zoom);
-    }
-  }
-
-  toggleBounce(marker) {
-    if (marker.getAnimation() !== null) {
-      marker.setAnimation(null);
-    } else {
-      marker.setAnimation(window.google.maps.Animation.BOUNCE);
-    }
-    setTimeout(() => {
-      marker.setAnimation(null);
-    }, 1000);
   }
 
   navKeyPress(e) {
@@ -182,58 +200,45 @@ class App extends Component {
     this.setState({ sidebarOpen: false });
   }
 
-  updateMapBounds(visibleMarkers) {
-    let newBounds = new window.google.maps.LatLngBounds();
-    visibleMarkers.forEach((marker) => newBounds.extend(marker.position));
-    this.map.fitBounds(newBounds);
-
-    // set max zoom level
-    let zoomLevel = this.map.getZoom();
-    if (zoomLevel > 15) {
-      zoomLevel = 15;
-
-      // open infoWindow if map contains a single marker
-      if (visibleMarkers.length === 1) {
-        window.google.maps.event.trigger(visibleMarkers[0], 'click');
-      }
+  toggleBounce(marker) {
+    if (marker.getAnimation() !== null) {
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(window.google.maps.Animation.BOUNCE);
     }
-    this.setState({ zoom: zoomLevel });
+    setTimeout(() => {
+      marker.setAnimation(null);
+    }, 1000);
   }
 
   render() {
+    const {
+      toggleSidebar,
+      navKeyPress,
+      handleListItemClick,
+      updateMapBounds,
+      listItemKeyPress,
+      closeSidebar,
+      state: { sidebarOpen }
+    } = this;
+
     return (
-      <div id="app-container">
-        <NavBar
-          toggleSidebar={this.toggleSidebar}
-          sidebarOpen={this.state.sidebarOpen}
-          navKeyPress={this.navKeyPress}
+      <main id="app-container">
+        <NavButton
+          toggleSidebar={toggleSidebar}
+          sidebarOpen={sidebarOpen}
+          navKeyPress={navKeyPress}
         />
         <SideBar
-          handleListItemClick={this.handleListItemClick}
-          venues={this.state.venues}
-          markers={this.state.markers}
-          updateSuperState={this.state.updateSuperState}
-          infoWindow={this.state.infoWindow}
-          sidebarOpen={this.state.sidebarOpen}
-          updateMapBounds={this.updateMapBounds}
-          listItemKeyPress={this.listItemKeyPress}
+          {...this.state}
+          handleListItemClick={handleListItemClick}
+          updateMapBounds={updateMapBounds}
+          listItemKeyPress={listItemKeyPress}
         />
-        <Map closeSidebar={this.closeSidebar} />
-      </div>
+        <Map sidebarOpen={sidebarOpen} id="map" closeSidebar={closeSidebar} />
+      </main>
     );
   }
 }
-
-// Load google maps asynchronously
-// Create Google Maps script tag and insert it before all other script tags
-const loadMapScript = (url) => {
-  const index = window.document.getElementsByTagName('script')[0];
-  const script = window.document.createElement('script');
-  script.src = url;
-  script.async = true;
-  script.defer = true;
-  script.onerror = () => alert('Unable to load Google Maps');
-  index.parentNode.insertBefore(script, index);
-};
 
 export default App;

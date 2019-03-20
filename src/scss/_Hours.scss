@@ -1,0 +1,115 @@
+.table-hours {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: -0.4rem;
+
+  tbody {
+    border-bottom: 1px dotted $ui-07;
+
+    td {
+      padding: 10px 0 10px 0px;
+      // width: 33.3%;
+      text-align: center;
+      &:first-of-type {
+        padding: 10px 0 10px 0rem;
+        width: 38%;
+        // width: 42%;
+      }
+      &:last-of-type {
+        // padding: 10px 0 10px 1rem;
+
+        // text-align: center;
+        // padding-left: 1rem;
+        // padding-right: 3%;
+        padding: 10px 2% 10px 1rem;
+      }
+    }
+
+    th {
+      width: 31%;
+      box-sizing: border-box;
+      padding: 10px 4px 10px 4px;
+    }
+
+    &:first-of-type {
+      th {
+        padding: 0 4px 10px 4px;
+      }
+      td {
+        padding: 0 0 10px 0px;
+        // &:last-of-type {
+        //   // padding-left: 1rem;
+        //   // padding-right: 3%;
+        //   // padding: 0 4% 10px 1rem; 68.5 -> 31.5
+        // }
+        &:last-of-type {
+          padding: 0 2% 10px 1rem;
+        }
+      }
+    }
+    &:last-of-type {
+      th,
+      td {
+        padding-bottom: 5px;
+      }
+      // border-bottom: 1px solid transparent;
+      border-bottom: none;
+
+      // td:last-of-type {
+      //   padding: 10px 4% 5px 1rem;
+      //   background: red;
+      // }
+    }
+  }
+
+  // th {
+  //   padding: 10px 0 10px 8px;
+  // }
+
+  // th,
+  // .hours {
+  //   width: 33.3%;
+  //   // padding-bottom: 8px;
+  // }
+
+  .open,
+  .closed {
+    font-family: $bold;
+  }
+
+  .open {
+    color: $primary;
+  }
+
+  .closed {
+    color: $secondary;
+  }
+}
+
+.data-unavailable {
+  // text-align: center;
+
+  a {
+    color: $primary;
+    float: right;
+  }
+
+  // .unavailable-message {
+  //   margin-bottom: 1rem;
+  // }
+
+  .icon-phone,
+  .icon-globe {
+    position: relative;
+    top: -1px;
+    width: 14px;
+  }
+  // .icon-phone {
+  //   position: relative;
+  //   top: 1px;
+  // }
+
+  // .hours-phone {
+  //   margin-top: 5px;
+  // }
+}

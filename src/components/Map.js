@@ -1,9 +1,26 @@
 import React, { Component } from 'react';
 
-class Map extends Component {
+export default class Map extends Component {
   constructor(props) {
     super(props);
     this.handleCloseSidebar = this.handleCloseSidebar.bind(this);
+  }
+
+  componentDidMount() {
+    if (!window.google) {
+      const API_KEY = 'AIzaSyCHE01dQ6hdkOBP0qxkzYdTCJdhYesX8gY';
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = `https://maps.google.com/maps/api/js?key=${API_KEY}`;
+      script.onerror = () => alert('Unable to load Google Maps');
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      // Insert new script node before first script tag
+      firstScriptTag.parentNode.insertBefore(script, firstScriptTag);
+      //Important: cannot access google.maps until it's finished loading
+      script.addEventListener('load', (e) => {
+        console.log('A. map script loaded');
+      });
+    }
   }
 
   handleCloseSidebar() {
@@ -13,17 +30,19 @@ class Map extends Component {
   }
 
   render() {
+    const {
+      handleCloseSidebar,
+      props: { id, sidebarOpen }
+    } = this;
+    console.log('rendered map');
     return (
-      <main>
-        <div
-          role="application"
-          aria-hidden="true"
-          id="map"
-          onClick={this.handleCloseSidebar}
-        />
-      </main>
+      <section
+        id="map"
+        className={sidebarOpen ? 'pad-left' : ''}
+        onClick={handleCloseSidebar}
+      >
+        <div role="application" aria-hidden="true" id={id} />
+      </section>
     );
   }
 }
-
-export default Map;

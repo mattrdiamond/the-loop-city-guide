@@ -2,11 +2,28 @@
 // Colors
 //--------------------------------------------------------------------
 
-$white: #f3f3f3;
-$black: #111;
-$primary: #5e9cea;
+//---- Primary colors
+$white: #fff;
+$white-opaque: rgba(255, 255, 255, 0.4);
+$primary: #247f9e;
+$secondary: #da3743;
+$yellow: #fdaf08;
+$black: #333;
+$focus: #6aa6ba;
 
-$ui-primary: #333;
+//---- Variants
+$black-01: lighten($black, 10%);
+$black-02: lighten($black, 20%);
+$black-03: lighten($black, 30%);
+$black-04: lighten($black, 40%);
+$black-05: lighten($black, 50%);
+$black-06: lighten($black, 60%);
+$black-07: lighten($black, 70%);
+$black-08: lighten($black, 77%);
+$black-09: lighten($black, 90%);
+
+//---- UI colors
+$ui-primary: #32333f;
 
 $ui-01: lighten($ui-primary, 10%);
 $ui-02: lighten($ui-primary, 20%);
@@ -14,12 +31,27 @@ $ui-03: lighten($ui-primary, 30%);
 $ui-04: lighten($ui-primary, 40%);
 $ui-05: lighten($ui-primary, 50%);
 $ui-06: lighten($ui-primary, 60%);
-$ui-07: lighten($ui-primary, 70%);
-$ui-08: lighten($ui-primary, 80%);
-$ui-09: lighten($ui-primary, 90%);
+$ui-07: lighten($ui-primary, 65%);
+$ui-08: lighten($ui-primary, 68%);
+$ui-09: lighten($ui-primary, 74%);
+$ui-10: lighten($ui-primary, 76%);
+
+//--------------------------------------------------------------------
+// Fonts
+//--------------------------------------------------------------------
+$roman: 'proxima_nova_regular', Helvetica, sans-serif;
+$bold: 'proxima_nova_bold', Helvetica, sans-serif;
+$semibold: 'proxima_nova_semibold', Helvetica, sans-serif;
 
 //--------------------------------------------------------------------
 // Units
 //--------------------------------------------------------------------
 
-$height-minus-navbar: calc(100% - 50px);
+$height-minus-navbar: calc(100% - 76px);
+$unit: 10px;
+
+//--------------------------------------------------------------------
+// Animations
+//--------------------------------------------------------------------
+
+$easing: cubic-bezier(0.6, 0.05, 0.28, 0.91);

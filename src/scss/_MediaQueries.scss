@@ -1,0 +1,55 @@
+@media only screen and (max-width: 500px) {
+  #app-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #venue-sidebar {
+    width: 100%;
+    position: static;
+    order: 2;
+    top: 57px;
+    // overflow: change from fixed to visible to make map and venues scroll together???
+    overflow: visible;
+    height: auto;
+    flex: 1;
+    // transition: none;
+    &.hidden {
+      margin-left: 0;
+    }
+
+    .sidebar-wrapper {
+      overflow: visible;
+    }
+  }
+
+  .search-bar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+  }
+
+  #map {
+    width: 100%;
+    order: 1;
+    height: 250px;
+    position: fixed;
+    margin-top: 59px;
+    &.pad-left {
+      margin-left: 0;
+    }
+  }
+
+  .hamburger--vortex .hamburger-box {
+    display: none;
+  }
+
+  // prevent app container from collapsing
+  body,
+  #root,
+  #app-container {
+    min-height: 100%;
+    // height: auto;
+  }
+}

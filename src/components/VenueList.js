@@ -1,20 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ListItem from './ListItem';
 
-export default class venueList extends Component {
-  render() {
-    return (
-      <ul className="venue-list">
-        {this.props.venues &&
-          this.props.venues.map((venue, index) => (
-            <ListItem
-              key={index}
-              venue={venue}
-              handleListItemClick={this.props.handleListItemClick}
-              listItemKeyPress={this.props.listItemKeyPress}
-            />
-          ))}
-      </ul>
-    );
-  }
-}
+const venueList = ({
+  venues,
+  handleListItemClick,
+  listItemKeyPress,
+  infoWindow,
+  loading
+}) => (
+  <ul className="venue-list">
+    {venues &&
+      venues.map((venue) => (
+        <ListItem
+          key={`venue_${venue.location.address.replace(/\s+/g, '')}_${venue.createdAt}`}
+          venue={venue}
+          handleListItemClick={handleListItemClick}
+          listItemKeyPress={listItemKeyPress}
+          infoWindow={infoWindow}
+          loading={loading}
+        />
+      ))}
+  </ul>
+);
+
+export default venueList;
