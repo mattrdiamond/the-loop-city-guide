@@ -16,7 +16,6 @@ class Helper {
   }
 
   static urlBuilder(urlParams) {
-    // if empty return empty string
     if (!urlParams) {
       return '';
     }

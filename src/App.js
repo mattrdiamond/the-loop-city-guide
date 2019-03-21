@@ -78,7 +78,6 @@ class App extends Component {
       });
   }
 
-  // Sort venues alphabetically by venue name
   alphabetizeVenues(a, b) {
     if (a.name < b.name) return -1;
     if (a.name > b.name) return 1;
@@ -141,8 +140,9 @@ class App extends Component {
   }
 
   updateMapBounds(visibleMarkers) {
-    // Extend the map bounds to include each marker's position
     let newBounds = new window.google.maps.LatLngBounds();
+
+    // Extend the map bounds to include each marker's position
     visibleMarkers.forEach((marker) => newBounds.extend(marker.position));
     this.map.fitBounds(newBounds);
 
