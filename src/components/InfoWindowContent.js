@@ -2,7 +2,7 @@ import Icons from '../images/icons.svg';
 
 const InfoWindowContent = (venue) => {
 
-  // Include venue icon if available. Otherwise set as empty string
+  // Include venue icon if available
   const category = venue.categories[0];
   const venueIcon = category
     ? '<img class="iw-photo" src="' +
@@ -17,7 +17,7 @@ const InfoWindowContent = (venue) => {
   const hoursIcon =
     `<div class="icon-container clock">
       <svg class="iw-icon"
-        role="img" height="14px" width="14px" aria-label="clock icon" >
+        role="img" height="13px" width="13px" aria-label="clock icon" >
         <title>location icon</title>
         <use href="${Icons}#clock"/>
       </svg>
@@ -35,7 +35,7 @@ const InfoWindowContent = (venue) => {
         <ul class="iw-list">
           <li class="iw-address">
             <div class="icon-container marker">
-              <svg class="iw-icon" role="img" height="18px" width="14px" aria-label="location icon" >
+              <svg class="iw-icon" role="img" height="17px" width="13px" aria-label="location icon" >
                 <title>location icon</title>
                 <use href="${Icons}#marker"/>
               </svg>

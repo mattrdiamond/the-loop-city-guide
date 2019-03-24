@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import SearchButton from './SearchButton';
 
-// PureComponent handles shouldComponentUpdate for you
 export default class SearchBar extends PureComponent {
   constructor(props) {
     super(props);

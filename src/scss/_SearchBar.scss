@@ -81,7 +81,7 @@
     // letter-spacing: 0.4px;
     @extend %searchbar-text;
     color: rgba(255, 255, 255, 0.25);
-    transition: all 0.4s ease;
+    transition: all 0.5s ease;
     &.active {
       color: rgba(255, 255, 255, 0.65);
     }
@@ -91,7 +91,7 @@
     @extend %searchbar-text;
     opacity: 0;
     padding-left: 20px;
-    transition: all 0.4s ease;
+    transition: all 0.5s ease;
     &.active {
       opacity: 1;
       cursor: pointer;
