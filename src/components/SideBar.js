@@ -3,29 +3,18 @@ import VenueList from './VenueList';
 import SearchBar from './SearchBar';
 import Icon from './Icon';
 import CategoryBar from './CategoryBar';
-import ListItem from './ListItem';
 import ListItemLoader from './ListItemLoader';
 
 export default class SideBar extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       query: '',
       visibleMarkers: []
     };
     this.handleFilterVenues = this.handleFilterVenues.bind(this);
+    this.clearInput = this.clearInput.bind(this);
   }
-
-  // Only update if number of markers/venues changes
-  // shouldComponentUpdate(nextState, nextProps) {
-  //   if (
-  //     !this.props.loading &&
-  //     nextProps.visibleMarkers.length === this.state.visibleMarkers.length
-  //   ) {
-  //     return false;
-  //   }
-  //   return true;
-  // }
 
   // filter venues to match query value
   handleFilterVenues() {
@@ -69,7 +58,7 @@ export default class SideBar extends Component {
 
   // check to see if number of markers changed before updating map bounds
   didMarkersChange() {
-    const { markers, infoWindow } = this.props;
+    const { markers, infoWindow, updateMapBounds } = this.props;
     const showingMarkers = markers.filter((marker) => marker.visible);
 
     // close infoWindow unless the map contains a single marker
@@ -83,16 +72,21 @@ export default class SideBar extends Component {
       showingMarkers.length > 0
     ) {
       // update map bounds to fit visible markers
-      this.props.updateMapBounds(showingMarkers);
+      updateMapBounds(showingMarkers);
     }
     // update visibleMarkers for next execution
     this.setState({ visibleMarkers: showingMarkers });
+  }
+
+  clearInput() {
+    this.setState({ query: '' });
   }
 
   render() {
     const {
       handleFilterVenues,
       handleFilterMarkers,
+      clearInput,
       props: {
         toggleSidebar,
         sidebarOpen,
@@ -101,9 +95,13 @@ export default class SideBar extends Component {
         listItemKeyPress,
         infoWindow,
         updateSuperState,
-        category
-      }
+        category,
+        loading,
+        venues
+      },
+      state: { query }
     } = this;
+
     console.log('rendered sidebar');
 
     return (
@@ -113,10 +111,12 @@ export default class SideBar extends Component {
           sidebarOpen={sidebarOpen}
           navKeyPress={navKeyPress}
           handleFilterMarkers={handleFilterMarkers}
+          query={query}
+          clearInput={clearInput}
         />
         <div className="sidebar-wrapper">
-          {/*--- Initial load: display loading component until fetch complete ---*/}
-          {this.props.loading && this.props.venues.length === 0 ? (
+          {/*--- Initial load: display loading components while fetching data ---*/}
+          {loading && venues.length === 0 ? (
             <div className="loader-container">
               <ListItemLoader />
               <ListItemLoader />
@@ -128,7 +128,7 @@ export default class SideBar extends Component {
               listItemKeyPress={listItemKeyPress}
               infoWindow={infoWindow}
               venues={handleFilterVenues()}
-              loading={this.props.loading}
+              loading={loading}
             />
           )}
           <footer>

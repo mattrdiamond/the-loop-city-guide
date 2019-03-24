@@ -12,10 +12,8 @@ export default class Tabs extends Component {
 
   shouldComponentUpdate(nextState, nextProps) {
     const { activeTab } = this.state;
-    // console.log('TABS: nextprops activetab', nextProps.activeTab);
-    // console.log('TABS: prevprops activetab', activeTab);
-    // if nextProps is different from active tab,
-    // render when activating (nextProps) or deactivating (activeTab) tabs (nextProps will be false when deactivating and activeTab (previously active tab) will be true)
+
+    // Only render when activating (nextProps) or deactivating (activeTab) tabs
     if (nextProps.activeTab !== activeTab && (nextProps.activeTab || activeTab)) {
       return true;
     } else {

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Category from './Category';
 
 export default class CategoryBar extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.onClickCategory = this.onClickCategory.bind(this);
   }
 
@@ -23,7 +23,6 @@ export default class CategoryBar extends Component {
 
     return (
       <nav className="category-nav">
-        {/*--- Map through list of 4 categories ---*/}
         <ul className="category-list">
           {children.map((child) => {
             const { label } = child.props;

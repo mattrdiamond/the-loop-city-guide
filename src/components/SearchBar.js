@@ -1,10 +1,10 @@
-import React, { Component, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import SearchButton from './SearchButton';
 
 // PureComponent handles shouldComponentUpdate for you
 export default class SearchBar extends PureComponent {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { showInput: false };
     this.toggleInput = this.toggleInput.bind(this);
   }
@@ -15,7 +15,8 @@ export default class SearchBar extends PureComponent {
 
   render() {
     const {
-      props: { handleFilterMarkers },
+      toggleInput,
+      props: { handleFilterMarkers, query, clearInput },
       state: { showInput }
     } = this;
 
@@ -24,7 +25,7 @@ export default class SearchBar extends PureComponent {
     return (
       <div className="search-bar">
         <div className="nav-top">
-          <SearchButton showInput={showInput} toggleInput={this.toggleInput} />
+          <SearchButton showInput={showInput} toggleInput={toggleInput} />
         </div>
         <div className={'input-container' + (showInput ? ' visible' : ' hidden')}>
           <input
@@ -33,8 +34,17 @@ export default class SearchBar extends PureComponent {
             placeholder="Search..."
             onChange={handleFilterMarkers}
             tabIndex={showInput ? 0 : -1}
+            value={query}
           />
-          <span className="input-caption">Type to filter venues</span>
+          <span className={'input-caption' + (!query ? ' active' : '')}>
+            Type to filter venues
+          </span>
+          <button
+            className={'clear-input' + (query ? ' active' : '')}
+            onClick={clearInput}
+          >
+            Clear
+          </button>
         </div>
       </div>
     );

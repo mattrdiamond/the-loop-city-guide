@@ -1,3 +1,11 @@
+%searchbar-text {
+  // color: $white-opaque;
+  padding: 0.5rem 0 0;
+  font-size: 0.9rem;
+  display: inline-block;
+  letter-spacing: 0.4px;
+}
+
 .search-bar {
   background: $primary;
   color: white;
@@ -21,6 +29,9 @@
     // transform: scale(0);
     transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
     padding: 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     &.visible {
       height: 70px;
       // display: block;
@@ -63,11 +74,36 @@
   }
 
   .input-caption {
-    color: $white-opaque;
-    padding-top: 0.5rem;
-    font-size: 0.9rem;
-    display: block;
-    letter-spacing: 0.4px;
+    // color: $white-opaque;
+    // padding-top: 0.5rem;
+    // font-size: 0.9rem;
+    // display: block;
+    // letter-spacing: 0.4px;
+    @extend %searchbar-text;
+    color: rgba(255, 255, 255, 0.25);
+    transition: all 0.4s ease;
+    &.active {
+      color: rgba(255, 255, 255, 0.65);
+    }
+  }
+
+  .clear-input {
+    @extend %searchbar-text;
+    opacity: 0;
+    padding-left: 20px;
+    transition: all 0.4s ease;
+    &.active {
+      opacity: 1;
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.65);
+      &:hover,
+      &:focus {
+        color: white;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
   }
 
   h1 {

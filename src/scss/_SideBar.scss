@@ -5,12 +5,9 @@
   // background: $white;
   z-index: 4;
   font-size: 1rem;
-  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
   // padding: 1rem;
   // left: -415px;
-  &.hidden {
-    margin-left: -415px;
-  }
 
   display: flex;
   flex-direction: column;
@@ -22,6 +19,10 @@
   transition: all 0.35s $easing;
   // box-shadow: 1px 0px 5px $black-05;
   background: $ui-08;
+
+  &.hidden {
+    margin-left: -415px;
+  }
 
   .sidebar-wrapper {
     padding: 1rem;

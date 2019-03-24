@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Icon from './Icon';
 
-export default class Category extends Component {
+export default class Category extends PureComponent {
   constructor(props) {
     super(props);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -17,6 +17,7 @@ export default class Category extends Component {
       handleOnClick,
       props: { category, label }
     } = this;
+    console.log('rendered category');
 
     return (
       <li

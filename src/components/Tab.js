@@ -19,6 +19,8 @@ export default class Tab extends Component {
       props: { activeTab, label }
     } = this;
 
+    console.log('render tab', label);
+
     let tabClass = 'tab-list-item';
     let arrowClass = 'arrow-button';
 
