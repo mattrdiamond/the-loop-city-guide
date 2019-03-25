@@ -1,4 +1,8 @@
 @media only screen and (max-width: 500px) {
+  html {
+    height: auto;
+  }
+
   #app-container {
     display: flex;
     flex-direction: column;
@@ -9,11 +13,10 @@
     position: static;
     order: 2;
     top: 57px;
-    // overflow: change from fixed to visible to make map and venues scroll together???
     overflow: visible;
     height: auto;
     flex: 1;
-    // transition: none;
+    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.35);
     &.hidden {
       margin-left: 0;
     }
@@ -41,15 +44,9 @@
     }
   }
 
-  .hamburger--vortex .hamburger-box {
-    display: none;
-  }
-
-  // prevent app container from collapsing
-  body,
-  #root,
-  #app-container {
-    min-height: 100%;
-    // height: auto;
+  .hamburger--vortex {
+    .hamburger-box {
+      display: none;
+    }
   }
 }

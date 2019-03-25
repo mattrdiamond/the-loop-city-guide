@@ -60,19 +60,16 @@ th {
 .bold {
   font-family: "proxima_nova_bold", Helvetica, sans-serif; }
 
-.search-bar .input-caption, .search-bar .clear-input {
-  padding: 0.5rem 0 0;
-  font-size: 0.9rem;
-  display: inline-block;
-  letter-spacing: 0.4px; }
-
 .search-bar {
   background: #247f9e;
   color: white;
   padding: 1rem;
   z-index: 1;
   box-sizing: border-box;
-  width: 415px; }
+  width: 415px;
+  /* Firefox */
+  /* Internet Explorer 10-11 */
+  /* Microsoft Edge */ }
   .search-bar .nav-top {
     display: flex;
     justify-content: space-between;
@@ -88,8 +85,6 @@ th {
     .search-bar .input-container.visible {
       height: 70px; }
   .search-bar #search-input {
-    padding-left: 0;
-    padding-right: 0;
     margin-top: 1rem;
     height: 2.5rem;
     width: 100%;
@@ -103,23 +98,24 @@ th {
       outline: none; }
   .search-bar ::placeholder {
     color: rgba(255, 255, 255, 0.3);
-    opacity: 1;
-    /* Firefox */ }
+    opacity: 1; }
   .search-bar :-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
     color: rgba(255, 255, 255, 0.3); }
   .search-bar ::-ms-input-placeholder {
-    /* Microsoft Edge */
     color: rgba(255, 255, 255, 0.3); }
-  .search-bar .input-caption {
-    color: rgba(255, 255, 255, 0.25);
+  .search-bar .input-caption, .search-bar .clear-input {
+    padding: 0.5rem 0 0;
+    font-size: 0.9rem;
+    display: inline-block;
+    letter-spacing: 0.4px;
     transition: all 0.5s ease; }
+  .search-bar .input-caption {
+    color: rgba(255, 255, 255, 0.25); }
     .search-bar .input-caption.active {
       color: rgba(255, 255, 255, 0.65); }
   .search-bar .clear-input {
     opacity: 0;
-    padding-left: 20px;
-    transition: all 0.5s ease; }
+    padding-left: 20px; }
     .search-bar .clear-input.active {
       opacity: 1;
       cursor: pointer;
@@ -144,13 +140,13 @@ th {
   transition: all 0.35s cubic-bezier(0.6, 0.05, 0.28, 0.91);
   background: #dddee4; }
   #venue-sidebar.hidden {
-    margin-left: -415px; }
+    margin-left: -430px; }
+  #venue-sidebar.visible {
+    left: 0; }
   #venue-sidebar .sidebar-wrapper {
     padding: 1rem;
     overflow: auto;
     flex-grow: 1; }
-  #venue-sidebar.visible {
-    left: 0; }
   #venue-sidebar footer {
     text-align: center;
     margin: 1.5rem 0 0.5rem;
@@ -334,6 +330,9 @@ th {
     .venue-tabs .tab-list-item:last-of-type {
       border-left: 1px solid #dadbe2;
       border-radius: 0 0 9px 0; }
+    .venue-tabs .tab-list-item.tab-list-inactive {
+      border-bottom: 1px solid #dadbe2;
+      border-radius: 0; }
     .venue-tabs .tab-list-item.tab-list-active {
       border-top: 3px solid #247f9e;
       padding-top: 8px;
@@ -343,9 +342,6 @@ th {
         background: inherit; }
       .venue-tabs .tab-list-item.tab-list-active .icon {
         fill: #247f9e; }
-    .venue-tabs .tab-list-item.tab-list-inactive {
-      border-bottom: 1px solid #dadbe2;
-      border-radius: 0; }
   .venue-tabs .tab-content {
     display: none; }
   .venue-tabs .tab-content-active {
@@ -610,11 +606,7 @@ th {
       fill: #da3743; }
 
 .animated-background {
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-name: placeHolderShimmer;
-  animation-timing-function: linear;
+  animation: loaderShimmer 1s linear infinite forwards;
   background: #f6f7f8;
   background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
   background-size: 800px 104px;
@@ -708,13 +700,15 @@ th {
     height: 100%;
     border-radius: 0 10px 10px 0; }
 
-@keyframes placeHolderShimmer {
+@keyframes loaderShimmer {
   0% {
     background-position: -468px 0; }
   100% {
     background-position: 468px 0; } }
 
 @media only screen and (max-width: 500px) {
+  html {
+    height: auto; }
   #app-container {
     display: flex;
     flex-direction: column; }
@@ -725,7 +719,8 @@ th {
     top: 57px;
     overflow: visible;
     height: auto;
-    flex: 1; }
+    flex: 1;
+    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.35); }
     #venue-sidebar.hidden {
       margin-left: 0; }
     #venue-sidebar .sidebar-wrapper {
@@ -744,8 +739,4 @@ th {
     #map.pad-left {
       margin-left: 0; }
   .hamburger--vortex .hamburger-box {
-    display: none; }
-  body,
-  #root,
-  #app-container {
-    min-height: 100%; } }
+    display: none; } }
