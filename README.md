@@ -2,6 +2,8 @@
 
 This single page application features an interactive map that displays museum locations around Chicago. It was built with JavaScript and React and utilizes asynchronous APIs.
 
+![Screenshot of The Loop: Chicago City Guide](img/loop_screenshot.jpg)
+
 ## Project Details
 
 - The Google Maps API is used to generate the map. The Foursquare API is then called to display data about the museums and populate the markers.
