@@ -9,7 +9,7 @@ $primary: #247f9e;
 $secondary: #da3743;
 $yellow: #f7b600;
 $black: #333;
-$focus: #6aa6ba;
+$ui-primary: #32333f;
 
 //---- Variants
 $black-01: lighten($black, 10%);
@@ -21,9 +21,6 @@ $black-06: lighten($black, 60%);
 $black-07: lighten($black, 70%);
 $black-08: lighten($black, 77%);
 $black-09: lighten($black, 90%);
-
-//---- UI colors
-$ui-primary: #32333f;
 
 $ui-01: lighten($ui-primary, 10%);
 $ui-02: lighten($ui-primary, 20%);
@@ -39,16 +36,10 @@ $ui-10: lighten($ui-primary, 76%);
 //--------------------------------------------------------------------
 // Fonts
 //--------------------------------------------------------------------
-$roman: 'proxima_nova_regular', Helvetica, sans-serif;
+
+$regular: 'proxima_nova_regular', Helvetica, sans-serif;
 $bold: 'proxima_nova_bold', Helvetica, sans-serif;
 $semibold: 'proxima_nova_semibold', Helvetica, sans-serif;
-
-//--------------------------------------------------------------------
-// Units
-//--------------------------------------------------------------------
-
-$height-minus-navbar: calc(100% - 76px);
-$unit: 10px;
 
 //--------------------------------------------------------------------
 // Animations

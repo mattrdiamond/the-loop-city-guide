@@ -1,7 +1,7 @@
 #iw-container {
   display: flex;
   max-width: 250px;
-  font-family: $roman;
+  font-family: $regular;
   padding-right: 10px;
 }
 .iw-photo {
@@ -52,4 +52,11 @@
 .iw-icon {
   // margin-right: 5px;
   fill: $ui-04;
+}
+
+// hide scrollbar in Chrome
+.scroll-fix {
+  line-height: 1.35;
+  overflow: hidden;
+  // white-space: nowrap;
 }

@@ -28,7 +28,7 @@ const InfoWindowContent = (venue) => {
 
   // Generate content for infoWindow
   const contentString =
-    `<div id='iw-container'>
+    `<div id='iw-container' class='scroll-fix'>
       ${venueIcon}
       <div class="iw-content">
         <h4 class="iw-title">${venue.name}</h4>

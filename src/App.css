@@ -1,7 +1,7 @@
 html {
   height: 100%;
   font-size: 13px;
-  font-family: 'proxima_nova_regular', Helvetica, sans-serif;
+  font-family: "proxima_nova_regular", Helvetica, sans-serif;
   letter-spacing: 0.4px;
   color: #32333f; }
 
@@ -37,7 +37,7 @@ input {
   letter-spacing: 0.4px;
   background: none;
   border: none;
-  font-family: 'proxima_nova_regular', Helvetica, sans-serif; }
+  font-family: "proxima_nova_regular", Helvetica, sans-serif; }
 
 a {
   text-decoration: none;
@@ -379,8 +379,7 @@ th {
 
 .table-hours {
   width: 100%;
-  border-collapse: collapse;
-  margin-bottom: -0.4rem; }
+  border-collapse: collapse; }
   .table-hours tbody {
     border-bottom: 1px dotted #dadbe2; }
     .table-hours tbody td {
@@ -405,7 +404,24 @@ th {
       border-bottom: none; }
       .table-hours tbody:last-of-type th,
       .table-hours tbody:last-of-type td {
-        padding-bottom: 5px; }
+        padding-bottom: 0px; }
+      .table-hours tbody:last-of-type td:last-of-type {
+        padding-bottom: 0; }
+    .table-hours tbody .open,
+    .table-hours tbody .closed {
+      font-family: "proxima_nova_bold", Helvetica, sans-serif; }
+    .table-hours tbody .open {
+      color: #247f9e; }
+    .table-hours tbody .closed {
+      color: #da3743; }
+  .table-hours .data-unavailable a {
+    color: #247f9e;
+    float: right; }
+  .table-hours .data-unavailable .icon-phone,
+  .table-hours .data-unavailable .icon-globe {
+    position: relative;
+    top: -1px;
+    width: 14px; }
   .table-hours .open,
   .table-hours .closed {
     font-family: "proxima_nova_bold", Helvetica, sans-serif; }
@@ -506,6 +522,10 @@ th {
 
 .iw-icon {
   fill: #9395aa; }
+
+.scroll-fix {
+  line-height: 1.35;
+  overflow: hidden; }
 
 .arrow-button {
   width: 1.05rem;
