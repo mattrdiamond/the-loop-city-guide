@@ -350,7 +350,8 @@ th {
     border-radius: 0 0 10px 10px; }
 
 .tip {
-  display: flex; }
+  display: flex;
+  word-break: break-word; }
   .tip:first-of-type {
     margin-bottom: 1rem;
     padding-bottom: 1rem;
@@ -371,7 +372,9 @@ th {
     float: right;
     color: #b3b3b3;
     font-family: "proxima_nova_regular", Helvetica, sans-serif;
-    font-size: 0.9rem; }
+    font-size: 0.9rem;
+    position: relative;
+    top: 1.1px; }
 
 .table-hours {
   width: 100%;
