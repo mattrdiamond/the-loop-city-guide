@@ -4,7 +4,7 @@ Check out **The Loop: Chicago City Guide** for the best restaurants, bars, coffe
 
 ![Screenshot of The Loop: Chicago City Guide](img/loop_screenshot.jpg)
 
-## Project Details
+## Details
 
 - This single page application fetches venue recommendations from the Foursquare API and integrates Google Maps to display each venue's location.
 - Clicking a venue on the sidebar will animate its associated map marker and open an info window.
