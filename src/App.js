@@ -53,7 +53,7 @@ class App extends Component {
     FoursquareAPI.getVenueRecommendations({
       near: 'Chicago, IL',
       section: this.state.category,
-      limit: 10
+      limit: 2
     })
       .then((results) => {
         const { items } = results.response.groups[0];
@@ -68,8 +68,10 @@ class App extends Component {
         return venueDetails;
       })
       .then((venueDetails, center) => {
-        venueDetails.sort(this.alphabetizeVenues);
-        this.setState({ venues: venueDetails, center: center });
+        const sortedVenues = venueDetails.sort((a, b) =>
+          this.stripFirstArticle(a.name) > this.stripFirstArticle(b.name) ? 1 : -1
+        );
+        this.setState({ venues: sortedVenues, center: center });
         callback();
       })
       .catch((error) => {
@@ -78,10 +80,9 @@ class App extends Component {
       });
   }
 
-  alphabetizeVenues(a, b) {
-    if (a.name < b.name) return -1;
-    if (a.name > b.name) return 1;
-    return 0;
+  // remove articles 'a', 'the' and 'an' from beginning of string
+  stripFirstArticle(string) {
+    return string.replace(/^(a |the |an )/i, '').trim();
   }
 
   initMap() {
