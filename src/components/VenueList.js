@@ -4,7 +4,7 @@ import ListItem from './ListItem';
 const venueList = ({
   venues,
   handleListItemClick,
-  listItemKeyPress,
+  handleKeyPress,
   infoWindow,
   loading
 }) => (
@@ -15,7 +15,7 @@ const venueList = ({
           key={`venue_${venue.location.address.replace(/\s+/g, '')}_${venue.createdAt}`}
           venue={venue}
           handleListItemClick={handleListItemClick}
-          listItemKeyPress={listItemKeyPress}
+          handleKeyPress={handleKeyPress}
           infoWindow={infoWindow}
           loading={loading}
         />

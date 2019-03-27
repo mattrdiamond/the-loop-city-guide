@@ -1,13 +1,13 @@
 import React from 'react';
 
-const NavButton = ({ sidebarOpen, toggleSidebar, navKeyPress }) => {
+const NavButton = ({ sidebarOpen, toggleSidebar, handleKeyPress }) => {
   const isOpen = sidebarOpen ? ' open' : ' closed';
   return (
     <button
       id="nav-button"
       className={'hamburger--vortex' + isOpen}
       onMouseDown={toggleSidebar}
-      onKeyPress={navKeyPress}
+      onKeyPress={handleKeyPress(toggleSidebar)}
       type="button"
       aria-label={(sidebarOpen ? 'Hide' : 'Show') + ' venue sidebar'}
       aria-controls="venue-sidebar"

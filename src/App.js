@@ -26,10 +26,8 @@ class App extends Component {
     this.initMap = this.initMap.bind(this);
     this.handleListItemClick = this.handleListItemClick.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
-    this.navKeyPress = this.navKeyPress.bind(this);
     this.updateMapBounds = this.updateMapBounds.bind(this);
     this.closeSidebar = this.closeSidebar.bind(this);
-    this.listItemKeyPress = this.listItemKeyPress.bind(this);
     this.fetchVenues = this.fetchVenues.bind(this);
     this.createMarkers = this.createMarkers.bind(this);
   }
@@ -177,21 +175,11 @@ class App extends Component {
     }
   }
 
-  listItemKeyPress(e, venue) {
-    let code = e.keyCode || e.which;
-
-    if (code === 13) {
-      this.handleListItemClick(venue);
+  handleKeyPress = (onClick) => ({ key }) => {
+    if (key === 'Enter') {
+      onClick();
     }
-  }
-
-  navKeyPress(e) {
-    let code = e.keyCode || e.which;
-
-    if (code === 13) {
-      this.toggleSidebar();
-    }
-  }
+  };
 
   toggleSidebar() {
     this.setState({ sidebarOpen: !this.state.sidebarOpen });
@@ -215,11 +203,10 @@ class App extends Component {
   render() {
     const {
       toggleSidebar,
-      navKeyPress,
       handleListItemClick,
       updateMapBounds,
-      listItemKeyPress,
       closeSidebar,
+      handleKeyPress,
       state: { sidebarOpen }
     } = this;
 
@@ -228,13 +215,13 @@ class App extends Component {
         <NavButton
           toggleSidebar={toggleSidebar}
           sidebarOpen={sidebarOpen}
-          navKeyPress={navKeyPress}
+          handleKeyPress={handleKeyPress}
         />
         <SideBar
           {...this.state}
           handleListItemClick={handleListItemClick}
           updateMapBounds={updateMapBounds}
-          listItemKeyPress={listItemKeyPress}
+          handleKeyPress={handleKeyPress}
         />
         <Map sidebarOpen={sidebarOpen} id="map" closeSidebar={closeSidebar} />
       </main>

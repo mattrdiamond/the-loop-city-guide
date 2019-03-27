@@ -88,6 +88,10 @@
         outline: none;
       }
     }
+    &:active,
+    &:focus-within {
+      outline: none;
+    }
   }
 
   h1 {

@@ -15,7 +15,7 @@ export default class SearchBar extends PureComponent {
   render() {
     const {
       toggleInput,
-      props: { handleFilterMarkers, query, clearInput },
+      props: { handleFilterMarkers, query, clearInput, handleKeyPress },
       state: { showInput }
     } = this;
 
@@ -41,6 +41,7 @@ export default class SearchBar extends PureComponent {
           <button
             className={'clear-input' + (query ? ' active' : '')}
             onClick={clearInput}
+            onKeyPress={handleKeyPress(clearInput)}
           >
             Clear
           </button>

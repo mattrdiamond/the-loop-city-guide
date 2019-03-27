@@ -124,6 +124,8 @@ th {
         color: white; }
       .search-bar .clear-input.active:focus {
         outline: none; }
+    .search-bar .clear-input:active, .search-bar .clear-input:focus-within {
+      outline: none; }
   .search-bar h1 {
     margin: 0 auto; }
 

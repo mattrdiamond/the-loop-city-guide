@@ -92,12 +92,12 @@ export default class SideBar extends Component {
         sidebarOpen,
         navKeyPress,
         handleListItemClick,
-        listItemKeyPress,
         infoWindow,
         updateSuperState,
         category,
         loading,
-        venues
+        venues,
+        handleKeyPress
       },
       state: { query }
     } = this;
@@ -113,6 +113,7 @@ export default class SideBar extends Component {
           handleFilterMarkers={handleFilterMarkers}
           query={query}
           clearInput={clearInput}
+          handleKeyPress={handleKeyPress}
         />
         <div className="sidebar-wrapper">
           {/*--- Initial load: display 3 loading components while fetching data ---*/}
@@ -125,7 +126,7 @@ export default class SideBar extends Component {
           ) : (
             <VenueList
               handleListItemClick={handleListItemClick}
-              listItemKeyPress={listItemKeyPress}
+              handleKeyPress={handleKeyPress}
               infoWindow={infoWindow}
               venues={handleFilterVenues()}
               loading={loading}

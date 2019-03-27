@@ -45,7 +45,7 @@ export default class ListItem extends Component {
   }
 
   render() {
-    const { venue, infoWindow } = this.props;
+    const { venue, infoWindow, handleListItemClick, handleKeyPress } = this.props;
     console.log('ListItem: rendered ' + venue.name);
 
     return (
@@ -58,11 +58,9 @@ export default class ListItem extends Component {
             tabIndex="0"
             className={'list-item' + (infoWindow.id === venue.id ? ' active' : '')}
             onClick={() => {
-              this.props.handleListItemClick(venue);
+              handleListItemClick(venue);
             }}
-            onKeyPress={(e) => {
-              this.props.listItemKeyPress(e, venue);
-            }}
+            onKeyPress={handleKeyPress(handleListItemClick)}
           >
             <div className="content-container">
               <div className="content-inner-wrapper">
