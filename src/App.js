@@ -139,6 +139,7 @@ class App extends Component {
   }
 
   updateMapBounds(visibleMarkers) {
+    console.log('visibleMarkers', visibleMarkers);
     let newBounds = new window.google.maps.LatLngBounds();
 
     // Extend the map bounds to include each marker's position
@@ -167,6 +168,8 @@ class App extends Component {
 
   handleListItemClick(venue) {
     const { markers, infoWindow } = this.state;
+    console.log('markers', markers);
+    console.log('venue', venue);
     const clickedMarker = markers.find((marker) => marker.id === venue.id);
 
     // Open infowindow if not already open
@@ -175,11 +178,14 @@ class App extends Component {
     }
   }
 
-  handleKeyPress = (onClick) => ({ key }) => {
-    if (key === 'Enter') {
-      onClick();
-    }
-  };
+  // return function that executes onClick. Event parameter optional.
+  handleKeyPress(onClick, e) {
+    return ({ key }) => {
+      if (key === 'Enter') {
+        onClick(e);
+      }
+    };
+  }
 
   toggleSidebar() {
     this.setState({ sidebarOpen: !this.state.sidebarOpen });

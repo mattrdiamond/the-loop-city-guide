@@ -79,7 +79,15 @@ export default class SideBar extends Component {
   }
 
   clearInput() {
-    this.setState({ query: '' });
+    const { markers, updateMapBounds, infoWindow } = this.props;
+    const allMarkers = markers.map((marker) => {
+      marker.setVisible(true);
+      return marker;
+    });
+
+    this.setState({ query: '', visibleMarkers: allMarkers });
+    infoWindow.close();
+    updateMapBounds(allMarkers);
   }
 
   render() {

@@ -60,7 +60,7 @@ export default class ListItem extends Component {
             onClick={() => {
               handleListItemClick(venue);
             }}
-            onKeyPress={handleKeyPress(handleListItemClick)}
+            onKeyPress={handleKeyPress(handleListItemClick, venue)}
           >
             <div className="content-container">
               <div className="content-inner-wrapper">
