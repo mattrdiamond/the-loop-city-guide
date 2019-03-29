@@ -28,6 +28,7 @@ export default class SideBar extends Component {
         venue.name
           .toLowerCase()
           .replace(/[^\w ]/gi, '')
+          .trim()
           .includes(
             query
               .toLowerCase()
@@ -48,12 +49,16 @@ export default class SideBar extends Component {
 
     // check each venue to see if it includes query value
     const showMarkers = venues.map((venue) => {
-      const queryMatch = venue.name.toLowerCase().includes(
-        e.target.value
-          .toLowerCase()
-          .replace(/[^\w ]/gi, '')
-          .trim()
-      );
+      const queryMatch = venue.name
+        .toLowerCase()
+        .replace(/[^\w ]/gi, '')
+        .trim()
+        .includes(
+          e.target.value
+            .toLowerCase()
+            .replace(/[^\w ]/gi, '')
+            .trim()
+        );
 
       // find corresponding marker
       const marker = markers.find((marker) => marker.id === venue.id);
