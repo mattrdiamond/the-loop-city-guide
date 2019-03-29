@@ -519,32 +519,41 @@ th {
   line-height: 1.35;
   overflow: hidden; }
 
-.arrow-button {
-  width: 1.05rem;
-  height: 1.25rem;
+.arrow-button span {
+  width: 13px;
+  height: 9px;
   display: inline-block;
   position: relative;
-  margin-left: 9px;
-  top: 0.16rem; }
-  .arrow-button span {
-    top: 0.5rem;
-    position: absolute;
-    width: 0.65rem;
-    height: 0.12rem;
-    background-color: #cccdd7;
+  top: 1px;
+  transition: 0.3s ease;
+  transform: rotate(0);
+  margin-left: 5px; }
+  .arrow-button span:before, .arrow-button span:after {
+    content: '';
     display: inline-block;
-    transition: all 0.2s ease;
-    border-radius: 5px; }
-    .arrow-button span:first-of-type {
-      left: 0;
-      transform: rotate(40deg); }
-    .arrow-button span:last-of-type {
-      right: 0;
-      transform: rotate(-40deg); }
-  .arrow-button.active span:first-of-type {
-    transform: rotate(-40deg); }
-  .arrow-button.active span:last-of-type {
-    transform: rotate(40deg); }
+    position: absolute;
+    width: 2px;
+    height: 7px;
+    background-color: transparent;
+    transition: 0.3s ease;
+    border-bottom: 9px solid #cccdd7;
+    top: -1px;
+    left: 6px;
+    border-radius: 2px;
+    transform: rotate(0); }
+  .arrow-button span:before {
+    transform: rotate(-135deg); }
+  .arrow-button span:after {
+    position: absolute;
+    transform: rotate(135deg); }
+
+.arrow-button.active span {
+  transform: rotate(0);
+  transform: translate(0, -5px); }
+  .arrow-button.active span:before {
+    transform: rotate(-45deg); }
+  .arrow-button.active span:after {
+    transform: rotate(45deg); }
 
 #search-button {
   background: none;

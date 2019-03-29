@@ -23,6 +23,7 @@ export default class Tabs extends Component {
 
   // Close tab if already open or open tab
   onClickTabItem(tab) {
+    console.log('tab', tab);
     if (tab === this.state.activeTab) {
       this.setState({ activeTab: '' });
     } else {

@@ -1,37 +1,45 @@
 .arrow-button {
-  width: 1.05rem;
-  height: 1.25rem;
-  display: inline-block;
-  position: relative;
-  margin-left: 9px;
-  top: 0.16rem;
-
   span {
-    top: 0.5rem;
-    position: absolute;
-    width: 0.65rem;
-    height: 0.12rem;
-    background-color: $ui-06;
+    width: 13px;
+    height: 9px;
     display: inline-block;
-    transition: all 0.2s ease;
-    border-radius: 5px;
-    &:first-of-type {
-      left: 0;
-      transform: rotate(40deg);
+    position: relative;
+    top: 1px;
+    transition: 0.3s ease;
+    transform: rotate(0);
+    margin-left: 5px;
+    &:before,
+    &:after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      width: 2px;
+      height: 7px;
+      background-color: transparent;
+      transition: 0.3s ease;
+      border-bottom: 9px solid $ui-06;
+      top: -1px;
+      left: 6px;
+      border-radius: 2px;
+      transform: rotate(0);
     }
-    &:last-of-type {
-      right: 0;
-      transform: rotate(-40deg);
+    &:before {
+      transform: rotate(-135deg);
+    }
+    &:after {
+      position: absolute;
+      transform: rotate(135deg);
     }
   }
-
   &.active {
     span {
-      &:first-of-type {
-        transform: rotate(-40deg);
+      transform: rotate(0);
+      transform: translate(0, -5px);
+      &:before {
+        transform: rotate(-45deg);
       }
-      &:last-of-type {
-        transform: rotate(40deg);
+      &:after {
+        transform: rotate(45deg);
       }
     }
   }
