@@ -527,7 +527,7 @@ th {
   top: 1px;
   transition: 0.3s ease;
   transform: rotate(0);
-  margin-left: 5px; }
+  margin-left: 6px; }
   .arrow-button span:before, .arrow-button span:after {
     content: '';
     display: inline-block;
