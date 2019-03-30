@@ -140,9 +140,10 @@ export default class SideBar extends Component {
           handleKeyPress={handleKeyPress}
         />
         <div className="sidebar-wrapper">
-          {/*--- Initial load: display 3 loading components while fetching data ---*/}
+          {/*--- Initial load: display 4 loading components while fetching data ---*/}
           {loading && venues.length === 0 ? (
             <div className="loader-container">
+              <ListItemLoader />
               <ListItemLoader />
               <ListItemLoader />
               <ListItemLoader />

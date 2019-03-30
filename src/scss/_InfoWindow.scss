@@ -7,7 +7,7 @@
 
 .iw-photo {
   background: $yellow;
-  max-height: 50px;
+  height: 50px;
   border-radius: 40px;
 }
 
@@ -21,6 +21,8 @@
   color: $primary;
   font-size: 1.2rem;
   line-height: 19.5px;
+  // remove faux bold in safari
+  font-weight: 500;
 }
 
 .iw-list {
