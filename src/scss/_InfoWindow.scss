@@ -3,6 +3,7 @@
   max-width: 250px;
   font-family: $regular;
   padding-right: 10px;
+  overflow: auto;
 }
 
 .iw-photo {
@@ -13,6 +14,7 @@
 
 .iw-content {
   padding-left: 1rem;
+  flex: 1;
 }
 
 .iw-title {
