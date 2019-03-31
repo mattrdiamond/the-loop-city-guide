@@ -15,6 +15,8 @@ Check out **The Loop: Chicago City Guide** for the best restaurants, bars, coffe
 
 ## Running Instructions
 
+Visit the live version [here](https://mattrdiamond.github.io/the-loop-city-guide/), or follow the instructions below to run locally.
+
 ### Development Mode
 
 - Download or Clone the Repository.
