@@ -51,7 +51,7 @@ class App extends Component {
     FoursquareAPI.getVenueRecommendations({
       near: 'Chicago, IL',
       section: this.state.category,
-      limit: 2
+      limit: 10
     })
       .then((results) => {
         const { items } = results.response.groups[0];
@@ -78,8 +78,8 @@ class App extends Component {
       });
   }
 
-  // remove articles 'a', 'the' and 'an' from beginning of string
   stripFirstArticle(string) {
+    // remove articles 'a', 'the' and 'an' from beginning of string
     return string.replace(/^(a |the |an )/i, '').trim();
   }
 
@@ -119,7 +119,6 @@ class App extends Component {
         animation: window.google.maps.Animation.DROP
       });
 
-      // Add click event to each marker
       marker.addListener('click', () => {
         // Animate marker
         this.toggleBounce(marker);
@@ -139,7 +138,6 @@ class App extends Component {
   }
 
   updateMapBounds(visibleMarkers) {
-    console.log('visibleMarkers', visibleMarkers);
     let newBounds = new window.google.maps.LatLngBounds();
 
     // Extend the map bounds to include each marker's position
@@ -168,8 +166,6 @@ class App extends Component {
 
   handleListItemClick(venue) {
     const { markers, infoWindow } = this.state;
-    console.log('markers', markers);
-    console.log('venue', venue);
     const clickedMarker = markers.find((marker) => marker.id === venue.id);
 
     // Open infowindow if not already open

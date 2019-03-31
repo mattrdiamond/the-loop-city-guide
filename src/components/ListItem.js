@@ -46,7 +46,6 @@ export default class ListItem extends Component {
 
   render() {
     const { venue, infoWindow, handleListItemClick, handleKeyPress } = this.props;
-    console.log('ListItem: rendered ' + venue.name);
 
     return (
       <React.Fragment>

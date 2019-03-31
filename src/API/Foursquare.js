@@ -34,8 +34,6 @@ class Helper {
     if (!response.ok) {
       throw Error(response.statusText);
     }
-    console.log('response', response);
-
     return response;
   }
 

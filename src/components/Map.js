@@ -34,7 +34,7 @@ export default class Map extends PureComponent {
       handleCloseSidebar,
       props: { id, sidebarOpen }
     } = this;
-    console.log('rendered map');
+
     return (
       <section
         id="map"

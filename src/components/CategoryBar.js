@@ -19,8 +19,6 @@ export default class CategoryBar extends Component {
       props: { children, category }
     } = this;
 
-    console.log('render category bar');
-
     return (
       <nav className="category-nav">
         <ul className="category-list">

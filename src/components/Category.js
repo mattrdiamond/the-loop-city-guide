@@ -17,7 +17,6 @@ export default class Category extends PureComponent {
       handleOnClick,
       props: { category, label }
     } = this;
-    console.log('rendered category');
 
     return (
       <li

@@ -19,8 +19,6 @@ export default class SearchBar extends PureComponent {
       state: { showInput }
     } = this;
 
-    console.log('render searchBar');
-
     return (
       <div className="search-bar">
         <div className="nav-top">

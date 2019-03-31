@@ -126,8 +126,6 @@ export default class SideBar extends Component {
       state: { query }
     } = this;
 
-    console.log('rendered sidebar');
-
     return (
       <section id="venue-sidebar" className={sidebarOpen ? 'visible' : 'hidden'}>
         <SearchBar
