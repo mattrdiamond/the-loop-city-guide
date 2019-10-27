@@ -2,6 +2,8 @@
 
 Check out **The Loop: Chicago City Guide** for the best restaurants, bars, coffeehouses and attractions in the windy city!
 
+Visit the [live version](https://mattrdiamond.github.io/the-loop-city-guide/), or follow the running instructions below to run locally.
+
 ![Screenshot of The Loop: Chicago City Guide](img/loop_screenshot.jpg)
 
 ## Details
@@ -14,8 +16,6 @@ Check out **The Loop: Chicago City Guide** for the best restaurants, bars, coffe
 - The sidebar can be accessed using the keyboard by pressing enter on the navigation menu. You can then tab through the museum names and press enter to display the info window.
 
 ## Running Instructions
-
-Visit the live version [here](https://mattrdiamond.github.io/the-loop-city-guide/), or follow the instructions below to run locally.
 
 ### Development Mode
 
