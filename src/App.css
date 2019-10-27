@@ -223,14 +223,17 @@ th {
   width: 100%;
   color: #4d4d4d;
   border-radius: 10px;
-  background: #fff; }
-  .list-item:focus {
-    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.2);
+  background: #fff;
+  transition: focus 0.3s, box-shadow 0.3s;
+  cursor: pointer; }
+  .list-item:focus, .list-item:hover {
+    box-shadow: 0 2px 5px 0 rgba(0, 1, 10, 0.2);
     outline: none; }
+  .list-item.active {
+    box-shadow: 0 0 0 1px #da3743, 0 2px 5px 0 rgba(0, 1, 10, 0.2);
+    cursor: default; }
   .list-item:first-of-type {
     margin-top: 0; }
-  .list-item.active {
-    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.3); }
   .list-item .content-container {
     width: 100%;
     padding: 1rem 1rem 0; }
@@ -241,14 +244,12 @@ th {
       margin-right: 1rem;
       border-radius: 2px;
       width: 100px;
-      height: 100px;
-      cursor: pointer; }
+      height: 100px; }
     .list-item .content-container .info-column {
       padding-right: 10px;
       flex: 1; }
       .list-item .content-container .info-column .venue-name {
-        margin-bottom: 3px;
-        cursor: pointer; }
+        margin-bottom: 3px; }
       .list-item .content-container .info-column .venue-category {
         border-radius: 20px;
         color: #da3743;
