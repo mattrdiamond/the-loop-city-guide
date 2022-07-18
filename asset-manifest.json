@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/the-loop-city-guide/static/css/main.bb945796.chunk.css",
-    "main.js": "/the-loop-city-guide/static/js/main.08f044ba.chunk.js",
-    "main.js.map": "/the-loop-city-guide/static/js/main.08f044ba.chunk.js.map",
+    "main.css": "/the-loop-city-guide/static/css/main.292b682c.chunk.css",
+    "main.js": "/the-loop-city-guide/static/js/main.95c62dd1.chunk.js",
+    "main.js.map": "/the-loop-city-guide/static/js/main.95c62dd1.chunk.js.map",
     "runtime-main.js": "/the-loop-city-guide/static/js/runtime-main.19c15c9d.js",
     "runtime-main.js.map": "/the-loop-city-guide/static/js/runtime-main.19c15c9d.js.map",
-    "static/js/2.f221f496.chunk.js": "/the-loop-city-guide/static/js/2.f221f496.chunk.js",
-    "static/js/2.f221f496.chunk.js.map": "/the-loop-city-guide/static/js/2.f221f496.chunk.js.map",
+    "static/js/2.b4961ef1.chunk.js": "/the-loop-city-guide/static/js/2.b4961ef1.chunk.js",
+    "static/js/2.b4961ef1.chunk.js.map": "/the-loop-city-guide/static/js/2.b4961ef1.chunk.js.map",
     "index.html": "/the-loop-city-guide/index.html",
-    "static/css/main.bb945796.chunk.css.map": "/the-loop-city-guide/static/css/main.bb945796.chunk.css.map",
-    "static/js/2.f221f496.chunk.js.LICENSE.txt": "/the-loop-city-guide/static/js/2.f221f496.chunk.js.LICENSE.txt",
-    "static/media/icons.78c756e9.svg": "/the-loop-city-guide/static/media/icons.78c756e9.svg",
+    "static/css/main.292b682c.chunk.css.map": "/the-loop-city-guide/static/css/main.292b682c.chunk.css.map",
+    "static/js/2.b4961ef1.chunk.js.LICENSE.txt": "/the-loop-city-guide/static/js/2.b4961ef1.chunk.js.LICENSE.txt",
+    "static/media/icons.ebefb063.svg": "/the-loop-city-guide/static/media/icons.ebefb063.svg",
     "static/media/placeholder.21868459.svg": "/the-loop-city-guide/static/media/placeholder.21868459.svg",
     "static/media/fonts.css": "/the-loop-city-guide/static/media/proximanova-semibold-webfont.9aefb5b2.woff"
   },
   "entrypoints": [
     "static/js/runtime-main.19c15c9d.js",
-    "static/js/2.f221f496.chunk.js",
-    "static/css/main.bb945796.chunk.css",
-    "static/js/main.08f044ba.chunk.js"
+    "static/js/2.b4961ef1.chunk.js",
+    "static/css/main.292b682c.chunk.css",
+    "static/js/main.95c62dd1.chunk.js"
   ]
 }
