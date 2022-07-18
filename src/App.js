@@ -5,6 +5,8 @@ import Map from './components/Map';
 import FoursquareAPI from './API/Foursquare';
 import './App.css';
 import InfoWindowContent from './components/InfoWindowContent';
+import BillingModal from './components/BillingModal';
+import WithModal from './components/WithModal';
 import MapStyles from './MapStyles.json';
 
 class App extends Component {
@@ -21,7 +23,7 @@ class App extends Component {
       category: 'food',
       updateSuperState: (obj) => {
         this.setState(obj);
-      }
+      },
     };
     this.initMap = this.initMap.bind(this);
     this.handleListItemClick = this.handleListItemClick.bind(this);
@@ -51,7 +53,7 @@ class App extends Component {
     FoursquareAPI.getVenueRecommendations({
       near: 'Chicago, IL',
       section: this.state.category,
-      limit: 10
+      limit: 10,
     })
       .then((results) => {
         const { items } = results.response.groups[0];
@@ -89,7 +91,7 @@ class App extends Component {
       center: this.state.center,
       zoom: this.state.zoom,
       styles: MapStyles,
-      mapTypeControl: false
+      mapTypeControl: false,
     });
 
     // Create single InfoWindow
@@ -103,7 +105,7 @@ class App extends Component {
   createMarkers() {
     const {
       infowindow,
-      state: { venues }
+      state: { venues },
     } = this;
 
     // Create marker for each venue
@@ -111,12 +113,12 @@ class App extends Component {
       const marker = new window.google.maps.Marker({
         position: {
           lat: venue.location.lat,
-          lng: venue.location.lng
+          lng: venue.location.lng,
         },
         id: venue.id,
         map: this.map,
         title: venue.name,
-        animation: window.google.maps.Animation.DROP
+        animation: window.google.maps.Animation.DROP,
       });
 
       marker.addListener('click', () => {
@@ -209,7 +211,7 @@ class App extends Component {
       updateMapBounds,
       closeSidebar,
       handleKeyPress,
-      state: { sidebarOpen }
+      state: { sidebarOpen },
     } = this;
 
     return (
@@ -231,4 +233,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default WithModal({ Modal: BillingModal, showModal: true })(App);

@@ -19,8 +19,11 @@
 
   .sidebar-wrapper {
     padding: 1rem;
-    overflow: auto;
+    overflow: hidden;
     flex-grow: 1;
+    &:hover {
+      overflow-y: visible;
+    }
   }
 
   footer {
