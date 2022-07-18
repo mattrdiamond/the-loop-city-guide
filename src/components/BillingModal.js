@@ -8,7 +8,7 @@ export default function BillingModal({ modalOpen, setModalOpen }) {
         <div className="icon-wrapper">
           <Icon icon="logo" />
         </div>
-        <h1>Notice:</h1>
+        <h1>Welcome.</h1>
         <p>
           The Google Maps API is no longer free. The map in this app does not have billing
           enabled, so it is displayed in development mode. Aside from the watermark, the

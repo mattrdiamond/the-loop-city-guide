@@ -756,7 +756,8 @@ th {
     font-size: 2rem;
     font-family: "proxima_nova_bold", Helvetica, sans-serif;
     margin-bottom: 1rem;
-    color: #666666; }
+    color: #666666;
+    letter-spacing: 0; }
   .modal-wrapper .icon-wrapper {
     border: 1px solid #dddee4;
     width: 7rem;
