@@ -32,13 +32,15 @@ const Tip = ({ venue, formatDate }) => {
 
   return users.map((user, index) => (
     <li key={venue.id + '_tip_' + index} className="tip">
-      {avatars && (
-        <img
-          className="tip-photo"
-          src={avatars[index]}
-          alt={'a photo of ' + user.user.firstName}
-        />
-      )}
+      <div className="avatar-wrapper">
+        {avatars && (
+          <img
+            className="tip-photo"
+            src={avatars[index]}
+            alt={'a photo of ' + user.user.firstName}
+          />
+        )}
+      </div>
       <div className="tip-text">
         <p className="tip-quote">&ldquo;{user.text}&rdquo;</p>
         <span className="user-name">{user.user.firstName}</span>

@@ -2,17 +2,16 @@
   display: flex;
   // prevent long urls from breaking layout
   word-break: break-word;
-  &:first-of-type {
+  &:not(:last-of-type) {
     margin-bottom: 1rem;
     padding-bottom: 1rem;
     border-bottom: 1px dotted $ui-07;
   }
 
   .tip-photo {
-    border-radius: 50px;
-    margin-right: 1rem;
-    margin-top: 5px;
-    height: 50px;
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
   }
 
   .tip-text {
